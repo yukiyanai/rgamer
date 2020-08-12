@@ -18,3 +18,6 @@ A character string showing the pure-strategy Nash equilibria.
 \seealso{
 \code{\link{normal_form}}
 }
+\author{
+Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+}

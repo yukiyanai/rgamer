@@ -18,3 +18,6 @@ A ggplot figure of the best response correspondences.
 \seealso{
 \code{\link{normal_form}}, \code{\link[ggplot2]{ggplot}}
 }
+\author{
+Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+}

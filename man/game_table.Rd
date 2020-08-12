@@ -23,3 +23,6 @@ A gt table of the normal form game.
 \seealso{
 \code{\link{normal_form}}, \code{\link[gt]{gt}}
 }
+\author{
+Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+}

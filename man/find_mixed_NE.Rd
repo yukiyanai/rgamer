@@ -18,3 +18,6 @@ A list of the probabilities given to each strategy that specifies the mixed-stra
 \seealso{
 \code{\link{normal_form}}
 }
+\author{
+Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+}

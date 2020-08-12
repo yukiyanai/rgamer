@@ -44,3 +44,6 @@ A list containing two data frames, each of which is a player's best response to 
 \code{as_df_br()} creates a list of data frames of each player's best responses in
   a given parameter space.
 }
+\author{
+Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+}

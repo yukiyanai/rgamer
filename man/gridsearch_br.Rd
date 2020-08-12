@@ -49,3 +49,6 @@ A data frame containing the pair of the best responses of the players.
 \code{gridsearch_br()} numerically finds a pair of best responses of
     two players by grid search.
 }
+\author{
+Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+}

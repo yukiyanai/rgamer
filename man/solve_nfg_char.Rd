@@ -29,3 +29,6 @@ A list containing the pair of the best response correspondence (NE)  and the plo
 \seealso{
 \code{\link{normal_form}}
 }
+\author{
+Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+}

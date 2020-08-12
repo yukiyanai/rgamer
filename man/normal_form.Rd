@@ -99,3 +99,6 @@ game4 <- normal_form(
 )
 }
 }
+\author{
+Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+}

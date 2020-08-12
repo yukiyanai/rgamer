@@ -18,3 +18,6 @@ A data frame containing the pair of the best responses of two players.
 \seealso{
 \code{\link{normal_form}}
 }
+\author{
+Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+}

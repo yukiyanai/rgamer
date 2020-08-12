@@ -39,3 +39,6 @@ A list containing pure strategy Nash equilibrium (NE), mixed strategy NE, the gt
 \seealso{
 \code{\link{normal_form}}
 }
+\author{
+Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+}

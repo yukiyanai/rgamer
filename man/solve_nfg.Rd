@@ -86,3 +86,6 @@ game3 <- normal_form(
     par2_lim = c(0, 40))
 s3 <- solve_nfg(game3)
 }
+\author{
+Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+}
