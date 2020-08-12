@@ -26,7 +26,6 @@
 #' @param cons_common A named list of parameters contained in \code{p1} and \code{p2} that should be treated
 #'     as constants, if any. If \code{cons1} and \code{cons2} are exactly same, you can specify \code{cons_common}
 #'      instead of both \code{cons1} and \code{cons2}.
-#' @param precision A natural number specifying the precision of numerical approximation.
 #' @return An object of "normal_form" class, which defines a normal-form (or strategic-form) game.
 #' @export
 #' @examples
@@ -52,6 +51,15 @@
 #'   par1_lim = c(0, 30),
 #'   par2_lim = c(0, 30))
 #'
+#' \dontrun{
+#' game4 <- normal_form(
+#'   p1 = fx,
+#'   p2 = "-y^2 + (28 - x) * y",
+#'   pars = c('x', 'y'),
+#'   par1_lim = c(0, 30),
+#'   par2_lim = c(0, 30)
+#' )
+#' }
 normal_form <- function(
   players = NULL,
   s1 = NULL,

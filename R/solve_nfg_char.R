@@ -56,7 +56,7 @@ solve_nfg_char <- function(game, delta = 0.1, plot = TRUE, quietly = FALSE) {
   g2_y0 <- function(x) {
     g2(x = x, y = par2_lim[1])
   }
-  xintercept2 <- uniroot(g2_y0, c(par1_lim[1], par1_lim[2] * 2))$root
+  xintercept2 <- stats::uniroot(g2_y0, c(par1_lim[1], par1_lim[2] * 2))$root
   g2_x0 <- function(y) {
     g2(x = par1_lim[1], y = y)
   }
@@ -104,7 +104,7 @@ solve_nfg_char <- function(game, delta = 0.1, plot = TRUE, quietly = FALSE) {
     ggplot2::geom_hline(yintercept = par1_lim[1], color = "gray") +
     ggplot2::geom_vline(xintercept = par2_lim[1], color = "gray") +
     ggplot2::geom_line(data = df,
-              aes(x = x, y = y, color = player, group = player)) +
+                       ggplot2::aes(x = x, y = y, color = player, group = player)) +
     ggplot2::geom_point(data = df_sol, ggplot2::aes(x = x, y = y), size = 2, color = "black") +
     ggplot2::geom_text(data = df_sol, ggplot2::aes(x = x, y = y, label = text),
               nudge_x = xmax / 12, nudge_y = ymax / 12) +
