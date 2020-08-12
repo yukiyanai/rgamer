@@ -7,6 +7,7 @@
 #'   Default is \code{TRUE}.
 #' @param cell_width A number specifying the cell width of the game matrix. The unit is pixel. Default is 80.
 #' @importFrom magrittr %>%
+#' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 game_table <- function(game, mark_br = TRUE, cell_width = 80) {
 
   players <- game$player

@@ -14,6 +14,7 @@
 #'     If \code{cons1} and \code{cons2} are exactly same, you can specify \code{cons_common}
 #'     instead of \code{cons1} and \code{cons2}.
 #' @importFrom magrittr %>%
+#' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 as_df_br <- function(players,
                      p1,
                      p2,

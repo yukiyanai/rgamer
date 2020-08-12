@@ -3,6 +3,7 @@
 #' @return A list of the probabilities given to each strategy that specifies the mixed-strategy Nash equilibrium.
 #' @param game A "normal_form" class object created by \code{normal_form()}.
 #' @seealso \code{\link{normal_form}}
+#' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 find_mixed_NE <- function(game) {
 
   s1 <- game$strategy[[1]]

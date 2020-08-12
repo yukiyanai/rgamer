@@ -3,6 +3,7 @@
 #' @return A ggplot figure of the best response correspondences.
 #' @param game A "normal_form" class object created by \code{normal_form()}.
 #' @seealso \code{\link{normal_form}}, \code{\link[ggplot2]{ggplot}}
+#' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 br_plot <- function(game) {
 
   s1 <- game$strategy[[1]]

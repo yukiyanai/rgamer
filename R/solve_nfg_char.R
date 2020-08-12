@@ -12,6 +12,7 @@
 #' @param quietly A logical value to determine if the equilibrium will be kept in the returned list
 #'     without being printed on screen. Default is \code{FALSE}.
 #' @importFrom magrittr %>%
+#' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 solve_nfg_char <- function(game, delta = 0.1, plot = TRUE, quietly = FALSE) {
 
   p1 <- game$payoff[[1]]

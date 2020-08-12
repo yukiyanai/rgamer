@@ -27,6 +27,7 @@
 #'     as constants, if any. If \code{cons1} and \code{cons2} are exactly same, you can specify \code{cons_common}
 #'      instead of both \code{cons1} and \code{cons2}.
 #' @return An object of "normal_form" class, which defines a normal-form (or strategic-form) game.
+#' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
 #' @examples
 #' game1 <- normal_form(

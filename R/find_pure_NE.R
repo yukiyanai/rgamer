@@ -3,6 +3,7 @@
 #' @return A character string showing the pure-strategy Nash equilibria.
 #' @param game A "normal_form" class object created by \code{normal_form()}.
 #' @seealso \code{\link{normal_form}}
+#' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 find_pure_NE <- function(game) {
 
   s1 <- game$strategy[[1]]

@@ -7,6 +7,7 @@
 #' @inheritParams solve_nfg_matrix
 #' @inheritParams solve_nfg_char
 #' @inheritParams solve_nfg_fcn
+#' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
 #' @examples
 #' game1 <- normal_form(

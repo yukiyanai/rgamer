@@ -4,6 +4,7 @@
 #' @param game A "normal_form" class object created by \code{normal_form()}.
 #' @seealso \code{\link{normal_form}}
 #' @importFrom magrittr %>%
+#' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 find_best_response <- function(game) {
 
   players <- game$player

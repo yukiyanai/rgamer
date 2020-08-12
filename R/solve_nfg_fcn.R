@@ -17,6 +17,7 @@
 #'     will be displayed. Default is \code{TRUE}.
 #' @param quietly A logical value to determine if the equilibrium will be kept in the returned list
 #'     without being printed on screen. Default is \code{FALSE}.
+#' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 solve_nfg_fcn <- function(game,
                           cons1 = NULL,
                           cons2 = NULL,

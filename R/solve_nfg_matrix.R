@@ -12,6 +12,7 @@
 #'   The default value is 80.
 #' @param quietly A logical value that determines whether the equilibrium will be kept in the returned list
 #'     without being printed on screen. Default is \code{FALSE}.
+#' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 solve_nfg_matrix <- function(
   game,
   mixed = FALSE,
