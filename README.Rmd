@@ -71,12 +71,10 @@ game1 <- normal_form(
   p2 = c(1, -1, -1, 1))
 ```
 
-Then, you can pass it to `solve_nfg()` function to get the table of the game and the Nash equilibrium.
-```{r, results = 'asis'}
-s_game1 <- solve_nfg(game1, mixed = TRUE)
+Then, you can pass it to `solve_nfg()` function to get the table of the game (not shown here) and the Nash equilibrium.
+```{r}
+s_game1 <- solve_nfg(game1, mixed = TRUE, show_table = FALSE)
 ```
-
-In the table above, players' best responses against each of the opponent's action is marked by an asterisk.
 
 For a 2-by-2 game, you can plot the best response correspondences as well.
 ```{r}
