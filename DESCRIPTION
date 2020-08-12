@@ -1,12 +1,40 @@
 Package: rgamer
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: Learning Game Theory Using R
+Version: 0.0.1
+Authors@R:
+    c(person(given = "Yoshio",
+             family = "Kamijo",
+             role = "aut",
+             comment = c(ORCID = "0000-0002-2184-9594")),
+      person(given = "Yuki",
+             family = "Yanai",
+             role = c("aut", "cre"),
+             email = "yanai.yuki@kochi-tech.ac.jp",
+             comment = c(ORCID = "0000-0002-3795-3281")))
+Description: rgamer is an R package that helps students learn (and instructors teach) 
+    game theory using R. The rgamer package provides visual displays of basic two-person games 
+    and finds Nash equilibria of the games.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
+Suggests: 
+    testthat,
+    knitr,
+    rmarkdown
+Depends:
+    ggplot2 (>= 3.3.0)
+Imports:
+    crayon,
+    dplyr (>= 1.0.0),
+    gt,
+    magrittr,
+    MASS,
+    nleqslv,
+    purrr,
+    stringr,
+    stringi,
+    tidyselect
+ByteCompile: TRUE
+VignetteBuilder: knitr
