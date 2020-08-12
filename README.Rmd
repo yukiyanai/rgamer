@@ -1,0 +1,157 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  message = FALSE,
+  #out.width = "100%"
+  fig.width = 5,
+  fig.height = 5
+)
+```
+
+# rgamer
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Travis build status](https://travis-ci.org/yukiyanai/rgamer.svg?branch=master)](https://travis-ci.org/yukiyanai/rgamer)
+[![Codecov test coverage](https://codecov.io/gh/yukiyanai/rgamer/branch/master/graph/badge.svg)](https://codecov.io/gh/yukiyanai/rgamer?branch=master)
+<!-- badges: end -->
+
+## Overview
+
+The goal of `rgamer` is to help students learn Game Theory using R.
+The functions provided by the package not only solve basic games such as two-person normal-form games but also provides the users with visual displays that highlight some aspects of the games --- game matrices, best response correspondence, etc.
+In addition, it suggests some numerical solutions for games of which it is difficult --- or even seems impossible --- to derive a closed-form analytic solution.
+
+
+## Installation
+
+<!--
+#You can install the released version of rgamer from [CRAN](https://CRAN.R-project.org) with:
+``` {r}
+install.packages("rgamer")
+```
+-->
+
+You can install the development version from [GitHub](https://github.com/) with:
+
+``` {r, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("yukiyanai/rgamer")
+```
+
+## Example
+
+```{r}
+library(rgamer)
+```
+
+### Example 1
+
+An example of a normal-form game:
+
+- Player: \{Kicker, GK \}
+- Strategy: \{(left, right), (left, right)\}
+- Payoff: \{(-1, 1, 1, -1), (1, -1, -1, 1)\}
+
+First, you define the game by `normal_form()`:
+```{r}
+game1 <- normal_form(
+  players = c("Kicker", "GK"),
+  s1 = c("left", "right"), 
+  s2 = c("left", "right"),
+  p1 = c(-1, 1, 1, -1), 
+  p2 = c(1, -1, -1, 1))
+```
+
+Then, you can pass it to `solve_nfg()` function to get the table of the game and the Nash equilibrium.
+```{r, results = 'asis'}
+s_game1 <- solve_nfg(game1, mixed = TRUE)
+```
+
+In the table above, players' best responses against each of the opponent's action is marked by an asterisk.
+
+For a 2-by-2 game, you can plot the best response correspondences as well.
+```{r}
+s_game1$br_plot
+```
+
+
+
+### Example 2
+
+An example of a normal-form game:
+
+- Player: \{ A, B \}
+- Strategy: \{$x \in [0, 30]$, $y \in [0, 30]$ \}
+- Payoff: \{$f_x(x, y) = -x^2 + (28 - y)x$, $f_y(x, y) = -y^2 + (28 - x) y$\}
+
+You can define a game by specifying payoff functions as character vectors using `normal_form()`:
+```{r}
+game2 <- normal_form(
+  players = c("A", "B"),
+  p1 = "-x^2 + (28 - y) * x",
+  p2 = "-y^2 + (28 - x) * y",
+  par1_lim = c(0, 30),
+  par2_lim = c(0, 30),
+  pars = c("x", "y"))
+```
+
+Then, you can pass it to `solve_nfg()`, which displays the best response correspondences by default.
+```{r}
+s_game2 <- solve_nfg(game2)
+```
+
+
+### Example 3
+
+An example of a normal-form game:
+
+- Player: \{ A, B \}
+- Strategy: \{$x \in [0, 30]$, $y \in [0, 30]$ \}
+- Payoff: \{$f_x(x, y) = -x^a + (b - y)x$, $f_y(x, y) = -y^s + (t - x) y$\}
+
+You can define a normal-form game by specifying payoffs by R functions.
+```{r}
+f_x <- function(x, y, a, b) {
+  -x^a + (b - y) * x
+}
+f_y <- function(x, y, s, t) {
+  -y^s + (t - x) * y
+}
+game3 <- normal_form(
+  players = c("A", "B"),
+  p1 = f_x,
+  p2 = f_y,
+  par1_lim = c(0, 30),
+  par2_lim = c(0, 30),
+  pars = c("x", "y"))
+```
+
+Then, you can approximate a solution numerically by `solve_nfg()`. Note that you need to set the parameter values of the function that should be treated as constants by arguments `cons1` and `cons2`, each of which accepts a named list. In addition, you can suppress the plot of best responses by `plot = FALSE`.
+```{r}
+s_game3 <- solve_nfg(
+  game = game3,
+  cons1 = list(a = 2, b = 28),
+  cons2 = list(s = 2, t = 28),
+  plot = FALSE
+)
+```
+
+You can increase the precision of approximation by `precision` (default is `1`), which takes a natural number.
+```{r}
+s_game3b <- solve_nfg(
+  game = game3,
+  cons1 = list(a = 2, b = 28),
+  cons2 = list(s = 2, t = 28),
+  precision = 3
+)
+```
+

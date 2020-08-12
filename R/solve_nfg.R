@@ -1,0 +1,61 @@
+#' @title Find equilibria of a normal-form game
+#' @description \code{solve_nfg()} finds Nash equilibria of a normal-form game. This is a wrapper
+#'     function of \code{\link{solve_nfg_matrix}}, \code{\link{solve_nfg_char}}, and
+#'     \code{\link{solve_nfg_fcn}}.
+#' @return A list containing Nash equilibria (if any), the game table (if available),
+#'     and the plot of best response correspondence (if available).
+#' @inheritParams solve_nfg_matrix
+#' @inheritParams solve_nfg_char
+#' @inheritParams solve_nfg_fcn
+#' @export
+#' @examples
+#' game1 <- normal_form(
+#'   s1 = c("T", "B"), s2 = c("L", "R"),
+#'   p1 = c(4, 2, 3, 1), p2 = c(4, 3, 2, 1))
+#' s1 <- solve_nfg(game1, show_table = FALSE)
+#'
+#' game2 <- normal_form(
+#'   p1 = "-x1^2 + (28 - x2) * x1",
+#'   p2 = "-x2^2 + (28 - x1) * x2",
+#'   par1_lim = c(0, 30),
+#'   par2_lim = c(0, 30),
+#'   pars = c("x1", "x2"))
+#' s2 <- solve_nfg(game2)
+#'
+#' fx <- function(x, y) -x^2 + (28 - y) * x
+#' fy <- function(x, y) -y^2 + (28 - x) * y
+#' game3 <- normal_form(
+#'     p1 = fx,
+#'     p2 = fy,
+#'     pars = c("x", "y"),
+#'     par1_lim = c(0, 40),
+#'     par2_lim = c(0, 40))
+#' s3 <- solve_nfg(game3)
+solve_nfg <- function(game,
+                      mixed = FALSE,
+                      show_table = TRUE,
+                      cell_width = 80,
+                      mark_br = TRUE,
+                      delta = 0.1,
+                      cons1 = NULL,
+                      cons2 = NULL,
+                      cons_common = NULL,
+                      precision = 1,
+                      plot = TRUE,
+                      quietly = FALSE) {
+
+  if (class(game) != "normal_form")
+    stop("game must be an object of 'normal_form' class created by normal_form() function.")
+
+  if (game$type == "matrix") {
+    solve_nfg_matrix(game = game, mixed = mixed, show_table = show_table,
+                     cell_width = cell_width, mark_br = mark_br, quietly = quietly)
+
+  } else if (game$type == "char_function") {
+    solve_nfg_char(game = game, delta = delta, plot = plot, quietly = quietly)
+
+  } else {
+    solve_nfg_fcn(game = game, cons1 = cons1, cons2 = cons2, cons_common = cons_common,
+                  precision = precision, plot = plot, quietly = quietly)
+  }
+}

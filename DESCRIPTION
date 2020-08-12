@@ -22,19 +22,21 @@ RoxygenNote: 7.1.1
 Suggests: 
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    covr
 Depends:
     ggplot2 (>= 3.3.0)
 Imports:
-    crayon,
     dplyr (>= 1.0.0),
     gt,
     magrittr,
     MASS,
     nleqslv,
     purrr,
+    stats,
     stringr,
     stringi,
+    tibble,
     tidyselect
 ByteCompile: TRUE
 VignetteBuilder: knitr
