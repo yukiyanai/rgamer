@@ -12,7 +12,7 @@
 #'     First, it can be a numeric vector of payoffs. Second, it can be a character string of the payoff
 #'    function (e.g., p1 = "x^2 - y"). Third, it can be an R function of payoff.
 #' @param p2 The payoff of Player 2. See the explanation of \code{p1} for detail.
-#' @param byrow If TRUE, payoffs will be lined up by row. Default is FALSE.
+#' @param byrow A logical value. If \code{TRUE}, payoffs will be lined up by row. Default is FALSE.
 #'     Only used when both \code{s1} and \code{s2} are provided.
 #' @param pars A character vector of parameters that are selected by players 1 and 2, respectively.
 #'     Only used when \code{p1} and \code{p2} are specified as a function
