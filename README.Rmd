@@ -27,8 +27,8 @@ knitr::opts_chunk$set(
 ## Overview
 
 The goal of `rgamer` is to help students learn Game Theory using R.
-The functions provided by the package not only solve basic games such as two-person normal-form games but also provides the users with visual displays that highlight some aspects of the games --- game matrices, best response correspondence, etc.
-In addition, it suggests some numerical solutions for games of which it is difficult --- or even seems impossible --- to derive a closed-form analytic solution.
+The functions provided by the package not only solve basic games such as two-person normal-form games but also provides the users with visual displays that highlight some aspects of the games --- game tables, best response correspondences, etc.
+In addition, it suggests some numerical solutions for games of which it is difficult --- or even seems impossible --- to derive a closed-form analytical solution.
 
 
 ## Installation
@@ -47,7 +47,7 @@ You can install the development version from [GitHub](https://github.com/) with:
 devtools::install_github("yukiyanai/rgamer")
 ```
 
-## Example
+## Examples
 
 ```{r}
 library(rgamer)
@@ -55,35 +55,62 @@ library(rgamer)
 
 ### Example 1
 
-An example of a normal-form game:
+An example of a normal-form game (prisoner's dilemma).
 
-- Player: \{Kicker, GK \}
-- Strategy: \{(left, right), (left, right)\}
-- Payoff: \{(-1, 1, 1, -1), (1, -1, -1, 1)\}
+- Player: \{Kamijo, Yanai \}
+- Strategy: \{(Stays silent, Betrays), (Stays silent, Betrays)\}
+- Payoff: \{(-1, 0, -3, -2), (-1, -3, 0, -2)\}
 
 First, you define the game by `normal_form()`:
 ```{r}
 game1 <- normal_form(
-  players = c("Kicker", "GK"),
-  s1 = c("left", "right"), 
-  s2 = c("left", "right"),
-  p1 = c(-1, 1, 1, -1), 
-  p2 = c(1, -1, -1, 1))
+  players = c("Kamijo", "Yanai"),
+  s1 = c("Stays silent", "Betrays"), 
+  s2 = c("Stays silent", "Betrays"), 
+  p1 = c(-1,  0, -3, -2), 
+  p2 = c(-1, -3,  0, -2))
 ```
 
-Then, you can pass it to `solve_nfg()` function to get the table of the game (not shown here) and the Nash equilibrium.
+Then, you can pass it to `solve_nfg()` function to get the table of the game and the Nash equilibrium.
+```{r, eval = FALSE}
+s_game1 <- solve_nfg(game1)
+```
+```{r, echo = FALSE, message = TRUE}
+s_game1 <- solve_nfg(game1, show_table = FALSE)
+```
+![](figs/eg1_table.png)
+
+### Example 2
+
+An example of a coordination game.
+
+- Player: \{Kamijo, Yanai \}
+- Strategy: \{(Stag, Hare), (Stag, Hare)\}
+- Payoff: \{(10, 8, 0, 7), (10, 0, 8, 7)\}
+
+Define the game by `normal_form()`:
 ```{r}
-s_game1 <- solve_nfg(game1, mixed = TRUE, show_table = FALSE)
+game2 <- normal_form(
+  players = c("Kamijo", "Yanai"),
+  s1 = c("Stag", "Hare"), 
+  s2 = c("Stag", "Hare"), 
+  p1 = c(10, 8, 0, 7), 
+  p2 = c(10, 0, 8, 7))
+```
+
+Then, you can pass it to `solve_nfg()` function to get NEs. Set `mixed = TRUE` to find mixed-strategy NEs well.
+```{r, results = 'asis', message = TRUE}
+s_game2 <- solve_nfg(game2, mixed = TRUE, show_table = FALSE)
 ```
 
 For a 2-by-2 game, you can plot the best response correspondences as well.
 ```{r}
-s_game1$br_plot
+s_game2$br_plot
 ```
 
 
 
-### Example 2
+### Example 3
 
 An example of a normal-form game:
 
@@ -93,7 +120,7 @@ An example of a normal-form game:
 
 You can define a game by specifying payoff functions as character vectors using `normal_form()`:
 ```{r}
-game2 <- normal_form(
+game3 <- normal_form(
   players = c("A", "B"),
   p1 = "-x^2 + (28 - y) * x",
   p2 = "-y^2 + (28 - x) * y",
@@ -103,12 +130,12 @@ game2 <- normal_form(
 ```
 
 Then, you can pass it to `solve_nfg()`, which displays the best response correspondences by default.
-```{r}
-s_game2 <- solve_nfg(game2)
+```{r, message = TRUE}
+s_game3 <- solve_nfg(game3)
 ```
 
 
-### Example 3
+### Example 4
 
 An example of a normal-form game:
 
@@ -124,7 +151,7 @@ f_x <- function(x, y, a, b) {
 f_y <- function(x, y, s, t) {
   -y^s + (t - x) * y
 }
-game3 <- normal_form(
+game4 <- normal_form(
   players = c("A", "B"),
   p1 = f_x,
   p2 = f_y,
@@ -134,19 +161,19 @@ game3 <- normal_form(
 ```
 
 Then, you can approximate a solution numerically by `solve_nfg()`. Note that you need to set the parameter values of the function that should be treated as constants by arguments `cons1` and `cons2`, each of which accepts a named list. In addition, you can suppress the plot of best responses by `plot = FALSE`.
-```{r}
-s_game3 <- solve_nfg(
-  game = game3,
+```{r, message = TRUE}
+s_game4 <- solve_nfg(
+  game = game4,
   cons1 = list(a = 2, b = 28),
   cons2 = list(s = 2, t = 28),
   plot = FALSE
 )
 ```
 
-You can increase the precision of approximation by `precision` (default is `1`), which takes a natural number.
-```{r}
-s_game3b <- solve_nfg(
-  game = game3,
+You can increase the precision of approximation by `precision`, which takes a natural number (default is `precision = 1`).
+```{r, message = TRUE}
+s_game5 <- solve_nfg(
+  game = game4,
   cons1 = list(a = 2, b = 28),
   cons2 = list(s = 2, t = 28),
   precision = 3

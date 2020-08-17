@@ -8,7 +8,7 @@ solve_nfg(
   game,
   mixed = FALSE,
   show_table = TRUE,
-  cell_width = 80,
+  cell_width = NULL,
   mark_br = TRUE,
   delta = 0.1,
   cons1 = NULL,

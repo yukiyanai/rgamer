@@ -4,7 +4,7 @@
 \alias{game_table}
 \title{Create a table of the game}
 \usage{
-game_table(game, mark_br = TRUE, cell_width = 80)
+game_table(game, mark_br = TRUE, cell_width = NULL)
 }
 \arguments{
 \item{game}{A "normal_form" class object created by \code{normal_form()}.}
@@ -12,7 +12,8 @@ game_table(game, mark_br = TRUE, cell_width = 80)
 \item{mark_br}{A logical value. If \code{TRUE}, the best response to each of the opponent's strategy is marked.
 Default is \code{TRUE}.}
 
-\item{cell_width}{A number specifying the cell width of the game matrix. The unit is pixel. Default is 80.}
+\item{cell_width}{A number specifying the cell width of the game matrix. The unit is pixel. If not specified,
+the function tries to find the appropriate size.}
 }
 \value{
 A gt table of the normal form game.

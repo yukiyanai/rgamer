@@ -17,16 +17,16 @@ solve_nfg_matrix <- function(
   game,
   mixed = FALSE,
   show_table = TRUE,
-  cell_width = 80,
+  cell_width = NULL,
   mark_br = TRUE,
   quietly = FALSE) {
 
   ## Pure-strategy NE
   psNE <- find_pure_NE(game)
   if (is.null(psNE)) {
-    cat("Pure strategy NE does not exist.\n")
+    message("Pure strategy NE does not exist.\n")
   } else if (!quietly) {
-    cat("Pure-strategy NE:", psNE, "\n")
+    if (!quietly) message("Pure-strategy NE: ", psNE)
   }
 
   if (mixed) {
@@ -36,13 +36,17 @@ solve_nfg_matrix <- function(
       out1 <- stringi::stri_join(MASS::fractions(msNE[[1]]), collapse = ", ")
       out2 <- stringi::stri_join(MASS::fractions(msNE[[2]]), collapse = ", ")
       out <- paste0("[(", out1, "), (", out2, ")]")
-      if (!quietly) cat("Mixed-strategy NE:", out, "\n")
+
+      if (!quietly) message("Mixed-strategy NE: ", out)
+
+      message("#  The obtained mixed-strategy NE might be only a part of the solutions.\n",
+              "#  Please examine br_plot (best response plot) carefully.")
     }
   } else {
     msNE <- NULL
   }
   mat_tbl <- game_table(game, cell_width = cell_width, mark_br = mark_br)
-  if (show_table)  gt:::print.gt_tbl(mat_tbl)
+  if (show_table) print(mat_tbl)
 
   if (length(game$strategy[[1]]) == 2 & length(game$strategy[[2]])) {
     p <- br_plot(game)
@@ -50,5 +54,5 @@ solve_nfg_matrix <- function(
     p <- NULL
   }
 
-  return(list(psNE = psNE, msNE = msNE, matrix = mat_tbl, br_plot = p))
+  return(list(psNE = psNE, msNE = msNE, table = mat_tbl, br_plot = p))
 }

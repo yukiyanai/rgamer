@@ -34,7 +34,7 @@ function (e.g., p1 = "x^2 - y"). Third, it can be an R function of payoff.}
 
 \item{p2}{The payoff of Player 2. See the explanation of \code{p1} for detail.}
 
-\item{byrow}{If TRUE, payoffs will be lined up by row. Default is FALSE.
+\item{byrow}{A logical value. If \code{TRUE}, payoffs will be lined up by row. Default is FALSE.
 Only used when both \code{s1} and \code{s2} are provided.}
 
 \item{pars}{A character vector of parameters that are selected by players 1 and 2, respectively.

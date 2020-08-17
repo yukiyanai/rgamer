@@ -8,7 +8,7 @@ solve_nfg_matrix(
   game,
   mixed = FALSE,
   show_table = TRUE,
-  cell_width = 80,
+  cell_width = NULL,
   mark_br = TRUE,
   quietly = FALSE
 )

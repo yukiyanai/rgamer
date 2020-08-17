@@ -105,20 +105,42 @@ solve_nfg_char <- function(game, delta = 0.1, plot = TRUE, quietly = FALSE) {
     ggplot2::geom_hline(yintercept = par1_lim[1], color = "gray") +
     ggplot2::geom_vline(xintercept = par2_lim[1], color = "gray") +
     ggplot2::geom_line(data = df,
-                       ggplot2::aes(x = x, y = y, color = player, group = player)) +
-    ggplot2::geom_point(data = df_sol, ggplot2::aes(x = x, y = y), size = 2, color = "black") +
+                       ggplot2::aes(x = x, y = y,
+                                    group = player,
+                                    color = player,
+                                    alpha = player,
+                                    size  = player)) +
+    ggplot2::geom_point(data = df_sol, ggplot2::aes(x = x, y = y), size = 4, color = "black") +
     ggplot2::geom_text(data = df_sol, ggplot2::aes(x = x, y = y, label = text),
               nudge_x = xmax / 12, nudge_y = ymax / 12) +
     ggplot2::xlim(par1_lim[1], xmax) +
     ggplot2::ylim(par2_lim[1], ymax) +
     ggplot2::geom_segment(data = df_intercept,
                           ggplot2::aes(x = xs, y = ys, xend = xe, yend = ye,
-                                       group = player, color = player)) +
+                                       group = player,
+                                       color = player,
+                                       alpha = player,
+                                       size  = player),
+                          lineend = "round",
+                          linejoin = "round") +
+    ggplot2::scale_color_brewer(palette = 'Set1',
+                                direction = -1,
+                                breaks = players,
+                                labels = players) +
+    ggplot2::scale_alpha_manual(values = c(0.7, 0.8),
+                                breaks = players,
+                                labels = players) +
+    ggplot2::scale_size_manual(values = c(3, 1),
+                               breaks = players,
+                               labels = players) +
     ggplot2::labs(x = pars[1], y = pars[2]) +
     ggplot2::coord_fixed()
 
   if (plot) plot(p)
-  if (!quietly) cat("NE:", df_sol$text, "\n")
+  if (!quietly) message("NE: ", df_sol$text)
+
+  message("#  The obtained NE might be only a part of the solutions.\n",
+          "#  Please examine br_plot (best response plot) carefully.")
 
   return(list(NE = NE, br_plot = p))
 }

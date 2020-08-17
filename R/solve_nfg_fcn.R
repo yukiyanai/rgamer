@@ -26,6 +26,8 @@ solve_nfg_fcn <- function(game,
                           plot = TRUE,
                           quietly = FALSE) {
 
+  players = game$player
+
   par1_lim <- game$strategy[[1]]
   par2_lim <- game$strategy[[2]]
 
@@ -74,15 +76,33 @@ solve_nfg_fcn <- function(game,
     ggplot2::geom_hline(yintercept = par1_lim[1], color = "gray") +
     ggplot2::geom_vline(xintercept = par2_lim[1], color = "gray") +
     ggplot2::geom_line(data = df,
-                       ggplot2::aes(x = x, y = y, color = player, group = player)) +
-    ggplot2::geom_point(data = df_sol, ggplot2::aes(x = x, y = y), size = 2, color = "black") +
+                       ggplot2::aes(x = x, y = y,
+                                    color = player,
+                                    group = player,
+                                    alpha = player,
+                                    size  = player)) +
+    ggplot2::geom_point(data = df_sol, ggplot2::aes(x = x, y = y), size = 4, color = "black") +
     ggplot2::geom_text(data = df_sol, ggplot2::aes(x = x, y = y, label = text),
                        nudge_x = par1_lim[2] / 10, nudge_y = par2_lim[2] / 10) +
+    ggplot2::scale_color_brewer(palette = 'Set1',
+                                direction = -1,
+                                breaks = players,
+                                labels = players) +
+    ggplot2::scale_alpha_manual(values = c(1, 1),
+                                breaks = players,
+                                labels = players) +
+    ggplot2::scale_size_manual(values = c(3, 1),
+                               breaks = players,
+                               labels = players) +
     ggplot2::labs(x = game$pars[1], y = game$pars[2]) +
     ggplot2::coord_fixed()
 
   if (plot) plot(p)
-  if (!quietly) cat("approximated NE:", df_sol$text, "\n")
+  if (!quietly) message("approximated NE: ", df_sol$text)
+
+  message("#  The obtained NE might be only a part of the solutions.\n",
+          "#  Please examine br_plot (best response plot) carefully.")
 
   return(list(NE = NE, br_plot = p))
 }
+

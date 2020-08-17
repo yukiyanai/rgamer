@@ -106,12 +106,28 @@ br_plot <- function(game) {
       ys = c(coord_q1_s, coord_q2_s),
       ye = c(coord_q1_e, coord_q2_e))
     brp <- ggplot2::ggplot(df) +
+      ggplot2::geom_vline(xintercept = c(0, 1), color = "gray") +
+      ggplot2::geom_hline(yintercept = c(0, 1), color = "gray") +
       ggplot2::geom_segment(ggplot2::aes(x = xs, y = ys,
-                            xend = xe, yend = ye,
-                            color = player)) +
+                                         xend = xe, yend = ye,
+                                         color = player,
+                                         alpha = player,
+                                         size  = player),
+                            lineend = "round",
+                            linejoin = "mitre") +
       ggplot2::labs(x = "p", y = "q", title = "best response correspondence") +
       ggplot2::coord_fixed() +
       ggplot2::theme(axis.title.y = element_text(angle = 0, vjust = 0.5)) +
+      ggplot2::scale_color_brewer(palette = 'Set1',
+                                  direction = -1,
+                                  breaks = players,
+                                  labels = players) +
+      ggplot2::scale_alpha_manual(values = c(0.7, 0.8),
+                                  breaks = players,
+                                  labels = players) +
+      ggplot2::scale_size_manual(values = c(3, 1),
+                                 breaks = players,
+                                 labels = players) +
       ggplot2::scale_x_continuous(breaks = c(0, p_cut, 1),
                                   labels = c("0", as.character(MASS::fractions(p_cut)), "1")) +
       ggplot2::scale_y_continuous(breaks = c(0, q_cut, 1),
