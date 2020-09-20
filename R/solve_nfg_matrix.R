@@ -31,7 +31,7 @@ solve_nfg_matrix <- function(
 
   if (mixed) {
     msNE <- find_mixed_NE(game)
-    if (is.null(msNE)) cat("Mixed-strategy NE does not exist (or infinitely many exist).\n")
+    if (is.null(msNE)) message("Mixed-strategy NE does not exist (or infinitely many exist).\n")
     else {
       out1 <- stringi::stri_join(MASS::fractions(msNE[[1]]), collapse = ", ")
       out2 <- stringi::stri_join(MASS::fractions(msNE[[2]]), collapse = ", ")

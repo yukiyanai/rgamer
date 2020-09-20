@@ -28,7 +28,7 @@ Depends:
     ggplot2 (>= 3.3.0)
 Imports:
     dplyr (>= 1.0.0),
-    gt,
+    gt (>= 0.2.1),
     magrittr,
     MASS,
     nleqslv,

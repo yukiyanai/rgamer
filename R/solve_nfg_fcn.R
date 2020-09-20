@@ -70,12 +70,16 @@ solve_nfg_fcn <- function(game,
                  cons1 = cons1,
                  cons2 = cons2,
                  cons_common = cons_common)
-  df <- dplyr::bind_rows(df)
+  df1 <- df$df1 %>%
+    dplyr::arrange(y)
+  df2 <- df$df2 %>%
+    dplyr::arrange(x)
+  df <- dplyr::bind_rows(df1, df2)
 
   p <- ggplot2::ggplot(df) +
     ggplot2::geom_hline(yintercept = par1_lim[1], color = "gray") +
     ggplot2::geom_vline(xintercept = par2_lim[1], color = "gray") +
-    ggplot2::geom_line(data = df,
+    ggplot2::geom_path(data = df,
                        ggplot2::aes(x = x, y = y,
                                     color = player,
                                     group = player,

@@ -10,6 +10,7 @@ normal_form(
   s2 = NULL,
   p1,
   p2,
+  symmetric = FALSE,
   byrow = FALSE,
   pars = NULL,
   par1_lim = NULL,
@@ -34,7 +35,10 @@ function (e.g., p1 = "x^2 - y"). Third, it can be an R function of payoff.}
 
 \item{p2}{The payoff of Player 2. See the explanation of \code{p1} for detail.}
 
-\item{byrow}{A logical value. If \code{TRUE}, payoffs will be lined up by row. Default is FALSE.
+\item{symmetric}{A logical value. Set this \code{TRUE} when the payoffs for two players are
+symmetric as in the prisoners' dilemma. Then, p1 is recycled for p2. Default is \code{FALSE}}
+
+\item{byrow}{A logical value. If \code{TRUE}, payoffs will be lined up by row. Default is \code{FALSE}.
 Only used when both \code{s1} and \code{s2} are provided.}
 
 \item{pars}{A character vector of parameters that are selected by players 1 and 2, respectively.
@@ -90,6 +94,7 @@ game3 <- normal_form(
   par2_lim = c(0, 30))
 
 \dontrun{
+## This causes an error because p1 and p2 are in different forms.
 game4 <- normal_form(
   p1 = fx,
   p2 = "-y^2 + (28 - x) * y",

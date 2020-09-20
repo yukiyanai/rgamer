@@ -33,7 +33,7 @@ Installation
 
 ```r
 install.packages("rgamer")
-#> Warning: package 'rgamer' is not available (for R version 4.0.2)
+#> Warning: package 'rgamer' is not available (for R version 3.6.3)
 ```
 -->
 
@@ -194,3 +194,40 @@ takes a natural number (default is `precision = 1`).
     #> #  Please examine br_plot (best response plot) carefully.
 
 ![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->
+
+Example 5
+---------
+
+You can draw a tree of an extensive form game.
+
+    game6 <- extensive_form(
+      players = list("f", c("m", "m")),
+      n_node = c(1, 2, 4),
+      n_choice = list(2,
+                      c(2, 2),
+                      rep(0, 4)),
+      strategy = list(c("ballet", "baseball"),
+                      c("ballet", "baseball"), c("ballet", "baseball")),
+      payoff = list(f = c(2, 0, 0, 1),
+                    m = c(1, 0, 0, 2)),
+      quietly = TRUE
+    )
+
+![](man/figures/README-unnamed-chunk-16-1.png)<!-- -->
+
+And you can show the equilibrium path by setting `mark_path = TRUE`.
+
+    game6 <- extensive_form(
+      players = list("f", c("m", "m")),
+      n_node = c(1, 2, 4),
+      n_choice = list(2,
+                      c(2, 2),
+                      rep(0, 4)),
+      strategy = list(c("ballet", "baseball"),
+                      c("ballet", "baseball"), c("ballet", "baseball")),
+      payoff = list(f = c(2, 0, 0, 1),
+                    m = c(1, 0, 0, 2)),
+      mark_path = TRUE
+    )
+
+![](man/figures/README-unnamed-chunk-17-1.png)<!-- --> \`\`\`

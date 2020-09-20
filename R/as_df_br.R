@@ -95,7 +95,8 @@ as_df_br <- function(players,
     unlist()
 
   df0 <- df0 %>%
-    dplyr::select(tidyselect::all_of(pars), payoff1, payoff2)
+    dplyr::select(tidyselect::all_of(pars), payoff1, payoff2) %>%
+    dplyr::filter(!is.nan(payoff1), !is.nan(payoff2))
   names(df0)[1:2] <- c("x", "y")
 
   df1 <- df0 %>%
