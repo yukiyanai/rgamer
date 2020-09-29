@@ -119,7 +119,6 @@ br_plot <- function(game) {
       ggplot2::coord_fixed() +
       ggplot2::theme(axis.title.y = element_text(angle = 0, vjust = 0.5)) +
       ggplot2::scale_color_brewer(palette = 'Set1',
-                                  direction = -1,
                                   breaks = players,
                                   labels = players) +
       ggplot2::scale_alpha_manual(values = c(0.7, 0.8),

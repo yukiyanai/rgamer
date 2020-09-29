@@ -43,6 +43,7 @@ solve_nfg <- function(game,
                       cons_common = NULL,
                       precision = 1,
                       plot = TRUE,
+                      mark_NE = FALSE,
                       quietly = FALSE) {
 
   if (class(game) != "normal_form")
@@ -53,10 +54,10 @@ solve_nfg <- function(game,
                      cell_width = cell_width, mark_br = mark_br, quietly = quietly)
 
   } else if (game$type == "char_function") {
-    solve_nfg_char(game = game, delta = delta, plot = plot, quietly = quietly)
+    solve_nfg_char(game = game, delta = delta, plot = plot, mark_NE = mark_NE, quietly = quietly)
 
   } else {
     solve_nfg_fcn(game = game, cons1 = cons1, cons2 = cons2, cons_common = cons_common,
-                  precision = precision, plot = plot, quietly = quietly)
+                  precision = precision, plot = plot, mark_NE = mark_NE, quietly = quietly)
   }
 }

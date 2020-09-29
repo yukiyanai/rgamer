@@ -18,7 +18,7 @@
 #' @param mark_path A logical value. If \code{TRUE}, The paths played in the equilibrium will be
 #'     marked (with color and bold lines). Default is \code{FALSE}.
 #' @param direction The direction to which a game tree grows. The value must be one of
-#'     \code{"horizontal"}, \code{"up"}, and \code{"down"}. Default is \code{"horizontal"}.
+#'     \code{"right"}, \code{"up"}, and \code{"down"}. Default is \code{"right"}.
 #' @return An object of "extensive_form" class, which defines an extensive-form (or sequential) game.
 #' @importFrom magrittr %>%
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
@@ -84,10 +84,10 @@ extensive_form <- function(
   quietly = FALSE,
   show_tree = TRUE,
   mark_path = FALSE,
-  direction = "horizontal" # direction of the game tree
+  direction = "right" # direction of the game tree
 ) {
 
-  direction <- match.arg(direction, choices = c("horizontal", "up", "down"))
+  direction <- match.arg(direction, choices = c("right", "up", "down"))
 
   u_players <- players %>% unlist() %>% unique()
   n_players <- length(u_players)
@@ -260,7 +260,6 @@ extensive_form <- function(
     ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
                    panel.grid.minor = ggplot2::element_blank()) +
     ggplot2::scale_color_brewer(palette = "Set1",
-                                direction = -1,
                                 guide = FALSE)
 
 

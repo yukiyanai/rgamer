@@ -180,6 +180,12 @@ s_game5 <- solve_nfg(
 )
 ```
 
+You can extract the best response plot with NE marked as follows.
+```{r}
+s_game5$br_plot_NE
+```
+
+
 
 ## Example 5
 
@@ -215,6 +221,3 @@ game6 <- extensive_form(
 )
 ```
 ```
-
-
-

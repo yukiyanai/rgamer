@@ -15,6 +15,8 @@
 #'     The default value is 1.
 #' @param plot A logical value to determine whether the figure of the best response correspondences
 #'     will be displayed. Default is \code{TRUE}.
+#' @param mark_NE A logical value to control if the NE (if any) will be marked in the best response
+#'     plot, which will be displayed (only dipslayed when \code{plot = TRUE}). Default is \code{FALSE}.
 #' @param quietly A logical value to determine if the equilibrium will be kept in the returned list
 #'     without being printed on screen. Default is \code{FALSE}.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
@@ -24,9 +26,10 @@ solve_nfg_fcn <- function(game,
                           cons_common = NULL,
                           precision = 1L,
                           plot = TRUE,
+                          mark_NE = FALSE,
                           quietly = FALSE) {
 
-  players = game$player
+  players <- game$player
 
   par1_lim <- game$strategy[[1]]
   par2_lim <- game$strategy[[2]]
@@ -74,22 +77,41 @@ solve_nfg_fcn <- function(game,
     dplyr::arrange(y)
   df2 <- df$df2 %>%
     dplyr::arrange(x)
+
+  difference1 <- diff(df1$y[1:2])
+  check_range_lb <- NE - difference1
+  check_range_ub <- NE + difference1
+  check_df1 <- df1 %>%
+    dplyr::filter(x > check_range_lb[1],
+                  x < check_range_ub[1],
+                  y > check_range_lb[2],
+                  y < check_range_ub[2])
+
+  difference2 <- diff(df2$x[1:2])
+  check_range_lb <- NE - difference2
+  check_range_ub <- NE + difference2
+  check_df2 <- df2 %>%
+    dplyr::filter(x > check_range_lb[1],
+                  x < check_range_ub[1],
+                  y > check_range_lb[2],
+                  y < check_range_ub[2])
+
+  if (nrow(check_df1) == 0 | nrow(check_df2) == 0) {
+    NE <- NULL
+  }
+
   df <- dplyr::bind_rows(df1, df2)
 
   p <- ggplot2::ggplot(df) +
     ggplot2::geom_hline(yintercept = par1_lim[1], color = "gray") +
     ggplot2::geom_vline(xintercept = par2_lim[1], color = "gray") +
-    ggplot2::geom_path(data = df,
+    ggplot2::geom_point(data = df,
                        ggplot2::aes(x = x, y = y,
                                     color = player,
                                     group = player,
                                     alpha = player,
                                     size  = player)) +
-    ggplot2::geom_point(data = df_sol, ggplot2::aes(x = x, y = y), size = 4, color = "black") +
-    ggplot2::geom_text(data = df_sol, ggplot2::aes(x = x, y = y, label = text),
-                       nudge_x = par1_lim[2] / 10, nudge_y = par2_lim[2] / 10) +
     ggplot2::scale_color_brewer(palette = 'Set1',
-                                direction = -1,
                                 breaks = players,
                                 labels = players) +
     ggplot2::scale_alpha_manual(values = c(1, 1),
@@ -101,12 +123,32 @@ solve_nfg_fcn <- function(game,
     ggplot2::labs(x = game$pars[1], y = game$pars[2]) +
     ggplot2::coord_fixed()
 
-  if (plot) plot(p)
-  if (!quietly) message("approximated NE: ", df_sol$text)
+
+   if (is.null(NE)) {
+     p2 <- p
+   } else {
+     p2 <- p +
+      ggplot2::geom_point(data = df_sol, ggplot2::aes(x = x, y = y), size = 4, color = "black") +
+      ggplot2::geom_text(data = df_sol, ggplot2::aes(x = x, y = y, label = text),
+                         nudge_x = par1_lim[2] / 10, nudge_y = par2_lim[2] / 10)
+   }
+
+
+  if (plot) {
+    if (mark_NE) plot(p2)
+    else plot(p)
+  }
+
+  if (!quietly) {
+    if (is.null(NE)) {
+      message("NE was not found")
+    } else {
+      message("approximated NE: ", df_sol$text)
+    }
+  }
 
   message("#  The obtained NE might be only a part of the solutions.\n",
           "#  Please examine br_plot (best response plot) carefully.")
 
-  return(list(NE = NE, br_plot = p))
+  return(list(NE = NE, br_plot = p, br_plot_NE = p2))
 }
-

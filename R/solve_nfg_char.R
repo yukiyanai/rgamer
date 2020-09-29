@@ -9,11 +9,13 @@
 #'     The default value is 0.1. The smaller the value is, the smoother the correspondence curves are.
 #' @param plot A logical value to determine whether the figure of the best response correspondences
 #'     will be displayed. Default is \code{TRUE}.
+#' @param mark_NE A logical value to control if the NE (if any) will be marked in the best response
+#'     plot, which will be displayed (only dipslayed when \code{plot = TRUE}). Default is \code{FALSE}.
 #' @param quietly A logical value to determine if the equilibrium will be kept in the returned list
 #'     without being printed on screen. Default is \code{FALSE}.
 #' @importFrom magrittr %>%
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
-solve_nfg_char <- function(game, delta = 0.1, plot = TRUE, quietly = FALSE) {
+solve_nfg_char <- function(game, delta = 0.1, plot = TRUE, mark_NE = FALSE, quietly = FALSE) {
 
   p1 <- game$payoff[[1]]
   p2 <- game$payoff[[2]]
@@ -110,9 +112,6 @@ solve_nfg_char <- function(game, delta = 0.1, plot = TRUE, quietly = FALSE) {
                                     color = player,
                                     alpha = player,
                                     size  = player)) +
-    ggplot2::geom_point(data = df_sol, ggplot2::aes(x = x, y = y), size = 4, color = "black") +
-    ggplot2::geom_text(data = df_sol, ggplot2::aes(x = x, y = y, label = text),
-              nudge_x = xmax / 12, nudge_y = ymax / 12) +
     ggplot2::xlim(par1_lim[1], xmax) +
     ggplot2::ylim(par2_lim[1], ymax) +
     ggplot2::geom_segment(data = df_intercept,
@@ -124,7 +123,6 @@ solve_nfg_char <- function(game, delta = 0.1, plot = TRUE, quietly = FALSE) {
                           lineend = "round",
                           linejoin = "round") +
     ggplot2::scale_color_brewer(palette = 'Set1',
-                                direction = -1,
                                 breaks = players,
                                 labels = players) +
     ggplot2::scale_alpha_manual(values = c(0.7, 0.8),
@@ -136,11 +134,22 @@ solve_nfg_char <- function(game, delta = 0.1, plot = TRUE, quietly = FALSE) {
     ggplot2::labs(x = pars[1], y = pars[2]) +
     ggplot2::coord_fixed()
 
-  if (plot) plot(p)
+  p2 <- p +
+    ggplot2::geom_point(data = df_sol, ggplot2::aes(x = x, y = y),
+                        size = 4, color = "black") +
+    ggplot2::geom_text(data = df_sol, ggplot2::aes(x = x, y = y, label = text),
+              nudge_x = xmax / 12, nudge_y = ymax / 12)
+
+
+  if (plot) {
+    if (mark_NE) plot(p2)
+    else plot(p)
+  }
+
   if (!quietly) message("NE: ", df_sol$text)
 
   message("#  The obtained NE might be only a part of the solutions.\n",
           "#  Please examine br_plot (best response plot) carefully.")
 
-  return(list(NE = NE, br_plot = p))
+  return(list(NE = NE, br_plot = p, br_plot_NE = p2))
 }

@@ -1,3 +1,11 @@
+# rgamer 0.0.3
+
+Two bugs have been fixed. First, the bug that incorrectly finds a NE, which should not exist, has been fixed. Second, a discrete best response correspondence was displayed as a continuous path in the previous version, but the current versions shows it as discrete.
+
+Now, when you specify payoffs as functions, you can choose if NE should be displayed in the best response plot by `mark_NE`.  After saving the solution to an object, you can retract the best response plot with and without the NE by `br_plot_NE` and `br_plot`, respectively,
+
+
+
 # rgamer 0.0.2
 
 `extensive_form()` has been added to solve a simple extensive form game. The function draws a game tree, finds a subgame perfect equilibrium, and shows the equilibrium path on the tree.
