@@ -18,7 +18,7 @@ coverage](https://codecov.io/gh/yukiyanai/rgamer/branch/master/graph/badge.svg)]
 The goal of `rgamer` is to help students learn Game Theory using R. The
 functions provided by the package not only solve basic games such as
 two-person normal-form games but also provides the users with visual
-displays that highlight some aspects of the games — game tables, best
+displays that highlight some aspects of the games — payoff matrix, best
 response correspondences, etc. In addition, it suggests some numerical
 solutions for games of which it is difficult — or even seems impossible
 — to derive a closed-form analytical solution.
