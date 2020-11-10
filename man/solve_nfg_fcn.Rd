@@ -12,7 +12,8 @@ solve_nfg_fcn(
   precision = 1L,
   plot = TRUE,
   mark_NE = FALSE,
-  quietly = FALSE
+  quietly = FALSE,
+  color_palette = "Set1"
 )
 }
 \arguments{
@@ -38,6 +39,8 @@ plot, which will be displayed (only dipslayed when \code{plot = TRUE}). Default 
 
 \item{quietly}{A logical value to determine if the equilibrium will be kept in the returned list
 without being printed on screen. Default is \code{FALSE}.}
+
+\item{color_palette}{A color palette to be used. Default is \code{"Set1"}.}
 }
 \value{
 A list containing the pair of the best response correspondence (NE)  and the plot of best

@@ -78,7 +78,7 @@ s_game1 <- solve_nfg(game1)
 ```{r, echo = FALSE, message = TRUE}
 s_game1 <- solve_nfg(game1, show_table = FALSE)
 ```
-![](figs/eg1_table.png)
+<img src="figs/eg1_table.png" width=500>
 
 ### Example 2
 
@@ -172,7 +172,7 @@ s_game4 <- solve_nfg(
 
 You can increase the precision of approximation by `precision`, which takes a natural number (default is `precision = 1`).
 ```{r, message = TRUE}
-s_game5 <- solve_nfg(
+s_game4b <- solve_nfg(
   game = game4,
   cons1 = list(a = 2, b = 28),
   cons2 = list(s = 2, t = 28),
@@ -182,12 +182,59 @@ s_game5 <- solve_nfg(
 
 You can extract the best response plot with NE marked as follows.
 ```{r}
-s_game5$br_plot_NE
+s_game4b$br_plot_NE
 ```
 
 
-
 ## Example 5
+
+You can define payoffs by R functions and evaluate them at some discretized values by setting `discretize = TRUE`.  The following is a Bertrand competition example: 
+```{r}
+func_price1 <- function(p, q) {
+    if (p < q) {
+      profit <- p
+    } else if (p == q) {
+      profit <- 0.5 * p
+    } else {
+      profit <- 0
+    }
+    return (profit)
+  }
+
+func_price2 <- function(p, q){
+  
+  if (p > q) {
+    profit <- q
+  } else if (p == q) {
+    profit <- 0.5 * q
+  } else {
+    profit <- 0
+  }
+  return (profit)
+}
+
+game5 <- normal_form(
+  s1 = seq(from = 0, to = 10, by = 2),
+  s2 = seq(from = 0, to = 10, by = 2),
+  p1 = func_price1,
+  p2 = func_price2,
+  pars = c("p", "q"),
+  discretize = TRUE)
+```
+
+Then, you can examine the specified part of the game.
+```{r, eval = FALSE}
+s_game5 <- solve_nfg(game5, mark_br = FALSE)
+```
+```{r, echo = FALSE, message = TRUE}
+s_game5 <- solve_nfg(game5, show_table = FALSE, mark_br = FALSE)
+```
+<img src="figs/eg5_table.png" width=750>
+
+
+
+
+## Example 6
 
 You can draw a tree of an extensive form game.
 ```{r}
@@ -217,7 +264,8 @@ game6 <- extensive_form(
                   c("ballet", "baseball"), c("ballet", "baseball")),
   payoff = list(f = c(2, 0, 0, 1),
                 m = c(1, 0, 0, 2)),
-  mark_path = TRUE
+  mark_path = TRUE,
+  color_palette = "Accent"
 )
 ```
 

@@ -2,9 +2,10 @@
 #' @description \code{br_plot()} creates a plot of the best response correspondences for a 2-by-2 game.
 #' @return A ggplot figure of the best response correspondences.
 #' @param game A "normal_form" class object created by \code{normal_form()}.
+#' @param color_palette A color palette to be used. Default is \code{"Set1"}.
 #' @seealso \code{\link{normal_form}}, \code{\link[ggplot2]{ggplot}}
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
-br_plot <- function(game) {
+br_plot <- function(game, color_palette = "Set1") {
 
   s1 <- game$strategy[[1]]
   s2 <- game$strategy[[2]]
@@ -34,7 +35,7 @@ br_plot <- function(game) {
       q <- ifelse(p2[2] > p2[4], 1, 0)
     }
     if (p == "ANY" | q == "ANY") {
-      cat("The best response correspondens is not uniquely determined; no plot has been created.\n")
+      cat("The best response correspondence is not uniquely determined; no plot has been created.\n")
       return(NULL)
     }
     df <- data.frame(
@@ -47,6 +48,7 @@ br_plot <- function(game) {
       ggplot2::geom_segment(ggplot2::aes(x = xs, y = ys,
                                          xend = xe, yend = ye,
                             color = player)) +
+      ggplot2::scale_color_brewer(palette = color_palette) +
       ggplot2::labs(x = "p", y = "q", title = "best response correspondence") +
       ggplot2::coord_fixed() +
       ggplot2::theme(axis.title.y = element_text(angle = 0, vjust = 0.5))
@@ -118,7 +120,7 @@ br_plot <- function(game) {
       ggplot2::labs(x = "p", y = "q", title = "best response correspondence") +
       ggplot2::coord_fixed() +
       ggplot2::theme(axis.title.y = element_text(angle = 0, vjust = 0.5)) +
-      ggplot2::scale_color_brewer(palette = 'Set1',
+      ggplot2::scale_color_brewer(palette = color_palette,
                                   breaks = players,
                                   labels = players) +
       ggplot2::scale_alpha_manual(values = c(0.7, 0.8),

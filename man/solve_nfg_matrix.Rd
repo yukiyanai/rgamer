@@ -10,7 +10,8 @@ solve_nfg_matrix(
   show_table = TRUE,
   cell_width = NULL,
   mark_br = TRUE,
-  quietly = FALSE
+  quietly = FALSE,
+  color_palette = "Set1"
 )
 }
 \arguments{
@@ -27,7 +28,9 @@ The default value is 80.}
 Default is \code{TRUE}.}
 
 \item{quietly}{A logical value that determines whether the equilibrium will be kept in the returned list
-without being printed on screen. Default is \code{FALSE}.}
+without being printed on screen. Default is \code{FALSE}}
+
+\item{color_palette}{A color palette to be used. Default is \code{"Set1"}.}
 }
 \value{
 A list containing pure strategy Nash equilibrium (NE), mixed strategy NE, the gt table of the game,

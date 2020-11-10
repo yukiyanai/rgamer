@@ -82,6 +82,7 @@ game_table <- function(game, mark_br = TRUE, cell_width = NULL) {
     )
 
   if (exists("cellw_rgamer_temp")) cellw <<- cellw_rgamer_temp
+  else rm(cellw)
 
   return(mat_tbl)
 }

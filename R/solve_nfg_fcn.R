@@ -19,6 +19,8 @@
 #'     plot, which will be displayed (only dipslayed when \code{plot = TRUE}). Default is \code{FALSE}.
 #' @param quietly A logical value to determine if the equilibrium will be kept in the returned list
 #'     without being printed on screen. Default is \code{FALSE}.
+#' @param color_palette A color palette to be used. Default is \code{"Set1"}.
+#'
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 solve_nfg_fcn <- function(game,
                           cons1 = NULL,
@@ -27,7 +29,8 @@ solve_nfg_fcn <- function(game,
                           precision = 1L,
                           plot = TRUE,
                           mark_NE = FALSE,
-                          quietly = FALSE) {
+                          quietly = FALSE,
+                          color_palette = "Set1") {
 
   players <- game$player
 
@@ -111,7 +114,7 @@ solve_nfg_fcn <- function(game,
                                     group = player,
                                     alpha = player,
                                     size  = player)) +
-    ggplot2::scale_color_brewer(palette = 'Set1',
+    ggplot2::scale_color_brewer(palette = color_palette,
                                 breaks = players,
                                 labels = players) +
     ggplot2::scale_alpha_manual(values = c(1, 1),

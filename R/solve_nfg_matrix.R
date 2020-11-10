@@ -11,7 +11,8 @@
 #' @param cell_width A number specifying the cell width of the game matrix. The unit is pixel.
 #'   The default value is 80.
 #' @param quietly A logical value that determines whether the equilibrium will be kept in the returned list
-#'     without being printed on screen. Default is \code{FALSE}.
+#'     without being printed on screen. Default is \code{FALSE}
+#' @param color_palette A color palette to be used. Default is \code{"Set1"}.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 solve_nfg_matrix <- function(
   game,
@@ -19,7 +20,8 @@ solve_nfg_matrix <- function(
   show_table = TRUE,
   cell_width = NULL,
   mark_br = TRUE,
-  quietly = FALSE) {
+  quietly = FALSE,
+  color_palette = "Set1") {
 
   ## Pure-strategy NE
   psNE <- find_pure_NE(game)
@@ -49,7 +51,7 @@ solve_nfg_matrix <- function(
   if (show_table) print(mat_tbl)
 
   if (length(game$strategy[[1]]) == 2 & length(game$strategy[[2]])) {
-    p <- br_plot(game)
+    p <- br_plot(game, color_palette = color_palette)
   } else {
     p <- NULL
   }

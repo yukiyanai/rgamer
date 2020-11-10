@@ -4,10 +4,12 @@
 \alias{br_plot}
 \title{Plot of best response correspondences}
 \usage{
-br_plot(game)
+br_plot(game, color_palette = "Set1")
 }
 \arguments{
 \item{game}{A "normal_form" class object created by \code{normal_form()}.}
+
+\item{color_palette}{A color palette to be used. Default is \code{"Set1"}.}
 }
 \value{
 A ggplot figure of the best response correspondences.

@@ -10,6 +10,7 @@ normal_form(
   s2 = NULL,
   p1,
   p2,
+  discretize = FALSE,
   symmetric = FALSE,
   byrow = FALSE,
   pars = NULL,
@@ -30,10 +31,13 @@ the player has discrete-choice strategies.}
 the player has discrete-choice strategies.}
 
 \item{p1}{The payoff of Player1. This argument can be specified in three different ways.
- First, it can be a numeric vector of payoffs. Second, it can be a character string of the payoff
+First, it can be a numeric vector of payoffs. Second, it can be a character string of the payoff
 function (e.g., p1 = "x^2 - y"). Third, it can be an R function of payoff.}
 
 \item{p2}{The payoff of Player 2. See the explanation of \code{p1} for detail.}
+
+\item{discretize}{A logical value. Set this \code{TRUE} to evaluate payoff functions
+at some discrete values of strategies \code{s1} and \code{s2}. Default is \code{FALSE}}
 
 \item{symmetric}{A logical value. Set this \code{TRUE} when the payoffs for two players are
 symmetric as in the prisoners' dilemma. Then, p1 is recycled for p2. Default is \code{FALSE}}

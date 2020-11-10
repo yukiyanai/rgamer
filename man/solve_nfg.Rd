@@ -17,7 +17,8 @@ solve_nfg(
   precision = 1,
   plot = TRUE,
   mark_NE = FALSE,
-  quietly = FALSE
+  quietly = FALSE,
+  color_palette = "Set1"
 )
 }
 \arguments{
@@ -55,7 +56,9 @@ will be displayed. Default is \code{TRUE}.}
 plot, which will be displayed (only dipslayed when \code{plot = TRUE}). Default is \code{FALSE}.}
 
 \item{quietly}{A logical value that determines whether the equilibrium will be kept in the returned list
-without being printed on screen. Default is \code{FALSE}.}
+without being printed on screen. Default is \code{FALSE}}
+
+\item{color_palette}{A color palette to be used. Default is \code{"Set1"}.}
 }
 \value{
 A list containing Nash equilibria (if any), the game table (if available),

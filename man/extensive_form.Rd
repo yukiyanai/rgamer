@@ -13,7 +13,8 @@ extensive_form(
   quietly = FALSE,
   show_tree = TRUE,
   mark_path = FALSE,
-  direction = "right"
+  direction = "right",
+  color_palette = "Set1"
 )
 }
 \arguments{
@@ -42,7 +43,9 @@ on screen. Default is \code{FALSE}.}
 marked (with color and bold lines). Default is \code{FALSE}.}
 
 \item{direction}{The direction to which a game tree grows. The value must be one of
-\code{"right"}, \code{"up"}, and \code{"down"}. Default is \code{"right"}.}
+\code{"right"}, \code{"up"}, \code{"down"}, and \code{"bidirectional"}. Default is \code{"right"}.}
+
+\item{color_palette}{A color palette to be used. Default is "Set1".}
 }
 \value{
 An object of "extensive_form" class, which defines an extensive-form (or sequential) game.

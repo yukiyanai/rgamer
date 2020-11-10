@@ -1,3 +1,7 @@
+# rgamer 0.0.4
+
+This version adds options to (1) discretized strategies with continuous payoff functions (see Example 5 in README) and (2) draw a bidirectional game tree for an extensive-form game Some minor bugs have been fixed. Now users can choose a color palette for ggplot2 figures. 
+
 # rgamer 0.0.3
 
 Two bugs have been fixed. First, the bug that incorrectly finds a NE, which should not exist, has been fixed. Second, a discrete best response correspondence was displayed as a continuous path in the previous version, but the current versions shows it as discrete.

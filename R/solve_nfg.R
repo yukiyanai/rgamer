@@ -44,20 +44,38 @@ solve_nfg <- function(game,
                       precision = 1,
                       plot = TRUE,
                       mark_NE = FALSE,
-                      quietly = FALSE) {
+                      quietly = FALSE,
+                      color_palette = "Set1") {
 
   if (class(game) != "normal_form")
     stop("game must be an object of 'normal_form' class created by normal_form() function.")
 
   if (game$type == "matrix") {
-    solve_nfg_matrix(game = game, mixed = mixed, show_table = show_table,
-                     cell_width = cell_width, mark_br = mark_br, quietly = quietly)
+    solve_nfg_matrix(game = game,
+                     mixed = mixed,
+                     show_table = show_table,
+                     cell_width = cell_width,
+                     mark_br = mark_br,
+                     quietly = quietly,
+                     color_palette = color_palette)
 
   } else if (game$type == "char_function") {
-    solve_nfg_char(game = game, delta = delta, plot = plot, mark_NE = mark_NE, quietly = quietly)
+    solve_nfg_char(game = game,
+                   delta = delta,
+                   plot = plot,
+                   mark_NE = mark_NE,
+                   quietly = quietly,
+                   color_palette = color_palette)
 
   } else {
-    solve_nfg_fcn(game = game, cons1 = cons1, cons2 = cons2, cons_common = cons_common,
-                  precision = precision, plot = plot, mark_NE = mark_NE, quietly = quietly)
+    solve_nfg_fcn(game = game,
+                  cons1 = cons1,
+                  cons2 = cons2,
+                  cons_common = cons_common,
+                  precision = precision,
+                  plot = plot,
+                  mark_NE = mark_NE,
+                  quietly = quietly,
+                  color_palette = color_palette)
   }
 }

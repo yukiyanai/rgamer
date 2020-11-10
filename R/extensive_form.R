@@ -18,7 +18,8 @@
 #' @param mark_path A logical value. If \code{TRUE}, The paths played in the equilibrium will be
 #'     marked (with color and bold lines). Default is \code{FALSE}.
 #' @param direction The direction to which a game tree grows. The value must be one of
-#'     \code{"right"}, \code{"up"}, and \code{"down"}. Default is \code{"right"}.
+#'     \code{"right"}, \code{"up"}, \code{"down"}, and \code{"bidirectional"}. Default is \code{"right"}.
+#' @param color_palette A color palette to be used. Default is "Set1".
 #' @return An object of "extensive_form" class, which defines an extensive-form (or sequential) game.
 #' @importFrom magrittr %>%
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
@@ -77,17 +78,17 @@
 #'    mark_path = TRUE)
 extensive_form <- function(
   players = NULL, # list, one vector for each sequence
-  n_node,        # vector, one value for each sequence
-  n_choice,       # list, one vecor  for each sequence
+  n_node,         # vector, one value for each sequence
+  n_choice,       # list, one vector  for each sequence
   strategy,       # list, one vector for each node.
   payoff,         # named list, one vector for each player. Names must match the unique names of the players
   quietly = FALSE,
   show_tree = TRUE,
   mark_path = FALSE,
-  direction = "right" # direction of the game tree
-) {
+  direction = "right", # direction of the game tree
+  color_palette = "Set1") {
 
-  direction <- match.arg(direction, choices = c("right", "up", "down"))
+  direction <- match.arg(direction, choices = c("right", "up", "down", "bidirectional"))
 
   u_players <- players %>% unlist() %>% unique()
   n_players <- length(u_players)
@@ -123,7 +124,6 @@ extensive_form <- function(
     node_from = rep(nonzero_index, nonzero_choice),
     node_to   = 2:(n_path + 1))
 
-
   df_node <- tree_position(players, n_node, n_choice)
 
   df_payoff <- as.data.frame(payoff)
@@ -144,7 +144,6 @@ extensive_form <- function(
   node_id_vec <- df_node %>%
     dplyr::arrange(id) %>%
     dplyr::pull(id)
-
 
   df_pos <- dplyr::bind_rows(df_node, df_payoff) %>%
     dplyr::arrange(id)
@@ -175,9 +174,9 @@ extensive_form <- function(
       df_pos[node_id_vec[i], u_players] <- df_pos[choice, u_players]
     }
 
-   df_played <- df_sub %>%
-     dplyr::mutate(played = ifelse(node_to == choice, TRUE, FALSE)) %>%
-     dplyr::bind_rows(df_played)
+    df_played <- df_sub %>%
+      dplyr::mutate(played = ifelse(node_to == choice, TRUE, FALSE)) %>%
+      dplyr::bind_rows(df_played)
    }
 
   df_path <- df_path %>%
@@ -189,6 +188,61 @@ extensive_form <- function(
                   y_m = 1/2 * y_s + 1/2 * y_e,
                   y_m = ifelse(y_m == y_e, y_m + 3, y_m),
                   played = df_played$played)
+
+  ## Game Tree
+  if (direction == "bidirectional") {
+    if (n_choice_vec[1] != 2) stop(message("The first node must have two options for a 'bidrectional' tree"))
+    df_path0 <- df_path
+    df_path$left <- rep(NA, nrow(df_path))
+    df_path$left[1:2] <- 0:1
+    for (i in 3:nrow(df_path)) {
+      node_origin2 <- df_path$node_from[i]
+      while (node_origin2 > 2) {
+        df_search <- filter(df_path, node_to == node_origin2)
+        node_origin2 <- df_search$node_from[1]
+      }
+      df_path$left[i] <- ifelse(node_origin2 == 2, 0, 1)
+    }
+    y_adj_right <- with(df_path, y_s[1] - y_e[1])
+    y_adj_left <-  with(df_path, y_s[2] - y_e[2])
+    df_path <- df_path %>%
+      dplyr::mutate(x_s = ifelse(left == 0, x_s, -x_s),
+                    x_e = ifelse(left == 0, x_e, -x_e))
+
+    df_path_top2 <- df_path[1:2,] %>%
+      dplyr::mutate(y_e = y_s)
+    df_path_rem <- df_path[-(1:2),] %>%
+      dplyr::mutate(y_s = ifelse(left == 0, y_s + y_adj_right, y_s + y_adj_left),
+                    y_e = ifelse(left == 0, y_e + y_adj_right, y_e + y_adj_left))
+    df_path <- dplyr::bind_rows(df_path_top2, df_path_rem) %>%
+      dplyr::mutate(x_m = 3/4 * x_s + 1/4  * x_e,
+                    y_m = 1/2 * y_s + 1/2 * y_e,
+                    y_m = ifelse(y_m == y_e, y_m + 1.5, y_m))
+
+    ## Adjust payoff positions
+    df_payoff <- df_path0 %>%
+      dplyr::rename(match_id = id) %>%
+      dplyr::select(match_id, x_e, y_e) %>%
+      dplyr::right_join(df_payoff, by = c("x_e" = "x", "y_e" = "y")) %>%
+      dplyr::select(-c(x_e, y_e))
+    df_payoff <- df_path %>%
+      dplyr::rename(x = x_e, y = y_e, match_id = id) %>%
+      dplyr::select(x, y, match_id, left) %>%
+      dplyr::right_join(df_payoff, by = "match_id")
+
+    ## Adjust node positions
+    df_node <- df_path0 %>%
+      dplyr::rename(match_id = id) %>%
+      dplyr::select(match_id, x_s, y_s) %>%
+      dplyr::right_join(df_node, by = c("x_s" = "x", "y_s" = "y")) %>%
+      dplyr::select(-c(x_s, y_s))
+    df_node <- df_path %>%
+      dplyr::rename(x = x_s, y = y_s, match_id = id) %>%
+      dplyr::select(x, y, match_id, left) %>%
+      dplyr::right_join(df_node, by = "match_id") %>%
+      dplyr::select(-match_id) %>%
+      dplyr::distinct()
+  }
 
   df_sol <- df_path %>%
     dplyr::filter(played)
@@ -205,7 +259,6 @@ extensive_form <- function(
   SGPE <- paste0("[", SGPE, "]")
 
 
-  ## Game Tree
   if (mark_path) {
     tree <- ggplot2::ggplot() +
       ggplot2::geom_segment(data = df_path,
@@ -243,7 +296,8 @@ extensive_form <- function(
     tree <- tree +
       ggplot2::geom_text(data = df_payoff,
                          ggplot2::aes(x = x, y = y, label = payoff),
-                         nudge_x = 5, size = 4) +
+                         nudge_x = 5 - 10 * df_payoff$left,
+                         size = 4) +
       ggplot2::scale_x_continuous(NULL, breaks = NULL) +
       ggplot2::scale_y_continuous(NULL, breaks = NULL)
   }
@@ -256,12 +310,12 @@ extensive_form <- function(
                         size = 4) +
     ggplot2::geom_text(data = df_path,
                        ggplot2::aes(x = x_m, y = y_m, label = s),
+                       nudge_x = 5 - 10 * df_path$left,
                        size = 4) +
     ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
                    panel.grid.minor = ggplot2::element_blank()) +
-    ggplot2::scale_color_brewer(palette = "Set1",
+    ggplot2::scale_color_brewer(palette = color_palette,
                                 guide = FALSE)
-
 
   if (show_tree) {
     plot(tree)
