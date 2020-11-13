@@ -25,10 +25,10 @@ solve_nfg_char <- function(game,
 
   p1 <- game$payoff[[1]]
   p2 <- game$payoff[[2]]
-  pars = game$pars
-  par1_lim = game$strategy[[1]]
-  par2_lim = game$strategy[[2]]
-  players = game$player
+  pars <- game$pars
+  par1_lim <- game$strategy[[1]]
+  par2_lim <- game$strategy[[2]]
+  players <-game$player
 
   rg1 <- par1_lim[2] - par1_lim[1]
   rg2 <- par2_lim[2] - par2_lim[1]
@@ -128,17 +128,17 @@ solve_nfg_char <- function(game,
   ## determine plot range
   if (is.null(xintercept1) & is.null(xintercept2)) {
     xmax <- ceiling(max(par1_lim) * 1.1)
-    xmax <- max(c(xmax, p1max))
+    xmax <- max(c(xmax, par1_lim[2]))
   } else {
     xmax <- ceiling(max(c(xintercept1, xintercept2)) * 1.1)
-    xmax <- max(c(xmax, p1max))
+    xmax <- max(c(xmax, par1_lim[2]))
   }
   if (is.null(yintercept1) & is.null(yintercept2)) {
     ymax <- ceiling(max(par2_lim) * 1.1)
-    ymax <- max(c(ymax, p2max))
+    ymax <- max(c(ymax, par2_lim[2]))
   } else {
     ymax <- ceiling(max(c(yintercept1, yintercept2)) * 1.1)
-    ymax <- max(c(ymax, p2max))
+    ymax <- max(c(ymax, par2_lim[2]))
   }
 
   df_intercept <- data.frame(
@@ -284,7 +284,7 @@ solve_nfg_char <- function(game,
     df1 <- df_p1_br %>%
       dplyr::mutate(player = players[1])
     df2 <- df_p2_br %>%
-      dplyr::mutate(player = players[2])
+       dplyr::mutate(player = players[2])
     df <- dplyr::bind_rows(df1, df2)
 
     plt <- ggplot2::ggplot(df) +
