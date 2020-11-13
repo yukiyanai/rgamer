@@ -128,13 +128,17 @@ solve_nfg_char <- function(game,
   ## determine plot range
   if (is.null(xintercept1) & is.null(xintercept2)) {
     xmax <- ceiling(max(c(par1_lim[1], par2_lim[1])) * 1.1)
+    xmax <- max(c(xmax, p1max))
   } else {
     xmax <- ceiling(max(c(xintercept1, xintercept2)) * 1.1)
+    xmax <- max(c(xmax, p1max))
   }
   if (is.null(yintercept1) & is.null(yintercept2)) {
     ymax <- ceiling(max(c(par1_lim[2], par2_lim[2])) * 1.1)
+    ymax <- max(c(ymax, p2max))
   } else {
     ymax <- ceiling(max(c(yintercept1, yintercept2)) * 1.1)
+    ymax <- max(c(ymax, p2max))
   }
 
   df_intercept <- data.frame(
