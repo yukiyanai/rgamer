@@ -233,18 +233,17 @@ Bertrand competition example:
 
 ``` r
 func_price1 <- function(p, q) {
-    if (p < q) {
-      profit <- p
-    } else if (p == q) {
-      profit <- 0.5 * p
-    } else {
-      profit <- 0
-    }
-    return (profit)
+  if (p < q) {
+    profit <- p
+  } else if (p == q) {
+    profit <- 0.5 * p
+  } else {
+    profit <- 0
   }
+  profit
+}
 
 func_price2 <- function(p, q){
-  
   if (p > q) {
     profit <- q
   } else if (p == q) {
@@ -252,7 +251,7 @@ func_price2 <- function(p, q){
   } else {
     profit <- 0
   }
-  return (profit)
+  profit
 }
 
 game5 <- normal_form(
