@@ -16,7 +16,7 @@ coverage](https://codecov.io/gh/yukiyanai/rgamer/branch/master/graph/badge.svg)]
 ## Overview
 
 The goal of `rgamer` is to help students learn Game Theory using R. The
-functions provided by the package not only solve basic games such as
+functions prepared by the package not only solve basic games such as
 two-person normal-form games but also provides the users with visual
 displays that highlight some aspects of the games — payoff matrix, best
 response correspondence, etc. In addition, it suggests some numerical
@@ -255,11 +255,11 @@ func_price2 <- function(p, q){
 }
 
 game5 <- normal_form(
-  s1 = seq(from = 0, to = 10, by = 2),
-  s2 = seq(from = 0, to = 10, by = 2),
   p1 = func_price1,
   p2 = func_price2,
   pars = c("p", "q"),
+  par1_lim = c(0, 10),
+  par2_lim = c(0, 10),
   discretize = TRUE)
 ```
 

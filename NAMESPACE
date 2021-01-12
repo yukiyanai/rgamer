@@ -2,5 +2,6 @@
 
 export(extensive_form)
 export(normal_form)
+export(simu_game)
 export(solve_nfg)
 importFrom(magrittr,"%>%")

@@ -11,6 +11,7 @@ normal_form(
   p1,
   p2,
   discretize = FALSE,
+  discrete_points = c(6, 6),
   symmetric = FALSE,
   byrow = FALSE,
   pars = NULL,
@@ -37,7 +38,13 @@ function (e.g., p1 = "x^2 - y"). Third, it can be an R function of payoff.}
 \item{p2}{The payoff of Player 2. See the explanation of \code{p1} for detail.}
 
 \item{discretize}{A logical value. Set this \code{TRUE} to evaluate payoff functions
-at some discrete values of strategies \code{s1} and \code{s2}. Default is \code{FALSE}}
+at some discrete values of strategies \code{s1} and \code{s2}. Default is \code{FALSE}.}
+
+\item{discrete_points}{A numeric vector of length 2 to set how many discrete points should be
+used to discretize the game defined by payoff functions. Default is \code{c(6, 6)}, which
+shows equally spaced 6 values from the range of the strategy
+\code{par1_lim} and \code{par2_lim}. Instead of setting this parameter, you can specify
+arbitrary points to use by setting \code{s1} and \code{s2}.}
 
 \item{symmetric}{A logical value. Set this \code{TRUE} when the payoffs for two players are
 symmetric as in the prisoners' dilemma. Then, p1 is recycled for p2. Default is \code{FALSE}}

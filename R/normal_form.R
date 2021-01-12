@@ -13,7 +13,12 @@
 #'     function (e.g., p1 = "x^2 - y"). Third, it can be an R function of payoff.
 #' @param p2 The payoff of Player 2. See the explanation of \code{p1} for detail.
 #' @param discretize A logical value. Set this \code{TRUE} to evaluate payoff functions
-#'      at some discrete values of strategies \code{s1} and \code{s2}. Default is \code{FALSE}
+#'      at some discrete values of strategies \code{s1} and \code{s2}. Default is \code{FALSE}.
+#' @param discrete_points A numeric vector of length 2 to set how many discrete points should be
+#'      used to discretize the game defined by payoff functions. Default is \code{c(6, 6)}, which
+#'      shows equally spaced 6 values from the range of the strategy
+#'      \code{par1_lim} and \code{par2_lim}. Instead of setting this parameter, you can specify
+#'      arbitrary points to use by setting \code{s1} and \code{s2}.
 #' @param symmetric A logical value. Set this \code{TRUE} when the payoffs for two players are
 #'     symmetric as in the prisoners' dilemma. Then, p1 is recycled for p2. Default is \code{FALSE}
 #' @param byrow A logical value. If \code{TRUE}, payoffs will be lined up by row. Default is \code{FALSE}.
@@ -73,6 +78,7 @@ normal_form <- function(
   p1,
   p2,
   discretize = FALSE,
+  discrete_points = c(6, 6),
   symmetric = FALSE,
   byrow = FALSE,
   pars = NULL,
@@ -142,6 +148,17 @@ normal_form <- function(
   } else if (is.function(p1) & is.function(p2)) {
     ## game whose payoffs are defined by function objects
     if (discretize) {
+      if (is.null(s1)) {
+        s1 <- seq(from = par1_lim[1],
+                  to   = par1_lim[2],
+                  length.out = discrete_points[1])
+      }
+      if (is.null(s2)) {
+        s2 <- seq(from = par2_lim[1],
+                  to   = par2_lim[2],
+                  length.out = discrete_points[2])
+      }
+
       s_set <- expand.grid(s1, s2)
       names(s_set) <- pars
       payoff1 <- purrr::pmap(s_set, p1) %>% unlist()

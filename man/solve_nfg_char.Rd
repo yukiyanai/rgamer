@@ -23,7 +23,7 @@ The default value is 0.1. The smaller the value is, the smoother the corresponde
 will be displayed. Default is \code{TRUE}.}
 
 \item{mark_NE}{A logical value to control if the NE (if any) will be marked in the best response
-plot, which will be displayed (only dipslayed when \code{plot = TRUE}). Default is \code{FALSE}.}
+plot, which will be displayed (only dislayed when \code{plot = TRUE}). Default is \code{FALSE}.}
 
 \item{quietly}{A logical value to determine if the equilibrium will be kept in the returned list
 without being printed on screen. Default is \code{FALSE}.}

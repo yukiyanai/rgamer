@@ -1,3 +1,7 @@
+# rgamer 0.0.5
+
+A function to simulate plays expected in a normal-form game is added.
+
 # rgamer 0.0.4
 
 This version adds options to (1) discretized strategies with continuous payoff functions (see Example 5 in README) and (2) draw a bidirectional game tree for an extensive-form game Some minor bugs have been fixed. Now users can choose a color palette for ggplot2 figures. 

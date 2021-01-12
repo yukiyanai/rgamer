@@ -53,7 +53,7 @@ The default value is 1.}
 will be displayed. Default is \code{TRUE}.}
 
 \item{mark_NE}{A logical value to control if the NE (if any) will be marked in the best response
-plot, which will be displayed (only dipslayed when \code{plot = TRUE}). Default is \code{FALSE}.}
+plot, which will be displayed (only dislayed when \code{plot = TRUE}). Default is \code{FALSE}.}
 
 \item{quietly}{A logical value that determines whether the equilibrium will be kept in the returned list
 without being printed on screen. Default is \code{FALSE}}
