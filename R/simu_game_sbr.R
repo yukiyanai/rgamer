@@ -5,18 +5,24 @@
 #'   player's previous action.
 #' @param game An object of \code{normal_form} class defined by \code{normal_form()}.
 #' @param n_periods A positive integer specifying how many times the game is played within each sample.
+#' @param init1 Player 1's first strategy. If not specified, a strategy is randomly selected
+#'   from the player's strategy set.
+#' @param init2 Player 2's first strategy. If not specified, a strategy is randomly selected
+#'   from the player's strategy set.
 #' @param rho A numeric value in [0, 1] to control the degree of inertia in each player's behavior. If \code{rho = 1},
 #'    each player does not change their choices over time. If \code{rho = 0}, each player does not stick to their
 #'    previous choice at all.
 #' @param lambda A positive value controlling the weight of the best response to the previous move of the opponent.
-#' #' @param cons1 A named list of parameters contained in \code{game$payoff$p1} that should be treated as constants, if any.
+#' @param cons1 A named list of parameters contained in \code{game$payoff$p1} that should be treated as constants, if any.
 #' @param cons2 A named list of parameters contained in \code{game$payoff$p2} that should be treated as constants, if any.
 #' @return data.frame containing the history of the game played.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @importFrom magrittr %>%
 simu_game_sbr <- function(game,
                           n_periods,
-                          rho = 0.2,
+                          init1 = NULL,
+                          init2 = NULL,
+                          rho = 0,
                           lambda = 1,
                           cons1 = NULL,
                           cons2 = NULL) {
@@ -30,8 +36,10 @@ simu_game_sbr <- function(game,
     s2 <- game$strategy$s2
 
     # for the first round
-    play1[1] <- sample(s1, size = 1)
-    play2[1] <- sample(s2, size = 1)
+    if (is.null(init1)) play1[1] <- sample(s1, size = 1)
+    else play1[1] <- init1
+    if (is.null(init2)) play2[1] <- sample(s2, size = 1)
+    else play2[1] <- init2
 
     for (i in 2:n_periods) {
       ## Player 1
@@ -65,8 +73,10 @@ simu_game_sbr <- function(game,
     # for the first round
     s1 <- game$strategy$s1
     s2 <- game$strategy$s2
-    play1[1] <- runif(1, min = s1[1], max = s1[2])
-    play2[1] <- runif(1, min = s2[1], max = s2[2])
+    if (is.null(init1)) play1[1] <- runif(1, min = s1[1], max = s1[2])
+    else play1[1] <- init1
+    if (is.null(init2)) play2[1] <- runif(1, min = s2[1], max = s2[2])
+    else play2[1] <- init2
 
     for (i in 2:n_periods) {
       ## Player 1
@@ -145,8 +155,10 @@ simu_game_sbr <- function(game,
     # for the first round
     s1 <- game$strategy$s1
     s2 <- game$strategy$s2
-    play1[1] <- runif(1, min = s1[1], max = s1[2])
-    play2[1] <- runif(1, min = s2[1], max = s2[2])
+    if (is.null(init1)) play1[1] <- runif(1, min = s1[1], max = s1[2])
+    else play1[1] <- init1
+    if (is.null(init2)) play2[1] <- runif(1, min = s2[1], max = s2[2])
+    else play2[1] <- init2
 
     for (i in 2:n_periods) {
 

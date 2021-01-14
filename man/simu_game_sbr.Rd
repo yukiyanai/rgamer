@@ -7,7 +7,9 @@
 simu_game_sbr(
   game,
   n_periods,
-  rho = 0.2,
+  init1 = NULL,
+  init2 = NULL,
+  rho = 0,
   lambda = 1,
   cons1 = NULL,
   cons2 = NULL
@@ -18,12 +20,19 @@ simu_game_sbr(
 
 \item{n_periods}{A positive integer specifying how many times the game is played within each sample.}
 
+\item{init1}{Player 1's first strategy. If not specified, a strategy is randomly selected
+from the player's strategy set.}
+
+\item{init2}{Player 2's first strategy. If not specified, a strategy is randomly selected
+from the player's strategy set.}
+
 \item{rho}{A numeric value in [0, 1] to control the degree of inertia in each player's behavior. If \code{rho = 1},
 each player does not change their choices over time. If \code{rho = 0}, each player does not stick to their
 previous choice at all.}
 
-\item{lambda}{A positive value controlling the weight of the best response to the previous move of the opponent.
-#' @param cons1 A named list of parameters contained in \code{game$payoff$p1} that should be treated as constants, if any.}
+\item{lambda}{A positive value controlling the weight of the best response to the previous move of the opponent.}
+
+\item{cons1}{A named list of parameters contained in \code{game$payoff$p1} that should be treated as constants, if any.}
 
 \item{cons2}{A named list of parameters contained in \code{game$payoff$p2} that should be treated as constants, if any.}
 }

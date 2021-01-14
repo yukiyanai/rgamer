@@ -12,11 +12,16 @@
 #'   alternately chooses the best response to the other player's previous action.
 #'   With \code{"imitation"}, each player imitates the opponent's choice in the previous period.
 #'   Players randomly choose their strategies or the first period in each of these options.
+#' @param init1 Player 1's first strategy. If not specified, a strategy is randomly selected
+#'   from the player's strategy set.
+#' @param init2 Player 2's first strategy. If not specified, a strategy is randomly selected
+#'   from the player's strategy set.
 #' @param rho A numeric value in [0, 1] to control the degree of inertia in each player's behavior. If \code{rho = 1},
-#'    each player does not change their choices over time. If \code{rho = 0}, each player does not stick to their
+#'    each player does not change their choices over time. If \code{rho = 0}, which is the default value, each player does not stick to their
 #'    previous choice at all.
 #' @param lambda A positive value controlling the weight of the best response to the previous move of the opponent.
-#'
+#' @param cons1 A named list of parameters contained in \code{game$payoff$p1} that should be treated as constants, if any.
+#' @param cons2 A named list of parameters contained in \code{game$payoff$p2} that should be treated as constants, if any.
 #' @return A list of plays by player.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
@@ -24,16 +29,18 @@ simu_game <- function(game,
                       n_samples,
                       n_periods,
                       type = "br",
-                      rho = 0.2,
+                      init1 = NULL,
+                      init2 = NULL,
+                      rho = 0,
                       lambda = 1,
                       cons1 = NULL,
                       cons2 = NULL) {
 
-  #if (class(game) != "normal_form") stop(message("Please provide a game defined by normal_form()"))
+  if (class(game) != "normal_form") stop(message("Please provide a game defined by normal_form()"))
 
-  #if (rho < 0 | rho > 1) stop(message("The value for rho must be in [0, 1]."))
+  if (rho < 0 | rho > 1) stop(message("The value for rho must be in [0, 1]."))
 
-  #type <- match.arg(type, choices = c("br", "sbr", "abr", "imitation"))
+  type <- match.arg(type, choices = c("br", "sbr", "abr", "imitation"))
 
 
   if (type == "br") {
@@ -41,7 +48,9 @@ simu_game <- function(game,
                        n_periods = n_periods,
                        rho = rho,
                        cons1 = cons1,
-                       cons2 = cons2)
+                       cons2 = cons2,
+                       init1 = init1,
+                       init2 = init2)
     df$sample <- 1
     if (n_samples > 1) {
       for (i in 2:n_samples) {
@@ -49,7 +58,9 @@ simu_game <- function(game,
                              n_periods = n_periods,
                              rho = rho,
                              cons1 = cons1,
-                             cons2 = cons2)
+                             cons2 = cons2,
+                             init1 = init1,
+                             init2 = init2)
         df_i$sample <- i
         df <- dplyr::bind_rows(df, df_i)
       }
@@ -60,7 +71,9 @@ simu_game <- function(game,
                         rho = rho,
                         lambda = lambda,
                         cons1 = cons1,
-                        cons2 = cons2)
+                        cons2 = cons2,
+                        init1 = init1,
+                        init2 = init2)
     df$sample <- 1
     if (n_samples > 1) {
       for (i in 2:n_samples) {
@@ -69,7 +82,9 @@ simu_game <- function(game,
                               rho = rho,
                               lambda = lambda,
                               cons1 = cons1,
-                              cons2 = cons2)
+                              cons2 = cons2,
+                              init1 = init1,
+                              init2 = init2)
         df_i$sample <- i
         df <- dplyr::bind_rows(df, df_i)
       }
@@ -80,7 +95,9 @@ simu_game <- function(game,
                         n_periods = n_periods,
                         rho = rho,
                         cons1 = cons1,
-                        cons2 = cons2)
+                        cons2 = cons2,
+                        init1 = init1,
+                        init2 = init2)
     df$sample <- 1
     if (n_samples > 1) {
       for (i in 2:n_samples) {
@@ -89,7 +106,9 @@ simu_game <- function(game,
           n_periods = n_periods,
           rho = rho,
           cons1 = cons1,
-          cons2 = cons2)
+          cons2 = cons2,
+          init1 = init1,
+          init2 = init2)
         df_i$sample <- i
         df <- dplyr::bind_rows(df, df_i)
       }
@@ -99,7 +118,9 @@ simu_game <- function(game,
                               n_periods = n_periods,
                               rho = rho,
                               cons1 = cons1,
-                              cons2 = cons2)
+                              cons2 = cons2,
+                              init1 = init1,
+                              init2 = init2)
     df$sample <- 1
     if (n_samples > 1) {
       for (i in 2:n_samples) {
@@ -108,7 +129,9 @@ simu_game <- function(game,
           n_periods = n_periods,
           rho = rho,
           cons1 = cons1,
-          cons2 = cons2)
+          cons2 = cons2,
+          init1 = init1,
+          init2 = init2)
         df_i$sample <- i
         df <- dplyr::bind_rows(df, df_i)
       }

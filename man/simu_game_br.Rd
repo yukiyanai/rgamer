@@ -4,12 +4,26 @@
 \alias{simu_game_br}
 \title{Plays a normal-form game by simulation (best response)}
 \usage{
-simu_game_br(game, n_periods, rho = 0.2, cons1 = NULL, cons2 = NULL)
+simu_game_br(
+  game,
+  n_periods,
+  init1 = NULL,
+  init2 = NULL,
+  rho = 0,
+  cons1 = NULL,
+  cons2 = NULL
+)
 }
 \arguments{
 \item{game}{An object of \code{normal_form} class defined by \code{normal_form()}.}
 
 \item{n_periods}{A positive integer specifying how many times the game is played within each sample.}
+
+\item{init1}{Player 1's first strategy. If not specified, a strategy is randomly selected
+from the player's strategy set.}
+
+\item{init2}{Player 2's first strategy. If not specified, a strategy is randomly selected
+from the player's strategy set.}
 
 \item{rho}{A numeric value in [0, 1] to control the degree of inertia in each player's behavior. If \code{rho = 1},
 each player does not change their choices over time. If \code{rho = 0}, each player does not stick to their
