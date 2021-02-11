@@ -50,7 +50,7 @@ solve_nfg_matrix <- function(
   mat_tbl <- game_table(game, cell_width = cell_width, mark_br = mark_br)
   if (show_table) print(mat_tbl)
 
-  if (length(game$strategy[[1]]) == 2 & length(game$strategy[[2]])) {
+  if (length(game$strategy[[1]]) == 2 & length(game$strategy[[2]]) == 2) {
     p <- br_plot(game, color_palette = color_palette)
   } else {
     p <- NULL

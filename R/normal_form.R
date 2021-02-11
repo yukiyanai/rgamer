@@ -119,7 +119,7 @@ normal_form <- function(
     } else {
       row <- rep(1:n_rows, times = n_cols)
       s1_vec <- rep(s1, times = n_cols)
-      column <- rep(1:n_cols, each = n_cols)
+      column <- rep(1:n_cols, each = n_rows)
       s2_vec <- rep(s2, each = n_rows)
     }
 

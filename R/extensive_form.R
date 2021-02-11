@@ -88,7 +88,7 @@ extensive_form <- function(
   direction = "right", # direction of the game tree
   color_palette = "Set1") {
 
-  direction <- match.arg(direction, choices = c("right", "up", "down", "bidirectional"))
+   direction <- match.arg(direction, choices = c("right", "up", "down", "bidirectional"))
 
   u_players <- players %>% unlist() %>% unique()
   n_players <- length(u_players)
@@ -247,17 +247,55 @@ extensive_form <- function(
   df_sol <- df_path %>%
     dplyr::filter(played)
 
-  SGPE <- rep(NA, n_players)
-  for (i in seq_along(u_players)) {
-    df_p <- df_sol %>% dplyr::filter(player == u_players[i])
-    s <- df_p %>% dplyr::pull(s)
-    s_mid <- paste(s, collapse = ", ")
-    SGPE[i] <- paste0("(", s_mid, ")")
-  }
-  SGPE <- SGPE %>%
-    paste(collapse = ", ")
-  SGPE <- paste0("[", SGPE, "]")
+  n_paths_played <- table(df_sol$node_from)
+  n_sol <- prod(n_paths_played)
 
+
+  choice <- vector(mode = "list", length = length(n_paths_played))
+  node_id <- names(n_paths_played)
+  node_player <- rep(NA, length.out = length(n_paths_played))
+  for (i in seq_along(n_paths_played)) {
+    node_player[i] <- unique(df_sol$player[df_sol$node_from == node_id[i]])
+    choice[[i]] <- df_sol %>%
+      dplyr::filter(node_from == names(n_paths_played)[i]) %>%
+      dplyr::pull(s)
+  }
+
+  sol_sets <- expand.grid(choice) %>%
+    t() %>%
+    tibble::as_tibble() %>%
+    tidyr::pivot_longer(
+      cols = 1:n_sol,
+      names_to = "sol_id",
+      values_to = "s"
+    ) %>%
+    dplyr::arrange(sol_id)
+  sol_sets$player <- rep(node_player, n_sol)
+
+  df_sol2 <- dplyr::full_join(df_sol, sol_sets,
+                              by = c("s", "player")) %>%
+    dplyr::arrange(sol_id, node_from)
+
+  sol_id_vec <- unique(df_sol2$sol_id)
+
+  SGPE <- rep(NA, length.out = n_sol)
+  for (j in 1:n_sol) {
+
+    df_sol_sub <- df_sol2[df_sol2$sol_id == sol_id_vec[j],]
+
+
+    SGPE_tmp <- rep(NA, n_players)
+    for (i in seq_along(u_players)) {
+      df_p <- df_sol_sub %>% dplyr::filter(player == u_players[i])
+      s <- df_p %>% dplyr::pull(s)
+      s_mid <- paste(s, collapse = ", ")
+      SGPE_tmp[i] <- paste0("(", s_mid, ")")
+    }
+    SGPE_tmp <- SGPE_tmp %>%
+      paste(collapse = ", ")
+    SGPE_tmp <- paste0("[", SGPE_tmp, "]")
+    SGPE[j] <- SGPE_tmp
+  }
 
   if (mark_path) {
     tree <- ggplot2::ggplot() +
@@ -317,12 +355,17 @@ extensive_form <- function(
     ggplot2::scale_color_brewer(palette = color_palette,
                                 guide = FALSE)
 
-  if (show_tree) {
+   if (show_tree) {
     plot(tree)
   }
 
   if (!quietly) {
-    message("Subgame perfect equilibrium: ", SGPE)
+    if (length(SGPE) > 1) {
+      message("Subgame perfect equilibria: ",
+              paste(SGPE, collapse = ", "))
+    } else {
+      message("Subgame perfect equilibrium: ", SGPE)
+    }
   }
 
   value <- list(player   = players,

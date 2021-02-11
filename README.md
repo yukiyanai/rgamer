@@ -30,16 +30,19 @@ solutions for games of which it is difficult — or even seems impossible
 
 ```r
 install.packages("rgamer")
-#> Warning: package 'rgamer' is not available for this version of R
-#> 
-#> A version of this package for your version of R might be available elsewhere,
-#> see the ideas at
-#> https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages
+#> Warning: package 'rgamer' is not available (for R version 4.0.2)
 ```
 -->
 
 You can install the development version from
 [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("yukiyanai/rgamer")
+```
+
+or
 
 ``` r
 # install.packages("devtools")
@@ -56,9 +59,9 @@ library(rgamer)
 
 An example of a normal-form game (prisoner’s dilemma).
 
-  - Player: {Kamijo, Yanai }
-  - Strategy: {(Stays silent, Betrays), (Stays silent, Betrays)}
-  - Payoff: {(-1, 0, -3, -2), (-1, -3, 0, -2)}
+-   Player: {Kamijo, Yanai }
+-   Strategy: {(Stays silent, Betrays), (Stays silent, Betrays)}
+-   Payoff: {(-1, 0, -3, -2), (-1, -3, 0, -2)}
 
 First, you define the game by `normal_form()`:
 
@@ -86,9 +89,9 @@ s_game1 <- solve_nfg(game1)
 
 An example of a coordination game.
 
-  - Player: {Kamijo, Yanai }
-  - Strategy: {(Stag, Hare), (Stag, Hare)}
-  - Payoff: {(10, 8, 0, 7), (10, 0, 8, 7)}
+-   Player: {Kamijo, Yanai }
+-   Strategy: {(Stag, Hare), (Stag, Hare)}
+-   Payoff: {(10, 8, 0, 7), (10, 0, 8, 7)}
 
 Define the game by `normal_form()`:
 
@@ -101,8 +104,8 @@ game2 <- normal_form(
   p2 = c(10, 0, 8, 7))
 ```
 
-Then, you can pass it to `solve_nfg()` function to get NEs. Set `mixed =
-TRUE` to find mixed-strategy NEs well.
+Then, you can pass it to `solve_nfg()` function to get NEs. Set
+`mixed = TRUE` to find mixed-strategy NEs well.
 
 ``` r
 s_game2 <- solve_nfg(game2, mixed = TRUE, show_table = FALSE)
@@ -119,16 +122,17 @@ well.
 s_game2$br_plot
 ```
 
-![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-11-1.png)<!-- -->
 
 ### Example 3
 
 An example of a normal-form game:
 
-  - Player: { A, B }
-  - Strategy: {\(x \in [0, 30]\), \(y \in [0, 30]\) }
-  - Payoff: {\(f_x(x, y) = -x^2 + (28 - y)x\),
-    \(f_y(x, y) = -y^2 + (28 - x) y\)}
+-   Player: { A, B }
+-   Strategy: {*x* ∈ \[0, 30\], *y* ∈ \[0, 30\] }
+-   Payoff:
+    {*f*<sub>*x*</sub>(*x*, *y*) =  − *x*<sup>2</sup> + (28 − *y*)*x*,
+    *f*<sub>*y*</sub>(*x*, *y*) =  − *y*<sup>2</sup> + (28 − *x*)*y*}
 
 You can define a game by specifying payoff functions as character
 vectors using `normal_form()`:
@@ -153,16 +157,17 @@ s_game3 <- solve_nfg(game3)
 #> #  Please examine br_plot (best response plot) carefully.
 ```
 
-![](man/figures/README-unnamed-chunk-12-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-13-1.png)<!-- -->
 
 ### Example 4
 
 An example of a normal-form game:
 
-  - Player: { A, B }
-  - Strategy: {\(x \in [0, 30]\), \(y \in [0, 30]\) }
-  - Payoff: {\(f_x(x, y) = -x^a + (b - y)x\),
-    \(f_y(x, y) = -y^s + (t - x) y\)}
+-   Player: { A, B }
+-   Strategy: {*x* ∈ \[0, 30\], *y* ∈ \[0, 30\] }
+-   Payoff:
+    {*f*<sub>*x*</sub>(*x*, *y*) =  − *x*<sup>*a*</sup> + (*b* − *y*)*x*,
+    *f*<sub>*y*</sub>(*x*, *y*) =  − *y*<sup>*s*</sup> + (*t* − *x*)*y*}
 
 You can define a normal-form game by specifying payoffs by R functions.
 
@@ -215,7 +220,7 @@ s_game4b <- solve_nfg(
 #> #  Please examine br_plot (best response plot) carefully.
 ```
 
-![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-16-1.png)<!-- -->
 
 You can extract the best response plot with NE marked as follows.
 
@@ -223,7 +228,7 @@ You can extract the best response plot with NE marked as follows.
 s_game4b$br_plot_NE
 ```
 
-![](man/figures/README-unnamed-chunk-16-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-17-1.png)<!-- -->
 
 ## Example 5
 
@@ -292,7 +297,7 @@ game6 <- extensive_form(
 )
 ```
 
-![](man/figures/README-unnamed-chunk-20-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-21-1.png)<!-- -->
 
 And you can show the equilibrium path by setting `mark_path = TRUE`.
 
@@ -312,4 +317,4 @@ game6 <- extensive_form(
 )
 ```
 
-![](man/figures/README-unnamed-chunk-21-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-22-1.png)<!-- -->

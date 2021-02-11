@@ -43,9 +43,17 @@ install.packages("rgamer")
 You can install the development version from [GitHub](https://github.com/) with:
 
 ``` {r, eval = FALSE}
+# install.packages("remotes")
+remotes::install_github("yukiyanai/rgamer")
+```
+
+or
+
+``` {r, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("yukiyanai/rgamer")
 ```
+
 
 ## Examples
 
