@@ -1,6 +1,6 @@
 # rgamer 0.0.6
 
-This version contains three new functions: `find_dominant()` and `find_dominated()` finds (weakly) dominant and (weakly) dominated strategies, respectively, if any, `eliminate_strategy()` eliminates the specific player's specific strategy from a normal-form game. In addition, Some bugs has been fixed.
+This version contains three new functions: `find_dominant()` and `find_dominated()` finds (weakly) dominant and (weakly) dominated strategies, respectively, and `eliminate_strategy()` eliminates the specific player's specific strategy from a normal-form game. In addition, Some bugs have been fixed.
 
 # rgamer 0.0.5
 
