@@ -12,41 +12,47 @@ find_dominated <- function(game) {
 
     ## Player 1
     dom_res_1 <- rep(FALSE, length.out = n_s1)
-    for (i in 1:n_s1) {
-      not_i <- c(1:n_s1)[-i]
-      cond_w <- cond <- rep(FALSE, length.out = length(not_i))
-      for (j in seq_along(not_i)) {
-        if (all(game$mat$matrix1[i, ] < game$mat$matrix1[not_i[j], ])) {
-          cond[j] <- TRUE
-        } else if (all(game$mat$matrix1[i, ] <= game$mat$matrix1[not_i[j], ])) {
-          cond_w[j] <- TRUE
+    if (n_s1 > 1) {
+      for (i in 1:n_s1) {
+        not_i <- c(1:n_s1)[-i]
+        cond_w <- cond <- rep(FALSE, length.out = length(not_i))
+        for (j in seq_along(not_i)) {
+          if (all(game$mat$matrix1[i, ] < game$mat$matrix1[not_i[j], ])) {
+            cond[j] <- TRUE
+          } else if (all(game$mat$matrix1[i, ] <= game$mat$matrix1[not_i[j], ])) {
+            cond_w[j] <- TRUE
+          }
         }
+        if (all(cond)) {
+          dom_res_1[i] <- "dominated"
+          break
+        }
+        else if (all(cond_w)) dom_res_1[i] <- "weakly"
       }
-      if (all(cond)) {
-        dom_res_1[i] <- "dominated"
-        break
-      }
-      else if (all(cond_w)) dom_res_1[i] <- "weakly"
     }
 
     ## Player 2
     dom_res_2 <- rep(FALSE, length.out = n_s2)
-    for (i in 1:n_s2) {
-      not_i <- c(1:n_s2)[-i]
-      cond_w <- cond <- rep(FALSE, length.out = length(not_i))
-      for (j in seq_along(not_i)) {
-        if (all(game$mat$matrix2[, i] < game$mat$matrix2[, not_i[j]])) {
-          cond[j] <- TRUE
-        } else if (all(game$mat$matrix2[, i] <= game$mat$matrix2[, not_i[j]])) {
-          cond_w[j] <- TRUE
+    if (n_s2 > 1) {
+      for (i in 1:n_s2) {
+        not_i <- c(1:n_s2)[-i]
+        cond_w <- cond <- rep(FALSE, length.out = length(not_i))
+        for (j in seq_along(not_i)) {
+          if (all(game$mat$matrix2[, i] < game$mat$matrix2[, not_i[j]])) {
+            cond[j] <- TRUE
+          } else if (all(game$mat$matrix2[, i] <= game$mat$matrix2[, not_i[j]])) {
+            cond_w[j] <- TRUE
+          }
         }
+        if (all(cond)) {
+          dom_res_2[i] <- "dominated"
+          break
+        }
+        else if (all(cond_w)) dom_res_2[i] <- "weakly"
       }
-      if (all(cond)) {
-        dom_res_2[i] <- "dominated"
-        break
-      }
-      else if (all(cond_w)) dom_res_2[i] <- "weakly"
     }
+
+    ## to sum up
     dom_1 <- game$strategy$s1[dom_res_1 == "dominated"]
     if (length(dom_1) == 0) dom_1 <- NA
 
