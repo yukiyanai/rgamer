@@ -59,10 +59,18 @@ find_dominant <- function(game) {
     wdom_2 <- game$strategy$s2[dom_res_2 == "weakly"]
     if (length(wdom_2) == 0) wdom_2 <- NA
 
-    message(paste0(game$player[1], "'s dominant strategy: ", dom_1))
-    message(paste0(game$player[1], "'s weakly dominant strategy: ", wdom_1))
-    message(paste0(game$player[2], "'s dominant strategy: ", dom_2))
-    message(paste0(game$player[2], "'s weakly dominant strategy: ", wdom_2))
+    message(paste0(game$player[1],
+                   "'s dominant strategy: ",
+                   paste(dom_1, collapse = ", ")))
+    message(paste0(game$player[1],
+                   "'s weakly dominant strategy: ",
+                   paste(wdom_1, collapse = ", ")))
+    message(paste0(game$player[2],
+                   "'s dominant strategy: ",
+                   paste(dom_2, collapse = ", ")))
+    message(paste0(game$player[2],
+                   "'s weakly dominant strategy: ",
+                   paste(wdom_2, collapse = ", ")))
 
     dom_list <- list(dom_1, dom_2)
     names(dom_list) <- game$player
