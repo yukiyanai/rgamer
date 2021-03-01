@@ -289,12 +289,16 @@ game6 <- extensive_form(
   n_choice = list(2,
                   c(2, 2),
                   rep(0, 4)),
-  strategy = list(c("ballet", "baseball"),
+  action = list(c("ballet", "baseball"),
                   c("ballet", "baseball"), c("ballet", "baseball")),
   payoff = list(f = c(2, 0, 0, 1),
                 m = c(1, 0, 0, 2)),
   quietly = TRUE
 )
+#> Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.
+#> Using compatibility `.name_repair`.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_warnings()` to see where this warning was generated.
 ```
 
 ![](man/figures/README-unnamed-chunk-21-1.png)<!-- -->
@@ -308,7 +312,7 @@ game6 <- extensive_form(
   n_choice = list(2,
                   c(2, 2),
                   rep(0, 4)),
-  strategy = list(c("ballet", "baseball"),
+  action = list(c("ballet", "baseball"),
                   c("ballet", "baseball"), c("ballet", "baseball")),
   payoff = list(f = c(2, 0, 0, 1),
                 m = c(1, 0, 0, 2)),

@@ -1,0 +1,179 @@
+---
+title: "rgamer (version 0.0.6) test"
+date: "`r Sys.Date()`"
+author: "Yuki Yanai"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(rgamer)
+```
+
+
+version 0.0.6 をアップロードしました。
+```{r}
+packageVersion("rgamer")
+```
+
+## 修正点
+
+### 利得行列の最適反応の表示
+
+`*` だと問題の解決が難しかったので、記号を`^` に変えました。
+
+```{r, results = 'asis'}
+game1 <- normal_form(
+  players = c("Kamijo", "Yanai"),
+  s1 = c("Stays silent", "Betrays"), 
+  s2 = c("Stays silent", "Betrays"), 
+  p1 = c(-1,  0, -3, -2), 
+  p2 = c(-1, -3,  0, -2))
+s_game1 <- solve_nfg(game1)
+```
+
+### 展開型ゲームの均衡表示
+
+
+まず、もともと問題なかったものがこれまでどおり動くことの確認。
+```{r}
+g2 <- extensive_form(
+  players = list("f", c("m", "m")),
+ n_node = c(1, 2, 4),
+ n_choice = list(2, c(2, 2), rep(0, 4)),
+  strategy = list(c("ballet", "baseball"), c("ballet", "baseball"), c("ballet", "baseball")),
+ payoff = list(f = c(2, 0, 0, 1),m = c(1, 0, 0, 2)),
+ mark_path = TRUE,
+ quietly = FALSE
+)
+```
+
+右端の利得がパスと重なってしまう点は、できれば今後修正しようと思います。
+
+
+次に、問題が修正されたかどうかの確認。
+```{r}
+g3 <- extensive_form(
+  players = list("p1", rep("p2", 3)),
+  n_node = c(1, 3, 6),
+  n_choice = list(3, rep(2, 3), rep(0, 6)),
+  strategy = list(c("C", "D", "E"), c("F", "G"), c("H", "I"), c("J", "K")),
+  payoff = list(p1 = c(3, 1, 1, 2, 2, 1), p2 = c(0, 0, 1, 1, 2, 3)),
+  mark_path = TRUE,
+  direction = "down")
+```
+
+これでいかがでしょうか？
+
+
+## 新機能
+
+以下の例で利用するゲームの定義。
+
+```{r, results = 'asis'}
+game1 <- normal_form(
+  players = c("Kamijo", "Yanai"),
+  s1 = c("Stays silent", "Betrays"), 
+  s2 = c("Stays silent", "Betrays"), 
+  p1 = c(-1,  0, -3, -2), 
+  p2 = c(-1, -3,  0, -2))
+s_game1 <- solve_nfg(game1)
+```
+
+```{r, results = 'asis'}
+game2 <- normal_form(
+  s1 = c("T", "B"), 
+  s2 = c("L", "R"),
+  p1 = c(2, 2, 2, 2), 
+  p2 = c(3, 3, 3, 3))
+
+s2 <- solve_nfg(game2)
+```
+
+
+
+```{r, results = 'asis'}
+game3 <- normal_form(
+  s1 = c("rock", "paper", "scissors"), 
+  s2 = c("rock", "paper", "scissors"),
+  p1 = c(0, 1, -1, -1, 0, 1, 1, -1, 0), 
+  symmetric = TRUE)
+s3 <- solve_nfg(game3)
+```
+
+
+
+### 支配戦略の表示
+
+```{r}
+g1_dominant <- find_dominant(game1)
+```
+
+
+```{r}
+g2_dominant <- find_dominant(game2)
+```
+
+```{r}
+g3_dominant <- find_dominant(game3)
+```
+
+
+
+
+### 被支配戦略の表示
+
+```{r}
+g1_dominated <- find_dominated(game1)
+```
+
+
+```{r}
+g2_dominated <- find_dominated(game2)
+```
+
+```{r}
+g3_dominated <- find_dominated(game3)
+```
+
+
+
+
+### 被支配戦略の消去
+
+```{r}
+g1_dominated
+```
+
+Kamijo の dominated strategy である Stays silent を消去する。
+```{r, results = 'asis'}
+game1a <- eliminate_strategy(game1,
+                             player = "Kamijo",
+                             eliminated = "Stays silent")  # case-sensitive!
+s_game1a <- solve_nfg(game1a)
+```
+
+この時点で、被支配戦略を確認。
+```{r}
+g1a_dominated <- find_dominated(game1a)
+```
+
+
+Yanai の被支配戦略である Stays silent を消去する。
+```{r, results = 'asis'}
+game1b <- eliminate_strategy(game1a,
+                             player = "Yanai",
+                             eliminated = "Stays silent")
+s_game1b <- solve_nfg(game1b)
+```
+
+再び、被支配戦略を確認。
+```{r}
+g1b_dominated <- find_dominated(game1b)
+```
+
+消去すべき戦略はない。
+

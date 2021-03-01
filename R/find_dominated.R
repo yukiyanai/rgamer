@@ -23,11 +23,10 @@ find_dominated <- function(game) {
             cond_w[j] <- TRUE
           }
         }
-        if (all(cond)) {
+        if (sum(cond) > 0) {
           dom_res_1[i] <- "dominated"
           break
-        }
-        else if (all(cond_w)) dom_res_1[i] <- "weakly"
+        } else if (sum(cond_w) > 0) dom_res_1[i] <- "weakly"
       }
     }
 
@@ -44,11 +43,10 @@ find_dominated <- function(game) {
             cond_w[j] <- TRUE
           }
         }
-        if (all(cond)) {
+        if (sum(cond) > 0) {
           dom_res_2[i] <- "dominated"
           break
-        }
-        else if (all(cond_w)) dom_res_2[i] <- "weakly"
+        } else if (sum(cond_w) > 0) dom_res_2[i] <- "weakly"
       }
     }
 

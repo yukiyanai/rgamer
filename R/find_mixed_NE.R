@@ -44,10 +44,18 @@ find_mixed_NE <- function(game) {
     NULL
   })
 
+
   if (is.null(prob1) | is.null(prob2)) {
     msNE <- NULL
   } else {
-    msNE <- list(s1 = as.vector(prob1), s2 = as.vector(prob2))
+    prob1 <- as.vector(prob1)
+    prob2 <- as.vector(prob2)
+    prob1[prob1 > 1] <- 1
+    prob2[prob2 > 1] <- 1
+    prob1[prob1 < 0] <- 0
+    prob2[prob2 < 0] <- 0
+
+    msNE <- list(s1 = prob1, s2 = prob2)
   }
 
   return(msNE)

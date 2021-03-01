@@ -7,8 +7,8 @@
 #' @param n_choice A list of the number of choices at each node. Each element of the list must be
 #'     a numeric vector of the numbers of choices at a specific sequence. You must assign \code{0}
 #'     for the terminal (payoff) nodes.
-#' @param strategy A list of strategies. Each element of the list must be a vector of character strings
-#'     that corresponds to a specific node.
+#' @param action A list of actions. Each element of the list must be a vector of character strings
+#'     that corresponds to a specific player node.
 #' @param payoff A named list of payoffs. Each element of the list must be a numeric vector of
 #'     payoffs for a player. The names of the elements must match the names of the players
 #'     specified  by \code{players}.
@@ -32,7 +32,7 @@
 #'   n_choice = list(2,
 #'                   c(2, 2),
 #'                   rep(0, 4)),
-#'   strategy <- list(c("U", "D"),
+#'   action <- list(c("U", "D"),
 #'                    c("U'", "D'"), c("U''", "D''")),
 #'   payoff = list(Kamijo = c(0, 2, 1, 3),
 #'                 Yanai  = c(0, 1, 2, 1)))
@@ -43,7 +43,7 @@
 #'  n_choice = list(2,
 #'                  c(2, 2),
 #'                  rep(0, 4)),
-#'   strategy = list(c("ballet", "baseball"),
+#'   action = list(c("ballet", "baseball"),
 #'                  c("ballet", "baseball"), c("ballet", "baseball")),
 #'  payoff = list(f = c(2, 0, 0, 1),
 #'                m = c(1, 0, 0, 2)),
@@ -57,7 +57,7 @@
 #'   n_choice = list(3,
 #'                   rep(2, 3),
 #'                   rep(0, 6)),
-#'   strategy = list(c("C", "D", "E"),
+#'   action = list(c("C", "D", "E"),
 #'                   c("F", "G"), c("H", "I"), c("J", "K")),
 #'   payoff = list(p1 = c(3, 1, 1, 2, 2, 1),
 #'                 p2 = c(0, 0, 1, 1, 2, 3)),
@@ -71,7 +71,7 @@
 #'    n_choice = list(2,
 #'                    c(0, 2),
 #'                    c(0, 0)),
-#'    strategy = list(c("give up", "keep asking"),
+#'    action = list(c("give up", "keep asking"),
 #'                    c("leave",   "buy")),
 #'    payoff   = list(child  = c(0, -10, 10),
 #'                    parent = c(5, -10,  2)),
@@ -80,7 +80,7 @@ extensive_form <- function(
   players = NULL, # list, one vector for each sequence
   n_node,         # vector, one value for each sequence
   n_choice,       # list, one vector  for each sequence
-  strategy,       # list, one vector for each node.
+  action,         # list, one vector for each node.
   payoff,         # named list, one vector for each player. Names must match the unique names of the players
   quietly = FALSE,
   show_tree = TRUE,
@@ -106,7 +106,7 @@ extensive_form <- function(
   ## number of choices at each sequence
   n_choice_seq <- rep(NA, length(players))
   for (i in seq_along(players)) {
-    n_choice_seq[i] <- length(strategy[[i]])
+    n_choice_seq[i] <- length(action[[i]])
   }
 
   p_length <- length(payoff[[1]])
@@ -120,7 +120,7 @@ extensive_form <- function(
   df_path <- data.frame(
     id        = 1:n_path,
     player    = rep(players_vec, nonzero_choice),
-    s         = unlist(strategy),
+    s         = unlist(action),
     node_from = rep(nonzero_index, nonzero_choice),
     node_to   = 2:(n_path + 1))
 
@@ -368,11 +368,11 @@ extensive_form <- function(
     }
   }
 
-  value <- list(player   = players,
-                strategy = strategy,
-                payoff   = payoff,
-                sgpe     = SGPE,
-                tree     = tree)
+  value <- list(player = players,
+                action = action,
+                payoff = payoff,
+                sgpe   = SGPE,
+                tree   = tree)
 
   structure(value, class = "extensive_form")
 }

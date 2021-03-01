@@ -8,7 +8,7 @@ extensive_form(
   players = NULL,
   n_node,
   n_choice,
-  strategy,
+  action,
   payoff,
   quietly = FALSE,
   show_tree = TRUE,
@@ -27,8 +27,8 @@ or a vector of character strings at a specific sequence.}
 a numeric vector of the numbers of choices at a specific sequence. You must assign \code{0}
 for the terminal (payoff) nodes.}
 
-\item{strategy}{A list of strategies. Each element of the list must be a vector of character strings
-that corresponds to a specific node.}
+\item{action}{A list of actions. Each element of the list must be a vector of character strings
+that corresponds to a specific player node.}
 
 \item{payoff}{A named list of payoffs. Each element of the list must be a numeric vector of
 payoffs for a player. The names of the elements must match the names of the players
@@ -61,7 +61,7 @@ g1 <- extensive_form(
   n_choice = list(2,
                   c(2, 2),
                   rep(0, 4)),
-  strategy <- list(c("U", "D"),
+  action <- list(c("U", "D"),
                    c("U'", "D'"), c("U''", "D''")),
   payoff = list(Kamijo = c(0, 2, 1, 3),
                 Yanai  = c(0, 1, 2, 1)))
@@ -72,7 +72,7 @@ g2 <- extensive_form(
  n_choice = list(2,
                  c(2, 2),
                  rep(0, 4)),
-  strategy = list(c("ballet", "baseball"),
+  action = list(c("ballet", "baseball"),
                  c("ballet", "baseball"), c("ballet", "baseball")),
  payoff = list(f = c(2, 0, 0, 1),
                m = c(1, 0, 0, 2)),
@@ -86,7 +86,7 @@ g3 <- extensive_form(
   n_choice = list(3,
                   rep(2, 3),
                   rep(0, 6)),
-  strategy = list(c("C", "D", "E"),
+  action = list(c("C", "D", "E"),
                   c("F", "G"), c("H", "I"), c("J", "K")),
   payoff = list(p1 = c(3, 1, 1, 2, 2, 1),
                 p2 = c(0, 0, 1, 1, 2, 3)),
@@ -100,7 +100,7 @@ g4 <- extensive_form(
    n_choice = list(2,
                    c(0, 2),
                    c(0, 0)),
-   strategy = list(c("give up", "keep asking"),
+   action = list(c("give up", "keep asking"),
                    c("leave",   "buy")),
    payoff   = list(child  = c(0, -10, 10),
                    parent = c(5, -10,  2)),
