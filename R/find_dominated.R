@@ -1,5 +1,6 @@
 #' @title Find dominated strategies in a normal-form game
-#' @description \code{find_dominated()} finds each player's dominated and weakly dominated strategies if they exist.
+#' @description \code{find_dominated()} finds each player's dominated
+#'     and weakly dominated strategies if they exist.
 #' @details
 #' @param game A normal-form game object created by \code{normal_form()}.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
@@ -55,13 +56,21 @@ find_dominated <- function(game) {
     if (length(dom_1) == 0) dom_1 <- NA
 
     wdom_1 <- game$strategy$s1[dom_res_1 == "weakly"]
-    if (length(wdom_1) == 0) wdom_1 <- NA
+    if (!is.na(dom_1)) {
+      wdom_1 <- dom_1
+    } else if (length(wdom_1) == 0) {
+      wdom_1 <- NA
+    }
 
     dom_2 <- game$strategy$s2[dom_res_2 == "dominated"]
     if (length(dom_2) == 0) dom_2 <- NA
 
     wdom_2 <- game$strategy$s2[dom_res_2 == "weakly"]
-    if (length(wdom_2) == 0) wdom_2 <- NA
+    if (!is.na(dom_2)) {
+      wdom_2 <- dom_2
+    } else if (length(wdom_2) == 0) {
+      wdom_2 <- NA
+    }
 
     message(paste0(game$player[1],
                    "'s dominated strategy: ",

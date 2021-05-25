@@ -34,10 +34,16 @@ simu_game_br <- function(game,
     s2 <- game$strategy$s2
 
     # for the first round
-    if (is.null(init1)) play1[1] <- sample(s1, size = 1)
-    else play1[1] <- init1
-    if (is.null(init2)) play2[1] <- sample(s2, size = 1)
-    else play2[1] <- init2
+    if (is.null(init1)) {
+      play1[1] <- sample(s1, size = 1)
+    } else {
+      play1[1] <- init1
+    }
+    if (is.null(init2)) {
+      play2[1] <- sample(s2, size = 1)
+    } else {
+      play2[1] <- init2
+    }
 
     for (i in 2:n_periods) {
       ## Player 1
@@ -47,7 +53,7 @@ simu_game_br <- function(game,
         df1 <- game$df %>%
           dplyr::filter(s2 == play2[i - 1]) %>%
           dplyr::filter(p1 == max(p1))
-        if (nrow(df1) > 1) df1 <- dplyr::slice_sample(df1, 1)
+        if (nrow(df1) > 1) df1 <- dplyr::slice_sample(df1, n = 1)
         play1[i] <- df1$s1[1]
       }
 
@@ -58,7 +64,7 @@ simu_game_br <- function(game,
         df2 <- game$df %>%
           dplyr::filter(s1 == play1[i - 1]) %>%
           dplyr::filter(p2 == max(p2))
-        if (nrow(df2) > 1) df2 <- dplyr::slice_sample(df2, 1)
+        if (nrow(df2) > 1) df2 <- dplyr::slice_sample(df2, n = 1)
         play2[i] <- df2$s2[1]
       }
     }
