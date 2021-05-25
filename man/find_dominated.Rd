@@ -10,7 +10,8 @@ find_dominated(game)
 \item{game}{A normal-form game object created by \code{normal_form()}.}
 }
 \description{
-\code{find_dominated()} finds each player's dominated and weakly dominated strategies if they exist.
+\code{find_dominated()} finds each player's dominated
+    and weakly dominated strategies if they exist.
 }
 \author{
 Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>

@@ -71,7 +71,8 @@ game_table <- function(game, mark_br = TRUE, cell_width = NULL) {
       columns = (1:n_cols) + 1
     ) %>%
     gt::tab_row_group(
-      group = players[1]
+      label = players[1],
+      rows = 1:n_rows
     ) %>%
     gt::cols_align(
       align = "center",
@@ -82,7 +83,6 @@ game_table <- function(game, mark_br = TRUE, cell_width = NULL) {
     )
 
   if (exists("cellw_rgamer_temp")) cellw <<- cellw_rgamer_temp
-  #else rm(cellw)
 
   return(mat_tbl)
 }
