@@ -2,14 +2,24 @@
 #' @description \code{game_table()} creates and displays a gt table of the game.
 #' @return A gt table of the normal form game.
 #' @param game A "normal_form" class object created by \code{normal_form()}.
+#'     The game's type must be "matrix".
 #' @seealso \code{\link{normal_form}}, \code{\link[gt]{gt}}
 #' @param mark_br A logical value. If \code{TRUE}, the best response to each of the opponent's strategy is marked.
 #'   Default is \code{TRUE}.
 #' @param cell_width A number specifying the cell width of the game matrix. The unit is pixel. If not specified,
 #'     the function tries to find the appropriate size.
 #' @importFrom magrittr %>%
+#' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 game_table <- function(game, mark_br = TRUE, cell_width = NULL) {
+
+  pid <- column <- NULL
+
+  if (exists("cellw", envir = .GlobalEnv)) {
+    cellw_rgamer_temp <- cellw
+  }
+  cellw <- NULL
+
 
   players <- game$player
   s1 <- game$strategy[[1]]
@@ -27,7 +37,7 @@ game_table <- function(game, mark_br = TRUE, cell_width = NULL) {
         mat1[rows1[s], cols1[s]] <- paste0(mat1[rows1[s], cols1[s]], '^')
       }
     }
-    BR2 <- BR %>%  dplyr::filter(pid == 2)
+    BR2 <- BR %>% dplyr::filter(pid == 2)
     if (nrow(BR2) > 0) {
       rows2 <- BR2 %>% dplyr::pull(row)
       cols2 <- BR2 %>% dplyr::pull(column)
@@ -59,8 +69,8 @@ game_table <- function(game, mark_br = TRUE, cell_width = NULL) {
   } else if (cell_width > 200) {
     warning("If the table doesn't fit to the screen, please make cell_width smaller.")
   }
-  if (exists("cellw")) cellw_rgamer_temp <- cellw
-  cellw <<- paste0(cell_width, "px")
+
+  assign("cellw", paste0(cell_width, "px"), envir = .GlobalEnv)
 
   ## Create the game matrix in HTML format with gt::gt()
   mat_tbl <- mat %>%
@@ -82,7 +92,11 @@ game_table <- function(game, mark_br = TRUE, cell_width = NULL) {
       tidyselect::everything() ~ cellw
     )
 
-  if (exists("cellw_rgamer_temp")) cellw <<- cellw_rgamer_temp
+  if (exists("cellw_rgamer_temp")) {
+    assign("cellw", cellw_rgamer_temp, envir = .GlobalEnv)
+  } else {
+    rm(cellw, envir = .GlobalEnv)
+  }
 
   return(mat_tbl)
 }

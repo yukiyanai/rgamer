@@ -1,5 +1,5 @@
 #' @title Define the node positions of a game tree
-#' @description \code{tree_position} determines the position of nodes in a game tree.
+#' @description \code{set_nodes} determines the position of nodes in a game tree.
 #' @details Create a data frame necessary to draw a game tree
 #' @param players A list of players.  Each element of the list must correspond to each game node, except for
 #'   the terminal (payoff) nodes.
@@ -7,9 +7,10 @@
 #' @param n_choice A list of the number of choices at each node. An element of the list must
 #'   correspond to each sequence (including the terminal node as the final sequence). Each element must
 #'   be a numeric vector whose length equals the number of nodes at the specific sequence.
-#' @return A data frame containing the positions of each node on x and y axes..
+#' @return A data frame containing the positions of each node on x and y axes.
+#' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
-tree_position <- function(players, n_node, n_choice) {
+set_nodes <- function(players, n_node, n_choice) {
 
   n_seq <- length(n_node)
 
@@ -29,11 +30,11 @@ tree_position <- function(players, n_node, n_choice) {
     n_choice_vec <- n_choice[[i]]
     keep <- NULL
     for (i in seq_along(n_choice_vec)) {
-       if (n_choice_vec[i] == 0) {
-         keep <- c(keep, FALSE)
-       } else {
-         keep <- c(keep, rep(TRUE, n_choice_vec[i]))
-       }
+      if (n_choice_vec[i] == 0) {
+        keep <- c(keep, FALSE)
+      } else {
+        keep <- c(keep, rep(TRUE, n_choice_vec[i]))
+      }
     }
   }
 

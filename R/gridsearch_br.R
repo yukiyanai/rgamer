@@ -17,6 +17,7 @@
 #'     The value n approximately means that the approximation is correct up to the Nth decimal place.
 #'     The default value is 1.
 #' @importFrom magrittr %>%
+#' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 gridsearch_br <- function(players,
                           p1,

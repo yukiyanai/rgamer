@@ -14,6 +14,7 @@
 #'     If \code{cons1} and \code{cons2} are exactly same, you can specify \code{cons_common}
 #'     instead of \code{cons1} and \code{cons2}.
 #' @importFrom magrittr %>%
+#' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 as_df_br <- function(players,
                      p1,
@@ -24,6 +25,8 @@ as_df_br <- function(players,
                      cons1 = NULL,
                      cons2 = NULL,
                      cons_common = NULL) {
+
+  payoff1 <- payoff2 <- x <- y <- NULL
 
   range1 <- par1_lim[2] - par1_lim[1]
   range2 <- par2_lim[2] - par2_lim[1]

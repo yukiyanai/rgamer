@@ -2,7 +2,9 @@
 #' @description \code{find_pure_NE()} finds pure-strategy Nash equilibria.
 #' @return A character string showing the pure-strategy Nash equilibria.
 #' @param game A "normal_form" class object created by \code{normal_form()}.
+#'     The game's type must be "matrix".
 #' @seealso \code{\link{normal_form}}
+#' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 find_pure_NE <- function(game) {
 

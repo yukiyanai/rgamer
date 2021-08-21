@@ -86,7 +86,7 @@ s_game1 <- solve_nfg(game1)
 ```{r, echo = FALSE, message = TRUE}
 s_game1 <- solve_nfg(game1, show_table = FALSE)
 ```
-<img src="figs/eg1_table.png" width=500>
+<img src="https://yukiyanai.github.io/resources/images/eg1_table.png" width=400>
 
 ### Example 2
 
@@ -236,7 +236,7 @@ s_game5 <- solve_nfg(game5, mark_br = FALSE)
 ```{r, echo = FALSE, message = TRUE}
 s_game5 <- solve_nfg(game5, show_table = FALSE, mark_br = FALSE)
 ```
-<img src="figs/eg5_table.png" width=750>
+<img src="https://yukiyanai.github.io/resources/images/eg5_table.png" width=700>
 
 
 
@@ -244,34 +244,31 @@ s_game5 <- solve_nfg(game5, show_table = FALSE, mark_br = FALSE)
 ## Example 6
 
 You can draw a tree of an extensive form game.
-```{r}
+```{r, fig.width = 7}
 game6 <- extensive_form(
-  players = list("f", c("m", "m")),
-  n_node = c(1, 2, 4),
-  n_choice = list(2,
-                  c(2, 2),
-                  rep(0, 4)),
-  action = list(c("ballet", "baseball"),
-                  c("ballet", "baseball"), c("ballet", "baseball")),
-  payoff = list(f = c(2, 0, 0, 1),
-                m = c(1, 0, 0, 2)),
+  players = list("Yanai", 
+                 rep("Kamijo", 2),
+                 rep(NA, 4)),
+  actions = list(c("stat", "game"),
+                  c("stat", "game"), c("stat", "game")),
+  payoffs = list(Yanai = c(2, 0, 0, 1),
+                 Kamijo = c(1, 0, 0, 2)),
   quietly = TRUE
 )
 ```
 
 And you can show the equilibrium path by setting `mark_path = TRUE`.
-```{r}
+```{r, fig.width = 7}
 game6 <- extensive_form(
-  players = list("f", c("m", "m")),
-  n_node = c(1, 2, 4),
-  n_choice = list(2,
-                  c(2, 2),
-                  rep(0, 4)),
-  action = list(c("ballet", "baseball"),
-                  c("ballet", "baseball"), c("ballet", "baseball")),
-  payoff = list(f = c(2, 0, 0, 1),
-                m = c(1, 0, 0, 2)),
+ players = list("Yanai", 
+                 rep("Kamijo", 2),
+                 rep(NA, 4)),
+  actions = list(c("stat", "game"),
+                  c("stat", "game"), c("stat", "game")),
+  payoffs = list(Yanai = c(2, 0, 0, 1),
+                 Kamijo = c(1, 0, 0, 2)),
   mark_path = TRUE,
+  direction = "right",
   color_palette = "Accent"
 )
 ```

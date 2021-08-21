@@ -6,31 +6,25 @@
 \usage{
 extensive_form(
   players = NULL,
-  n_node,
-  n_choice,
-  action,
-  payoff,
+  actions,
+  payoffs,
   quietly = FALSE,
   show_tree = TRUE,
   mark_path = FALSE,
-  direction = "right",
+  show_node_id = TRUE,
+  direction = "down",
   color_palette = "Set1"
 )
 }
 \arguments{
 \item{players}{A list of players. Each element of the list must be a character string
-or a vector of character strings at a specific sequence.}
+or a vector of character strings at a specific depth of the tree. Terminal nodes,
+where payoffs are displayed, must be specified as \code{NA}.}
 
-\item{n_node}{A numeric vector of the number of nodes at a specific sequence.}
-
-\item{n_choice}{A list of the number of choices at each node. Each element of the list must be
-a numeric vector of the numbers of choices at a specific sequence. You must assign \code{0}
-for the terminal (payoff) nodes.}
-
-\item{action}{A list of actions. Each element of the list must be a vector of character strings
+\item{actions}{A list of actions. Each element of the list must be a vector of character strings
 that corresponds to a specific player node.}
 
-\item{payoff}{A named list of payoffs. Each element of the list must be a numeric vector of
+\item{payoffs}{A named list of payoffs. Each element of the list must be a numeric vector of
 payoffs for a player. The names of the elements must match the names of the players
 specified  by \code{players}.}
 
@@ -42,8 +36,18 @@ on screen. Default is \code{FALSE}.}
 \item{mark_path}{A logical value. If \code{TRUE}, The paths played in the equilibrium will be
 marked (with color and bold lines). Default is \code{FALSE}.}
 
-\item{direction}{The direction to which a game tree grows. The value must be one of
-\code{"right"}, \code{"up"}, \code{"down"}, and \code{"bidirectional"}. Default is \code{"right"}.}
+\item{show_node_id}{A logical value. If \code{TRUE}, the node numbers are displayed in the
+figure. Default is \code{TRUE}}
+
+\item{direction}{The direction to which a game tree grows.
+The value must be one of:
+\code{"right"},
+\code{"up"},
+\code{"down"},
+\code{"bidirectional"},
+\code{"horizonal"}, and
+\code{"vertical"}.
+Default is \code{"down"}.}
 
 \item{color_palette}{A color palette to be used. Default is "Set1".}
 }
@@ -53,59 +57,65 @@ An object of "extensive_form" class, which defines an extensive-form (or sequent
 \description{
 \code{extensive_form} defines an extensive-form game
 }
+\details{
+This function defines an extensive-form game and draws the game tree.
+}
 \examples{
 g1 <- extensive_form(
   players = list("Kamijo",
-                 rep("Yanai", 2)),
-  n_node = c(1, 2, 4),
-  n_choice = list(2,
-                  c(2, 2),
-                  rep(0, 4)),
-  action <- list(c("U", "D"),
-                   c("U'", "D'"), c("U''", "D''")),
-  payoff = list(Kamijo = c(0, 2, 1, 3),
-                Yanai  = c(0, 1, 2, 1)))
+                 rep("Yanai", 2),
+                 rep(NA, 4)),
+  actions <- list(c("U", "D"),
+                  c("U'", "D'"), c("U''", "D''")),
+  payoffs = list(Kamijo = c(0, 2, 1, 3),
+                 Yanai  = c(0, 1, 2, 1)))
 
 g2 <- extensive_form(
-  players = list("f", c("m", "m")),
- n_node = c(1, 2, 4),
- n_choice = list(2,
-                 c(2, 2),
-                 rep(0, 4)),
-  action = list(c("ballet", "baseball"),
+  players = list("f",
+                 c("m", "m"),
+                 rep(NA, 4)),
+  actions = list(c("ballet", "baseball"),
                  c("ballet", "baseball"), c("ballet", "baseball")),
- payoff = list(f = c(2, 0, 0, 1),
-               m = c(1, 0, 0, 2)),
- mark_path = TRUE,
- quietly = TRUE
-)
+  payoffs = list(f = c(2, 0, 0, 1),
+                 m = c(1, 0, 0, 2)),
+  mark_path = TRUE,
+  quietly = TRUE,
+  show_node_id = FALSE)
 
 g3 <- extensive_form(
-  players = list("p1", rep("p2", 3)),
-  n_node = c(1, 3, 6),
-  n_choice = list(3,
-                  rep(2, 3),
-                  rep(0, 6)),
-  action = list(c("C", "D", "E"),
-                  c("F", "G"), c("H", "I"), c("J", "K")),
-  payoff = list(p1 = c(3, 1, 1, 2, 2, 1),
-                p2 = c(0, 0, 1, 1, 2, 3)),
+  players = list("p1",
+                 rep("p2", 3),
+                 rep(NA, 6)),
+  actions = list(c("C", "D", "E"),
+                 c("F", "G"), c("H", "I"), c("J", "K")),
+  payoffs = list(p1 = c(3, 1, 1, 2, 2, 1),
+                 p2 = c(0, 0, 1, 1, 2, 3)),
   mark_path = TRUE,
-  direction = "down")
+  direction = "down",
+  show_node_id = TRUE)
 
 g4 <- extensive_form(
   players = list("child",
-                 "parent"),
-   n_node = c(1, 2, 2),
-   n_choice = list(2,
-                   c(0, 2),
-                   c(0, 0)),
-   action = list(c("give up", "keep asking"),
-                   c("leave",   "buy")),
-   payoff   = list(child  = c(0, -10, 10),
-                   parent = c(5, -10,  2)),
+                 c(NA, "parent"),
+                 c(NA, NA)),
+   actions = list(c("give up", "keep asking"),
+                  c("leave",   "buy")),
+   payoffs   = list(child  = c(0, -10, 10),
+                    parent = c(5, -10,  2)),
    mark_path = TRUE)
+
+g5 <- extensive_form(
+  players = list("Kamijo",
+                 c("Yanai", NA),
+                 c("Kamijo", NA),
+                 c(NA, NA)),
+  actions = list(c("P", "T"),
+                   c("P'", "T'"),
+                   c("P''", "T''")),
+  payoffs = list(Kamijo = c(0, 1, 5, 3),
+                 Yanai = c(0, 2, 4, 1)),
+  direction = "horizontal")
 }
 \author{
-Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+Yoshio Kamijo and Yuki Yanai \href{mailto:yanai.yuki@kochi-tech.ac.jp}{yanai.yuki@kochi-tech.ac.jp}
 }

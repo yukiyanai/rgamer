@@ -20,7 +20,7 @@
 #' @param quietly A logical value to determine if the equilibrium will be kept in the returned list
 #'     without being printed on screen. Default is \code{FALSE}.
 #' @param color_palette A color palette to be used. Default is \code{"Set1"}.
-#'
+#' @import ggplot2
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 solve_nfg_fcn <- function(game,
                           cons1 = NULL,
@@ -31,6 +31,8 @@ solve_nfg_fcn <- function(game,
                           mark_NE = FALSE,
                           quietly = FALSE,
                           color_palette = "Set1") {
+
+  x <- y <- player <- text <- pars <- NULL
 
   players <- game$player
 

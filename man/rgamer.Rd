@@ -9,5 +9,5 @@ The rgamer package provides useful functions to highlight some important aspects
 basic games. It visually displays the game and finds solutions of the games.
 }
 \author{
-Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+Yoshio Kamijo and Yuki Yanai \href{mailto:yanai.yuki@kochi-tech.ac.jp}{yanai.yuki@kochi-tech.ac.jp}
 }

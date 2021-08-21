@@ -2,6 +2,7 @@
 #' @description \code{dom()} finds each player's (weakly) dominated
 #'     or (weakly) dominant strategies
 #' @param game A normal-form game object created by \code{normal_form()}.
+#'     The game's type must be "matrix".
 #' @param type Specify which to be found, "dominated" or "dominant."
 #'   Default is "dominated."
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>

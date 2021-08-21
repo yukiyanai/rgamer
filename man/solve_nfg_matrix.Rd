@@ -34,7 +34,7 @@ without being printed on screen. Default is \code{FALSE}}
 }
 \value{
 A list containing pure strategy Nash equilibrium (NE), mixed strategy NE, the gt table of the game,
-  and the plot of best response correspondences. Each element will be NULL if not available.
+and the plot of best response correspondences. Each element will be NULL if not available.
 }
 \description{
 \code{solve_nfg_matrix()} finds Nash equilibria of a normal-form (strategic-form) game.
@@ -43,5 +43,5 @@ A list containing pure strategy Nash equilibrium (NE), mixed strategy NE, the gt
 \code{\link{normal_form}}
 }
 \author{
-Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+Yoshio Kamijo and Yuki Yanai \href{mailto:yanai.yuki@kochi-tech.ac.jp}{yanai.yuki@kochi-tech.ac.jp}
 }

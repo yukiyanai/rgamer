@@ -1,15 +1,12 @@
 #' @title Define and solve a extensive-form (or strategic-form) game
 #' @description \code{extensive_form} defines an extensive-form game
-#' @details
+#' @details This function defines an extensive-form game and draws the game tree.
 #' @param players A list of players. Each element of the list must be a character string
-#'     or a vector of character strings at a specific sequence.
-#' @param n_node A numeric vector of the number of nodes at a specific sequence.
-#' @param n_choice A list of the number of choices at each node. Each element of the list must be
-#'     a numeric vector of the numbers of choices at a specific sequence. You must assign \code{0}
-#'     for the terminal (payoff) nodes.
-#' @param action A list of actions. Each element of the list must be a vector of character strings
+#'     or a vector of character strings at a specific depth of the tree. Terminal nodes,
+#'     where payoffs are displayed, must be specified as \code{NA}.
+#' @param actions A list of actions. Each element of the list must be a vector of character strings
 #'     that corresponds to a specific player node.
-#' @param payoff A named list of payoffs. Each element of the list must be a numeric vector of
+#' @param payoffs A named list of payoffs. Each element of the list must be a numeric vector of
 #'     payoffs for a player. The names of the elements must match the names of the players
 #'     specified  by \code{players}.
 #' @param quietly A logical value. If \code{TRUE}, the subgame perfect equilibrium will not be displayed
@@ -17,82 +14,123 @@
 #' @param show_tree A logical value. If \code{TRUE}, the game tree will be displayed. Default is \code{TRUE}
 #' @param mark_path A logical value. If \code{TRUE}, The paths played in the equilibrium will be
 #'     marked (with color and bold lines). Default is \code{FALSE}.
-#' @param direction The direction to which a game tree grows. The value must be one of
-#'     \code{"right"}, \code{"up"}, \code{"down"}, and \code{"bidirectional"}. Default is \code{"right"}.
+#' @param show_node_id A logical value. If \code{TRUE}, the node numbers are displayed in the
+#'     figure. Default is \code{TRUE}
+#' @param direction The direction to which a game tree grows.
+#'     The value must be one of:
+#'     \code{"right"},
+#'     \code{"up"},
+#'     \code{"down"},
+#'     \code{"bidirectional"},
+#'     \code{"horizonal"}, and
+#'     \code{"vertical"}.
+#'     Default is \code{"down"}.
 #' @param color_palette A color palette to be used. Default is "Set1".
 #' @return An object of "extensive_form" class, which defines an extensive-form (or sequential) game.
+#' @import ggplot2
 #' @importFrom magrittr %>%
+#' @include set_nodes.R
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
 #' @examples
 #' g1 <- extensive_form(
 #'   players = list("Kamijo",
-#'                  rep("Yanai", 2)),
-#'   n_node = c(1, 2, 4),
-#'   n_choice = list(2,
-#'                   c(2, 2),
-#'                   rep(0, 4)),
-#'   action <- list(c("U", "D"),
-#'                    c("U'", "D'"), c("U''", "D''")),
-#'   payoff = list(Kamijo = c(0, 2, 1, 3),
-#'                 Yanai  = c(0, 1, 2, 1)))
+#'                  rep("Yanai", 2),
+#'                  rep(NA, 4)),
+#'   actions <- list(c("U", "D"),
+#'                   c("U'", "D'"), c("U''", "D''")),
+#'   payoffs = list(Kamijo = c(0, 2, 1, 3),
+#'                  Yanai  = c(0, 1, 2, 1)))
 #'
 #' g2 <- extensive_form(
-#'   players = list("f", c("m", "m")),
-#'  n_node = c(1, 2, 4),
-#'  n_choice = list(2,
-#'                  c(2, 2),
-#'                  rep(0, 4)),
-#'   action = list(c("ballet", "baseball"),
+#'   players = list("f",
+#'                  c("m", "m"),
+#'                  rep(NA, 4)),
+#'   actions = list(c("ballet", "baseball"),
 #'                  c("ballet", "baseball"), c("ballet", "baseball")),
-#'  payoff = list(f = c(2, 0, 0, 1),
-#'                m = c(1, 0, 0, 2)),
-#'  mark_path = TRUE,
-#'  quietly = TRUE
-#' )
+#'   payoffs = list(f = c(2, 0, 0, 1),
+#'                  m = c(1, 0, 0, 2)),
+#'   mark_path = TRUE,
+#'   quietly = TRUE,
+#'   show_node_id = FALSE)
 #'
 #' g3 <- extensive_form(
-#'   players = list("p1", rep("p2", 3)),
-#'   n_node = c(1, 3, 6),
-#'   n_choice = list(3,
-#'                   rep(2, 3),
-#'                   rep(0, 6)),
-#'   action = list(c("C", "D", "E"),
-#'                   c("F", "G"), c("H", "I"), c("J", "K")),
-#'   payoff = list(p1 = c(3, 1, 1, 2, 2, 1),
-#'                 p2 = c(0, 0, 1, 1, 2, 3)),
+#'   players = list("p1",
+#'                  rep("p2", 3),
+#'                  rep(NA, 6)),
+#'   actions = list(c("C", "D", "E"),
+#'                  c("F", "G"), c("H", "I"), c("J", "K")),
+#'   payoffs = list(p1 = c(3, 1, 1, 2, 2, 1),
+#'                  p2 = c(0, 0, 1, 1, 2, 3)),
 #'   mark_path = TRUE,
-#'   direction = "down")
+#'   direction = "down",
+#'   show_node_id = TRUE)
 #'
 #' g4 <- extensive_form(
 #'   players = list("child",
-#'                  "parent"),
-#'    n_node = c(1, 2, 2),
-#'    n_choice = list(2,
-#'                    c(0, 2),
-#'                    c(0, 0)),
-#'    action = list(c("give up", "keep asking"),
-#'                    c("leave",   "buy")),
-#'    payoff   = list(child  = c(0, -10, 10),
-#'                    parent = c(5, -10,  2)),
+#'                  c(NA, "parent"),
+#'                  c(NA, NA)),
+#'    actions = list(c("give up", "keep asking"),
+#'                   c("leave",   "buy")),
+#'    payoffs   = list(child  = c(0, -10, 10),
+#'                     parent = c(5, -10,  2)),
 #'    mark_path = TRUE)
+#'
+#' g5 <- extensive_form(
+#'   players = list("Kamijo",
+#'                  c("Yanai", NA),
+#'                  c("Kamijo", NA),
+#'                  c(NA, NA)),
+#'   actions = list(c("P", "T"),
+#'                    c("P'", "T'"),
+#'                    c("P''", "T''")),
+#'   payoffs = list(Kamijo = c(0, 1, 5, 3),
+#'                  Yanai = c(0, 2, 4, 1)),
+#'   direction = "horizontal")
 extensive_form <- function(
   players = NULL, # list, one vector for each sequence
-  n_node,         # vector, one value for each sequence
-  n_choice,       # list, one vector  for each sequence
-  action,         # list, one vector for each node.
-  payoff,         # named list, one vector for each player. Names must match the unique names of the players
+  actions,        # list, one vector for each node.
+  payoffs,        # named list, one vector for each player. Names must match the unique names of the players
   quietly = FALSE,
   show_tree = TRUE,
   mark_path = FALSE,
-  direction = "right", # direction of the game tree
+  show_node_id = TRUE,
+  direction = "down", # direction of the game tree
   color_palette = "Set1") {
 
-   direction <- match.arg(direction, choices = c("right", "up", "down", "bidirectional"))
+  s1 <- s2 <- x <- y <- type <- id <- node_from <- node_to <- player <- NULL
+  x_s <- x_e <- y_s <- y_e <- y_m <- x_m <- NULL
+  played <- left <- match_id <- palyed <- sol_id <- payoff <- NULL
 
-  u_players <- players %>% unlist() %>% unique()
+  direction <- match.arg(direction,
+                         choices = c("right", "up", "down", "bidirectional",
+                                     "horizontal", "vertical"))
+
+  u_players <- players %>%
+    unlist() %>%
+    unique()
+  u_players <- u_players[!is.na(u_players)]
   n_players <- length(u_players)
-  n_seq <- length(players)
+  n_seq <- length(players) - 1
+
+  n_choice <- rep(NA, length(players)) %>%
+    as.list()
+  k <- 1
+  for (i in 1:length(n_choice)) {
+    v1 <- players[[i]]
+    nc <- rep(NA, length(v1))
+    for (j in seq_along(v1)) {
+      if (is.na(v1[j])) {
+        nc[j] <- 0
+      } else {
+        nc[j] <- length(actions[[k]])
+        k <- k + 1
+      }
+    }
+    n_choice[[i]] <- nc
+  }
+
+  n_node <- sapply(n_choice, length)
 
   n_node2 <- c(1, rep(NA, n_seq))
   keep <- 1
@@ -103,13 +141,16 @@ extensive_form <- function(
   }
   keep <- keep != 0
 
+  players <- unlist(players)
+  players <- players[!is.na(players)]
+
   ## number of choices at each sequence
   n_choice_seq <- rep(NA, length(players))
   for (i in seq_along(players)) {
-    n_choice_seq[i] <- length(action[[i]])
+    n_choice_seq[i] <- length(actions[[i]])
   }
 
-  p_length <- length(payoff[[1]])
+  p_length <- length(payoffs[[1]])
 
   n_choice_vec <- n_choice %>% unlist()
   n_path <- sum(n_choice_vec)
@@ -120,13 +161,27 @@ extensive_form <- function(
   df_path <- data.frame(
     id        = 1:n_path,
     player    = rep(players_vec, nonzero_choice),
-    s         = unlist(action),
+    s         = unlist(actions),
     node_from = rep(nonzero_index, nonzero_choice),
     node_to   = 2:(n_path + 1))
 
-  df_node <- tree_position(players, n_node, n_choice)
+  df_node <- set_nodes(players, n_node, n_choice)
 
-  df_payoff <- as.data.frame(payoff)
+  if (direction %in% c("horizontal","vertical")) {
+
+    x_types <- unique(df_node$x)
+    df_node_tmp <- tibble::tibble(NULL)
+    for (z in x_types) {
+      df_node_sub <- df_node %>%
+        dplyr::filter(x == z)
+      n_y <- df_node_sub$y %>% length()
+      df_node_sub$y <- seq(from = 0, to = -100, length.out = n_y)
+      df_node_tmp <- dplyr::bind_rows(df_node_tmp, df_node_sub)
+    }
+    df_node <- df_node_tmp
+  }
+
+  df_payoff <- as.data.frame(payoffs)
 
   payoff_label <- rep(NA, nrow(df_payoff))
   for (i in 1:nrow(df_payoff)) {
@@ -138,6 +193,8 @@ extensive_form <- function(
     dplyr::filter(type == "payoff") %>%
     dplyr::bind_cols(df_payoff) %>%
     dplyr::mutate(payoff = payoff_label)
+
+  df_node0 <- df_node
 
   df_node <- df_node %>%
     dplyr::filter(type == "play")
@@ -198,7 +255,7 @@ extensive_form <- function(
     for (i in 3:nrow(df_path)) {
       node_origin2 <- df_path$node_from[i]
       while (node_origin2 > 2) {
-        df_search <- filter(df_path, node_to == node_origin2)
+        df_search <- dplyr::filter(df_path, node_to == node_origin2)
         node_origin2 <- df_search$node_from[1]
       }
       df_path$left[i] <- ifelse(node_origin2 == 2, 0, 1)
@@ -263,7 +320,7 @@ extensive_form <- function(
 
   sol_sets <- expand.grid(choice) %>%
     t() %>%
-    tibble::as_tibble() %>%
+    tibble::as_tibble(.name_repair = "universal") %>%
     tidyr::pivot_longer(
       cols = 1:n_sol,
       names_to = "sol_id",
@@ -283,7 +340,6 @@ extensive_form <- function(
 
     df_sol_sub <- df_sol2[df_sol2$sol_id == sol_id_vec[j],]
 
-
     SGPE_tmp <- rep(NA, n_players)
     for (i in seq_along(u_players)) {
       df_p <- df_sol_sub %>% dplyr::filter(player == u_players[i])
@@ -296,6 +352,7 @@ extensive_form <- function(
     SGPE_tmp <- paste0("[", SGPE_tmp, "]")
     SGPE[j] <- SGPE_tmp
   }
+
 
   if (mark_path) {
     tree <- ggplot2::ggplot() +
@@ -314,6 +371,7 @@ extensive_form <- function(
                             y = y_s,  yend = y_e))
   }
 
+
   if (direction == "up") {
     tree <- tree +
       ggplot2::geom_text(data = df_payoff,
@@ -330,14 +388,35 @@ extensive_form <- function(
       ggplot2::coord_flip() +
       ggplot2::scale_x_reverse(NULL, breaks = NULL) +
       ggplot2::scale_y_reverse(NULL, breaks = NULL)
-  } else {
+  } else if (direction == "right") {
+    df_payoff <- df_payoff %>%
+        dplyr::mutate(x = x + 5)
+
     tree <- tree +
       ggplot2::geom_text(data = df_payoff,
                          ggplot2::aes(x = x, y = y, label = payoff),
-                         nudge_x = 5 - 10 * df_payoff$left,
                          size = 4) +
       ggplot2::scale_x_continuous(NULL, breaks = NULL) +
       ggplot2::scale_y_continuous(NULL, breaks = NULL)
+  } else if (direction == "horizontal") {
+    df_payoff <- df_payoff %>%
+      dplyr::mutate(x = x + 5)
+
+    tree <- tree +
+      ggplot2::geom_text(data = df_payoff,
+                         ggplot2::aes(x = x, y = y, label = payoff),
+                         size = 4) +
+      ggplot2::scale_x_continuous(NULL, breaks = NULL) +
+      ggplot2::scale_y_continuous(NULL, breaks = NULL)
+
+  } else if (direction == "vertical") {
+    tree <- tree +
+      ggplot2::geom_text(data = df_payoff,
+                         ggplot2::aes(x = x, y = y, label = payoff),
+                         nudge_x = -5, size = 4) +
+      ggplot2::coord_flip() +
+      ggplot2::scale_x_reverse(NULL, breaks = NULL) +
+      ggplot2::scale_y_reverse(NULL, breaks = NULL)
   }
 
   tree <- tree +
@@ -345,15 +424,30 @@ extensive_form <- function(
                         ggplot2::aes(x = x, y = y,
                                      label = player,
                                      color = player),
+
                         size = 4) +
     ggplot2::geom_text(data = df_path,
                        ggplot2::aes(x = x_m, y = y_m, label = s),
-                       nudge_x = 5 - 10 * df_path$left,
                        size = 4) +
     ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
                    panel.grid.minor = ggplot2::element_blank()) +
     ggplot2::scale_color_brewer(palette = color_palette,
-                                guide = FALSE)
+                                guide = "none")
+
+  if (show_node_id) {
+    df_node0 <- df_node0 %>%
+      dplyr::mutate(id = paste0("n", id))
+    tree <- tree +
+      ggplot2::geom_label(data = df_node0,
+                          ggplot2::aes(x = x, y = y + 5,
+                                      label = id),
+                          color = "black",
+                          size = 4) +
+      ggplot2::geom_point(data = df_node0 %>% dplyr::filter(type == "payoff"),
+                          ggplot2::aes(x = x, y = y),
+                          color = "black",
+                          size = 2)
+  }
 
    if (show_tree) {
     plot(tree)
@@ -369,10 +463,11 @@ extensive_form <- function(
   }
 
   value <- list(player = players,
-                action = action,
-                payoff = payoff,
-                sgpe   = SGPE,
+                action = actions,
+                payoff = payoffs,
+                spe    = SGPE,
                 tree   = tree)
 
   structure(value, class = "extensive_form")
 }
+

@@ -1,6 +1,8 @@
 #' @title Eliminate a strategy from a normal-form game.
 #' @description \code{eliminate_strategy()} eliminates a strategy from a normal-form game defined by \code{norma_form()}.
-#' @details
+#' @details This function eliminates a strategy from a normal-form game defined
+#'     by \code{norma_form()}. For instance, you can remove the dominated strategy
+#'     found by \code{dom()}.
 #' @param game A normal-form game object created by \code{normal_form()}.
 #' @param player A player one of whose strategies will be eliminated.
 #' @param eliminated A strategy to be eliminated. Case sensitive.
@@ -10,6 +12,8 @@
 eliminate_strategy <- function(game,
                                player,
                                eliminated) {
+
+  s1 <- s2 <- NULL
 
   elim_pos <- which(game$player == player)
 

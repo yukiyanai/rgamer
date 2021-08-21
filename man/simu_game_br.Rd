@@ -25,7 +25,7 @@ from the player's strategy set.}
 \item{init2}{Player 2's first strategy. If not specified, a strategy is randomly selected
 from the player's strategy set.}
 
-\item{rho}{A numeric value in [0, 1] to control the degree of inertia in each player's behavior. If \code{rho = 1},
+\item{rho}{A numeric value between 0 and 1 to control the degree of inertia in each player's behavior. If \code{rho = 1},
 each player does not change their choices over time. If \code{rho = 0}, each player does not stick to their
 previous choice at all.}
 
@@ -41,8 +41,8 @@ data.frame containing the history of the game played.
 }
 \details{
 Simulate plays expected in a normal-form game defined by \code{normal_form()} when
-  each player chooses the best reponse to the other player's previous move.
+each player chooses the best reponse to the other player's previous move.
 }
 \author{
-Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+Yoshio Kamijo and Yuki Yanai \href{mailto:yanai.yuki@kochi-tech.ac.jp}{yanai.yuki@kochi-tech.ac.jp}
 }

@@ -16,6 +16,11 @@ eliminate_strategy(game, player, eliminated)
 \description{
 \code{eliminate_strategy()} eliminates a strategy from a normal-form game defined by \code{norma_form()}.
 }
+\details{
+This function eliminates a strategy from a normal-form game defined
+by \code{norma_form()}. For instance, you can remove the dominated strategy
+found by \code{dom()}.
+}
 \author{
-Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+Yoshio Kamijo and Yuki Yanai \href{mailto:yanai.yuki@kochi-tech.ac.jp}{yanai.yuki@kochi-tech.ac.jp}
 }

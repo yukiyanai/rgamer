@@ -1,7 +1,7 @@
 Package: rgamer
 Type: Package
 Title: Learning Game Theory Using R
-Version: 0.0.6
+Version: 0.0.7
 Authors@R:
     c(person(given = "Yoshio",
              family = "Kamijo",
@@ -25,10 +25,10 @@ Suggests:
     rmarkdown,
     covr
 Depends:
-    ggplot2 (>= 3.3.0)
+    ggplot2 (>= 3.3.5)
 Imports:
     dplyr (>= 1.0.0),
-    gt (>= 0.2.1),
+    gt (>= 0.3.1),
     magrittr,
     MASS,
     nleqslv,
@@ -38,6 +38,40 @@ Imports:
     stringi,
     tibble,
     tidyr,
-    tidyselect
+    tidyselect,
+    tuple
 ByteCompile: TRUE
 VignetteBuilder: knitr
+Collate: 
+    'as_df_br.R'
+    'br_plot.R'
+    'dom.R'
+    'eliminate_strategy.R'
+    'set_nodes.R'
+    'extensive_form.R'
+    'find_best_response.R'
+    'find_dominant.R'
+    'find_dominated.R'
+    'find_mixed_NE.R'
+    'find_pure_NE.R'
+    'game_table.R'
+    'gridsearch_backward.R'
+    'gridsearch_br.R'
+    'normal_form.R'
+    'plot_simu.R'
+    'rgamer.R'
+    'seq_form.R'
+    'simu_game.R'
+    'simu_game_abr.R'
+    'simu_game_br.R'
+    'simu_game_imitation.R'
+    'simu_game_sbr.R'
+    'solve_nfg.R'
+    'solve_nfg_char.R'
+    'solve_nfg_fcn.R'
+    'solve_nfg_matrix.R'
+    'solve_seq.R'
+    'solve_seq_char.R'
+    'solve_seq_fcn.R'
+    'solve_seq_matrix.R'
+Roxygen: list(markdown = TRUE)

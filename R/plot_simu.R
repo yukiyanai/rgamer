@@ -1,4 +1,8 @@
+#' @import ggplot2
+# THIS FUNCTION IS UNDER DEVELOPMENT
 plot_simu <- function(sim_res) {
+
+  period <- play1 <- play2 <-
 
   df <- sim_res %>%
     dplyr::group_by(period) %>%
@@ -9,5 +13,5 @@ plot_simu <- function(sim_res) {
                         names_to = "Player",
                         values_to = "")
 
-  p <- ggplot2::ggplot(df, aes(x = period, ))
+  p <- ggplot2::ggplot(df, ggplot2::aes(x = period, ))
 }

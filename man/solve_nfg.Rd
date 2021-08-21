@@ -34,8 +34,9 @@ The default value is 80.}
 \item{mark_br}{A logical value. If \code{TRUE}, the best response to each of the opponent's strategy is marked.
 Default is \code{TRUE}.}
 
-\item{delta}{A numerical value specifying the grid size to draw the figure of best response correspondences.
-The default value is 0.1. The smaller the value is, the smoother the correspondence curves are.}
+\item{delta}{A numerical value specifying the grid size to draw the figure of
+best response correspondences.  The default value is 0.1. The smaller the
+value is, the smoother the correspondence curves are.}
 
 \item{cons1}{A named list of parameters contained in \code{game$payoff$p1} that should be treated as constants, if any.}
 
@@ -49,11 +50,12 @@ both \code{cons1} and \code{cons2}.}
 The value n approximately means that the approximation is correct up to the Nth decimal place.
 The default value is 1.}
 
-\item{plot}{A logical value to determine whether the figure of the best response correspondences
-will be displayed. Default is \code{TRUE}.}
+\item{plot}{A logical value to determine whether the figure of the best response
+correspondences will be displayed. Default is \code{TRUE}.}
 
-\item{mark_NE}{A logical value to control if the NE (if any) will be marked in the best response
-plot, which will be displayed (only dislayed when \code{plot = TRUE}). Default is \code{FALSE}.}
+\item{mark_NE}{A logical value to control if the NE (if any) will be marked in
+the best response plot, which will be displayed (only displayed when
+\code{plot = TRUE}). Default is \code{FALSE}.}
 
 \item{quietly}{A logical value that determines whether the equilibrium will be kept in the returned list
 without being printed on screen. Default is \code{FALSE}}
@@ -62,12 +64,12 @@ without being printed on screen. Default is \code{FALSE}}
 }
 \value{
 A list containing Nash equilibria (if any), the game table (if available),
-    and the plot of best response correspondence (if available).
+and the plot of best response correspondence (if available).
 }
 \description{
 \code{solve_nfg()} finds Nash equilibria of a normal-form game. This is a wrapper
-    function of \code{\link{solve_nfg_matrix}}, \code{\link{solve_nfg_char}}, and
-    \code{\link{solve_nfg_fcn}}.
+function of \code{\link{solve_nfg_matrix}}, \code{\link{solve_nfg_char}}, and
+\code{\link{solve_nfg_fcn}}.
 }
 \examples{
 game1 <- normal_form(
@@ -94,5 +96,5 @@ game3 <- normal_form(
 s3 <- solve_nfg(game3)
 }
 \author{
-Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+Yoshio Kamijo and Yuki Yanai \href{mailto:yanai.yuki@kochi-tech.ac.jp}{yanai.yuki@kochi-tech.ac.jp}
 }

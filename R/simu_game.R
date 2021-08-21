@@ -16,7 +16,7 @@
 #'   from the player's strategy set.
 #' @param init2 Player 2's first strategy. If not specified, a strategy is randomly selected
 #'   from the player's strategy set.
-#' @param rho A numeric value in [0, 1] to control the degree of inertia in each player's behavior. If \code{rho = 1},
+#' @param rho A numeric value between 0 and 1 to control the degree of inertia in each player's behavior. If \code{rho = 1},
 #'    each player does not change their choices over time. If \code{rho = 0}, which is the default value, each player does not stick to their
 #'    previous choice at all.
 #' @param lambda A positive value controlling the weight of the best response to the previous move of the opponent.

@@ -16,6 +16,7 @@
 #' @return data.frame containing the history of the game played.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @importFrom magrittr %>%
+#' @noRd
 simu_game_imitation <- function(
   game,
   n_periods,
@@ -41,7 +42,7 @@ simu_game_imitation <- function(
 
     for (i in 2:n_periods) {
       ## Player 1
-      if (runif(1) < rho) {
+      if (stats::runif(1) < rho) {
         play1[i] <- sample(s1, size = 1)
       } else {
         df1 <- game$df %>%
@@ -54,7 +55,7 @@ simu_game_imitation <- function(
       }
 
       ## Player 2
-      if (runif(1) < rho) {
+      if (stats::runif(1) < rho) {
         play2[i] <- sample(s2, size = 1)
       } else {
         df2 <- game$df %>%
@@ -72,9 +73,9 @@ simu_game_imitation <- function(
     # for the first round
     s1 <- game$strategy$s1
     s2 <- game$strategy$s2
-    if (is.null(init1)) play1[1] <- runif(1, min = s1[1], max = s1[2])
+    if (is.null(init1)) play1[1] <- stats::runif(1, min = s1[1], max = s1[2])
     else play1[1] <- init1
-    if (is.null(init2)) play2[1] <- runif(1, min = s2[1], max = s2[2])
+    if (is.null(init2)) play2[1] <- stats::runif(1, min = s2[1], max = s2[2])
     else play2[1] <- init2
 
     for (i in 2:n_periods) {
@@ -93,8 +94,8 @@ simu_game_imitation <- function(
       pp2 <- eval(f2, envir = list(YYY = play2[i - 1]))
 
       ## Player 1
-      if (runif(1) < rho) {
-        play1[i] <- runif(1, min = s1[1], max = s1[2])
+      if (stats::runif(1) < rho) {
+        play1[i] <- stats::runif(1, min = s1[1], max = s1[2])
       } else {
         if (pp1 > pp2) play1[i] <- play1[i - 1]
         else if (pp1 < pp2) play1[i] <- play2[i - 1]
@@ -102,8 +103,8 @@ simu_game_imitation <- function(
       }
 
       ## Player 2
-      if (runif(1) < rho) {
-        play2[i] <- runif(1, min = s2[1], max = s2[2])
+      if (stats::runif(1) < rho) {
+        play2[i] <- stats::runif(1, min = s2[1], max = s2[2])
       } else {
         if (pp1 > pp2) play2[i] <- play1[i - 1]
         else if (pp1 < pp2) play2[i] <- play2[i - 1]
@@ -116,9 +117,9 @@ simu_game_imitation <- function(
     # for the first round
     s1 <- game$strategy$s1
     s2 <- game$strategy$s2
-    if (is.null(init1)) play1[1] <- runif(1, min = s1[1], max = s1[2])
+    if (is.null(init1)) play1[1] <- stats::runif(1, min = s1[1], max = s1[2])
     else play1[1] <- init1
-    if (is.null(init2)) play2[1] <- runif(1, min = s2[1], max = s2[2])
+    if (is.null(init2)) play2[1] <- stats::runif(1, min = s2[1], max = s2[2])
     else play2[1] <- init2
 
     for (i in 2:n_periods) {
@@ -151,8 +152,8 @@ simu_game_imitation <- function(
       pp2 <- unlist(f2(play2[i - 1]))
 
       ## Player 1
-      if (runif(1) < rho) {
-        play1[i] <- runif(1, min = s1[1], max = s1[2])
+      if (stats::runif(1) < rho) {
+        play1[i] <- stats::runif(1, min = s1[1], max = s1[2])
       } else {
         if (pp1 > pp2) play1[i] <- play1[i - 1]
         else if (pp1 < pp2) play1[i] <- play2[i - 1]
@@ -160,8 +161,8 @@ simu_game_imitation <- function(
       }
 
       ## Player 2
-      if (runif(1) < rho) {
-        play2[i] <- runif(1, min = s2[1], max = s2[2])
+      if (stats::runif(1) < rho) {
+        play2[i] <- stats::runif(1, min = s2[1], max = s2[2])
       } else {
         if (pp1 > pp2) play2[i] <- play1[i - 1]
         else if (pp1 < pp2) play2[i] <- play2[i - 1]

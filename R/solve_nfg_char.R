@@ -1,19 +1,23 @@
-#' @title Find Nash equilibria of a normal-form game with  payoffs defined by character strings
+#' @title Find Nash equilibria of a normal-form game with  payoffs defined
+#'     by character strings
 #' @description \code{solve_nfg_char()} finds the pair of the best responses when payoff
 #'     functions are provided as character strings.
-#' @return A list containing the pair of the best response correspondence (NE)  and the plot of best
-#'     response correspondences.
+#' @return A list containing the pair of the best response correspondence (NE)
+#'     and the plot of best response correspondences.
 #' @param game A "normal_form" class object created by \code{normal_form()}.
 #' @seealso \code{\link{normal_form}}
-#' @param delta A numerical value specifying the grid size to draw the figure of best response correspondences.
-#'     The default value is 0.1. The smaller the value is, the smoother the correspondence curves are.
-#' @param plot A logical value to determine whether the figure of the best response correspondences
-#'     will be displayed. Default is \code{TRUE}.
-#' @param mark_NE A logical value to control if the NE (if any) will be marked in the best response
-#'     plot, which will be displayed (only dislayed when \code{plot = TRUE}). Default is \code{FALSE}.
-#' @param quietly A logical value to determine if the equilibrium will be kept in the returned list
-#'     without being printed on screen. Default is \code{FALSE}.
+#' @param delta A numerical value specifying the grid size to draw the figure of
+#'     best response correspondences.  The default value is 0.1. The smaller the
+#'     value is, the smoother the correspondence curves are.
+#' @param plot A logical value to determine whether the figure of the best response
+#'     correspondences will be displayed. Default is \code{TRUE}.
+#' @param mark_NE A logical value to control if the NE (if any) will be marked in
+#'     the best response plot, which will be displayed (only displayed when
+#'     \code{plot = TRUE}). Default is \code{FALSE}.
+#' @param quietly A logical value to determine if the equilibrium will be kept
+#'     in the returned list without being printed on screen. Default is \code{FALSE}.
 #' @param color_palette A color palette to be used. Default is \code{"Set1"}.
+#' @import ggplot2
 #' @importFrom magrittr %>%
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 solve_nfg_char <- function(game,
@@ -22,6 +26,9 @@ solve_nfg_char <- function(game,
                            mark_NE = FALSE,
                            quietly = FALSE,
                            color_palette = "Set1") {
+
+x <- y <- br_a <- br_b <- player <- NULL
+xs <- ys <- xe <- ye <- text <- NULL
 
   p1 <- game$payoff[[1]]
   p2 <- game$payoff[[2]]

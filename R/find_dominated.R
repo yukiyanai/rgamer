@@ -1,13 +1,14 @@
 #' @title Find dominated strategies in a normal-form game
 #' @description \code{find_dominated()} finds each player's dominated
 #'     and weakly dominated strategies if they exist.
-#' @details
 #' @param game A normal-form game object created by \code{normal_form()}.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
-#' @export
+#' @noRd
 find_dominated <- function(game) {
 
-  if (game$type == "matrix") {
+  if (game$type != "matrix") {
+    stop("game is not given by a payoff matrix")
+  } else {
     n_s1 <- length(game$strategy$s1)
     n_s2 <- length(game$strategy$s2)
 

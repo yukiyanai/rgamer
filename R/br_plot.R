@@ -4,8 +4,12 @@
 #' @param game A "normal_form" class object created by \code{normal_form()}.
 #' @param color_palette A color palette to be used. Default is \code{"Set1"}.
 #' @seealso \code{\link{normal_form}}, \code{\link[ggplot2]{ggplot}}
+#' @import ggplot2
+#' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 br_plot <- function(game, color_palette = "Set1") {
+
+  xs <- ys <- xe <- ye <- player <- element_text <- NULL
 
   s1 <- game$strategy[[1]]
   s2 <- game$strategy[[2]]

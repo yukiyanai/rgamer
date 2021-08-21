@@ -16,6 +16,7 @@
 #' @param cons2 A named list of parameters contained in \code{game$payoff$p2} that should be treated as constants, if any.
 #' @return data.frame containing the history of the game played.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
+#' @noRd
 #' @importFrom magrittr %>%
 simu_game_abr <- function(game,
                           n_periods,
@@ -24,6 +25,8 @@ simu_game_abr <- function(game,
                           rho   = 0,
                           cons1 = NULL,
                           cons2 = NULL) {
+
+  p1 <- p2 <- NULL
 
   n2 <- n_periods * 2
 
@@ -44,7 +47,7 @@ simu_game_abr <- function(game,
     for (i in 2:n2) {
       if (i %% 2 != 0) {
         ## Player 1
-        if (runif(1) < rho) {
+        if (stats::runif(1) < rho) {
           play1[i] <- play1[i - 1]
         } else {
           df1 <- game$df %>%
@@ -59,7 +62,7 @@ simu_game_abr <- function(game,
         ## Player 1
         play1[i] <- play1[i - 1]
         ## Player 2
-        if (runif(1) < rho) {
+        if (stats::runif(1) < rho) {
           play2[i] <- play2[i - 1]
         } else {
           df2 <- game$df %>%
@@ -76,15 +79,15 @@ simu_game_abr <- function(game,
     # for the first round
     s1 <- game$strategy$s1
     s2 <- game$strategy$s2
-    if (is.null(init1)) play1[1] <- runif(1, min = s1[1], max = s1[2])
+    if (is.null(init1)) play1[1] <- stats::runif(1, min = s1[1], max = s1[2])
     else play1[1] <- init1
-    if (is.null(init2)) play2[1] <- runif(1, min = s2[1], max = s2[2])
+    if (is.null(init2)) play2[1] <- stats::runif(1, min = s2[1], max = s2[2])
     else play2[1] <- init2
 
     for (i in 2:n2) {
       if (i %% 2 != 0) {
         ## Player 1
-        if (runif(1) < rho) {
+        if (stats::runif(1) < rho) {
           play1[i] <- play1[i - 1]
         } else {
           f1 <- game$payoff$p1 %>%
@@ -96,7 +99,7 @@ simu_game_abr <- function(game,
             eval(stats::D(f1, name = "XXX"),
                  envir = list(XXX = x))
           }
-          play1[i] <- try(uniroot(fd1, interval = s1)$root,
+          play1[i] <- try(stats::uniroot(fd1, interval = s1)$root,
                           silent = TRUE)
           if (class(play1[i]) == "character") play1[i] <- play1[i - 1]
           play1 <- as.numeric(play1)
@@ -107,7 +110,7 @@ simu_game_abr <- function(game,
         ## Player 1
         play1[i] <- play1[i - 1]
         ## Player 2
-        if (runif(1) < rho) {
+        if (stats::runif(1) < rho) {
           play2[i] <- play2[i - 1]
         } else {
           f2 <- game$payoff$p2 %>%
@@ -119,7 +122,7 @@ simu_game_abr <- function(game,
             eval(stats::D(f2, name = "YYY"),
                  envir = list(YYY = y))
           }
-          play2[i] <- try(uniroot(fd2, interval = s2)$root,
+          play2[i] <- try(stats::uniroot(fd2, interval = s2)$root,
                           silent = TRUE)
           if (class(play2[i]) == "character") play2[i] <- play2[i - 1]
           play2 <- as.numeric(play2)
@@ -132,15 +135,15 @@ simu_game_abr <- function(game,
     # for the first round
     s1 <- game$strategy$s1
     s2 <- game$strategy$s2
-    if (is.null(init1)) play1[1] <- runif(1, min = s1[1], max = s1[2])
+    if (is.null(init1)) play1[1] <- stats::runif(1, min = s1[1], max = s1[2])
     else play1[1] <- init1
-    if (is.null(init2)) play2[1] <- runif(1, min = s2[1], max = s2[2])
+    if (is.null(init2)) play2[1] <- stats::runif(1, min = s2[1], max = s2[2])
     else play2[1] <- init2
 
     for (i in 2:n2) {
       if (i %% 2 != 0) {
         ## Player 1
-        if (runif(1) < rho) {
+        if (stats::runif(1) < rho) {
           play1[i] <- play1[i - 1]
         } else {
           f1 <- function(XXX) {
@@ -154,13 +157,14 @@ simu_game_abr <- function(game,
             purrr::pmap(.l = arg_list,
                         .f = game$payoff$p1)
           }
-          play1[i] <- try(optim(par = median(s1),
-                                fn = f1,
-                                method = "L-BFGS-B",
-                                lower = s1[1],
-                                upper = s1[2],
-                                control = list(fnscale = -1))$par,
-                          silent = TRUE)
+          play1[i] <- try(
+            stats::optim(par = stats::median(s1),
+                         fn = f1,
+                         method = "L-BFGS-B",
+                         lower = s1[1],
+                         upper = s1[2],
+                         control = list(fnscale = -1))$par,
+            silent = TRUE)
           if (class(play1[i]) == "try-error") play1[i] <- play1[i - 1]
         }
         ## Player2
@@ -169,7 +173,7 @@ simu_game_abr <- function(game,
         ## Player 1
         play1[i] <- play1[i - 1]
         ## Player 2
-        if (runif(1) < rho) {
+        if (stats::runif(1) < rho) {
           play2[i] <- play2[i - 1]
         } else {
           f2 <- function(YYY) {
@@ -183,13 +187,14 @@ simu_game_abr <- function(game,
             purrr::pmap(.l = arg_list,
                         .f = game$payoff$p2)
           }
-          play2[i] <- try(optim(par = median(s2),
-                                fn = f2,
-                                method = "L-BFGS-B",
-                                lower = s2[1],
-                                upper = s2[2],
-                                control = list(fnscale = -1))$par,
-                          silent = TRUE)
+          play2[i] <- try(
+            stats::optim(par = stats::median(s2),
+                         fn = f2,
+                         method = "L-BFGS-B",
+                         lower = s2[1],
+                         upper = s2[2],
+                         control = list(fnscale = -1))$par,
+            silent = TRUE)
           if (class(play2[i]) == "try-error") play2[i] <- play2[i - 1]
         }
       }

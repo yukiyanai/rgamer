@@ -30,7 +30,11 @@ solutions for games of which it is difficult — or even seems impossible
 
 ```r
 install.packages("rgamer")
-#> Warning: package 'rgamer' is not available (for R version 4.0.2)
+#> Warning: package 'rgamer' is not available for this version of R
+#> 
+#> A version of this package for your version of R might be available elsewhere,
+#> see the ideas at
+#> https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages
 ```
 -->
 
@@ -83,7 +87,7 @@ s_game1 <- solve_nfg(game1)
 
     #> Pure-strategy NE: (Betrays, Betrays)
 
-<img src="figs/eg1_table.png" width=500>
+<img src="https://yukiyanai.github.io/resources/images/eg1_table.png" width=400>
 
 ### Example 2
 
@@ -276,7 +280,7 @@ s_game5 <- solve_nfg(game5, mark_br = FALSE)
 
     #> Pure-strategy NE: (0, 0)(2, 2)(4, 4)
 
-<img src="figs/eg5_table.png" width=750>
+<img src="https://yukiyanai.github.io/resources/images/eg5_table.png" width=700>
 
 ## Example 6
 
@@ -284,21 +288,15 @@ You can draw a tree of an extensive form game.
 
 ``` r
 game6 <- extensive_form(
-  players = list("f", c("m", "m")),
-  n_node = c(1, 2, 4),
-  n_choice = list(2,
-                  c(2, 2),
-                  rep(0, 4)),
-  action = list(c("ballet", "baseball"),
-                  c("ballet", "baseball"), c("ballet", "baseball")),
-  payoff = list(f = c(2, 0, 0, 1),
-                m = c(1, 0, 0, 2)),
+  players = list("Yanai", 
+                 rep("Kamijo", 2),
+                 rep(NA, 4)),
+  actions = list(c("stat", "game"),
+                  c("stat", "game"), c("stat", "game")),
+  payoffs = list(Yanai = c(2, 0, 0, 1),
+                 Kamijo = c(1, 0, 0, 2)),
   quietly = TRUE
 )
-#> Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.
-#> Using compatibility `.name_repair`.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_warnings()` to see where this warning was generated.
 ```
 
 ![](man/figures/README-unnamed-chunk-21-1.png)<!-- -->
@@ -307,16 +305,15 @@ And you can show the equilibrium path by setting `mark_path = TRUE`.
 
 ``` r
 game6 <- extensive_form(
-  players = list("f", c("m", "m")),
-  n_node = c(1, 2, 4),
-  n_choice = list(2,
-                  c(2, 2),
-                  rep(0, 4)),
-  action = list(c("ballet", "baseball"),
-                  c("ballet", "baseball"), c("ballet", "baseball")),
-  payoff = list(f = c(2, 0, 0, 1),
-                m = c(1, 0, 0, 2)),
+ players = list("Yanai", 
+                 rep("Kamijo", 2),
+                 rep(NA, 4)),
+  actions = list(c("stat", "game"),
+                  c("stat", "game"), c("stat", "game")),
+  payoffs = list(Yanai = c(2, 0, 0, 1),
+                 Kamijo = c(1, 0, 0, 2)),
   mark_path = TRUE,
+  direction = "right",
   color_palette = "Accent"
 )
 ```

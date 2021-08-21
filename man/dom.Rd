@@ -7,15 +7,16 @@
 dom(game, type = "dominated")
 }
 \arguments{
-\item{game}{A normal-form game object created by \code{normal_form()}.}
+\item{game}{A normal-form game object created by \code{normal_form()}.
+The game's type must be "matrix".}
 
 \item{type}{Specify which to be found, "dominated" or "dominant."
 Default is "dominated."}
 }
 \description{
 \code{dom()} finds each player's (weakly) dominated
-    or (weakly) dominant strategies
+or (weakly) dominant strategies
 }
 \author{
-Yoshio Kamijo and Yuki Yanai <yanai.yuki@kochi-tech.ac.jp>
+Yoshio Kamijo and Yuki Yanai \href{mailto:yanai.yuki@kochi-tech.ac.jp}{yanai.yuki@kochi-tech.ac.jp}
 }

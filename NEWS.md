@@ -1,3 +1,20 @@
+# rgamer 0.0.7
+
+## Making a game tree 
+
+- The way to draw a game tree by `extensive_form()` has been simplified.
+  - Users do not have to specify `n_node` or `n_choices`.
+- The positions of payoffs has been adjusted.  
+- Two new options for `direction`, "horizontal" and "vertical" are available.
+
+## Functions for a simple leader-follower game
+
+Functions to define and solve a simple leader-follower sequential game (e.g., Stackelberg competition) have been added.
+
+- Users can define such a game by `seq_form()` function.
+- Users can obtain the subgame perfect equilibrium outcome by `solve_seq()` function.
+
+
 # rgamer 0.0.6
 
 This version contains three new functions: `find_dominant()` and `find_dominated()` finds (weakly) dominant and (weakly) dominated strategies, respectively, and `eliminate_strategy()` eliminates the specific player's specific strategy from a normal-form game. In addition, Some bugs have been fixed.
