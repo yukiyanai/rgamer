@@ -13,7 +13,8 @@ extensive_form(
   mark_path = FALSE,
   show_node_id = TRUE,
   direction = "down",
-  color_palette = "Set1"
+  color_palette = "Set1",
+  family = NULL
 )
 }
 \arguments{
@@ -50,6 +51,8 @@ The value must be one of:
 Default is \code{"down"}.}
 
 \item{color_palette}{A color palette to be used. Default is "Set1".}
+
+\item{family}{A font family to be used in the tree.}
 }
 \value{
 An object of "extensive_form" class, which defines an extensive-form (or sequential) game.

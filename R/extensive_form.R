@@ -26,6 +26,7 @@
 #'     \code{"vertical"}.
 #'     Default is \code{"down"}.
 #' @param color_palette A color palette to be used. Default is "Set1".
+#' @param family A font family to be used in the tree.
 #' @return An object of "extensive_form" class, which defines an extensive-form (or sequential) game.
 #' @import ggplot2
 #' @importFrom magrittr %>%
@@ -96,11 +97,13 @@ extensive_form <- function(
   mark_path = FALSE,
   show_node_id = TRUE,
   direction = "down", # direction of the game tree
-  color_palette = "Set1") {
+  color_palette = "Set1",
+  family = NULL) {
 
   s1 <- s2 <- x <- y <- type <- id <- node_from <- node_to <- player <- NULL
   x_s <- x_e <- y_s <- y_e <- y_m <- x_m <- NULL
   played <- left <- match_id <- palyed <- sol_id <- payoff <- NULL
+  n_sol <- NULL
 
   direction <- match.arg(direction,
                          choices = c("right", "up", "down", "bidirectional",
@@ -264,6 +267,7 @@ extensive_form <- function(
     y_adj_left <-  with(df_path, y_s[2] - y_e[2])
     df_path <- df_path %>%
       dplyr::mutate(x_s = ifelse(left == 0, x_s, -x_s),
+
                     x_e = ifelse(left == 0, x_e, -x_e))
 
     df_path_top2 <- df_path[1:2,] %>%
@@ -318,14 +322,15 @@ extensive_form <- function(
       dplyr::pull(s)
   }
 
-  sol_sets <- expand.grid(choice) %>%
-    t() %>%
-    tibble::as_tibble(.name_repair = "universal") %>%
+  sol_sets <- expand.grid(choice) %>% t()
+  colnames(sol_sets) <- paste0("sol_", 1:n_sol)
+  sol_sets <- sol_sets %>%
+    tibble::as_tibble() %>%
     tidyr::pivot_longer(
-      cols = 1:n_sol,
+      cols = tidyselect::starts_with("sol_"),
       names_to = "sol_id",
-      values_to = "s"
-    ) %>%
+      names_prefix = "sol_",
+      values_to = "s") %>%
     dplyr::arrange(sol_id)
   sol_sets$player <- rep(node_player, n_sol)
 
@@ -419,20 +424,41 @@ extensive_form <- function(
       ggplot2::scale_y_reverse(NULL, breaks = NULL)
   }
 
-  tree <- tree +
-    ggplot2::geom_label(data = df_node,
-                        ggplot2::aes(x = x, y = y,
-                                     label = player,
-                                     color = player),
 
-                        size = 4) +
-    ggplot2::geom_text(data = df_path,
-                       ggplot2::aes(x = x_m, y = y_m, label = s),
-                       size = 4) +
-    ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
-                   panel.grid.minor = ggplot2::element_blank()) +
-    ggplot2::scale_color_brewer(palette = color_palette,
-                                guide = "none")
+  if (is.null(family)) {
+    tree <- tree +
+      ggplot2::geom_label(data = df_node,
+                          ggplot2::aes(x = x, y = y,
+                                       label = player,
+                                       color = player),
+
+                          size = 4) +
+      ggplot2::geom_text(data = df_path,
+                         ggplot2::aes(x = x_m, y = y_m, label = s),
+                         size = 4) +
+      ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
+                     panel.grid.minor = ggplot2::element_blank()) +
+      ggplot2::scale_color_brewer(palette = color_palette,
+                                  guide = "none")
+  } else {
+    tree <- tree +
+      ggplot2::geom_label(data = df_node,
+                          ggplot2::aes(x = x, y = y,
+                                       label = player,
+                                       color = player),
+
+                          size = 4,
+                          family = family) +
+      ggplot2::geom_text(data = df_path,
+                         ggplot2::aes(x = x_m, y = y_m, label = s),
+                         size = 4,
+                         family = family) +
+      ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
+                     panel.grid.minor = ggplot2::element_blank(),
+                     text = ggplot2::element_text(family = family)) +
+      ggplot2::scale_color_brewer(palette = color_palette,
+                                  guide = "none")
+  }
 
   if (show_node_id) {
     df_node0 <- df_node0 %>%
