@@ -110,12 +110,16 @@ simu_game_sbr <- function(game,
           play1[i] <- play1[i - 1]
         } else {
           left_len <- round((br - s1[1]) / (s1[2] - s1[1]) * 100, 0)
-          left <- seq(from = s1[1],
-                      to = br,
-                      length.out = left_len)
-          right <- seq(from = br,
-                       to = s1[2],
-                       length.out = 101 - left_len)[-1]
+          left <- ifelse(br <= s1[1],
+                         s1[1],
+                         seq(from = s1[1],
+                             to = br,
+                             length.out = left_len))
+          right <- ifelse(br >= s1[2],
+                          s1[2],
+                          seq(from = br,
+                              to = s1[2],
+                              length.out = 101 - left_len)[-1])
           s_vec <- c(left, right)
           p <- eval(f1, envir = list(XXX = s_vec))
           p <- exp(p * lambda)
@@ -145,12 +149,16 @@ simu_game_sbr <- function(game,
           play2[i] <- play2[i - 1]
         } else {
           left_len <- round((br - s2[1]) / (s2[2] - s2[1]) * 100, 0)
-          left <- seq(from = s2[1],
-                      to = br,
-                      length.out = left_len)
-          right <- seq(from = br,
-                       to = s2[2],
-                       length.out = 101 - left_len)[-1]
+          left <- ifelse(br <= s2[1],
+                         s2[1],
+                         seq(from = s2[1],
+                             to = br,
+                             length.out = left_len))
+          right <- ifelse(br >= s2[2],
+                          s2[2],
+                          seq(from = br,
+                              to = s2[2],
+                              length.out = 101 - left_len)[-1])
           s_vec <- c(left, right)
           p <- eval(f2, envir = list(YYY = s_vec))
           p <- exp(p * lambda)
@@ -201,12 +209,16 @@ simu_game_sbr <- function(game,
           play1[i] <- play1[i - 1]
         } else {
           left_len <- round((br - s1[1]) / (s1[2] - s1[1]) * 100, 0)
-          left <- seq(from = s1[1],
-                      to = br,
-                      length.out = left_len)
-          right <- seq(from = br,
-                       to = s1[2],
-                       length.out = 101 - left_len)[-1]
+          left <- ifelse(br <= s1[1],
+                         s1[1],
+                         seq(from = s1[1],
+                             to = br,
+                             length.out = left_len))
+          right <- ifelse(br >= s1[2],
+                          s1[2],
+                          seq(from = br,
+                              to = s1[2],
+                              length.out = 101 - left_len)[-1])
           s_vec <- c(left, right)
           p <- unlist(sapply(s_vec, f1))
           p <- exp(p * lambda)
@@ -243,12 +255,16 @@ simu_game_sbr <- function(game,
           play2[i] <- play2[i - 1]
         } else {
           left_len <- round((br - s2[1]) / (s2[2] - s2[1]) * 100, 0)
-          left <- seq(from = s2[1],
-                      to = br,
-                      length.out = left_len)
-          right <- seq(from = br,
-                       to = s2[2],
-                       length.out = 101 - left_len)[-1]
+          left <- ifelse(br <= s2[1],
+                         s2[1],
+                         seq(from = s2[1],
+                             to = br,
+                             length.out = left_len))
+          right <- ifelse(br >= s2[2],
+                          s2[2],
+                          seq(from = br,
+                              to = s2[2],
+                              length.out = 101 - left_len)[-1])
           s_vec <- c(left, right)
           p <- unlist(sapply(s_vec, f2))
           p <- exp(p * lambda)
