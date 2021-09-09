@@ -45,11 +45,10 @@ solve_nfg_matrix <- function(
       out <- paste0("[(", out1, "), (", out2, ")]")
 
       if (!quietly) {
-
         message("Mixed-strategy NE: ", out)
         message("The obtained mixed-strategy NE might be only a part of the solutions.")
 
-         if (length(game$strategy$s1) == 2 & length(game$strategy$s2) == 2) {
+        if (length(game$strategy$s1) == 2 & length(game$strategy$s2) == 2) {
           message("Please examine br_plot (best response plot) carefully.")
         }
       }

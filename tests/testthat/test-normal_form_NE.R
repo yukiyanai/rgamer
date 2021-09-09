@@ -29,6 +29,14 @@ char_game <- normal_form(
   par2_lim = c(0, 30),
   pars = c("x", "y"))
 
+char_game2 <- normal_form(
+  players = c("A", "B"),
+  p1 = "-x^2 + (28 - y) * x",
+  p2 = "-y^2 + (28 - x) * y",
+  par1_lim = c(3, 4),
+  par2_lim = c(3, 4),
+  pars = c("x", "y"))
+
 f_x <- function(xA, xB, a) {
   (a - xA - xB) * xA - 3 * xA
 }
@@ -75,6 +83,7 @@ test_that("solve_nfg_matrix finds NEs of matrix-type games", {
   expect_type(solve_nfg_matrix(PD), "list")
   expect_null(solve_nfg_matrix(RPS)$psNE)
   expect_message(solve_nfg_matrix(PD))
+  expect_message(solve_nfg_matrix(PD, mixed = TRUE))
   expect_message(solve_nfg_matrix(RPS, mixed = TRUE))
   expect_length(solve_nfg_matrix(PD), 4)
   expect_length(solve_nfg_matrix(SH), 4)
@@ -87,6 +96,7 @@ test_that("solve_nfg_char finds NEs of 'char_function'-type games", {
   expect_type(solve_nfg_char(char_game), "list")
   expect_length(solve_nfg_char(char_game), 3)
   expect_message(solve_nfg_char(char_game))
+  expect_message(solve_nfg_char(char_game2))
   expect_error(solve_nfg_char(PD))
   expect_error(solve_nfg_char(fcn_game))
 })

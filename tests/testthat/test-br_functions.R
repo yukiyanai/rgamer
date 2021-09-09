@@ -29,6 +29,14 @@ matrix_game <- normal_form(
   p1 = c(10, 8, 0, 7),
   p2 = c(10, 0, 8, 7))
 
+matrix_game2 <- normal_form(
+  players = c("Kamijo", "Yanai"),
+  s1 = c("Hare", "Stag"),
+  s2 = c("Hare", "Stag"),
+  p1 = c(7, 0, 8, 10),
+  p2 = c(7, 8, 0, 10))
+
+
 nogame <- normal_form(
   s1 = c("A", "B"),
   s2 = c("A", "B"),
@@ -58,6 +66,13 @@ seq_game <- seq_form(
   p1 = c(0, -1, 1, 1, 0, -1, -1, 1, 0),
   p2 = c(0, 1, -1, -1, 0, 1, 1, -1, 0)
 )
+
+RPS <- normal_form(
+  players = c("Kamijo", "Yanai"),
+  s1 = c("R", "P", "S"),
+  s2 = c("R", "P", "S"),
+  p1 = c(0, 1, -1, -1, 0, 1, 1, -1, 0),
+  symmetric = TRUE)
 
 test_that("as_df_br returns a list of two data frames", {
   expect_type(as_df_br(players = c("A", "B"),
@@ -103,8 +118,11 @@ test_that("as_df_br returns a list of two data frames", {
 test_that("br_plot draws best response correpondence given a matrix", {
   expect_s3_class(br_plot(matrix_game),
                   "ggplot")
+  expect_s3_class(br_plot(matrix_game2),
+                  "ggplot")
   expect_null(br_plot(nogame))
   expect_warning(br_plot(nogame))
+  expect_error(br_plot(RPS))
   expect_error(br_plot(char_game))
   expect_error(br_plot(fcn_game))
 })

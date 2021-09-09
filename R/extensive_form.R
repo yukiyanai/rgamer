@@ -1,21 +1,26 @@
 #' @title Define and solve a extensive-form (or strategic-form) game
-#' @description \code{extensive_form} defines an extensive-form game
-#' @details This function defines an extensive-form game and draws the game tree.
-#' @param players A list of players. Each element of the list must be a character string
-#'     or a vector of character strings at a specific depth of the tree. Terminal nodes,
-#'     where payoffs are displayed, must be specified as \code{NA}.
-#' @param actions A list of actions. Each element of the list must be a vector of character strings
-#'     that corresponds to a specific player node.
-#' @param payoffs A named list of payoffs. Each element of the list must be a numeric vector of
-#'     payoffs for a player. The names of the elements must match the names of the players
-#'     specified  by \code{players}.
-#' @param quietly A logical value. If \code{TRUE}, the subgame perfect equilibrium will not be displayed
-#'     on screen. Default is \code{FALSE}.
-#' @param show_tree A logical value. If \code{TRUE}, the game tree will be displayed. Default is \code{TRUE}
-#' @param mark_path A logical value. If \code{TRUE}, The paths played in the equilibrium will be
-#'     marked (with color and bold lines). Default is \code{FALSE}.
-#' @param show_node_id A logical value. If \code{TRUE}, the node numbers are displayed in the
-#'     figure. Default is \code{TRUE}
+#' @description \code{extensive_form} defines an extensive-form game and draws
+#'     a game tree.
+#' @details This function defines an extensive-form game and draws the game
+#'     tree.
+#' @param players A list of players. Each element of the list must be a
+#'     character string  or a vector of character strings at a specific depth of
+#'      the tree. Terminal nodes, where payoffs are displayed, must be specified
+#'       as \code{NA}.
+#' @param actions A list of actions. Each element of the list must be a vector
+#'     of character strings that corresponds to a specific player node.
+#' @param payoffs A named list of payoffs. Each element of the list must be a
+#'     numeric vector of payoffs for a player. The names of the elements must
+#'     match the names of the players specified  by \code{players}.
+#' @param quietly A logical value. If \code{TRUE}, the subgame perfect
+#'     equilibrium will not be displayed on screen. Default is \code{FALSE}.
+#' @param show_tree A logical value. If \code{TRUE}, the game tree will be
+#'     displayed. Default is \code{TRUE}.
+#' @param mark_path A logical value. If \code{TRUE}, The paths played in the
+#'     equilibrium will be marked (with color and bold lines). Default is
+#'     \code{FALSE}.
+#' @param show_node_id A logical value. If \code{TRUE}, the node numbers are
+#'     displayed in the figure. Default is \code{TRUE}.
 #' @param direction The direction to which a game tree grows.
 #'     The value must be one of:
 #'     \code{"right"},
@@ -27,8 +32,8 @@
 #'     Default is \code{"down"}.
 #' @param color_palette A color palette to be used. Default is "Set1".
 #' @param family A font family to be used in the tree.
-#' @return An object of "extensive_form" class, which defines an extensive-form (or sequential) game.
-#' @import ggplot2
+#' @return An object of "extensive_form" class, which defines an extensive-form
+#'     (or sequential) game.
 #' @importFrom magrittr %>%
 #' @include set_nodes.R
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>

@@ -15,3 +15,11 @@ navbar:
     twitter:
       icon: "fab fa-twitter fa-lg"
       href: https://twitter.com/yuki871
+
+template:
+  params:
+    docsearch:
+      api_key: API_KEY
+      index_name: INDEX_NAME
+
+url: https://yukiyanai.github.io/rgamer/

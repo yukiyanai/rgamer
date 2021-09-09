@@ -57,15 +57,57 @@ test_that("normal_form constructs a normal_form class", {
                               par2_lim = c(0, 10),
                               discretize = TRUE),
                   "normal_form")
+  expect_s3_class(normal_form(players = c("A", "B"),
+                              p1 = function(x, y, s){-x^s + (28-y) * x},
+                              p2 = function(x, y, s){-y^s + (28-x) * y},
+                              pars = c("x", "y"),
+                              par1_lim = c(0, 30),
+                              par2_lim = c(0, 30),
+                              cons_common = list(s = 2)),
+                  "normal_form")
   expect_error(normal_form(s1 = c("T", "B"),
                            s2 = c("L", "R"),
                            p1 = c(4, 2, 3),
+                           p2 = c(4, 3, 2, 1),
+                           players = c("Kamijo", "Yanai")))
+  expect_error(normal_form(s1 = c("T", "B"),
+                           s2 = c("L", "R"),
+                           p1 = c(4, 2, 3, 1),
                            p2 = c(4, 3, 2),
+                           players = c("Kamijo", "Yanai")))
+  expect_error(normal_form(s1 = NULL,
+                           s2 = c("L", "R"),
+                           p1 = c(4, 2, 3, 1),
+                           p2 = c(4, 3, 2, 1),
                            players = c("Kamijo", "Yanai")))
   expect_error(normal_form(p1 = func_price1,
                            p2 = "-y^2 + (28 - x) * y",
                            pars = c('x', 'y'),
                            par1_lim = c(0, 30),
+                           par2_lim = c(0, 30)))
+  expect_error(normal_form(players = c("A", "B"),
+                           p1 = "-x1^2 + (28 - x2) * x1",
+                           p2 = "-x2^2 + (28 - x1) * x2",
+                           par1_lim = NULL,
+                           par2_lim = c(0, 30),
+                           pars = c("x1", "x2")))
+  expect_error(normal_form(players = c("A", "B"),
+                           p1 = "-x1^2 + (28 - x2) * x1",
+                           p2 = "-x2^2 + (28 - x1) * x2",
+                           par1_lim = c(0, 15, 30),
+                           par2_lim = c(0, 30),
+                           pars = c("x1", "x2")))
+  expect_error(normal_form(players = c("A", "B"),
+                           p1 = function(x, y){-x^2 + (28-y) * x},
+                           p2 = function(x, y){-y^2 + (28-x) * y},
+                           pars = c("x", "y"),
+                           par1_lim = NULL,
+                           par2_lim = c(0, 30)))
+  expect_error(normal_form(players = c("A", "B"),
+                           p1 = function(x, y){-x^2 + (28-y) * x},
+                           p2 = function(x, y){-y^2 + (28-x) * y},
+                           pars = c("x", "y"),
+                           par1_lim = c(0, 15, 30),
                            par2_lim = c(0, 30)))
 })
 
@@ -104,9 +146,45 @@ test_that("seq_form constructs a sequential_form class", {
                            par2_lim = c(0, 10),
                            discretize = TRUE),
                   "sequential_form")
-  expect_error(seq_form(s1 = c("T", "B"), s2 = c("L", "R"),
-                        p1 = c(4, 2, 3), p2 = c(4, 3, 2),
+  expect_error(seq_form(s1 = c("T", "B"),
+                        s2 = c("L", "R"),
+                        p1 = c(4, 2, 3, 2),
+                        p2 = c(4, 3, 2),
                         players = c("Kamijo", "Yanai")))
+  expect_error(seq_form(s1 = c("T", "B"),
+                        s2 = c("L", "R"),
+                        p1 = c(4, 2, 3),
+                        p2 = c(4, 3, 2, 1),
+                        players = c("Kamijo", "Yanai")))
+  expect_error(seq_form(p1 = c(4, 2, 3),
+                        p2 = c(4, 3, 2),
+                        players = c("Kamijo", "Yanai")))
+  expect_error(seq_form(players = c("A", "B"),
+                        p1 = "-x1^2 + (28 - x2) * x1",
+                        p2 = "-x2^2 + (28 - x1) * x2",
+                        pars = c("x1", "x2")))
+  expect_error(seq_form(players = c("A", "B"),
+                        p1 = "-x1^2 + (28 - x2) * x1",
+                        p2 = "-x2^2 + (28 - x1) * x2",
+                        par1_lim = c(1, 2, 3),
+                        par2_lim = c(0, 10),
+                        pars = c("x1", "x2")))
+  expect_error(seq_form(players = c("A", "B"),
+                        p1 = function(x, y){-x^2 + (28-y) * x},
+                        p2 = function(x, y){-y^2 + (28-x) * y},
+                        pars = c("x", "y"),
+                        par2_lim = c(0, 30)))
+  expect_error(seq_form(players = c("A", "B"),
+                        p1 = function(x, y){-x^2 + (28-y) * x},
+                        p2 = function(x, y){-y^2 + (28-x) * y},
+                        pars = c("x", "y"),
+                        par1_lim = c(0, 5, 10),
+                        par2_lim = c(0, 30)))
+  expect_error(seq_form(players = c("A", "B"),
+                        p1 = 1:4,
+                        p2 = 1:4,
+                        pars = c("x", "y"),
+                        par2_lim = c(0, 30)))
 })
 
 test_that("extensive form constructs an extensive_form class", {
@@ -120,6 +198,36 @@ test_that("extensive form constructs an extensive_form class", {
                                                  Yanai  = c(0, 1, 2, 1))),
                   "extensive_form")
   expect_s3_class(extensive_form(players = list("Kamijo",
+                                                rep("Yanai", 2),
+                                                rep(NA, 4)),
+                                 actions <- list(c("U", "D"),
+                                                 c("U'", "D'"),
+                                                 c("U''", "D''")),
+                                 payoffs = list(Kamijo = c(0, 2, 1, 3),
+                                                Yanai  = c(0, 1, 2, 1)),
+                                 direction = "right"),
+                  "extensive_form")
+  expect_s3_class(extensive_form(players = list("Kamijo",
+                                                rep("Yanai", 2),
+                                                rep(NA, 4)),
+                                 actions <- list(c("U", "D"),
+                                                 c("U'", "D'"),
+                                                 c("U''", "D''")),
+                                 payoffs = list(Kamijo = c(0, 2, 1, 3),
+                                                Yanai  = c(0, 1, 2, 1)),
+                                 direction = "up"),
+                  "extensive_form")
+  expect_s3_class(extensive_form(players = list("Kamijo",
+                                                rep("Yanai", 2),
+                                                rep(NA, 4)),
+                                 actions <- list(c("U", "D"),
+                                                 c("U'", "D'"),
+                                                 c("U''", "D''")),
+                                 payoffs = list(Kamijo = c(0, 2, 1, 3),
+                                                Yanai  = c(0, 1, 2, 1)),
+                                 direction = "bidirectional"),
+                  "extensive_form")
+  expect_s3_class(extensive_form(players = list("Kamijo",
                                                 c("Yanai", NA),
                                                 c("Kamijo", NA),
                                                 c(NA, NA)),
@@ -130,6 +238,18 @@ test_that("extensive form constructs an extensive_form class", {
                                  payoffs = list(Kamijo = c(0, 1, 5, 3),
                                                 Yanai = c(0, 2, 4, 1))),
                   "extensive_form")
+  expect_s3_class(extensive_form(players = list("Kamijo",
+                                                c("Yanai", NA),
+                                                c("Kamijo", NA),
+                                                c(NA, NA)),
+                                 direction = "vertical",
+                                 actions = list(c("P", "T"),
+                                                c("P'", "T'"),
+                                                c("P''", "T''")),
+                                 payoffs = list(Kamijo = c(0, 1, 5, 3),
+                                                Yanai = c(0, 2, 4, 1)),
+                                 mark_path = TRUE),
+                  "extensive_form")
   expect_s3_class(extensive_form(players = list("p1",
                                                 rep("p2", 3),
                                                 rep(NA, 6)),
@@ -138,7 +258,8 @@ test_that("extensive form constructs an extensive_form class", {
                                                c("H", "I"),
                                                c("J", "K")),
                                  payoff = list(p1 = c(3, 1, 1, 2, 2, 1),
-                                               p2 = c(0, 0, 1, 1, 2, 3))),
+                                               p2 = c(0, 0, 1, 1, 2, 3)),
+                                 family = "sans"),
                   "extensive_form")
   expect_error(extensive_form(players = list("p1",
                                              rep("p2", 3)),
@@ -148,6 +269,16 @@ test_that("extensive form constructs an extensive_form class", {
                                             c("J", "K")),
                               payoff = list(p1 = c(3, 1, 1, 2, 2, 1),
                                             p2 = c(0, 0, 1, 1, 2, 3))))
+  expect_error(extensive_form(players = list("p1",
+                                             rep("p2", 3),
+                                             rep(NA, 6)),
+                              action = list(c("C", "D", "E"),
+                                            c("F", "G"),
+                                            c("H", "I"),
+                                            c("J", "K")),
+                              payoff = list(p1 = c(3, 1, 1, 2, 2, 1),
+                                            p2 = c(0, 0, 1, 1, 2, 3)),
+                              direction = "trichotomous"))
 })
 
 

@@ -16,7 +16,7 @@ Description: rgamer is an R package that helps students learn (and instructors t
     game theory using R. The rgamer package provides visual displays of basic two-person games 
     and finds Nash equilibria of the games.
 License: MIT + file LICENSE
-URL: https://github.com/yukiyanai/rgamer
+URL: https://yukiyanai.github.io/rgamer/, https://github.com/yukiyanai/rgamer
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1

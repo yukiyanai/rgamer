@@ -28,8 +28,8 @@ solve_nfg_char <- function(game,
                            quietly = FALSE,
                            color_palette = "Set1") {
 
-x <- y <- br_a <- br_b <- player <- NULL
-xs <- ys <- xe <- ye <- text <- NULL
+  x <- y <- br_a <- br_b <- player <- NULL
+  xs <- ys <- xe <- ye <- text <- NULL
 
   p1 <- game$payoff[[1]]
   p2 <- game$payoff[[2]]
@@ -77,6 +77,7 @@ xs <- ys <- xe <- ye <- text <- NULL
     g1(x = x, y = par2_lim[1])
   }
   expand_counter <- 0
+  xintercept1 <- NULL
   while (g1_y0(p1min) * g1_y0(p1max) >= 0) {
     p1min <- p1min - 0.5 * rg1
     p1max <- p1max + 0.5 * rg1
@@ -85,13 +86,13 @@ xs <- ys <- xe <- ye <- text <- NULL
   }
   if (expand_counter < 500) {
     xintercept1 <- stats::uniroot(g1_y0, c(p1min, p1max))$root
-  } else {
-    xintercept1 <- NULL
   }
+
   g1_x0 <- function(y) {
     g1(x = par1_lim[1], y = y)
   }
   expand_counter <- 0
+  yintercept1 <- NULL
   while (g1_x0(p2min) * g1_x0(p2max) >= 0) {
     p2min <- p2min - 0.5 * rg2
     p2max <- p2max + 0.5 * rg2
@@ -99,8 +100,6 @@ xs <- ys <- xe <- ye <- text <- NULL
   }
   if (expand_counter < 500) {
     yintercept1 <- stats::uniroot(g1_x0, c(p2min, p2max))$root
-  } else {
-    yintercept1 <- NULL
   }
 
   ## Find the intercepts of Player 2's response curve
@@ -112,6 +111,7 @@ xs <- ys <- xe <- ye <- text <- NULL
     g2(x = x, y = par2_lim[1])
   }
   expand_counter <- 0
+  xintercept2 <- NULL
   while (g2_y0(p1min) * g2_y0(p1max) >= 0) {
     p1min <- p1min - 0.5 * rg1
     p1max <- p1max + 0.5 * rg1
@@ -120,13 +120,13 @@ xs <- ys <- xe <- ye <- text <- NULL
   }
   if (expand_counter < 500) {
     xintercept2 <- stats::uniroot(g2_y0, c(p1min, p1max))$root
-  } else {
-    xintercetp2 <- NULL
   }
+
   g2_x0 <- function(y) {
     g2(x = par1_lim[1], y = y)
   }
   expand_counter <- 0
+  yintercept2 <- NULL
   while (g2_x0(p2min) * g2_x0(p2max) >= 0) {
     p2min <- p2min - 0.5 * rg2
     p2max <- p2max + 0.5 * rg2
@@ -135,8 +135,6 @@ xs <- ys <- xe <- ye <- text <- NULL
   }
   if (expand_counter < 500) {
     yintercept2 <- stats::uniroot(g2_x0, c(p2min, p2max))$root
-  } else {
-    yintercept2 <- NULL
   }
 
   ## determine plot range

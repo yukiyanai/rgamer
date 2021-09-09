@@ -1,42 +1,51 @@
 #' @title Define a sequential-form (leader-follower) game
-#' @description \code{seq_form()} defines a sequential-form game and
-#'     creates an object of "sequential_form" class.
-#' @details Create an object of 'sequential_form' class, which can be passed to functions
-#'     in order to find solutions of the game.
+#' @description \code{seq_form()} defines a sequential-form game and creates an
+#'     object of "sequential_form" class.
+#' @details Create an object of 'sequential_form' class, which can be passed to
+#'     functions in order to find solutions of the game.
 #' @param players A character vector of the name (label) for the players.
-#' @param s1 A character vector of pure strategies for Player 1 (row player). Required only when
-#'     the player has discrete-choice strategies.
-#' @param s2 A character vector of pure strategies for Player 2 (column player). Required only when
-#'     the player has discrete-choice strategies.
-#' @param p1 The payoff of Player1. This argument can be specified in three different ways.
-#'     First, it can be a numeric vector of payoffs. Second, it can be a character string of the payoff
-#'     function (e.g., p1 = "x^2 - y"). Third, it can be an R function of payoff.
-#' @param p2 The payoff of Player 2. See the explanation of \code{p1} for detail.
-#' @param discretize A logical value. Set this \code{TRUE} to evaluate payoff functions
-#'      at some discrete values of strategies \code{s1} and \code{s2}. Default is \code{FALSE}.
-#' @param discrete_points A numeric vector of length 2 to set how many discrete points should be
-#'      used to discretize the game defined by payoff functions. Default is \code{c(6, 6)}, which
-#'      shows equally spaced 6 values from the range of the strategy
-#'      \code{par1_lim} and \code{par2_lim}. Instead of setting this parameter, you can specify
-#'      arbitrary points to use by setting \code{s1} and \code{s2}.
-#' @param symmetric A logical value. Set this \code{TRUE} when the payoffs for two players are
-#'     symmetric as in the prisoners' dilemma. Then, p1 is recycled for p2. Default is \code{FALSE}
-#' @param byrow A logical value. If \code{TRUE}, payoffs will be lined up by row. Default is \code{FALSE}.
-#'     Only used when both \code{s1} and \code{s2} are provided.
-#' @param pars A character vector of parameters that are selected by players 1 and 2, respectively.
-#'     Only used when \code{p1} and \code{p2} are specified as a function
-#'     (either as a character string or as an R function).
-#' @param par1_lim A numeric vector of length 2, which defines the range of parameters
-#'     from which Player 1 chooses her strategy.
-#' @param par2_lim A numeric vector of length 2, which defines the range of parameters
-#'     from which Player 2 chooses his strategy.
-#' @param cons1 A named list of parameters contained in \code{p1} that should be treated as constants, if any.
-#' @param cons2 A named list of parameters contained in \code{p2} that should be treated as constants, if any.
-#' @param cons_common A named list of parameters contained in \code{p1} and \code{p2} that should be treated
-#'     as constants, if any. If \code{cons1} and \code{cons2} are exactly same, you can specify \code{cons_common}
+#' @param s1 A character vector of pure strategies for Player 1 (row player).
+#'     Required only when the players have discrete-choice strategies.
+#' @param s2 A character vector of pure strategies for Player 2 (column player).
+#'      Required only when the players have discrete-choice strategies.
+#' @param p1 The payoff of Player1. This argument can be specified in three
+#'     different ways. First, it can be a numeric vector of payoffs. Second, it
+#'     can be a character string of the payoff function (e.g., p1 = "x^2 - y").
+#'     Third, it can be an R function of payoff.
+#' @param p2 The payoff of Player 2. See the explanation of \code{p1} for
+#'     detail.
+#' @param discretize A logical value. Set this \code{TRUE} to evaluate payoff
+#'     functions at some discrete values of strategies \code{s1} and \code{s2}.
+#'     Default is \code{FALSE}.
+#' @param discrete_points A numeric vector of length 2 to set how many discrete
+#'     points should be used to discretize the game defined by payoff functions.
+#'     Default is \code{c(6, 6)}, which shows equally spaced 6 values from the
+#'     range of the strategy \code{par1_lim} and \code{par2_lim}. Instead of
+#'     setting this parameter, you can specify arbitrary points to use by
+#'     setting \code{s1} and \code{s2}.
+#' @param symmetric A logical value. Set this \code{TRUE} when the payoffs for
+#'     two players are symmetric as in the prisoners' dilemma. Then, p1 is
+#'     recycled for p2. Default is \code{FALSE}.
+#' @param byrow A logical value. If \code{TRUE}, payoffs will be lined up by
+#'     row. Default is \code{FALSE}. Only used when both \code{s1} and \code{s2}
+#'     are provided.
+#' @param pars A character vector of parameters that are selected by players 1
+#'     and 2, respectively. Only used when \code{p1} and \code{p2} are specified
+#'      as a function (either as a character string or as an R function).
+#' @param par1_lim A numeric vector of length 2, which defines the range of
+#'     parameters from which Player 1 chooses her strategy.
+#' @param par2_lim A numeric vector of length 2, which defines the range of
+#'     parameters from which Player 2 chooses his strategy.
+#' @param cons1 A named list of parameters contained in \code{p1} that should be
+#'      treated as constants, if any.
+#' @param cons2 A named list of parameters contained in \code{p2} that should be
+#'      treated as constants, if any.
+#' @param cons_common A named list of parameters contained in \code{p1} and
+#'     \code{p2} that should be treated as constants, if any. If \code{cons1}
+#'     and \code{cons2} are exactly same, you can specify \code{cons_common}
 #'     instead of both \code{cons1} and \code{cons2}.
-#' @return An object of "sequential_form" class, which defines a sequential-form game
-#      (an extensive form game with a leader and a follower).
+#' @return An object of "sequential_form" class, which defines a sequential-form
+#'     game (an extensive form game with a leader and a follower).
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
 seq_form <- function(

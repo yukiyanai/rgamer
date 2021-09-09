@@ -25,61 +25,71 @@ seq_form(
 \arguments{
 \item{players}{A character vector of the name (label) for the players.}
 
-\item{s1}{A character vector of pure strategies for Player 1 (row player). Required only when
-the player has discrete-choice strategies.}
+\item{s1}{A character vector of pure strategies for Player 1 (row player).
+Required only when the players have discrete-choice strategies.}
 
-\item{s2}{A character vector of pure strategies for Player 2 (column player). Required only when
-the player has discrete-choice strategies.}
+\item{s2}{A character vector of pure strategies for Player 2 (column player).
+Required only when the players have discrete-choice strategies.}
 
-\item{p1}{The payoff of Player1. This argument can be specified in three different ways.
-First, it can be a numeric vector of payoffs. Second, it can be a character string of the payoff
-function (e.g., p1 = "x^2 - y"). Third, it can be an R function of payoff.}
+\item{p1}{The payoff of Player1. This argument can be specified in three
+different ways. First, it can be a numeric vector of payoffs. Second, it
+can be a character string of the payoff function (e.g., p1 = "x^2 - y").
+Third, it can be an R function of payoff.}
 
-\item{p2}{The payoff of Player 2. See the explanation of \code{p1} for detail.}
+\item{p2}{The payoff of Player 2. See the explanation of \code{p1} for
+detail.}
 
-\item{discretize}{A logical value. Set this \code{TRUE} to evaluate payoff functions
-at some discrete values of strategies \code{s1} and \code{s2}. Default is \code{FALSE}.}
+\item{discretize}{A logical value. Set this \code{TRUE} to evaluate payoff
+functions at some discrete values of strategies \code{s1} and \code{s2}.
+Default is \code{FALSE}.}
 
-\item{discrete_points}{A numeric vector of length 2 to set how many discrete points should be
-used to discretize the game defined by payoff functions. Default is \code{c(6, 6)}, which
-shows equally spaced 6 values from the range of the strategy
-\code{par1_lim} and \code{par2_lim}. Instead of setting this parameter, you can specify
-arbitrary points to use by setting \code{s1} and \code{s2}.}
+\item{discrete_points}{A numeric vector of length 2 to set how many discrete
+points should be used to discretize the game defined by payoff functions.
+Default is \code{c(6, 6)}, which shows equally spaced 6 values from the
+range of the strategy \code{par1_lim} and \code{par2_lim}. Instead of
+setting this parameter, you can specify arbitrary points to use by
+setting \code{s1} and \code{s2}.}
 
-\item{symmetric}{A logical value. Set this \code{TRUE} when the payoffs for two players are
-symmetric as in the prisoners' dilemma. Then, p1 is recycled for p2. Default is \code{FALSE}}
+\item{symmetric}{A logical value. Set this \code{TRUE} when the payoffs for
+two players are symmetric as in the prisoners' dilemma. Then, p1 is
+recycled for p2. Default is \code{FALSE}.}
 
-\item{byrow}{A logical value. If \code{TRUE}, payoffs will be lined up by row. Default is \code{FALSE}.
-Only used when both \code{s1} and \code{s2} are provided.}
+\item{byrow}{A logical value. If \code{TRUE}, payoffs will be lined up by
+row. Default is \code{FALSE}. Only used when both \code{s1} and \code{s2}
+are provided.}
 
-\item{pars}{A character vector of parameters that are selected by players 1 and 2, respectively.
-Only used when \code{p1} and \code{p2} are specified as a function
-(either as a character string or as an R function).}
+\item{pars}{A character vector of parameters that are selected by players 1
+and 2, respectively. Only used when \code{p1} and \code{p2} are specified
+as a function (either as a character string or as an R function).}
 
-\item{par1_lim}{A numeric vector of length 2, which defines the range of parameters
-from which Player 1 chooses her strategy.}
+\item{par1_lim}{A numeric vector of length 2, which defines the range of
+parameters from which Player 1 chooses her strategy.}
 
-\item{par2_lim}{A numeric vector of length 2, which defines the range of parameters
-from which Player 2 chooses his strategy.}
+\item{par2_lim}{A numeric vector of length 2, which defines the range of
+parameters from which Player 2 chooses his strategy.}
 
-\item{cons1}{A named list of parameters contained in \code{p1} that should be treated as constants, if any.}
+\item{cons1}{A named list of parameters contained in \code{p1} that should be
+treated as constants, if any.}
 
-\item{cons2}{A named list of parameters contained in \code{p2} that should be treated as constants, if any.}
+\item{cons2}{A named list of parameters contained in \code{p2} that should be
+treated as constants, if any.}
 
-\item{cons_common}{A named list of parameters contained in \code{p1} and \code{p2} that should be treated
-as constants, if any. If \code{cons1} and \code{cons2} are exactly same, you can specify \code{cons_common}
+\item{cons_common}{A named list of parameters contained in \code{p1} and
+\code{p2} that should be treated as constants, if any. If \code{cons1}
+and \code{cons2} are exactly same, you can specify \code{cons_common}
 instead of both \code{cons1} and \code{cons2}.}
 }
 \value{
-An object of "sequential_form" class, which defines a sequential-form game
+An object of "sequential_form" class, which defines a sequential-form
+game (an extensive form game with a leader and a follower).
 }
 \description{
-\code{seq_form()} defines a sequential-form game and
-creates an object of "sequential_form" class.
+\code{seq_form()} defines a sequential-form game and creates an
+object of "sequential_form" class.
 }
 \details{
-Create an object of 'sequential_form' class, which can be passed to functions
-in order to find solutions of the game.
+Create an object of 'sequential_form' class, which can be passed to
+functions in order to find solutions of the game.
 }
 \author{
 Yoshio Kamijo and Yuki Yanai \href{mailto:yanai.yuki@kochi-tech.ac.jp}{yanai.yuki@kochi-tech.ac.jp}
