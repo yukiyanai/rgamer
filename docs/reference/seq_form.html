@@ -46,8 +46,8 @@
 
 
 <meta property="og:title" content="Define a sequential-form (leader-follower) game — seq_form" />
-<meta property="og:description" content="seq_form() defines a sequential-form game and
-creates an object of &quot;sequential_form&quot; class." />
+<meta property="og:description" content="seq_form() defines a sequential-form game and creates an
+object of &quot;sequential_form&quot; class." />
 
 
 
@@ -136,8 +136,8 @@ creates an object of &quot;sequential_form&quot; class." />
     </div>
 
     <div class="ref-description">
-    <p><code>seq_form()</code> defines a sequential-form game and
-creates an object of "sequential_form" class.</p>
+    <p><code>seq_form()</code> defines a sequential-form game and creates an
+object of "sequential_form" class.</p>
     </div>
 
     <pre class="usage"><span class='fu'>seq_form</span><span class='op'>(</span>
@@ -167,86 +167,96 @@ creates an object of "sequential_form" class.</p>
     </tr>
     <tr>
       <th>s1</th>
-      <td><p>A character vector of pure strategies for Player 1 (row player). Required only when
-the player has discrete-choice strategies.</p></td>
+      <td><p>A character vector of pure strategies for Player 1 (row player).
+Required only when the players have discrete-choice strategies.</p></td>
     </tr>
     <tr>
       <th>s2</th>
-      <td><p>A character vector of pure strategies for Player 2 (column player). Required only when
-the player has discrete-choice strategies.</p></td>
+      <td><p>A character vector of pure strategies for Player 2 (column player).
+Required only when the players have discrete-choice strategies.</p></td>
     </tr>
     <tr>
       <th>p1</th>
-      <td><p>The payoff of Player1. This argument can be specified in three different ways.
-First, it can be a numeric vector of payoffs. Second, it can be a character string of the payoff
-function (e.g., p1 = "x^2 - y"). Third, it can be an R function of payoff.</p></td>
+      <td><p>The payoff of Player1. This argument can be specified in three
+different ways. First, it can be a numeric vector of payoffs. Second, it
+can be a character string of the payoff function (e.g., p1 = "x^2 - y").
+Third, it can be an R function of payoff.</p></td>
     </tr>
     <tr>
       <th>p2</th>
-      <td><p>The payoff of Player 2. See the explanation of <code>p1</code> for detail.</p></td>
+      <td><p>The payoff of Player 2. See the explanation of <code>p1</code> for
+detail.</p></td>
     </tr>
     <tr>
       <th>discretize</th>
-      <td><p>A logical value. Set this <code>TRUE</code> to evaluate payoff functions
-at some discrete values of strategies <code>s1</code> and <code>s2</code>. Default is <code>FALSE</code>.</p></td>
+      <td><p>A logical value. Set this <code>TRUE</code> to evaluate payoff
+functions at some discrete values of strategies <code>s1</code> and <code>s2</code>.
+Default is <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>discrete_points</th>
-      <td><p>A numeric vector of length 2 to set how many discrete points should be
-used to discretize the game defined by payoff functions. Default is <code><a href='https://rdrr.io/r/base/c.html'>c(6, 6)</a></code>, which
-shows equally spaced 6 values from the range of the strategy
-<code>par1_lim</code> and <code>par2_lim</code>. Instead of setting this parameter, you can specify
-arbitrary points to use by setting <code>s1</code> and <code>s2</code>.</p></td>
+      <td><p>A numeric vector of length 2 to set how many discrete
+points should be used to discretize the game defined by payoff functions.
+Default is <code><a href='https://rdrr.io/r/base/c.html'>c(6, 6)</a></code>, which shows equally spaced 6 values from the
+range of the strategy <code>par1_lim</code> and <code>par2_lim</code>. Instead of
+setting this parameter, you can specify arbitrary points to use by
+setting <code>s1</code> and <code>s2</code>.</p></td>
     </tr>
     <tr>
       <th>symmetric</th>
-      <td><p>A logical value. Set this <code>TRUE</code> when the payoffs for two players are
-symmetric as in the prisoners' dilemma. Then, p1 is recycled for p2. Default is <code>FALSE</code></p></td>
+      <td><p>A logical value. Set this <code>TRUE</code> when the payoffs for
+two players are symmetric as in the prisoners' dilemma. Then, p1 is
+recycled for p2. Default is <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>byrow</th>
-      <td><p>A logical value. If <code>TRUE</code>, payoffs will be lined up by row. Default is <code>FALSE</code>.
-Only used when both <code>s1</code> and <code>s2</code> are provided.</p></td>
+      <td><p>A logical value. If <code>TRUE</code>, payoffs will be lined up by
+row. Default is <code>FALSE</code>. Only used when both <code>s1</code> and <code>s2</code>
+are provided.</p></td>
     </tr>
     <tr>
       <th>pars</th>
-      <td><p>A character vector of parameters that are selected by players 1 and 2, respectively.
-Only used when <code>p1</code> and <code>p2</code> are specified as a function
-(either as a character string or as an R function).</p></td>
+      <td><p>A character vector of parameters that are selected by players 1
+and 2, respectively. Only used when <code>p1</code> and <code>p2</code> are specified
+as a function (either as a character string or as an R function).</p></td>
     </tr>
     <tr>
       <th>par1_lim</th>
-      <td><p>A numeric vector of length 2, which defines the range of parameters
-from which Player 1 chooses her strategy.</p></td>
+      <td><p>A numeric vector of length 2, which defines the range of
+parameters from which Player 1 chooses her strategy.</p></td>
     </tr>
     <tr>
       <th>par2_lim</th>
-      <td><p>A numeric vector of length 2, which defines the range of parameters
-from which Player 2 chooses his strategy.</p></td>
+      <td><p>A numeric vector of length 2, which defines the range of
+parameters from which Player 2 chooses his strategy.</p></td>
     </tr>
     <tr>
       <th>cons1</th>
-      <td><p>A named list of parameters contained in <code>p1</code> that should be treated as constants, if any.</p></td>
+      <td><p>A named list of parameters contained in <code>p1</code> that should be
+treated as constants, if any.</p></td>
     </tr>
     <tr>
       <th>cons2</th>
-      <td><p>A named list of parameters contained in <code>p2</code> that should be treated as constants, if any.</p></td>
+      <td><p>A named list of parameters contained in <code>p2</code> that should be
+treated as constants, if any.</p></td>
     </tr>
     <tr>
       <th>cons_common</th>
-      <td><p>A named list of parameters contained in <code>p1</code> and <code>p2</code> that should be treated
-as constants, if any. If <code>cons1</code> and <code>cons2</code> are exactly same, you can specify <code>cons_common</code>
+      <td><p>A named list of parameters contained in <code>p1</code> and
+<code>p2</code> that should be treated as constants, if any. If <code>cons1</code>
+and <code>cons2</code> are exactly same, you can specify <code>cons_common</code>
 instead of both <code>cons1</code> and <code>cons2</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of "sequential_form" class, which defines a sequential-form game</p>
+    <p>An object of "sequential_form" class, which defines a sequential-form
+game (an extensive form game with a leader and a follower).</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Create an object of 'sequential_form' class, which can be passed to functions
-in order to find solutions of the game.</p>
+    <p>Create an object of 'sequential_form' class, which can be passed to
+functions in order to find solutions of the game.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Yoshio Kamijo and Yuki Yanai <a href='mailto:yanai.yuki@kochi-tech.ac.jp'>yanai.yuki@kochi-tech.ac.jp</a></p>

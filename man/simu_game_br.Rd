@@ -15,33 +15,40 @@ simu_game_br(
 )
 }
 \arguments{
-\item{game}{An object of \code{normal_form} class defined by \code{normal_form()}.}
+\item{game}{An object of \code{normal_form} class defined by
+\code{normal_form()}.}
 
-\item{n_periods}{A positive integer specifying how many times the game is played within each sample.}
+\item{n_periods}{A positive integer specifying how many times the game is
+played within each sample.}
 
-\item{init1}{Player 1's first strategy. If not specified, a strategy is randomly selected
-from the player's strategy set.}
+\item{init1}{Player 1's first strategy. If not specified, a strategy is
+randomly selected from the player's strategy set.}
 
-\item{init2}{Player 2's first strategy. If not specified, a strategy is randomly selected
-from the player's strategy set.}
+\item{init2}{Player 2's first strategy. If not specified, a strategy is
+randomly selected from the player's strategy set.}
 
-\item{rho}{A numeric value between 0 and 1 to control the degree of inertia in each player's behavior. If \code{rho = 1},
-each player does not change their choices over time. If \code{rho = 0}, each player does not stick to their
-previous choice at all.}
+\item{rho}{A numeric value between 0 and 1 to control the degree of inertia
+in each player's behavior. If \code{rho = 1}, ach player does not chang
+their choices over time. If \code{rho = 0}, each player does not stick to
+their previous choice at all.}
 
-\item{cons1}{A named list of parameters contained in \code{game$payoff$p1} that should be treated as constants, if any.}
+\item{cons1}{A named list of parameters contained in \code{game$payoff$p1}
+that should be treated as constants, if any.}
 
-\item{cons2}{A named list of parameters contained in \code{game$payoff$p2} that should be treated as constants, if any.}
+\item{cons2}{A named list of parameters contained in \code{game$payoff$p2}
+that should be treated as constants, if any.}
 }
 \value{
 data.frame containing the history of the game played.
 }
 \description{
-\code{simu_game()} simulates plays expected in a normal-form game.
+\code{simu_game()} simulates plays expected in a normal-form
+game.
 }
 \details{
-Simulate plays expected in a normal-form game defined by \code{normal_form()} when
-each player chooses the best reponse to the other player's previous move.
+Simulate plays expected in a normal-form game defined by
+\code{normal_form()} when each player chooses the best response to the
+other player's previous move.
 }
 \author{
 Yoshio Kamijo and Yuki Yanai \href{mailto:yanai.yuki@kochi-tech.ac.jp}{yanai.yuki@kochi-tech.ac.jp}

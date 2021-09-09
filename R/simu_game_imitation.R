@@ -1,30 +1,36 @@
 #' @title Play a normal-form game by simulation (imitation)
-#' @description \code{simu_game()} simulates plays expected in a normal-form game.
-#' @details Simulate plays expected in a normal-form game defined by \code{normal_form()} when
-#'   each player imitates the other player's previous action..
-#' @param game An object of \code{normal_form} class defined by \code{normal_form()}.
-#' @param n_periods A positive integer specifying how many times the game is played within each sample.
-#' @param init1 Player 1's first strategy. If not specified, a strategy is randomly selected
-#'   from the player's strategy set.
-#' @param init2 Player 2's first strategy. If not specified, a strategy is randomly selected
-#'   from the player's strategy set.
-#' @param rho A numeric value in [0, 1] to control the degree of inertia in each player's behavior. If \code{rho = 1},
-#'    each player does not change their choices over time. If \code{rho = 0}, each player does not stick to their
-#'    previous choice at all.
-#' @param cons1 A named list of parameters contained in \code{game$payoff$p1} that should be treated as constants, if any.
-#' @param cons2 A named list of parameters contained in \code{game$payoff$p2} that should be treated as constants, if any.
+#' @description \code{simu_game_imitation()} simulates plays expected in a
+#'     normal-form game.
+#' @details Simulate plays expected in a normal-form game defined by
+#'     \code{normal_form()} when each player imitates the other player's
+#'     previous action.
+#' @param game An object of \code{normal_form} class defined by
+#'     \code{normal_form()}.
+#' @param n_periods A positive integer specifying how many times the game is
+#'     played within each sample.
+#' @param init1 Player 1's first strategy. If not specified, a strategy is
+#'     randomly selected from the player's strategy set.
+#' @param init2 Player 2's first strategy. If not specified, a strategy is
+#'     randomly selected from the player's strategy set.
+#' @param rho A numeric value in [0, 1] to control the degree of inertia in each
+#'      player's behavior. If \code{rho = 1}, each player does not change their
+#'      choices over time. If \code{rho = 0}, each player does not stick to
+#'      their previous choice at all.
+#' @param cons1 A named list of parameters contained in \code{game$payoff$p1}
+#'     that should be treated as constants, if any.
+#' @param cons2 A named list of parameters contained in \code{game$payoff$p2}
+#'     that should be treated as constants, if any.
 #' @return data.frame containing the history of the game played.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @importFrom magrittr %>%
 #' @noRd
-simu_game_imitation <- function(
-  game,
-  n_periods,
-  init1 = NULL,
-  init2 = NULL,
-  rho = 0,
-  cons1 = NULL,
-  cons2 = NULL) {
+simu_game_imitation <- function(game,
+                                n_periods,
+                                init1 = NULL,
+                                init2 = NULL,
+                                rho = 0,
+                                cons1 = NULL,
+                                cons2 = NULL) {
 
   play1 <- rep(NA, n_periods)
   play2 <- rep(NA, n_periods)
@@ -169,13 +175,9 @@ simu_game_imitation <- function(
         else play2[i] <- mean(c(play1[i - 1], play2[i - 1]))
       }
     }
-
-
-
   }
 
   return(data.frame(play1 = play1,
                     play2 = play2,
                     period = 1:n_periods))
 }
-

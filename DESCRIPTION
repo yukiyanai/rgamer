@@ -40,7 +40,8 @@ Imports:
     tibble,
     tidyr,
     tidyselect,
-    tuple
+    tuple,
+    lifecycle
 ByteCompile: TRUE
 VignetteBuilder: knitr
 Collate: 
@@ -59,7 +60,6 @@ Collate:
     'gridsearch_backward.R'
     'gridsearch_br.R'
     'normal_form.R'
-    'plot_simu.R'
     'rgamer.R'
     'seq_form.R'
     'simu_game.R'

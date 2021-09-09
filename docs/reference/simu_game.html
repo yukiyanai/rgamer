@@ -46,7 +46,8 @@
 
 
 <meta property="og:title" content="Plays a normal-form game by simulation — simu_game" />
-<meta property="og:description" content="simu_game() simulates plays expected in a normal-form game." />
+<meta property="og:description" content="simu_game() simulates plays expected in a normal-form
+game." />
 
 
 
@@ -135,7 +136,8 @@
     </div>
 
     <div class="ref-description">
-    <p><code>simu_game()</code> simulates plays expected in a normal-form game.</p>
+    <p><code>simu_game()</code> simulates plays expected in a normal-form
+game.</p>
     </div>
 
     <pre class="usage"><span class='fu'>simu_game</span><span class='op'>(</span>
@@ -156,54 +158,63 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>game</th>
-      <td><p>An object of <code>normal_form</code> class defined by <code><a href='normal_form.html'>normal_form()</a></code>.</p></td>
+      <td><p>An object of <code>normal_form</code> class defined by
+<code><a href='normal_form.html'>normal_form()</a></code>.</p></td>
     </tr>
     <tr>
       <th>n_samples</th>
-      <td><p>A positive integer specifying the number of samples to be simulated.</p></td>
+      <td><p>A positive integer specifying the number of samples to be
+simulated.</p></td>
     </tr>
     <tr>
       <th>n_periods</th>
-      <td><p>A positive integer specifying how many times the game is played within each sample.</p></td>
+      <td><p>A positive integer specifying how many times the game is
+played within each sample.</p></td>
     </tr>
     <tr>
       <th>type</th>
       <td><p>A character string to tell what kind of simulation should be run.
-The available options are <code>"br"</code>, <code>"sbr"</code>, <code>"abr"</code>, and <code>"imitation"</code>.
-With <code>"br"</code>, each player chooses the best response to the opponent's choice in
-the previous period. With <code>"sbr"</code>, each player chooses the softly best response to
-the opponent's choice in the previous periods, With <code>"abr"</code>, each player
-alternately chooses the best response to the other player's previous action.
-With <code>"imitation"</code>, each player imitates the opponent's choice in the previous period.
-Players randomly choose their strategies or the first period in each of these options.</p></td>
+The available options are <code>"br"</code>, <code>"sbr"</code>, <code>"abr"</code>, and
+<code>"imitation"</code>. With <code>"br"</code>, each player chooses the best
+response to the opponent's choice in the previous period. With
+<code>"sbr"</code>, each player chooses the softly best response to the
+opponent's choice in the previous periods, With <code>"abr"</code>, each
+player alternately chooses the best response to the other player's
+previous action. With <code>"imitation"</code>, each player imitates the
+opponent's choice in the previous period. Players randomly choose their
+strategies or the first period in each of these options.</p></td>
     </tr>
     <tr>
       <th>init1</th>
-      <td><p>Player 1's first strategy. If not specified, a strategy is randomly selected
-from the player's strategy set.</p></td>
+      <td><p>Player 1's first strategy. If not specified, a strategy is
+randomly selected from the player's strategy set.</p></td>
     </tr>
     <tr>
       <th>init2</th>
-      <td><p>Player 2's first strategy. If not specified, a strategy is randomly selected
-from the player's strategy set.</p></td>
+      <td><p>Player 2's first strategy. If not specified, a strategy is
+randomly selected from the player's strategy set.</p></td>
     </tr>
     <tr>
       <th>rho</th>
-      <td><p>A numeric value between 0 and 1 to control the degree of inertia in each player's behavior. If <code>rho = 1</code>,
-each player does not change their choices over time. If <code>rho = 0</code>, which is the default value, each player does not stick to their
-previous choice at all.</p></td>
+      <td><p>A numeric value between 0 and 1 to control the degree of inertia
+in each player's behavior. If <code>rho = 1</code>, each player does not change
+their choices over time. If <code>rho = 0</code>, which is the default value,
+each player does not stick to their previous choice at all.</p></td>
     </tr>
     <tr>
       <th>lambda</th>
-      <td><p>A positive value controlling the weight of the best response to the previous move of the opponent.</p></td>
+      <td><p>A positive value controlling the weight of the best response to
+the previous move of the opponent.</p></td>
     </tr>
     <tr>
       <th>cons1</th>
-      <td><p>A named list of parameters contained in <code>game$payoff$p1</code> that should be treated as constants, if any.</p></td>
+      <td><p>A named list of parameters contained in <code>game$payoff$p1</code>
+that should be treated as constants, if any.</p></td>
     </tr>
     <tr>
       <th>cons2</th>
-      <td><p>A named list of parameters contained in <code>game$payoff$p2</code> that should be treated as constants, if any.</p></td>
+      <td><p>A named list of parameters contained in <code>game$payoff$p2</code>
+that should be treated as constants, if any.</p></td>
     </tr>
     </table>
 
@@ -212,7 +223,8 @@ previous choice at all.</p></td>
     <p>A list of plays by player.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Simulate plays expected in a normal-form game defined by <code><a href='normal_form.html'>normal_form()</a></code>.</p>
+    <p>Simulate plays expected in a normal-form game defined by
+<code><a href='normal_form.html'>normal_form()</a></code>.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Yoshio Kamijo and Yuki Yanai <a href='mailto:yanai.yuki@kochi-tech.ac.jp'>yanai.yuki@kochi-tech.ac.jp</a></p>

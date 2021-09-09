@@ -11,9 +11,9 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/rgamer)](https://CRAN.R-project.org/package=rgamer)
 [![Travis build
 status](https://travis-ci.org/yukiyanai/rgamer.svg?branch=master)](https://travis-ci.org/yukiyanai/rgamer)
-[![R-CMD-check](https://github.com/yukiyanai/rgamer/workflows/R-CMD-check/badge.svg)](https://github.com/yukiyanai/rgamer/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/yukiyanai/rgamer/branch/master/graph/badge.svg)](https://codecov.io/gh/yukiyanai/rgamer?branch=master)
+[![R-CMD-check](https://github.com/yukiyanai/rgamer/workflows/R-CMD-check/badge.svg)](https://github.com/yukiyanai/rgamer/actions)
 <!-- badges: end -->
 
 ## Overview
@@ -118,8 +118,8 @@ Then, you can pass it to `solve_nfg()` function to get NEs. Set
 s_game2 <- solve_nfg(game2, mixed = TRUE, show_table = FALSE)
 #> Pure-strategy NE: (Stag, Stag)(Hare, Hare)
 #> Mixed-strategy NE: [(7/9, 2/9), (7/9, 2/9)]
-#> #  The obtained mixed-strategy NE might be only a part of the solutions.
-#> #  Please examine br_plot (best response plot) carefully.
+#> The obtained mixed-strategy NE might be only a part of the solutions.
+#> Please examine br_plot (best response plot) carefully.
 ```
 
 For a 2-by-2 game, you can plot the best response correspondences as
@@ -160,8 +160,8 @@ correspondences by default.
 ``` r
 s_game3 <- solve_nfg(game3)
 #> NE: (28/3, 28/3)
-#> #  The obtained NE might be only a part of the solutions.
-#> #  Please examine br_plot (best response plot) carefully.
+#> The obtained NE might be only a part of the solutions.
+#> Please examine br_plot (best response plot) carefully.
 ```
 
 ![](man/figures/README-unnamed-chunk-13-1.png)<!-- -->
@@ -208,8 +208,8 @@ s_game4 <- solve_nfg(
   plot = FALSE
 )
 #> approximated NE: (9.3, 9.3)
-#> #  The obtained NE might be only a part of the solutions.
-#> #  Please examine br_plot (best response plot) carefully.
+#> The obtained NE might be only a part of the solutions.
+#> Please examine br_plot (best response plot) carefully.
 ```
 
 You can increase the precision of approximation by `precision`, which
@@ -223,8 +223,8 @@ s_game4b <- solve_nfg(
   precision = 3
 )
 #> approximated NE: (9.333, 9.333)
-#> #  The obtained NE might be only a part of the solutions.
-#> #  Please examine br_plot (best response plot) carefully.
+#> The obtained NE might be only a part of the solutions.
+#> Please examine br_plot (best response plot) carefully.
 ```
 
 ![](man/figures/README-unnamed-chunk-16-1.png)<!-- -->

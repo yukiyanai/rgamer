@@ -46,7 +46,8 @@
 
 
 <meta property="og:title" content="Define and solve a extensive-form (or strategic-form) game — extensive_form" />
-<meta property="og:description" content="extensive_form defines an extensive-form game" />
+<meta property="og:description" content="extensive_form defines an extensive-form game and draws
+a game tree." />
 
 
 
@@ -135,7 +136,8 @@
     </div>
 
     <div class="ref-description">
-    <p><code>extensive_form</code> defines an extensive-form game</p>
+    <p><code>extensive_form</code> defines an extensive-form game and draws
+a game tree.</p>
     </div>
 
     <pre class="usage"><span class='fu'>extensive_form</span><span class='op'>(</span>
@@ -156,39 +158,42 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>players</th>
-      <td><p>A list of players. Each element of the list must be a character string
-or a vector of character strings at a specific depth of the tree. Terminal nodes,
-where payoffs are displayed, must be specified as <code>NA</code>.</p></td>
+      <td><p>A list of players. Each element of the list must be a
+character string  or a vector of character strings at a specific depth of
+the tree. Terminal nodes, where payoffs are displayed, must be specified
+as <code>NA</code>.</p></td>
     </tr>
     <tr>
       <th>actions</th>
-      <td><p>A list of actions. Each element of the list must be a vector of character strings
-that corresponds to a specific player node.</p></td>
+      <td><p>A list of actions. Each element of the list must be a vector
+of character strings that corresponds to a specific player node.</p></td>
     </tr>
     <tr>
       <th>payoffs</th>
-      <td><p>A named list of payoffs. Each element of the list must be a numeric vector of
-payoffs for a player. The names of the elements must match the names of the players
-specified  by <code>players</code>.</p></td>
+      <td><p>A named list of payoffs. Each element of the list must be a
+numeric vector of payoffs for a player. The names of the elements must
+match the names of the players specified  by <code>players</code>.</p></td>
     </tr>
     <tr>
       <th>quietly</th>
-      <td><p>A logical value. If <code>TRUE</code>, the subgame perfect equilibrium will not be displayed
-on screen. Default is <code>FALSE</code>.</p></td>
+      <td><p>A logical value. If <code>TRUE</code>, the subgame perfect
+equilibrium will not be displayed on screen. Default is <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>show_tree</th>
-      <td><p>A logical value. If <code>TRUE</code>, the game tree will be displayed. Default is <code>TRUE</code></p></td>
+      <td><p>A logical value. If <code>TRUE</code>, the game tree will be
+displayed. Default is <code>TRUE</code>.</p></td>
     </tr>
     <tr>
       <th>mark_path</th>
-      <td><p>A logical value. If <code>TRUE</code>, The paths played in the equilibrium will be
-marked (with color and bold lines). Default is <code>FALSE</code>.</p></td>
+      <td><p>A logical value. If <code>TRUE</code>, The paths played in the
+equilibrium will be marked (with color and bold lines). Default is
+<code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>show_node_id</th>
-      <td><p>A logical value. If <code>TRUE</code>, the node numbers are displayed in the
-figure. Default is <code>TRUE</code></p></td>
+      <td><p>A logical value. If <code>TRUE</code>, the node numbers are
+displayed in the figure. Default is <code>TRUE</code>.</p></td>
     </tr>
     <tr>
       <th>direction</th>
@@ -214,10 +219,12 @@ Default is <code>"down"</code>.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of "extensive_form" class, which defines an extensive-form (or sequential) game.</p>
+    <p>An object of "extensive_form" class, which defines an extensive-form
+(or sequential) game.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function defines an extensive-form game and draws the game tree.</p>
+    <p>This function defines an extensive-form game and draws the game
+tree.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Yoshio Kamijo and Yuki Yanai <a href='mailto:yanai.yuki@kochi-tech.ac.jp'>yanai.yuki@kochi-tech.ac.jp</a></p>

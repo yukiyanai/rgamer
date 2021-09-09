@@ -96,6 +96,7 @@ test_that("solve_nfg_char finds NEs of 'char_function'-type games", {
   expect_type(solve_nfg_char(char_game), "list")
   expect_length(solve_nfg_char(char_game), 3)
   expect_message(solve_nfg_char(char_game))
+  expect_message(solve_nfg_char(char_game, mark_NE = TRUE))
   expect_message(solve_nfg_char(char_game2))
   expect_error(solve_nfg_char(PD))
   expect_error(solve_nfg_char(fcn_game))

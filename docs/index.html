@@ -169,8 +169,8 @@ install.packages("rgamer")
 <code class="sourceCode R"><span class="va">s_game2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_nfg.html">solve_nfg</a></span><span class="op">(</span><span class="va">game2</span>, mixed <span class="op">=</span> <span class="cn">TRUE</span>, show_table <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; Pure-strategy NE: (Stag, Stag)(Hare, Hare)</span>
 <span class="co">#&gt; Mixed-strategy NE: [(7/9, 2/9), (7/9, 2/9)]</span>
-<span class="co">#&gt; #  The obtained mixed-strategy NE might be only a part of the solutions.</span>
-<span class="co">#&gt; #  Please examine br_plot (best response plot) carefully.</span></code></pre></div>
+<span class="co">#&gt; The obtained mixed-strategy NE might be only a part of the solutions.</span>
+<span class="co">#&gt; Please examine br_plot (best response plot) carefully.</span></code></pre></div>
 <p>For a 2-by-2 game, you can plot the best response correspondences as well.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s_game2</span><span class="op">$</span><span class="va">br_plot</span></code></pre></div>
@@ -198,8 +198,8 @@ install.packages("rgamer")
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s_game3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_nfg.html">solve_nfg</a></span><span class="op">(</span><span class="va">game3</span><span class="op">)</span>
 <span class="co">#&gt; NE: (28/3, 28/3)</span>
-<span class="co">#&gt; #  The obtained NE might be only a part of the solutions.</span>
-<span class="co">#&gt; #  Please examine br_plot (best response plot) carefully.</span></code></pre></div>
+<span class="co">#&gt; The obtained NE might be only a part of the solutions.</span>
+<span class="co">#&gt; Please examine br_plot (best response plot) carefully.</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-13-1.png"><!-- --></p>
 </div>
 <div id="example-4" class="section level3">
@@ -235,8 +235,8 @@ install.packages("rgamer")
   plot <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span>
 <span class="co">#&gt; approximated NE: (9.3, 9.3)</span>
-<span class="co">#&gt; #  The obtained NE might be only a part of the solutions.</span>
-<span class="co">#&gt; #  Please examine br_plot (best response plot) carefully.</span></code></pre></div>
+<span class="co">#&gt; The obtained NE might be only a part of the solutions.</span>
+<span class="co">#&gt; Please examine br_plot (best response plot) carefully.</span></code></pre></div>
 <p>You can increase the precision of approximation by <code>precision</code>, which takes a natural number (default is <code>precision = 1</code>).</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s_game4b</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_nfg.html">solve_nfg</a></span><span class="op">(</span>
@@ -246,8 +246,8 @@ install.packages("rgamer")
   precision <span class="op">=</span> <span class="fl">3</span>
 <span class="op">)</span>
 <span class="co">#&gt; approximated NE: (9.333, 9.333)</span>
-<span class="co">#&gt; #  The obtained NE might be only a part of the solutions.</span>
-<span class="co">#&gt; #  Please examine br_plot (best response plot) carefully.</span></code></pre></div>
+<span class="co">#&gt; The obtained NE might be only a part of the solutions.</span>
+<span class="co">#&gt; Please examine br_plot (best response plot) carefully.</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-16-1.png"><!-- --></p>
 <p>You can extract the best response plot with NE marked as follows.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
