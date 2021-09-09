@@ -106,7 +106,7 @@ simu_game_sbr <- function(game,
         }
         br <- try(stats::uniroot(fd1, interval = s1)$root,
                         silent = TRUE)
-        if (class(br) == "character") {
+        if (class(br) == "try-error") {
           play1[i] <- play1[i - 1]
         } else {
 
@@ -149,7 +149,7 @@ simu_game_sbr <- function(game,
         }
         br <- try(stats::uniroot(fd2, interval = s2)$root,
                         silent = TRUE)
-        if (class(br) == "character") {
+        if (class(br) == "try-error") {
           play2[i] <- play2[i - 1]
         } else {
 
@@ -290,7 +290,6 @@ simu_game_sbr <- function(game,
         play2 <- as.numeric(play2)
       }
     }
-
   }
 
   return(data.frame(play1 = play1,
