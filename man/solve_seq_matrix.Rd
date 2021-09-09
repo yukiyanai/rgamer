@@ -2,8 +2,7 @@
 % Please edit documentation in R/solve_seq_matrix.R
 \name{solve_seq_matrix}
 \alias{solve_seq_matrix}
-\title{Find subgame perfect equilibria of a sequential-form game
-with discrete-choice strategies}
+\title{Find subgame perfect equilibria of a sequential-form game.}
 \usage{
 solve_seq_matrix(
   game,
@@ -16,17 +15,18 @@ solve_seq_matrix(
 \arguments{
 \item{game}{A "sequential_form" class object created by \code{seq_form()}.}
 
-\item{show_table}{A logical value. If \code{TRUE}, the table of the game will be displayed. Default is \code{TRUE}.}
+\item{show_table}{A logical value. If \code{TRUE}, the table of the game will
+be displayed. Default is \code{TRUE}.}
 
-\item{mark_br}{A logical value. If \code{TRUE}, the follower's best response to
-each of the leader's strategy is marked.
-Default is \code{FALSE}.}
+\item{mark_br}{A logical value. If \code{TRUE}, the follower's best response
+to each of the leader's strategy is marked. Default is \code{FALSE}.}
 
-\item{cell_width}{A number specifying the cell width of the game matrix. The unit is pixel.
-The default value is 80.}
+\item{cell_width}{A number specifying the cell width of the game matrix. The
+unit is pixel.}
 
-\item{quietly}{A logical value that determines whether the equilibrium will be kept in the returned list
-without being printed on screen. Default is \code{FALSE}.}
+\item{quietly}{A logical value that determines whether the equilibrium will
+be kept in the returned list without being printed on screen. Default is
+\code{FALSE}.}
 }
 \value{
 A list containing subgame perfect equilibrium (SPE) outcome and
@@ -34,7 +34,7 @@ the gt table of the game.
 }
 \description{
 \code{solve_seq_matrix()} finds subgame perfect equilibria of
-a sequential-form (an extensive-form) game.
+a sequential-form (an extensive-form) game with discrete-choice strategies.
 }
 \seealso{
 \code{\link{seq_form}}

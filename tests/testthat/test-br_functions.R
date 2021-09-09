@@ -4,9 +4,16 @@ context("Find best responses")
 f_x <- function(x, y) {
   -x^2 + (28 - y) * x
 }
-f_y <- function(x, y, s, t) {
+f_y <- function(x, y) {
   -y^2 + (28 - x) * y
 }
+f_x2 <- function(x, y, a, s) {
+  -x^s + (a - y) * x
+}
+f_y2 <- function(x, y, a, s) {
+  -y^s + (a - x) * y
+}
+
 
 PD <- normal_form(
   players = c("Kamijo", "Yanai"),
@@ -21,6 +28,12 @@ matrix_game <- normal_form(
   s2 = c("Stag", "Hare"),
   p1 = c(10, 8, 0, 7),
   p2 = c(10, 0, 8, 7))
+
+nogame <- normal_form(
+  s1 = c("A", "B"),
+  s2 = c("A", "B"),
+  p1 = rep(1, 4),
+  p2 = rep(2, 4))
 
 char_game <- normal_form(
   players = c("A", "B"),
@@ -60,11 +73,38 @@ test_that("as_df_br returns a list of two data frames", {
                         pars = c("x", "y"),
                         par1_lim = c(0, 30),
                         par2_lim = c(0, 30)), 2)
+ expect_type(as_df_br(players = c("A", "B"),
+                      p1 = f_x2,
+                      p2 = f_y2,
+                      pars = c("x", "y"),
+                      cons_common = list(a = 28, s = 2),
+                      par1_lim = c(0, 30),
+                      par2_lim = c(0, 30)),
+             "list")
+ expect_type(as_df_br(players = c("A", "B"),
+                      p1 = f_x2,
+                      p2 = f_y,
+                      pars = c("x", "y"),
+                      cons1 = list(a = 28, s = 2),
+                      par1_lim = c(0, 30),
+                      par2_lim = c(0, 30)),
+             "list")
+ expect_type(as_df_br(players = c("A", "B"),
+                      p1 = f_x,
+                      p2 = f_y2,
+                      pars = c("x", "y"),
+                      cons2 = list(a = 28, s = 2),
+                      par1_lim = c(0, 30),
+                      par2_lim = c(0, 30)),
+             "list")
+
 })
 
 test_that("br_plot draws best response correpondence given a matrix", {
   expect_s3_class(br_plot(matrix_game),
                   "ggplot")
+  expect_null(br_plot(nogame))
+  expect_warning(br_plot(nogame))
   expect_error(br_plot(char_game))
   expect_error(br_plot(fcn_game))
 })

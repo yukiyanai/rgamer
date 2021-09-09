@@ -2,7 +2,7 @@
 % Please edit documentation in R/solve_nfg_matrix.R
 \name{solve_nfg_matrix}
 \alias{solve_nfg_matrix}
-\title{Find Nash equilibria of a normal-form game with discrete-choice strategies}
+\title{Find Nash equilibria of a normal-form game.}
 \usage{
 solve_nfg_matrix(
   game,
@@ -17,27 +17,32 @@ solve_nfg_matrix(
 \arguments{
 \item{game}{A "normal_form" class object created by \code{normal_form()}.}
 
-\item{mixed}{A logical value. If \code{TRUE}, mixed-strategy NE will be calculated. Default is \code{FALSE}.}
+\item{mixed}{A logical value. If \code{TRUE}, mixed-strategy NE will be
+searched. Default is \code{FALSE}.}
 
-\item{show_table}{A logical value. If \code{TRUE}, the table of the game will be displayed. Default is \code{TRUE}.}
+\item{show_table}{A logical value. If \code{TRUE}, the payoff matrix  of the
+game will be displayed. Default is \code{TRUE}.}
 
-\item{cell_width}{A number specifying the cell width of the game matrix. The unit is pixel.
-The default value is 80.}
+\item{cell_width}{A number specifying the cell width of the payoff matrix.
+The unit is pixel.}
 
-\item{mark_br}{A logical value. If \code{TRUE}, the best response to each of the opponent's strategy is marked.
-Default is \code{TRUE}.}
+\item{mark_br}{A logical value. If \code{TRUE}, the best response to each of
+the opponent's strategy is marked. Default is \code{TRUE}.}
 
-\item{quietly}{A logical value that determines whether the equilibrium will be kept in the returned list
-without being printed on screen. Default is \code{FALSE}}
+\item{quietly}{A logical value that determines whether the equilibrium will
+be kept in the returned list without being printed on screen. Default is
+\code{FALSE}.}
 
 \item{color_palette}{A color palette to be used. Default is \code{"Set1"}.}
 }
 \value{
-A list containing pure strategy Nash equilibrium (NE), mixed strategy NE, the gt table of the game,
-and the plot of best response correspondences. Each element will be NULL if not available.
+A list containing pure strategy Nash equilibrium (NE), mixed strategy
+NE, the gt table of the game, and the plot of best response
+correspondences. Each element will be \code{NULL} if not available.
 }
 \description{
-\code{solve_nfg_matrix()} finds Nash equilibria of a normal-form (strategic-form) game.
+\code{solve_nfg_matrix()} finds Nash equilibria of a normal-form
+(strategic-form) game with discrete-choice strategies.
 }
 \seealso{
 \code{\link{normal_form}}

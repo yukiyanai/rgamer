@@ -1,9 +1,12 @@
 #' @title Find equilibria of a normal-form game
-#' @description \code{solve_nfg()} finds Nash equilibria of a normal-form game. This is a wrapper
-#'     function of \code{\link{solve_nfg_matrix}}, \code{\link{solve_nfg_char}}, and
-#'     \code{\link{solve_nfg_fcn}}.
-#' @return A list containing Nash equilibria (if any), the game table (if available),
-#'     and the plot of best response correspondence (if available).
+#' @description \code{solve_nfg()} finds Nash equilibria of a normal-form game.
+#' @details This function finds Nash equilibria of a normal-form game by
+#'     \code{\link{solve_nfg_matrix}}, \code{\link{solve_nfg_char}}, or
+#'     \code{\link{solve_nfg_fcn}} depending on \code{type} of a normal_form
+#'     object defined by \code{normal_form}.
+#' @return A list containing Nash equilibria (if any), the payoff matrix of the
+#'     game  (if available), and the plot of best response correspondence
+#'     (if available).
 #' @inheritParams solve_nfg_matrix
 #' @inheritParams solve_nfg_char
 #' @inheritParams solve_nfg_fcn
@@ -67,7 +70,7 @@ solve_nfg <- function(game,
                    quietly = quietly,
                    color_palette = color_palette)
 
-  } else {
+  } else if (game$type == "function") {
     solve_nfg_fcn(game = game,
                   cons1 = cons1,
                   cons2 = cons2,
@@ -77,5 +80,7 @@ solve_nfg <- function(game,
                   mark_NE = mark_NE,
                   quietly = quietly,
                   color_palette = color_palette)
+  } else {
+    stop("This game has not been defined properly.")
   }
 }

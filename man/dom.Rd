@@ -10,7 +10,7 @@ dom(game, type = "dominated")
 \item{game}{A normal-form game object created by \code{normal_form()}.
 The game's type must be "matrix".}
 
-\item{type}{Specify which to be found, "dominated" or "dominant."
+\item{type}{Specify which to be found, "dominated" or "dominant".
 Default is "dominated."}
 }
 \description{

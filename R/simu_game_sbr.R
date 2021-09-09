@@ -1,4 +1,4 @@
-#' @title Plays a normal-form game by simulation (softly best response)
+#' @title Play a normal-form game by simulation (softly best response)
 #' @description \code{simu_game()} simulates plays expected in a normal-form game.
 #' @details Simulate plays expected in a normal-form game defined by \code{normal_form()} when
 #'   each player choose the action that is more likely to improve their payoff given the other

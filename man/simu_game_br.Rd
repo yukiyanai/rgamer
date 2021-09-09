@@ -2,7 +2,7 @@
 % Please edit documentation in R/simu_game_br.R
 \name{simu_game_br}
 \alias{simu_game_br}
-\title{Plays a normal-form game by simulation (best response)}
+\title{Play a normal-form game by simulation (best response)}
 \usage{
 simu_game_br(
   game,

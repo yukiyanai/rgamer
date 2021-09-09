@@ -1,47 +1,59 @@
 #' @title Define a normal-form (or strategic-form) game
 #' @description \code{normal_form()} defines a normal-form game and
 #'     creates an object of "normal_form" class.
-#' @details Create an object of 'normal_form' class, which can be passed to functions
-#'     in order to find solutions of the game.
+#' @details Creates an object of 'normal_form' class, which can be passed to
+#'     functions in order to find solutions of the game.
 #' @param players A character vector of the name (label) for the players.
-#' @param s1 A character vector of pure strategies for Player 1 (row player). Required only when
-#'     the player has discrete-choice strategies.
-#' @param s2 A character vector of pure strategies for Player 2 (column player). Required only when
-#'     the player has discrete-choice strategies.
-#' @param p1 The payoff of Player1. This argument can be specified in three different ways.
-#'     First, it can be a numeric vector of payoffs. Second, it can be a character string of the payoff
-#'     function (e.g., p1 = "x^2 - y"). Third, it can be an R function of payoff.
-#' @param p2 The payoff of Player 2. See the explanation of \code{p1} for detail.
-#' @param discretize A logical value. Set this \code{TRUE} to evaluate payoff functions
-#'      at some discrete values of strategies \code{s1} and \code{s2}. Default is \code{FALSE}.
-#' @param discrete_points A numeric vector of length 2 to set how many discrete points should be
-#'      used to discretize the game defined by payoff functions. Default is \code{c(6, 6)}, which
-#'      shows equally spaced 6 values from the range of the strategy
-#'      \code{par1_lim} and \code{par2_lim}. Instead of setting this parameter, you can specify
-#'      arbitrary points to use by setting \code{s1} and \code{s2}.
-#' @param symmetric A logical value. Set this \code{TRUE} when the payoffs for two players are
-#'     symmetric as in the prisoners' dilemma. Then, p1 is recycled for p2. Default is \code{FALSE}
-#' @param byrow A logical value. If \code{TRUE}, payoffs will be lined up by row. Default is \code{FALSE}.
-#'     Only used when both \code{s1} and \code{s2} are provided.
-#' @param pars A character vector of parameters that are selected by players 1 and 2, respectively.
-#'     Only used when \code{p1} and \code{p2} are specified as a function
-#'     (either as a character string or as an R function).
-#' @param par1_lim A numeric vector of length 2, which defines the range of parameters
-#'     from which Player 1 chooses her strategy.
-#' @param par2_lim A numeric vector of length 2, which defines the range of parameters
-#'     from which Player 2 chooses his strategy.
-#' @param cons1 A named list of parameters contained in \code{p1} that should be treated as constants, if any.
-#' @param cons2 A named list of parameters contained in \code{p2} that should be treated as constants, if any.
-#' @param cons_common A named list of parameters contained in \code{p1} and \code{p2} that should be treated
-#'     as constants, if any. If \code{cons1} and \code{cons2} are exactly same, you can specify \code{cons_common}
-#'      instead of both \code{cons1} and \code{cons2}.
-#' @return An object of "normal_form" class, which defines a normal-form (or strategic-form) game.
+#' @param s1 A character vector of pure strategies for Player 1 (row player).
+#'     Required only when the player has discrete-choice strategies.
+#' @param s2 A character vector of pure strategies for Player 2 (column player).
+#'      Required only when the player has discrete-choice strategies.
+#' @param p1 The payoff of Player1. This argument can be specified in three
+#'     different ways. First, it can be a numeric vector of payoffs. Second, it
+#'     can be a character string of the payoff function (e.g., p1 = "x^2 - y").
+#'     Third, it can be an R function of payoff.
+#' @param p2 The payoff of Player 2. See the explanation of \code{p1}
+#'     for detail.
+#' @param discretize A logical value. Set this \code{TRUE} to evaluate payoff
+#'     functions at some discrete values of strategies \code{s1} and \code{s2}.
+#'     Default is \code{FALSE}.
+#' @param discrete_points A numeric vector of length 2 to set how many discrete
+#'     points should be used to discretize the game defined by payoff functions.
+#'      Default is \code{c(6, 6)}, which shows equally spaced 6 values from the
+#'      range of the strategies \code{par1_lim} and \code{par2_lim}. Instead of
+#'      setting this parameter, you can specify the vectors of arbitrary
+#'      strategies by setting \code{s1} and \code{s2}.
+#' @param symmetric A logical value. Set this \code{TRUE} when the payoffs for
+#'     two players are symmetric as in the prisoners' dilemma. Then, p1 is
+#'     recycled for p2. Default is \code{FALSE}.
+#' @param byrow A logical value. If \code{TRUE}, payoffs will be lined up by
+#'     row. Default is \code{FALSE}. Only used when both \code{s1} and \code{s2}
+#'      are provided.
+#' @param pars A character vector of parameters that are selected by players 1
+#'     and 2, respectively. Only used when \code{p1} and \code{p2} are specified
+#'      by payoff functions (either as character strings or R functions).
+#' @param par1_lim A numeric vector of length 2, which defines the range of
+#'     parameters from which Player 1 chooses her strategy.
+#' @param par2_lim A numeric vector of length 2, which defines the range of
+#'     parameters from which Player 2 chooses his strategy.
+#' @param cons1 A named list of parameters contained in \code{p1} that should be
+#'      treated as constants, if any.
+#' @param cons2 A named list of parameters contained in \code{p2} that should be
+#'      treated as constants, if any.
+#' @param cons_common A named list of parameters contained in \code{p1} and
+#'     \code{p2} that should be treated as constants, if any. If \code{cons1}
+#'     and \code{cons2} are exactly same, you can specify \code{cons_common}
+#'     instead of both \code{cons1} and \code{cons2}.
+#' @return An object of "normal_form" class, which defines a normal-form (or
+#'     strategic-form) game.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
 #' @examples
 #' game1 <- normal_form(
-#'   s1 = c("T", "B"), s2 = c("L", "R"),
-#'   p1 = c(4, 2, 3, 1), p2 = c(4, 3, 2, 1),
+#'   s1 = c("T", "B"),
+#'   s2 = c("L", "R"),
+#'   p1 = c(4, 2, 3, 1),
+#'   p2 = c(4, 3, 2, 1),
 #'   players = c("Row Player", "Column Player"))
 #'
 #' game2 <- normal_form(
@@ -88,7 +100,7 @@ normal_form <- function(
   cons2 = NULL,
   cons_common = NULL) {
 
-  stop_message <- "For a game with discrete strategies, please specify  both s1 and s2.\nFor a game with continuous strategies, please specify all of p1, p2, pars, par1_lim, and par2_lim. When dicretize = TRUE, par1_lim and par2_lim are not necessary."
+  stop_message <- "For a game with discrete strategies, please specify both s1 and s2.\nFor a game with continuous strategies, please specify all of p1, p2, pars, par1_lim, and par2_lim. When dicretize = TRUE, par1_lim and par2_lim are not necessary."
 
   if (is.null(players)) players <- c("Player 1", "Player 2")
 

@@ -1,11 +1,13 @@
-#' @title Find best responses to the opponent's actions
+#' @title Find best responses to the opponent's actions.
 #' @description \code{find_best_response()} finds the best responses to each of
-#'   the opponent's strategy.
-#' @return A data frame containing the pair of the best responses of two players.
+#'     the opponent's strategy in a normal-form game with discrete-choice
+#'     strategies.
+#' @return A data frame containing the pair of the best responses of two
+#'     players.
 #' @param game A "normal_form" class object created by \code{normal_form()} or
-#'   a "sequential_form" class object created by \code{seq_form()}.
-#'   The game's type must be "matrix".
-#' @seealso \code{\link{normal_form}} and \code{\link{seq_form}}
+#'   a "sequential_form" class object created by \code{seq_form()}. The game's
+#'   type must be "matrix".
+#' @seealso \code{\link{normal_form}} and \code{\link{seq_form}}.
 #' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
@@ -21,7 +23,7 @@ find_best_response <- function(game) {
 
   if (class(game) == "normal_form") {
 
-    ## find the best responses of Player 1 (row player) against Player 2 (column player)
+    ## find the best responses of P1 (row player) v. P2 (column player)
     df_1 <- data.frame(NULL)
     for (j in seq_along(s2)) {
       df_1 <- df %>%
@@ -38,7 +40,7 @@ find_best_response <- function(game) {
       dplyr::mutate(player = players[1],
                     pid = 1)
 
-    ## find the best responses of Player 2 (column player) against Player 1 (row player)
+    ## find the best responses of P2 (column player) v. P1 (row player)
     df_2 <- data.frame(NULL)
     for (i in seq_along(s1)) {
       df_2 <- df %>%

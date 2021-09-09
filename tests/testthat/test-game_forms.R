@@ -1,8 +1,39 @@
 context("Game Definitions")
 
+func_price1 <- function(p, q) {
+  if (p < q) {
+    profit <- p
+  } else if (p == q) {
+    profit <- 0.5 * p
+  } else {
+    profit <- 0
+  }
+  profit
+}
+
+func_price2 <- function(p, q){
+  if (p > q) {
+    profit <- q
+  } else if (p == q) {
+    profit <- 0.5 * q
+  } else {
+    profit <- 0
+  }
+  profit
+}
+
 test_that("normal_form constructs a normal_form class", {
-  expect_s3_class(normal_form(s1 = c("T", "B"), s2 = c("L", "R"),
-                              p1 = c(4, 2, 3, 1), p2 = c(4, 3, 2, 1),
+  expect_s3_class(normal_form(s1 = c("T", "B"),
+                              s2 = c("L", "R"),
+                              p1 = c(4, 2, 3, 1),
+                              p2 = c(4, 3, 2, 1),
+                              players = c("Kamijo", "Yanai")),
+                  "normal_form")
+  expect_s3_class(normal_form(s1 = c("T", "B"),
+                              s2 = c("L", "R"),
+                              p1 = c(4, 3, 2, 1),
+                              byrow = TRUE,
+                              symmetric = TRUE,
                               players = c("Kamijo", "Yanai")),
                   "normal_form")
   expect_s3_class(normal_form(players = c("A", "B"),
@@ -19,14 +50,37 @@ test_that("normal_form constructs a normal_form class", {
                               par1_lim = c(0, 30),
                               par2_lim = c(0, 30)),
                   "normal_form")
-  expect_error(normal_form(s1 = c("T", "B"), s2 = c("L", "R"),
-                           p1 = c(4, 2, 3), p2 = c(4, 3, 2),
+  expect_s3_class(normal_form(p1 = func_price1,
+                              p2 = func_price2,
+                              pars = c("p", "q"),
+                              par1_lim = c(0, 10),
+                              par2_lim = c(0, 10),
+                              discretize = TRUE),
+                  "normal_form")
+  expect_error(normal_form(s1 = c("T", "B"),
+                           s2 = c("L", "R"),
+                           p1 = c(4, 2, 3),
+                           p2 = c(4, 3, 2),
                            players = c("Kamijo", "Yanai")))
+  expect_error(normal_form(p1 = func_price1,
+                           p2 = "-y^2 + (28 - x) * y",
+                           pars = c('x', 'y'),
+                           par1_lim = c(0, 30),
+                           par2_lim = c(0, 30)))
 })
 
 test_that("seq_form constructs a sequential_form class", {
-  expect_s3_class(seq_form(s1 = c("T", "B"), s2 = c("L", "R"),
-                           p1 = c(4, 2, 3, 1), p2 = c(4, 3, 2, 1),
+  expect_s3_class(seq_form(s1 = c("T", "B"),
+                           s2 = c("L", "R"),
+                           p1 = c(4, 2, 3, 1),
+                           p2 = c(4, 3, 2, 1),
+                           players = c("Kamijo", "Yanai")),
+                  "sequential_form")
+  expect_s3_class(seq_form(s1 = c("T", "B"),
+                           s2 = c("L", "R"),
+                           p1 = c(4, 2, 2, 1),
+                           symmetric = TRUE,
+                           byrow = TRUE,
                            players = c("Kamijo", "Yanai")),
                   "sequential_form")
   expect_s3_class(seq_form(players = c("A", "B"),
@@ -42,6 +96,13 @@ test_that("seq_form constructs a sequential_form class", {
                            pars = c("x", "y"),
                            par1_lim = c(0, 30),
                            par2_lim = c(0, 30)),
+                  "sequential_form")
+  expect_s3_class(seq_form(p1 = func_price1,
+                           p2 = func_price2,
+                           pars = c("p", "q"),
+                           par1_lim = c(0, 10),
+                           par2_lim = c(0, 10),
+                           discretize = TRUE),
                   "sequential_form")
   expect_error(seq_form(s1 = c("T", "B"), s2 = c("L", "R"),
                         p1 = c(4, 2, 3), p2 = c(4, 3, 2),
@@ -132,6 +193,7 @@ seq_game <- seq_form(
 test_that("game_table makes a payoff matrix of normal-form games", {
   expect_s3_class(game_table(PD), "gt_tbl")
   expect_s3_class(game_table(SH), "gt_tbl")
+  expect_warning(game_table(PD, cell_width = 250))
   expect_error(game_table(char_game))
   expect_s3_class(game_table(seq_game), "gt_tbl")
 })

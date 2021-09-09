@@ -66,5 +66,4 @@ gridsearch_backward <- function(f1, f2, x_vec, y_vec, pars = NULL) {
 
   best_p2[which.max(best_p2$p1),] %>%
     dplyr::select(x, y, p1, p2)
-
 }

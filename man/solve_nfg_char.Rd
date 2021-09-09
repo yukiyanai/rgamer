@@ -2,8 +2,7 @@
 % Please edit documentation in R/solve_nfg_char.R
 \name{solve_nfg_char}
 \alias{solve_nfg_char}
-\title{Find Nash equilibria of a normal-form game with  payoffs defined
-by character strings}
+\title{Find Nash equilibria of a normal-form game.}
 \usage{
 solve_nfg_char(
   game,
@@ -18,28 +17,30 @@ solve_nfg_char(
 \item{game}{A "normal_form" class object created by \code{normal_form()}.}
 
 \item{delta}{A numerical value specifying the grid size to draw the figure of
-best response correspondences.  The default value is 0.1. The smaller the
-value is, the smoother the correspondence curves are.}
+best response correspondences. The default value is \code{0.1}. The
+smaller the value is, the smoother the correspondence curves are.}
 
-\item{plot}{A logical value to determine whether the figure of the best response
-correspondences will be displayed. Default is \code{TRUE}.}
+\item{plot}{A logical value to determine whether the figure of the best
+response correspondences will be displayed. Default is \code{TRUE}.}
 
-\item{mark_NE}{A logical value to control if the NE (if any) will be marked in
-the best response plot, which will be displayed (only displayed when
+\item{mark_NE}{A logical value to control if the NE (if any) will be marked
+in the best response plot, which will be displayed (only displayed when
 \code{plot = TRUE}). Default is \code{FALSE}.}
 
 \item{quietly}{A logical value to determine if the equilibrium will be kept
-in the returned list without being printed on screen. Default is \code{FALSE}.}
+in the returned list without being printed on screen. Default is
+\code{FALSE}.}
 
 \item{color_palette}{A color palette to be used. Default is \code{"Set1"}.}
 }
 \value{
-A list containing the pair of the best response correspondence (NE)
+A list containing the pair of the best responses of two players (NE)
 and the plot of best response correspondences.
 }
 \description{
-\code{solve_nfg_char()} finds the pair of the best responses when payoff
-functions are provided as character strings.
+\code{solve_nfg_char()} finds the pair of the best responses
+of a normal-form game defined with payoff functions as character
+strings by \code{normal_form()}.
 }
 \seealso{
 \code{\link{normal_form}}

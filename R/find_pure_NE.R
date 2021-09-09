@@ -1,5 +1,6 @@
-#' @title Find pure-strategy Nash equilibria
-#' @description \code{find_pure_NE()} finds pure-strategy Nash equilibria.
+#' @title Find pure-strategy Nash equilibria of a normal-form game.
+#' @description \code{find_pure_NE()} finds pure-strategy Nash equilibria of a
+#'     normal-form game with discrete-choice strategies.
 #' @return A character string showing the pure-strategy Nash equilibria.
 #' @param game A "normal_form" class object created by \code{normal_form()}.
 #'     The game's type must be "matrix".

@@ -1,13 +1,17 @@
-#' @title Plot of best response correspondences
-#' @description \code{br_plot()} creates a plot of the best response correspondences for a 2-by-2 game.
+#' @title Visualize best response correspondences
+#' @description \code{br_plot()} creates a plot of the best response
+#'     correspondences for a 2-by-2 game.
 #' @return A ggplot figure of the best response correspondences.
 #' @param game A "normal_form" class object created by \code{normal_form()}.
+#' @param msNE Mixed-strategy NE calculated by \code{find_mixed_NE()}.
 #' @param color_palette A color palette to be used. Default is \code{"Set1"}.
 #' @seealso \code{\link{normal_form}}, \code{\link[ggplot2]{ggplot}}
 #' @import ggplot2
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
-br_plot <- function(game, color_palette = "Set1") {
+br_plot <- function(game,
+                    msNE = NULL,
+                    color_palette = "Set1") {
 
   xs <- ys <- xe <- ye <- player <- element_text <- NULL
 
@@ -15,31 +19,34 @@ br_plot <- function(game, color_palette = "Set1") {
   s2 <- game$strategy[[2]]
   p1 <- game$payoff[[1]]
   p2 <- game$payoff[[2]]
-  if (length(s1) != 2 | length(s2) != 2) stop("This function works only for a 2-by-2 game.")
+  if (length(s1) != 2 | length(s2) != 2) {
+    stop("This function works only for a 2-by-2 game.")
+  }
 
   players <- game$player
   mat1 <- game$mat$matrix1
   mat2 <- game$mat$matrix2
-  msNE <- find_mixed_NE(game)
+
+  if (is.null(msNE)) msNE <- find_mixed_NE(game)
 
   if (is.null(msNE)) {
     ## BR of A v B
     if (p1[1] == p1[2] & p1[3] == p1[4]) {
       p <- "ANY"
-      cat(paste0("Any p is ", players[1], "'s best response regardless of ", players[2], "'s action.\n"))
+      warning(paste0("Any p is ", players[1], "'s best response regardless of ", players[2], "'s action.\n"))
     } else {
       p <- ifelse(p1[3] > p1[4], 1, 0)
     }
 
     ## BR of B v A
-    if (p2[1] == p2[3] & p2[2] == p1[4]) {
+    if (p2[1] == p2[3] & p2[2] == p2[4]) {
       q <- "ANY"
-      cat(paste0("Any q is ", players[2], "'s best response regardless of ", players[1], "'s action.\n"))
+      warning(paste0("Any q is ", players[2], "'s best response regardless of ", players[1], "'s action.\n"))
     } else {
       q <- ifelse(p2[2] > p2[4], 1, 0)
     }
     if (p == "ANY" | q == "ANY") {
-      cat("The best response correspondence is not uniquely determined; no plot has been created.\n")
+      warning("The best response correspondence is not uniquely determined; no plot has been created.\n")
       return(NULL)
     }
     df <- data.frame(
@@ -111,19 +118,22 @@ br_plot <- function(game, color_palette = "Set1") {
       xe = c(coord_p1_e, coord_p2_e),
       ys = c(coord_q1_s, coord_q2_s),
       ye = c(coord_q1_e, coord_q2_e))
+
     brp <- ggplot2::ggplot(df) +
       ggplot2::geom_vline(xintercept = c(0, 1), color = "gray") +
       ggplot2::geom_hline(yintercept = c(0, 1), color = "gray") +
-      ggplot2::geom_segment(ggplot2::aes(x = xs, y = ys,
-                                         xend = xe, yend = ye,
+      ggplot2::geom_segment(ggplot2::aes(x = xs,
+                                         y = ys,
+                                         xend = xe,
+                                         yend = ye,
                                          color = player,
                                          alpha = player,
                                          size  = player),
                             lineend = "round",
                             linejoin = "mitre") +
-      ggplot2::labs(x = "p", y = "q", title = "best response correspondence") +
+      ggplot2::labs(x = "p", y = "q", title = "") +
       ggplot2::coord_fixed() +
-      ggplot2::theme(axis.title.y = element_text(angle = 0, vjust = 0.5)) +
+      ggplot2::theme(axis.title.y = ggplot2::element_text(angle = 0, vjust = 0.5)) +
       ggplot2::scale_color_brewer(palette = color_palette,
                                   breaks = players,
                                   labels = players) +
@@ -138,5 +148,6 @@ br_plot <- function(game, color_palette = "Set1") {
       ggplot2::scale_y_continuous(breaks = c(0, q_cut, 1),
                                   labels = c("0", as.character(MASS::fractions(q_cut)), "1"))
   }
+
   return(brp)
 }

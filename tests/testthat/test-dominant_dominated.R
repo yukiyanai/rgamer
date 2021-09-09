@@ -1,6 +1,5 @@
 context("Dominant and dominated strategies")
 
-
 PD <- normal_form(
   players = c("Kamijo", "Yanai"),
   s1 = c("Stays silent", "Betrays"),
@@ -15,6 +14,13 @@ SH <- normal_form(
   p1 = c(10, 8, 0, 7),
   p2 = c(10, 0, 8, 7))
 
+matrix_game <- normal_form(
+  s1 = c("A", "B"),
+  s2 = c("A", "B"),
+  p1 = c(1, 1, 2, 0),
+  symmetric = TRUE)
+
+
 char_game <- normal_form(
   players = c("A", "B"),
   p1 = "-x^2 + (28 - y) * x",
@@ -26,25 +32,36 @@ char_game <- normal_form(
 
 test_that("find_dominant finds dominant startegies", {
   expect_type(find_dominant(PD), "list")
-  expect_equal(length(find_dominant(PD)), 2)
+  expect_type(find_dominant(matrix_game), "list")
+  expect_length(find_dominant(PD), 2)
+  expect_length(find_dominant(matrix_game), 2)
   expect_identical(all(is.na(unlist(find_dominant(SH)))), TRUE)
   expect_message(find_dominant(PD))
+  expect_message(find_dominant(matrix_game))
   expect_error(find_dominant(char_game))
 })
 
 test_that("find_dominated finds dominted startegies", {
   expect_type(find_dominated(PD), "list")
-  expect_equal(length(find_dominated(PD)), 2)
+  expect_type(find_dominated(matrix_game), "list")
+  expect_length(find_dominated(PD), 2)
+  expect_length(find_dominated(matrix_game), 2)
   expect_identical(all(is.na(unlist(find_dominated(SH)))), TRUE)
   expect_message(find_dominated(PD))
+  expect_message(find_dominated(matrix_game))
 })
 
 test_that("dom finds dominant or dominated strategies", {
   expect_identical(dom(PD), find_dominated(PD))
+  expect_identical(dom(matrix_game), find_dominated(matrix_game))
   expect_identical(dom(PD, type = "dominant"),
                    find_dominant(PD))
+  expect_identical(dom(matrix_game, type = "dominant"),
+                   find_dominant(matrix_game))
   expect_message(dom(PD))
+  expect_message(dom(matrix_game))
   expect_error(dom(char_game))
+  expect_error(dom(PD, type = "superior"))
 })
 
 test_that("eliminate_strategy eliminates a specified strategy from the game", {

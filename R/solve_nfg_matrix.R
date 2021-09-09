@@ -1,17 +1,22 @@
-#' @title Find Nash equilibria of a normal-form game with discrete-choice strategies
-#' @description \code{solve_nfg_matrix()} finds Nash equilibria of a normal-form (strategic-form) game.
-#' @return A list containing pure strategy Nash equilibrium (NE), mixed strategy NE, the gt table of the game,
-#'   and the plot of best response correspondences. Each element will be NULL if not available.
+#' @title Find Nash equilibria of a normal-form game.
+#' @description \code{solve_nfg_matrix()} finds Nash equilibria of a normal-form
+#'      (strategic-form) game with discrete-choice strategies.
+#' @return A list containing pure strategy Nash equilibrium (NE), mixed strategy
+#'      NE, the gt table of the game, and the plot of best response
+#'      correspondences. Each element will be \code{NULL} if not available.
 #' @param game A "normal_form" class object created by \code{normal_form()}.
 #' @seealso \code{\link{normal_form}}
-#' @param mixed A logical value. If \code{TRUE}, mixed-strategy NE will be calculated. Default is \code{FALSE}.
-#' @param show_table A logical value. If \code{TRUE}, the table of the game will be displayed. Default is \code{TRUE}.
-#' @param mark_br A logical value. If \code{TRUE}, the best response to each of the opponent's strategy is marked.
-#'   Default is \code{TRUE}.
-#' @param cell_width A number specifying the cell width of the game matrix. The unit is pixel.
-#'   The default value is 80.
-#' @param quietly A logical value that determines whether the equilibrium will be kept in the returned list
-#'     without being printed on screen. Default is \code{FALSE}
+#' @param mixed A logical value. If \code{TRUE}, mixed-strategy NE will be
+#'      searched. Default is \code{FALSE}.
+#' @param show_table A logical value. If \code{TRUE}, the payoff matrix  of the
+#'     game will be displayed. Default is \code{TRUE}.
+#' @param mark_br A logical value. If \code{TRUE}, the best response to each of
+#'     the opponent's strategy is marked. Default is \code{TRUE}.
+#' @param cell_width A number specifying the cell width of the payoff matrix.
+#'     The unit is pixel.
+#' @param quietly A logical value that determines whether the equilibrium will
+#'     be kept in the returned list without being printed on screen. Default is
+#'      \code{FALSE}.
 #' @param color_palette A color palette to be used. Default is \code{"Set1"}.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 solve_nfg_matrix <- function(
@@ -26,7 +31,7 @@ solve_nfg_matrix <- function(
   ## Pure-strategy NE
   psNE <- find_pure_NE(game)
   if (is.null(psNE)) {
-    message("Pure strategy NE does not exist.\n")
+    if (!quietly) message("Pure strategy NE does not exist.\n")
   } else if (!quietly) {
     if (!quietly) message("Pure-strategy NE: ", psNE)
   }
@@ -39,10 +44,15 @@ solve_nfg_matrix <- function(
       out2 <- stringi::stri_join(MASS::fractions(msNE[[2]]), collapse = ", ")
       out <- paste0("[(", out1, "), (", out2, ")]")
 
-      if (!quietly) message("Mixed-strategy NE: ", out)
+      if (!quietly) {
 
-      message("#  The obtained mixed-strategy NE might be only a part of the solutions.\n",
-              "#  Please examine br_plot (best response plot) carefully.")
+        message("Mixed-strategy NE: ", out)
+        message("The obtained mixed-strategy NE might be only a part of the solutions.")
+
+         if (length(game$strategy$s1) == 2 & length(game$strategy$s2) == 2) {
+          message("Please examine br_plot (best response plot) carefully.")
+        }
+      }
     }
   } else {
     msNE <- NULL
@@ -51,7 +61,7 @@ solve_nfg_matrix <- function(
   if (show_table) print(mat_tbl)
 
   if (length(game$strategy[[1]]) == 2 & length(game$strategy[[2]]) == 2) {
-    p <- br_plot(game, color_palette = color_palette)
+    p <- br_plot(game, color_palette = color_palette, msNE = msNE)
   } else {
     p <- NULL
   }

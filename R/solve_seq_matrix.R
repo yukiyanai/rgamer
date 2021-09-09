@@ -1,19 +1,19 @@
-#' @title Find subgame perfect equilibria of a sequential-form game
-#'   with discrete-choice strategies
+#' @title Find subgame perfect equilibria of a sequential-form game.
 #' @description \code{solve_seq_matrix()} finds subgame perfect equilibria of
-#'   a sequential-form (an extensive-form) game.
+#'   a sequential-form (an extensive-form) game with discrete-choice strategies.
 #' @return A list containing subgame perfect equilibrium (SPE) outcome and
 #'   the gt table of the game.
 #' @param game A "sequential_form" class object created by \code{seq_form()}.
 #' @seealso \code{\link{seq_form}}
-#' @param show_table A logical value. If \code{TRUE}, the table of the game will be displayed. Default is \code{TRUE}.
-#' @param mark_br A logical value. If \code{TRUE}, the follower's best response to
-#'   each of the leader's strategy is marked.
-#'   Default is \code{FALSE}.
-#' @param cell_width A number specifying the cell width of the game matrix. The unit is pixel.
-#'   The default value is 80.
-#' @param quietly A logical value that determines whether the equilibrium will be kept in the returned list
-#'     without being printed on screen. Default is \code{FALSE}.
+#' @param show_table A logical value. If \code{TRUE}, the table of the game will
+#'   be displayed. Default is \code{TRUE}.
+#' @param mark_br A logical value. If \code{TRUE}, the follower's best response
+#'   to each of the leader's strategy is marked. Default is \code{FALSE}.
+#' @param cell_width A number specifying the cell width of the game matrix. The
+#'   unit is pixel.
+#' @param quietly A logical value that determines whether the equilibrium will
+#'   be kept in the returned list without being printed on screen. Default is
+#'   \code{FALSE}.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 solve_seq_matrix <- function(
   game,
@@ -28,7 +28,7 @@ solve_seq_matrix <- function(
   sp1 <- game$strategy$s1
   p1_get <- rep(NA, length(sp1))
   sp2 <- rep(NA, length(sp1)) %>% as.list()
-  for(i in seq_along(sp1)) {
+  for (i in seq_along(sp1)) {
     dd <- game$df %>%
       dplyr::filter(s1 == sp1[i])
     s2_chosen <- dd$s2[which.max(dd$p2)]

@@ -1,4 +1,4 @@
-#' @title Plays a normal-form game by simulation (alternate best response)
+#' @title Play a normal-form game by simulation (alternate best response)
 #' @description \code{simu_game_abr()} simulates plays expected in a normal-form game.
 #' @details Simulate plays expected in a normal-form game defined by \code{normal_form()} when
 #'   each player alternately moves and each chose the best response to the opponent's previous

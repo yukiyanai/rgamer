@@ -1,0 +1,17 @@
+development:
+  mode: unreleased
+
+authors:
+  Yoshio Kamijo:
+    href: https://sites.google.com/site/yoshiokamijo/
+  Yuki Yanai:
+    href: https://yukiyanai.github.io
+
+navbar:
+  structure:
+    left: [home, reference, news]
+    right: [github, twitter]
+  components:
+    twitter:
+      icon: "fab fa-twitter fa-lg"
+      href: https://twitter.com/yuki871

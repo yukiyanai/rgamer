@@ -19,14 +19,14 @@ solve_seq(
 \arguments{
 \item{game}{A "sequential_form" class object created by \code{seq_form()}.}
 
-\item{show_table}{A logical value. If \code{TRUE}, the table of the game will be displayed. Default is \code{TRUE}.}
+\item{show_table}{A logical value. If \code{TRUE}, the table of the game will
+be displayed. Default is \code{TRUE}.}
 
-\item{cell_width}{A number specifying the cell width of the game matrix. The unit is pixel.
-The default value is 80.}
+\item{cell_width}{A number specifying the cell width of the game matrix. The
+unit is pixel.}
 
-\item{mark_br}{A logical value. If \code{TRUE}, the follower's best response to
-each of the leader's strategy is marked.
-Default is \code{FALSE}.}
+\item{mark_br}{A logical value. If \code{TRUE}, the follower's best response
+to each of the leader's strategy is marked. Default is \code{FALSE}.}
 
 \item{cons1}{A named list of parameters contained in \code{game$payoff$p1} that should be treated as constants, if any.}
 
@@ -41,8 +41,9 @@ If \code{cons1} and \code{cons2} are exactly same, you can specify
 The value n approximately means that the approximation is correct up to the Nth decimal place.
 The default value is 1.}
 
-\item{quietly}{A logical value that determines whether the equilibrium will be kept in the returned list
-without being printed on screen. Default is \code{FALSE}.}
+\item{quietly}{A logical value that determines whether the equilibrium will
+be kept in the returned list without being printed on screen. Default is
+\code{FALSE}.}
 }
 \value{
 A list containing subgame perfect equilibrium outcomes (if any), and

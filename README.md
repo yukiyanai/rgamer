@@ -7,8 +7,11 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/rgamer)](https://CRAN.R-project.org/package=rgamer)
 [![Travis build
 status](https://travis-ci.org/yukiyanai/rgamer.svg?branch=master)](https://travis-ci.org/yukiyanai/rgamer)
+[![R-CMD-check](https://github.com/yukiyanai/rgamer/workflows/R-CMD-check/badge.svg)](https://github.com/yukiyanai/rgamer/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/yukiyanai/rgamer/branch/master/graph/badge.svg)](https://codecov.io/gh/yukiyanai/rgamer?branch=master)
 <!-- badges: end -->

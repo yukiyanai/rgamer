@@ -24,52 +24,64 @@ solve_nfg(
 \arguments{
 \item{game}{A "normal_form" class object created by \code{normal_form()}.}
 
-\item{mixed}{A logical value. If \code{TRUE}, mixed-strategy NE will be calculated. Default is \code{FALSE}.}
+\item{mixed}{A logical value. If \code{TRUE}, mixed-strategy NE will be
+searched. Default is \code{FALSE}.}
 
-\item{show_table}{A logical value. If \code{TRUE}, the table of the game will be displayed. Default is \code{TRUE}.}
+\item{show_table}{A logical value. If \code{TRUE}, the payoff matrix  of the
+game will be displayed. Default is \code{TRUE}.}
 
-\item{cell_width}{A number specifying the cell width of the game matrix. The unit is pixel.
-The default value is 80.}
+\item{cell_width}{A number specifying the cell width of the payoff matrix.
+The unit is pixel.}
 
-\item{mark_br}{A logical value. If \code{TRUE}, the best response to each of the opponent's strategy is marked.
-Default is \code{TRUE}.}
+\item{mark_br}{A logical value. If \code{TRUE}, the best response to each of
+the opponent's strategy is marked. Default is \code{TRUE}.}
 
 \item{delta}{A numerical value specifying the grid size to draw the figure of
-best response correspondences.  The default value is 0.1. The smaller the
-value is, the smoother the correspondence curves are.}
+best response correspondences. The default value is \code{0.1}. The
+smaller the value is, the smoother the correspondence curves are.}
 
-\item{cons1}{A named list of parameters contained in \code{game$payoff$p1} that should be treated as constants, if any.}
+\item{cons1}{A named list of parameters contained in \code{game$payoff$p1}
+that should be treated as constants, if any.}
 
-\item{cons2}{A named list of parameters contained in \code{game$payoff$p2} that should be treated as constants, if any.}
+\item{cons2}{A named list of parameters contained in \code{game$payoff$p2}
+that should be treated as constants, if any.}
 
-\item{cons_common}{A named list of parameters contained in \code{game$payoff$p1} and \code{game$payoff$p2} that should be treated as constants, if any.
-If \code{cons1} and \code{cons2} are exactly same, you can specify \code{cons_common} instead of specifying
-both \code{cons1} and \code{cons2}.}
+\item{cons_common}{A named list of parameters contained in
+\code{game$payoff$p1} and \code{game$payoff$p2} that should be treated as
+constants, if any. If \code{cons1} and \code{cons2} are exactly same, you
+can specify \code{cons_common} instead of specifying both \code{cons1}
+and \code{cons2}.}
 
-\item{precision}{A natural number specifying the precision of numerical approximation.
-The value n approximately means that the approximation is correct up to the Nth decimal place.
-The default value is 1.}
+\item{precision}{A natural number specifying the precision of numerical
+approximation. The value n approximately means that the approximation is
+correct up to the Nth decimal place. The default value is 1.}
 
-\item{plot}{A logical value to determine whether the figure of the best response
-correspondences will be displayed. Default is \code{TRUE}.}
+\item{plot}{A logical value to determine whether the figure of the best
+response correspondences will be displayed. Default is \code{TRUE}.}
 
-\item{mark_NE}{A logical value to control if the NE (if any) will be marked in
-the best response plot, which will be displayed (only displayed when
+\item{mark_NE}{A logical value to control if the NE (if any) will be marked
+in the best response plot, which will be displayed (only displayed when
 \code{plot = TRUE}). Default is \code{FALSE}.}
 
-\item{quietly}{A logical value that determines whether the equilibrium will be kept in the returned list
-without being printed on screen. Default is \code{FALSE}}
+\item{quietly}{A logical value that determines whether the equilibrium will
+be kept in the returned list without being printed on screen. Default is
+\code{FALSE}.}
 
 \item{color_palette}{A color palette to be used. Default is \code{"Set1"}.}
 }
 \value{
-A list containing Nash equilibria (if any), the game table (if available),
-and the plot of best response correspondence (if available).
+A list containing Nash equilibria (if any), the payoff matrix of the
+game  (if available), and the plot of best response correspondence
+(if available).
 }
 \description{
-\code{solve_nfg()} finds Nash equilibria of a normal-form game. This is a wrapper
-function of \code{\link{solve_nfg_matrix}}, \code{\link{solve_nfg_char}}, and
-\code{\link{solve_nfg_fcn}}.
+\code{solve_nfg()} finds Nash equilibria of a normal-form game.
+}
+\details{
+This function finds Nash equilibria of a normal-form game by
+\code{\link{solve_nfg_matrix}}, \code{\link{solve_nfg_char}}, or
+\code{\link{solve_nfg_fcn}} depending on \code{type} of a normal_form
+object defined by \code{normal_form}.
 }
 \examples{
 game1 <- normal_form(

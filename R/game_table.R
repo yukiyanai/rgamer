@@ -4,10 +4,11 @@
 #' @param game A "normal_form" class object created by \code{normal_form()}.
 #'     The game's type must be "matrix".
 #' @seealso \code{\link{normal_form}}, \code{\link[gt]{gt}}
-#' @param mark_br A logical value. If \code{TRUE}, the best response to each of the opponent's strategy is marked.
-#'   Default is \code{TRUE}.
-#' @param cell_width A number specifying the cell width of the game matrix. The unit is pixel. If not specified,
-#'     the function tries to find the appropriate size.
+#' @param mark_br A logical value. If \code{TRUE}, the best response to each of
+#'     the opponent's strategy is marked. Default is \code{TRUE}.
+#' @param cell_width A number specifying the cell width of the game matrix.
+#'     The unit is pixel. If not specified, the function tries to find the
+#'     appropriate size.
 #' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
@@ -15,11 +16,12 @@ game_table <- function(game, mark_br = TRUE, cell_width = NULL) {
 
   pid <- column <- NULL
 
+  # Need to define the cell width for gt()  in .GlobalEnv.
+  # So temporarily put cellw in order not to overwrite the value
   if (exists("cellw", envir = .GlobalEnv)) {
     cellw_rgamer_temp <- cellw
   }
   cellw <- NULL
-
 
   players <- game$player
   s1 <- game$strategy[[1]]
@@ -34,7 +36,7 @@ game_table <- function(game, mark_br = TRUE, cell_width = NULL) {
       rows1 <- BR1 %>% dplyr::pull(row)
       cols1 <- BR1 %>% dplyr::pull(column)
       for (s in seq_along(rows1)) {
-        mat1[rows1[s], cols1[s]] <- paste0(mat1[rows1[s], cols1[s]], '^')
+        mat1[rows1[s], cols1[s]] <- paste0(mat1[rows1[s], cols1[s]], '*')
       }
     }
     BR2 <- BR %>% dplyr::filter(pid == 2)
@@ -42,7 +44,7 @@ game_table <- function(game, mark_br = TRUE, cell_width = NULL) {
       rows2 <- BR2 %>% dplyr::pull(row)
       cols2 <- BR2 %>% dplyr::pull(column)
       for (s in seq_along(rows2)) {
-        mat2[rows2[s], cols2[s]] <- paste0(mat2[rows2[s], cols2[s]], '^')
+        mat2[rows2[s], cols2[s]] <- paste0(mat2[rows2[s], cols2[s]], '*')
       }
     }
   }
@@ -50,9 +52,9 @@ game_table <- function(game, mark_br = TRUE, cell_width = NULL) {
   n_rows <- length(s1)
   n_cols <- length(s2)
 
-
   mat <- matrix(paste(mat1, mat2, sep = ", "),
                 ncol = n_cols)
+
   row.names(mat) <- s1
   colnames(mat) <- s2
 
@@ -92,6 +94,7 @@ game_table <- function(game, mark_br = TRUE, cell_width = NULL) {
       tidyselect::everything() ~ cellw
     )
 
+  # Re-assign the existing cellw value in .GlobalEnv if necessary
   if (exists("cellw_rgamer_temp")) {
     assign("cellw", cellw_rgamer_temp, envir = .GlobalEnv)
   } else {

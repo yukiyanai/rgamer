@@ -1,21 +1,28 @@
-#' @title Search a pair of the best responses of two players
-#' @description \code{gridsearch_br()} numerically finds a pair of best responses of
-#'     two players by grid search.
-#' @return A data frame containing the pair of the best responses of the players.
+#' @title Search a pair of the best responses of two players.
+#' @description \code{gridsearch_br()} numerically finds a pair of best
+#'     responses of a two-player normal-form game  by grid search.
+#' @return A data frame containing the pair of the best responses of the
+#'     players.
 #' @param players A character vector specifying the two players of the game.
 #' @param p1 An R function describing Player 1's payoff.
 #' @param p2 An R function describing Player 2's payoff.
-#' @param pars A character vector of length 2, which specifies the parameters each player chooses.
-#' @param par1_lim A numerical vector of length 2, which specifies the range of the first parameter.
-#' @param par2_lim A numerical vector of length 2, which specifies the range of the second parameter.
-#' @param cons1 A named list of parameters contained in \code{p1} that should be treated as constants, if any.
-#' @param cons2 A named list of parameters contained in \code{p2} that should be treated as constants, if any.
-#' @param cons_common A named list of parameters contained in \code{p1} and \code{p2} that should be
-#'     treated as constants, if any. If \code{cons1} and \code{cons2} are exactly same, you can specify
-#'     \code{cons_common} instead of \code{cons1} and \code{cons2}.
-#' @param precision A natural number specifying the precision of numerical approximation.
-#'     The value n approximately means that the approximation is correct up to the Nth decimal place.
-#'     The default value is 1.
+#' @param pars A character vector of length 2, which specifies the parameters
+#'     each player chooses.
+#' @param par1_lim A numerical vector of length 2, which specifies the range of
+#'     the first parameter.
+#' @param par2_lim A numerical vector of length 2, which specifies the range of
+#'     the second parameter.
+#' @param cons1 A named list of parameters contained in \code{p1} that should be
+#'      treated as constants, if any.
+#' @param cons2 A named list of parameters contained in \code{p2} that should be
+#'      treated as constants, if any.
+#' @param cons_common A named list of parameters contained in \code{p1} and
+#'     \code{p2} that should be treated as constants, if any. If \code{cons1}
+#'     and \code{cons2} are exactly same, you can specify \code{cons_common}
+#'     instead of \code{cons1} and \code{cons2}.
+#' @param precision A natural number specifying the precision of numerical
+#'     approximation. The value n approximately means that the approximation is
+#'     correct up to the Nth decimal place. The default value is 1.
 #' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
