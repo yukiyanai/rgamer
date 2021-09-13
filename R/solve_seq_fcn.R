@@ -67,14 +67,12 @@ solve_seq_fcn <- function(game,
     ff2 <- game$payoff$p2
   }
 
-
   par1_seq <- seq(from = par1_lim[1],
                   to = par1_lim[2],
                   length.out = 50)
   par2_seq <- seq(from = par2_lim[1],
                   to = par2_lim[2],
                   length.out = 50)
-
 
   while (TRUE) {
     dif <- max(par1_seq[2] - par1_seq[1],
@@ -84,7 +82,6 @@ solve_seq_fcn <- function(game,
                                x_vec = par1_seq,
                                y_vec = par2_seq,
                                pars = pars)
-
 
     if (dif < delta) {
       break
@@ -124,14 +121,9 @@ solve_seq_fcn <- function(game,
                   payoff1, ", ",
                   payoff2, ")")
 
-
-
-
   if (!quietly) message("SPE outcome: ", SPE)
 
-  message("#  The SPE shown here was numerically obtained and \n",
-          "#  can be slightly different from the analytical solution.")
+  message("The SPE shown here was numerically obtained and can be slightly different from the analytical solution (if any).")
 
   return(list(spe = SPE, payoff = payoff))
 }
-

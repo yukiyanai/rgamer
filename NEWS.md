@@ -1,3 +1,17 @@
+# rgamer 0.0.8
+
+## Changes in extensive-form games
+
+- `extensive_form()` function has been drastically modified. Now the function only defines a game. It no longer finds solution of an extensive-form game. 
+- To find a solution of the game, please use `solve_efg()` function. Currently, it finds backward-induction solutions of the game.
+- To display game treese with the solution paths colored, please use `show_path()`.
+
+## New functions
+
+- `seq_extensive()` transforms a "seq_form" class game into an "extensive_form" class.
+- `get_payoff()` returns the payoff corresponding to a specified pair of strategies or a specified set of actions profiles.
+
+
 # rgamer 0.0.7
 
 ## Making a game tree 

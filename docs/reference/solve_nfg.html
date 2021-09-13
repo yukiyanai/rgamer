@@ -78,7 +78,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.7</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.8</span>
       </span>
     </div>
 
@@ -144,7 +144,6 @@
   show_table <span class='op'>=</span> <span class='cn'>TRUE</span>,
   cell_width <span class='op'>=</span> <span class='cn'>NULL</span>,
   mark_br <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  delta <span class='op'>=</span> <span class='fl'>0.1</span>,
   cons1 <span class='op'>=</span> <span class='cn'>NULL</span>,
   cons2 <span class='op'>=</span> <span class='cn'>NULL</span>,
   cons_common <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -181,12 +180,6 @@ The unit is pixel.</p></td>
       <th>mark_br</th>
       <td><p>A logical value. If <code>TRUE</code>, the best response to each of
 the opponent's strategy is marked. Default is <code>TRUE</code>.</p></td>
-    </tr>
-    <tr>
-      <th>delta</th>
-      <td><p>A numerical value specifying the grid size to draw the figure of
-best response correspondences. The default value is <code>0.1</code>. The
-smaller the value is, the smoother the correspondence curves are.</p></td>
     </tr>
     <tr>
       <th>cons1</th>
@@ -263,7 +256,7 @@ object defined by <code>normal_form</code>.</p>
   par2_lim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>30</span><span class='op'>)</span>,
   pars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"x1"</span>, <span class='st'>"x2"</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>s2</span> <span class='op'>&lt;-</span> <span class='fu'>solve_nfg</span><span class='op'>(</span><span class='va'>game2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>NE: (28/3, 28/3)</span></div><div class='output co'>#&gt; <span class='message'>The obtained NE might be only a part of the solutions.</span>
+</div><div class='output co'>#&gt; <span class='message'>approximated NE: (9.3, 9.3)</span></div><div class='output co'>#&gt; <span class='message'>The obtained NE might be only a part of the solutions.</span>
 #&gt; <span class='message'>Please examine br_plot (best response plot) carefully.</span></div><div class='img'><img src='solve_nfg-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='va'>fx</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span> <span class='op'>-</span><span class='va'>x</span><span class='op'>^</span><span class='fl'>2</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>28</span> <span class='op'>-</span> <span class='va'>y</span><span class='op'>)</span> <span class='op'>*</span> <span class='va'>x</span>
 <span class='va'>fy</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span> <span class='op'>-</span><span class='va'>y</span><span class='op'>^</span><span class='fl'>2</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>28</span> <span class='op'>-</span> <span class='va'>x</span><span class='op'>)</span> <span class='op'>*</span> <span class='va'>y</span>
@@ -303,8 +296,8 @@ object defined by <code>normal_form</code>.</p>
   docsearch({
     
     
-    apiKey: 'API_KEY',
-    indexName: 'INDEX_NAME',
+    apiKey: '5ac428bc699b36dda4d35fa97f145ac1',
+    indexName: 'rgamer',
     inputSelector: 'input#search-input.form-control',
     transformData: function(hits) {
       return hits.map(function (hit) {

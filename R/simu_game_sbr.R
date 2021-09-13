@@ -37,7 +37,7 @@ simu_game_sbr <- function(game,
 
   p1 <- p2 <- NULL
 
-  if (lambda <= 0) stop(message("lambda must be positive."))
+  if (lambda <= 0) stop("lambda must be positive.")
 
   play1 <- rep(NA, n_periods)
   play2 <- rep(NA, n_periods)
@@ -110,21 +110,15 @@ simu_game_sbr <- function(game,
           play1[i] <- play1[i - 1]
         } else {
 
-          if (br > s1[1]) {
+          if (br <= s1[1] | br >= s1[2]) {
+            s_vec <- seq(from = s1[1], to = s1[2], length.out = 100)
+          } else {
             left_len <- round((br - s1[1]) / (s1[2] - s1[1]) * 100, 0)
             left <- seq(from = s1[1], to = br, length.out = left_len)
-          } else {
-            left_len <- 1
-            left <- s1[1]
-          }
-
-          if (br < s1[2]) {
             right <- seq(from = br, to = s1[2], length.out = 101 - left_len)[-1]
-          } else {
-            right <- s1[2]
+            s_vec <- c(left, right)
           }
 
-          s_vec <- c(left, right)
           p <- eval(f1, envir = list(XXX = s_vec))
           p <- exp(p * lambda)
           p <- p / sum(p)
@@ -153,21 +147,15 @@ simu_game_sbr <- function(game,
           play2[i] <- play2[i - 1]
         } else {
 
-          if (br > s2[1]) {
+          if (br <= s2[1] | br >= s2[2]) {
+            s_vec <- seq(from = s2[1], to = s2[2], length.out = 100)
+          } else {
             left_len <- round((br - s2[1]) / (s2[2] - s2[1]) * 100, 0)
             left <- seq(from = s2[1], to = br, length.out = left_len)
-          } else {
-            left_len <- 1
-            left <- s2[1]
-          }
-
-          if (br < s2[2]) {
             right <- seq(from = br, to = s2[2], length.out = 101 - left_len)[-1]
-          } else {
-            right <- s2[2]
+            s_vec <- c(left, right)
           }
 
-          s_vec <- c(left, right)
           p <- eval(f2, envir = list(YYY = s_vec))
           p <- exp(p * lambda)
           p <- p / sum(p)
@@ -217,21 +205,15 @@ simu_game_sbr <- function(game,
           play1[i] <- play1[i - 1]
         } else {
 
-          if (br > s1[1]) {
+          if (br <= s1[1] | br >= s1[2]) {
+            s_vec <- seq(from = s1[1], to = s1[2], length.out = 100)
+          } else {
             left_len <- round((br - s1[1]) / (s1[2] - s1[1]) * 100, 0)
             left <- seq(from = s1[1], to = br, length.out = left_len)
-          } else {
-            left_len <- 1
-            left <- s1[1]
-          }
-
-          if (br < s1[2]) {
             right <- seq(from = br, to = s1[2], length.out = 101 - left_len)[-1]
-          } else {
-            right <- s1[2]
+            s_vec <- c(left, right)
           }
 
-          s_vec <- c(left, right)
           p <- unlist(sapply(s_vec, f1))
           p <- exp(p * lambda)
           p <- p / sum(p)
@@ -267,21 +249,16 @@ simu_game_sbr <- function(game,
           play2[i] <- play2[i - 1]
         } else {
 
-          if (br > s2[1]) {
+
+          if (br <= s2[1] | br >= s2[2]) {
+            s_vec <- seq(from = s2[1], to = s2[2], length.out = 100)
+          } else {
             left_len <- round((br - s2[1]) / (s2[2] - s2[1]) * 100, 0)
             left <- seq(from = s2[1], to = br, length.out = left_len)
-          } else {
-            left_len <- 1
-            left <- s2[1]
-          }
-
-          if (br < s2[2]) {
             right <- seq(from = br, to = s2[2], length.out = 101 - left_len)[-1]
-          } else {
-            right <- s2[2]
+            s_vec <- c(left, right)
           }
 
-          s_vec <- c(left, right)
           p <- unlist(sapply(s_vec, f2))
           p <- exp(p * lambda)
           p <- p / sum(p)

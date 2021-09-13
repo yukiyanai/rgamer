@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.7</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.8</span>
       </span>
     </div>
 
@@ -172,6 +172,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="get_payoff.html">get_payoff()</a></code> </p>
+        </td>
+        <td><p>Get payoffs corresponding to specified strategies or actions.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="normal_form.html">normal_form()</a></code> </p>
         </td>
         <td><p>Define a normal-form (or strategic-form) game</p></td>
@@ -184,9 +190,21 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="seq_extensive.html">seq_extensive()</a></code> </p>
+        </td>
+        <td><p>Transform a sequential_form into extensive_form</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="seq_form.html">seq_form()</a></code> </p>
         </td>
         <td><p>Define a sequential-form (leader-follower) game</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="show_path.html">show_path()</a></code> </p>
+        </td>
+        <td><p>Plot a game tree with solution paths colored.</p></td>
       </tr><tr>
         
         <td>
@@ -199,6 +217,12 @@
           <p><code><a href="simu_game_br.html">simu_game_br()</a></code> </p>
         </td>
         <td><p>Play a normal-form game by simulation (best response)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="solve_efg.html">solve_efg()</a></code> </p>
+        </td>
+        <td><p>Find solutions of an extensive-form game.</p></td>
       </tr><tr>
         
         <td>
@@ -279,8 +303,8 @@
   docsearch({
     
     
-    apiKey: 'API_KEY',
-    indexName: 'INDEX_NAME',
+    apiKey: '5ac428bc699b36dda4d35fa97f145ac1',
+    indexName: 'rgamer',
     inputSelector: 'input#search-input.form-control',
     transformData: function(hits) {
       return hits.map(function (hit) {

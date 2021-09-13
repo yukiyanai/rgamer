@@ -12,13 +12,8 @@
 #' @param payoffs A named list of payoffs. Each element of the list must be a
 #'     numeric vector of payoffs for a player. The names of the elements must
 #'     match the names of the players specified  by \code{players}.
-#' @param quietly A logical value. If \code{TRUE}, the subgame perfect
-#'     equilibrium will not be displayed on screen. Default is \code{FALSE}.
 #' @param show_tree A logical value. If \code{TRUE}, the game tree will be
 #'     displayed. Default is \code{TRUE}.
-#' @param mark_path A logical value. If \code{TRUE}, The paths played in the
-#'     equilibrium will be marked (with color and bold lines). Default is
-#'     \code{FALSE}.
 #' @param show_node_id A logical value. If \code{TRUE}, the node numbers are
 #'     displayed in the figure. Default is \code{TRUE}.
 #' @param direction The direction to which a game tree grows.
@@ -32,10 +27,19 @@
 #'     Default is \code{"down"}.
 #' @param color_palette A color palette to be used. Default is "Set1".
 #' @param family A font family to be used in the tree.
+#' @param size_player Font size for the players' names. Default is 4.
+#' @param size_payoff Font size for the payoffs. Default is 4.
+#' @param size_action Font size for the action displayed by each edge. Default
+#'     is 4.
+#' @param size_node_id Size of the node id. Default is 4.
+#' @param size_terminal Size of the terminal node. Default is 2.
+#' @param scale Scale \code{player_size}, \code{payoff_size},
+#'     \code{action_size}, \code{noden_size}, \code{terminal_size}. It must be a
+#'      positive number.
 #' @return An object of "extensive_form" class, which defines an extensive-form
 #'     (or sequential) game.
 #' @importFrom magrittr %>%
-#' @include set_nodes.R
+#' @include set_nodes.R set_paths.R
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
 #' @examples
@@ -56,8 +60,6 @@
 #'                  c("ballet", "baseball"), c("ballet", "baseball")),
 #'   payoffs = list(f = c(2, 0, 0, 1),
 #'                  m = c(1, 0, 0, 2)),
-#'   mark_path = TRUE,
-#'   quietly = TRUE,
 #'   show_node_id = FALSE)
 #'
 #' g3 <- extensive_form(
@@ -68,7 +70,6 @@
 #'                  c("F", "G"), c("H", "I"), c("J", "K")),
 #'   payoffs = list(p1 = c(3, 1, 1, 2, 2, 1),
 #'                  p2 = c(0, 0, 1, 1, 2, 3)),
-#'   mark_path = TRUE,
 #'   direction = "down",
 #'   show_node_id = TRUE)
 #'
@@ -79,8 +80,7 @@
 #'    actions = list(c("give up", "keep asking"),
 #'                   c("leave",   "buy")),
 #'    payoffs   = list(child  = c(0, -10, 10),
-#'                     parent = c(5, -10,  2)),
-#'    mark_path = TRUE)
+#'                     parent = c(5, -10,  2)))
 #'
 #' g5 <- extensive_form(
 #'   players = list("Kamijo",
@@ -97,30 +97,37 @@ extensive_form <- function(
   players = NULL, # list, one vector for each sequence
   actions,        # list, one vector for each node.
   payoffs,        # named list, one vector for each player. Names must match the unique names of the players
-  quietly = FALSE,
   show_tree = TRUE,
-  mark_path = FALSE,
   show_node_id = TRUE,
-  direction = "down", # direction of the game tree
+  direction = "down",
   color_palette = "Set1",
-  family = NULL) {
-
-  s1 <- s2 <- x <- y <- type <- id <- node_from <- node_to <- player <- NULL
-  x_s <- x_e <- y_s <- y_e <- y_m <- x_m <- NULL
-  played <- left <- match_id <- palyed <- sol_id <- payoff <- NULL
-  n_sol <- NULL
+  family = NULL,
+  size_player = 4,
+  size_payoff = 4,
+  size_action = 4,
+  size_node_id = 4,
+  size_terminal = 2,
+  scale = NULL) {
 
   direction <- match.arg(direction,
-                         choices = c("right", "up", "down", "bidirectional",
+                         choices = c("right", "up", "down",
+                                     "bidirectional",
                                      "horizontal", "vertical"))
 
-  u_players <- players %>%
-    unlist() %>%
-    unique()
-  u_players <- u_players[!is.na(u_players)]
-  n_players <- length(u_players)
-  n_seq <- length(players) - 1
+  x_s <- x_m <- x_e <- y_s <- y_m <- y_e <- NULL
 
+  if (!is.null(scale)) {
+    if (!is.numeric(scale) | scale <= 0)
+      stop("scale must be a positive number")
+
+    size_player <- size_player * scale
+    size_payoff <- size_payoff * scale
+    size_action <- size_action * scale
+    size_node_id <- size_node_id * scale
+    size_terminal <- size_terminal * scale
+  }
+
+  # count the number of choices at each node
   n_choice <- rep(NA, length(players)) %>%
     as.list()
   k <- 1
@@ -138,367 +145,58 @@ extensive_form <- function(
     n_choice[[i]] <- nc
   }
 
-  n_node <- sapply(n_choice, length)
+  ## set nodes
+  df_node <- set_nodes(players, n_choice, payoffs, direction)
 
-  n_node2 <- c(1, rep(NA, n_seq))
-  keep <- 1
-  for (i in 2:length(n_choice)) {
-    n_node2[i] <- sum(n_choice[[i - 1]] * n_node[i - 1])
-    vec <- rep(n_choice[[i-1]], each = n_node[i])
-    keep <- c(keep, vec)
-  }
-  keep <- keep != 0
+  ## set branches
+  players_vec <- unlist(players)
+  players_vec <- players_vec[!is.na(players_vec)]
+  df_path <- set_paths(players_vec, n_choice, actions)
 
-  players <- unlist(players)
-  players <- players[!is.na(players)]
-
-  ## number of choices at each sequence
-  n_choice_seq <- rep(NA, length(players))
-  for (i in seq_along(players)) {
-    n_choice_seq[i] <- length(actions[[i]])
-  }
-
-  p_length <- length(payoffs[[1]])
-
-  n_choice_vec <- n_choice %>% unlist()
-  n_path <- sum(n_choice_vec)
-  nonzero_choice <- n_choice_vec[n_choice_vec != 0]
-  nonzero_index <- which(n_choice_vec != 0)
-
-  players_vec <- players %>% unlist()
-  df_path <- data.frame(
-    id        = 1:n_path,
-    player    = rep(players_vec, nonzero_choice),
-    s         = unlist(actions),
-    node_from = rep(nonzero_index, nonzero_choice),
-    node_to   = 2:(n_path + 1))
-
-  df_node <- set_nodes(players, n_node, n_choice)
-
-  if (direction %in% c("horizontal","vertical")) {
-
-    x_types <- unique(df_node$x)
-    df_node_tmp <- tibble::tibble(NULL)
-    for (z in x_types) {
-      df_node_sub <- df_node %>%
-        dplyr::filter(x == z)
-      n_y <- df_node_sub$y %>% length()
-      df_node_sub$y <- seq(from = 0, to = -100, length.out = n_y)
-      df_node_tmp <- dplyr::bind_rows(df_node_tmp, df_node_sub)
-    }
-    df_node <- df_node_tmp
-  }
-
-  df_payoff <- as.data.frame(payoffs)
-
-  payoff_label <- rep(NA, nrow(df_payoff))
-  for (i in 1:nrow(df_payoff)) {
-    payoff_label[i] <- paste(df_payoff[i, ], collapse = ", ")
-  }
-  payoff_label <- paste0("(", payoff_label, ")")
-
-  df_payoff <- df_node %>%
-    dplyr::filter(type == "payoff") %>%
-    dplyr::bind_cols(df_payoff) %>%
-    dplyr::mutate(payoff = payoff_label)
-
-  df_node0 <- df_node
-
-  df_node <- df_node %>%
-    dplyr::filter(type == "play")
-  node_id_vec <- df_node %>%
-    dplyr::arrange(id) %>%
-    dplyr::pull(id)
-
-  df_pos <- dplyr::bind_rows(df_node, df_payoff) %>%
-    dplyr::arrange(id)
-
-  df_played <- tibble::tibble(NULL)
-  ## Backward induction
-  for (i in nrow(df_node):1) {
-    df_sub <- df_path %>%
-      dplyr::filter(node_from == node_id_vec[i])
-
-    check_player <- df_sub %>% dplyr::pull(player) %>% unique()
-    check_payoff <- df_sub %>% dplyr::pull(node_to)
-    df_subgame <- df_pos %>%
-      dplyr::filter(id %in% check_payoff) %>%
-      dplyr::select(dplyr::all_of(check_player), id)
-    max_v <- max(df_subgame[, 1])
-    choice <- df_subgame$id[df_subgame[, 1] == max_v]
-
-    if (length(choice) > 1) {
-      keep <- df_pos[choice, u_players] %>%
-        as.matrix() %>%
-        apply(1, mean) %>%
-        which.max()
-      df_keep <- df_pos[choice, u_players]
-      df_keep <- df_keep[keep, ]
-      df_pos[node_id_vec[i], u_players] <- df_keep
-    } else {
-      df_pos[node_id_vec[i], u_players] <- df_pos[choice, u_players]
-    }
-
-    df_played <- df_sub %>%
-      dplyr::mutate(played = ifelse(node_to == choice, TRUE, FALSE)) %>%
-      dplyr::bind_rows(df_played)
-   }
-
+  ## add positions to the branches
   df_path <- df_path %>%
-    dplyr::mutate(x_s = df_pos$x[df_path$node_from],
-                  x_e = df_pos$x[df_path$node_to],
-                  y_s = df_pos$y[df_path$node_from],
-                  y_e = df_pos$y[df_path$node_to],
-                  x_m = 3/4 * x_s + 1/4  * x_e,
+    dplyr::mutate(x_s = df_node$x[df_path$node_from],
+                  x_e = df_node$x[df_path$node_to],
+                  y_s = df_node$y[df_path$node_from],
+                  y_e = df_node$y[df_path$node_to],
+                  x_m = 2/3 * x_s + 1/3  * x_e,
                   y_m = 1/2 * y_s + 1/2 * y_e,
-                  y_m = ifelse(y_m == y_e, y_m + 3, y_m),
-                  played = df_played$played)
+                  y_m = ifelse(y_m == y_e, y_m + 3, y_m))
 
-  ## Game Tree
-  if (direction == "bidirectional") {
-    if (n_choice_vec[1] != 2) stop(message("The first node must have two options for a 'bidrectional' tree"))
-    df_path0 <- df_path
-    df_path$left <- rep(NA, nrow(df_path))
-    df_path$left[1:2] <- 0:1
-    for (i in 3:nrow(df_path)) {
-      node_origin2 <- df_path$node_from[i]
-      while (node_origin2 > 2) {
-        df_search <- dplyr::filter(df_path, node_to == node_origin2)
-        node_origin2 <- df_search$node_from[1]
-      }
-      df_path$left[i] <- ifelse(node_origin2 == 2, 0, 1)
-    }
-    y_adj_right <- with(df_path, y_s[1] - y_e[1])
-    y_adj_left <-  with(df_path, y_s[2] - y_e[2])
-    df_path <- df_path %>%
-      dplyr::mutate(x_s = ifelse(left == 0, x_s, -x_s),
+  ## draw the game tree
+  tree <- draw_tree(df_path = df_path,
+                    df_node = df_node,
+                    direction = direction,
+                    show_node_id = show_node_id,
+                    color_palette = color_palette,
+                    family = family,
+                    size_player = size_player,
+                    size_payoff = size_payoff,
+                    size_action = size_action,
+                    size_node_id = size_node_id,
+                    size_terminal = size_terminal,
+                    scale = scale)
 
-                    x_e = ifelse(left == 0, x_e, -x_e))
-
-    df_path_top2 <- df_path[1:2,] %>%
-      dplyr::mutate(y_e = y_s)
-    df_path_rem <- df_path[-(1:2),] %>%
-      dplyr::mutate(y_s = ifelse(left == 0, y_s + y_adj_right, y_s + y_adj_left),
-                    y_e = ifelse(left == 0, y_e + y_adj_right, y_e + y_adj_left))
-    df_path <- dplyr::bind_rows(df_path_top2, df_path_rem) %>%
-      dplyr::mutate(x_m = 3/4 * x_s + 1/4  * x_e,
-                    y_m = 1/2 * y_s + 1/2 * y_e,
-                    y_m = ifelse(y_m == y_e, y_m + 1.5, y_m))
-
-    ## Adjust payoff positions
-    df_payoff <- df_path0 %>%
-      dplyr::rename(match_id = id) %>%
-      dplyr::select(match_id, x_e, y_e) %>%
-      dplyr::right_join(df_payoff, by = c("x_e" = "x", "y_e" = "y")) %>%
-      dplyr::select(-c(x_e, y_e))
-    df_payoff <- df_path %>%
-      dplyr::rename(x = x_e, y = y_e, match_id = id) %>%
-      dplyr::select(x, y, match_id, left) %>%
-      dplyr::right_join(df_payoff, by = "match_id")
-
-    ## Adjust node positions
-    df_node <- df_path0 %>%
-      dplyr::rename(match_id = id) %>%
-      dplyr::select(match_id, x_s, y_s) %>%
-      dplyr::right_join(df_node, by = c("x_s" = "x", "y_s" = "y")) %>%
-      dplyr::select(-c(x_s, y_s))
-    df_node <- df_path %>%
-      dplyr::rename(x = x_s, y = y_s, match_id = id) %>%
-      dplyr::select(x, y, match_id, left) %>%
-      dplyr::right_join(df_node, by = "match_id") %>%
-      dplyr::select(-match_id) %>%
-      dplyr::distinct()
-  }
-
-  df_sol <- df_path %>%
-    dplyr::filter(played)
-
-  n_paths_played <- table(df_sol$node_from)
-  n_sol <- prod(n_paths_played)
-
-
-  choice <- vector(mode = "list", length = length(n_paths_played))
-  node_id <- names(n_paths_played)
-  node_player <- rep(NA, length.out = length(n_paths_played))
-  for (i in seq_along(n_paths_played)) {
-    node_player[i] <- unique(df_sol$player[df_sol$node_from == node_id[i]])
-    choice[[i]] <- df_sol %>%
-      dplyr::filter(node_from == names(n_paths_played)[i]) %>%
-      dplyr::pull(s)
-  }
-
-  sol_sets <- expand.grid(choice) %>% t()
-  colnames(sol_sets) <- paste0("sol_", 1:n_sol)
-  sol_sets <- sol_sets %>%
-    tibble::as_tibble() %>%
-    tidyr::pivot_longer(
-      cols = tidyselect::starts_with("sol_"),
-      names_to = "sol_id",
-      names_prefix = "sol_",
-      values_to = "s") %>%
-    dplyr::arrange(sol_id)
-  sol_sets$player <- rep(node_player, n_sol)
-
-  df_sol2 <- dplyr::full_join(df_sol, sol_sets,
-                              by = c("s", "player")) %>%
-    dplyr::arrange(sol_id, node_from)
-
-  sol_id_vec <- unique(df_sol2$sol_id)
-
-  SGPE <- rep(NA, length.out = n_sol)
-  for (j in 1:n_sol) {
-
-    df_sol_sub <- df_sol2[df_sol2$sol_id == sol_id_vec[j],]
-
-    SGPE_tmp <- rep(NA, n_players)
-    for (i in seq_along(u_players)) {
-      df_p <- df_sol_sub %>% dplyr::filter(player == u_players[i])
-      s <- df_p %>% dplyr::pull(s)
-      s_mid <- paste(s, collapse = ", ")
-      SGPE_tmp[i] <- paste0("(", s_mid, ")")
-    }
-    SGPE_tmp <- SGPE_tmp %>%
-      paste(collapse = ", ")
-    SGPE_tmp <- paste0("[", SGPE_tmp, "]")
-    SGPE[j] <- SGPE_tmp
-  }
-
-
-  if (mark_path) {
-    tree <- ggplot2::ggplot() +
-      ggplot2::geom_segment(data = df_path,
-                            ggplot2::aes(x = x_s,  xend = x_e,
-                                         y = y_s,  yend = y_e)) +
-      ggplot2::geom_segment(data = df_sol,
-                            ggplot2::aes(x = x_s, xend = x_e,
-                                         y = y_s, yend = y_e,
-                                         color = player),
-                            size = 2)
-  } else {
-    tree <- ggplot2::ggplot() +
-      ggplot2::geom_segment(data = df_path,
-                            ggplot2::aes(x = x_s,  xend = x_e,
-                            y = y_s,  yend = y_e))
-  }
-
-
-  if (direction == "up") {
-    tree <- tree +
-      ggplot2::geom_text(data = df_payoff,
-                         ggplot2::aes(x = x, y = y, label = payoff),
-                         nudge_x = 5, size = 4) +
-      ggplot2::coord_flip() +
-      ggplot2::scale_x_continuous(NULL, breaks = NULL) +
-      ggplot2::scale_y_reverse(NULL, breaks = NULL)
-  } else if (direction == "down") {
-    tree <- tree +
-      ggplot2::geom_text(data = df_payoff,
-                         ggplot2::aes(x = x, y = y, label = payoff),
-                         nudge_x = -5, size = 4) +
-      ggplot2::coord_flip() +
-      ggplot2::scale_x_reverse(NULL, breaks = NULL) +
-      ggplot2::scale_y_reverse(NULL, breaks = NULL)
-  } else if (direction == "right") {
-    df_payoff <- df_payoff %>%
-        dplyr::mutate(x = x + 5)
-
-    tree <- tree +
-      ggplot2::geom_text(data = df_payoff,
-                         ggplot2::aes(x = x, y = y, label = payoff),
-                         size = 4) +
-      ggplot2::scale_x_continuous(NULL, breaks = NULL) +
-      ggplot2::scale_y_continuous(NULL, breaks = NULL)
-  } else if (direction == "horizontal") {
-    df_payoff <- df_payoff %>%
-      dplyr::mutate(x = x + 5)
-
-    tree <- tree +
-      ggplot2::geom_text(data = df_payoff,
-                         ggplot2::aes(x = x, y = y, label = payoff),
-                         size = 4) +
-      ggplot2::scale_x_continuous(NULL, breaks = NULL) +
-      ggplot2::scale_y_continuous(NULL, breaks = NULL)
-
-  } else if (direction == "vertical") {
-    tree <- tree +
-      ggplot2::geom_text(data = df_payoff,
-                         ggplot2::aes(x = x, y = y, label = payoff),
-                         nudge_x = -5, size = 4) +
-      ggplot2::coord_flip() +
-      ggplot2::scale_x_reverse(NULL, breaks = NULL) +
-      ggplot2::scale_y_reverse(NULL, breaks = NULL)
-  }
-
-
-  if (is.null(family)) {
-    tree <- tree +
-      ggplot2::geom_label(data = df_node,
-                          ggplot2::aes(x = x, y = y,
-                                       label = player,
-                                       color = player),
-
-                          size = 4) +
-      ggplot2::geom_text(data = df_path,
-                         ggplot2::aes(x = x_m, y = y_m, label = s),
-                         size = 4) +
-      ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
-                     panel.grid.minor = ggplot2::element_blank()) +
-      ggplot2::scale_color_brewer(palette = color_palette,
-                                  guide = "none")
-  } else {
-    tree <- tree +
-      ggplot2::geom_label(data = df_node,
-                          ggplot2::aes(x = x, y = y,
-                                       label = player,
-                                       color = player),
-
-                          size = 4,
-                          family = family) +
-      ggplot2::geom_text(data = df_path,
-                         ggplot2::aes(x = x_m, y = y_m, label = s),
-                         size = 4,
-                         family = family) +
-      ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
-                     panel.grid.minor = ggplot2::element_blank(),
-                     text = ggplot2::element_text(family = family)) +
-      ggplot2::scale_color_brewer(palette = color_palette,
-                                  guide = "none")
-  }
-
-  if (show_node_id) {
-    df_node0 <- df_node0 %>%
-      dplyr::mutate(id = paste0("n", id))
-    tree <- tree +
-      ggplot2::geom_label(data = df_node0,
-                          ggplot2::aes(x = x, y = y + 5,
-                                      label = id),
-                          color = "black",
-                          size = 4) +
-      ggplot2::geom_point(data = df_node0 %>% dplyr::filter(type == "payoff"),
-                          ggplot2::aes(x = x, y = y),
-                          color = "black",
-                          size = 2)
-  }
-
-   if (show_tree) {
+  if (show_tree) {
     plot(tree)
   }
 
-  if (!quietly) {
-    if (length(SGPE) > 1) {
-      message("Subgame perfect equilibria: ",
-              paste(SGPE, collapse = ", "))
-    } else {
-      message("Subgame perfect equilibrium: ", SGPE)
-    }
-  }
-
-  value <- list(player = players,
+  value <- list(player = players_vec,
                 action = actions,
                 payoff = payoffs,
-                spe    = SGPE,
-                tree   = tree)
+                tree   = tree,
+                data   = list(node = df_node,
+                              path = df_path),
+                tree_params = list(direction = direction,
+                                   show_node_id = show_node_id,
+                                   color_palette = color_palette,
+                                   family = family,
+                                   size_player = size_player,
+                                   size_payoff = size_payoff,
+                                   size_action = size_action,
+                                   size_node_id = size_node_id,
+                                   size_terminal = size_terminal,
+                                   scale = scale))
 
   structure(value, class = "extensive_form")
 }
-

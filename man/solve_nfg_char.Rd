@@ -6,7 +6,6 @@
 \usage{
 solve_nfg_char(
   game,
-  delta = 0.1,
   plot = TRUE,
   mark_NE = FALSE,
   quietly = FALSE,
@@ -15,10 +14,6 @@ solve_nfg_char(
 }
 \arguments{
 \item{game}{A "normal_form" class object created by \code{normal_form()}.}
-
-\item{delta}{A numerical value specifying the grid size to draw the figure of
-best response correspondences. The default value is \code{0.1}. The
-smaller the value is, the smoother the correspondence curves are.}
 
 \item{plot}{A logical value to determine whether the figure of the best
 response correspondences will be displayed. Default is \code{TRUE}.}

@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.7</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.8</span>
       </span>
     </div>
 
@@ -192,8 +192,9 @@ be kept in the returned list without being printed on screen. Default is
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list containing pure strategy Nash equilibrium (NE), mixed strategy
-NE, the gt table of the game, and the plot of best response
-correspondences. Each element will be <code>NULL</code> if not available.</p>
+NE, the gt table of the game, the plot of best response
+correspondences, and the list of mixed strategy NE of the subsets of
+strategies. Each element will be <code>NULL</code> if not available.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='normal_form.html'>normal_form</a></code></p></div>
@@ -228,8 +229,8 @@ correspondences. Each element will be <code>NULL</code> if not available.</p>
   docsearch({
     
     
-    apiKey: 'API_KEY',
-    indexName: 'INDEX_NAME',
+    apiKey: '5ac428bc699b36dda4d35fa97f145ac1',
+    indexName: 'rgamer',
     inputSelector: 'input#search-input.form-control',
     transformData: function(hits) {
       return hits.map(function (hit) {

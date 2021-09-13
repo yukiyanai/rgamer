@@ -47,7 +47,7 @@ simu_game <- function(game,
                       cons1 = NULL,
                       cons2 = NULL) {
 
-  if (class(game) != "normal_form") stop(message("Please provide a game defined by normal_form()."))
+  if (class(game) != "normal_form") stop("Please provide a game defined by normal_form().")
 
   if (rho < 0 | rho > 1) stop(message("The value for rho must be in [0, 1]."))
 

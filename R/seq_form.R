@@ -48,6 +48,13 @@
 #'     game (an extensive form game with a leader and a follower).
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
+#' @examples
+#' g1 <- seq_form(
+#'   players = c("Leader", "Follower"),
+#'   s1 = c("R", "S", "P"),
+#'   s2 = c("R", "S", "P"),
+#'   p1 = c(0, -1, 1, 1, 0, -1, -1, 1, 0),
+#'   p2 = c(0, 1, -1, -1, 0, 1, 1, -1, 0))
 seq_form <- function(
   players = NULL,
   s1 = NULL,

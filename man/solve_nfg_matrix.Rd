@@ -37,8 +37,9 @@ be kept in the returned list without being printed on screen. Default is
 }
 \value{
 A list containing pure strategy Nash equilibrium (NE), mixed strategy
-NE, the gt table of the game, and the plot of best response
-correspondences. Each element will be \code{NULL} if not available.
+NE, the gt table of the game, the plot of best response
+correspondences, and the list of mixed strategy NE of the subsets of
+strategies. Each element will be \code{NULL} if not available.
 }
 \description{
 \code{solve_nfg_matrix()} finds Nash equilibria of a normal-form

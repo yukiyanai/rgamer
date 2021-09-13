@@ -36,7 +36,7 @@ game_table <- function(game, mark_br = TRUE, cell_width = NULL) {
       rows1 <- BR1 %>% dplyr::pull(row)
       cols1 <- BR1 %>% dplyr::pull(column)
       for (s in seq_along(rows1)) {
-        mat1[rows1[s], cols1[s]] <- paste0(mat1[rows1[s], cols1[s]], '*')
+        mat1[rows1[s], cols1[s]] <- paste0(mat1[rows1[s], cols1[s]], '^')
       }
     }
     BR2 <- BR %>% dplyr::filter(pid == 2)
@@ -44,7 +44,7 @@ game_table <- function(game, mark_br = TRUE, cell_width = NULL) {
       rows2 <- BR2 %>% dplyr::pull(row)
       cols2 <- BR2 %>% dplyr::pull(column)
       for (s in seq_along(rows2)) {
-        mat2[rows2[s], cols2[s]] <- paste0(mat2[rows2[s], cols2[s]], '*')
+        mat2[rows2[s], cols2[s]] <- paste0(mat2[rows2[s], cols2[s]], '^')
       }
     }
   }

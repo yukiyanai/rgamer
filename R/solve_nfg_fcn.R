@@ -5,6 +5,8 @@
 #'      and the plot of best response correspondences.
 #' @param game A "normal_form" class object created by \code{normal_form()}.
 #' @seealso [normal_form()]
+#' @param par_label A vector of parameter labels if the user define the game
+#'     with functions as characters.
 #' @param cons1 A named list of parameters contained in \code{game$payoff$p1}
 #'     that should be treated as constants, if any.
 #' @param cons2 A named list of parameters contained in \code{game$payoff$p2}
@@ -29,6 +31,7 @@
 #' @import ggplot2
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 solve_nfg_fcn <- function(game,
+                          par_label = NULL,
                           cons1 = NULL,
                           cons2 = NULL,
                           cons_common = NULL,
@@ -41,6 +44,8 @@ solve_nfg_fcn <- function(game,
   x <- y <- player <- text <- pars <- NULL
 
   players <- game$player
+
+  if (is.null(par_label)) par_label <- game$pars
 
   par1_lim <- game$strategy[[1]]
   par2_lim <- game$strategy[[2]]
@@ -130,7 +135,7 @@ solve_nfg_fcn <- function(game,
     ggplot2::scale_size_manual(values = c(3, 1),
                                breaks = players,
                                labels = players) +
-    ggplot2::labs(x = game$pars[1], y = game$pars[2]) +
+    ggplot2::labs(x = par_label[1], y = par_label[2]) +
     ggplot2::coord_fixed()
 
 

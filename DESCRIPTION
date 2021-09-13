@@ -1,7 +1,7 @@
 Package: rgamer
 Type: Package
 Title: Learn Game Theory Using R
-Version: 0.0.7
+Version: 0.0.8
 Authors@R:
     c(person(given = "Yoshio",
              family = "Kamijo",
@@ -32,7 +32,7 @@ Imports:
     gt (>= 0.3.1),
     magrittr,
     MASS,
-    nleqslv,
+    patchwork,
     purrr,
     stats,
     stringr,
@@ -41,14 +41,19 @@ Imports:
     tidyr,
     tidyselect,
     tuple,
+    utils,
     lifecycle
 ByteCompile: TRUE
 VignetteBuilder: knitr
 Collate: 
     'as_df_br.R'
+    'draw_tree.R'
+    'backward_induction.R'
     'br_plot.R'
+    'char2function.R'
     'dom.R'
     'eliminate_strategy.R'
+    'set_paths.R'
     'set_nodes.R'
     'extensive_form.R'
     'find_best_response.R'
@@ -57,11 +62,17 @@ Collate:
     'find_mixed_NE.R'
     'find_pure_NE.R'
     'game_table.R'
+    'get_payoff_extensive.R'
+    'get_payoff_normal.R'
+    'get_payoff.R'
     'gridsearch_backward.R'
     'gridsearch_br.R'
     'normal_form.R'
     'rgamer.R'
+    'seq_extensive.R'
     'seq_form.R'
+    'solve_efg.R'
+    'show_path.R'
     'simu_game.R'
     'simu_game_abr.R'
     'simu_game_br.R'

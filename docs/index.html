@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.7</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.8</span>
       </span>
     </div>
 
@@ -197,7 +197,7 @@ install.packages("rgamer")
 <p>Then, you can pass it to <code><a href="reference/solve_nfg.html">solve_nfg()</a></code>, which displays the best response correspondences by default.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">s_game3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_nfg.html">solve_nfg</a></span><span class="op">(</span><span class="va">game3</span><span class="op">)</span>
-<span class="co">#&gt; NE: (28/3, 28/3)</span>
+<span class="co">#&gt; approximated NE: (9.3, 9.3)</span>
 <span class="co">#&gt; The obtained NE might be only a part of the solutions.</span>
 <span class="co">#&gt; Please examine br_plot (best response plot) carefully.</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-13-1.png"><!-- --></p>
@@ -232,8 +232,7 @@ install.packages("rgamer")
   game <span class="op">=</span> <span class="va">game4</span>,
   cons1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">2</span>, b <span class="op">=</span> <span class="fl">28</span><span class="op">)</span>,
   cons2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>s <span class="op">=</span> <span class="fl">2</span>, t <span class="op">=</span> <span class="fl">28</span><span class="op">)</span>,
-  plot <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
+  plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="co">#&gt; approximated NE: (9.3, 9.3)</span>
 <span class="co">#&gt; The obtained NE might be only a part of the solutions.</span>
 <span class="co">#&gt; Please examine br_plot (best response plot) carefully.</span></code></pre></div>
@@ -243,8 +242,7 @@ install.packages("rgamer")
   game <span class="op">=</span> <span class="va">game4</span>,
   cons1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">2</span>, b <span class="op">=</span> <span class="fl">28</span><span class="op">)</span>,
   cons2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>s <span class="op">=</span> <span class="fl">2</span>, t <span class="op">=</span> <span class="fl">28</span><span class="op">)</span>,
-  precision <span class="op">=</span> <span class="fl">3</span>
-<span class="op">)</span>
+  precision <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt; approximated NE: (9.333, 9.333)</span>
 <span class="co">#&gt; The obtained NE might be only a part of the solutions.</span>
 <span class="co">#&gt; Please examine br_plot (best response plot) carefully.</span></code></pre></div>
@@ -308,24 +306,16 @@ install.packages("rgamer")
                   <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stat"</span>, <span class="st">"game"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stat"</span>, <span class="st">"game"</span><span class="op">)</span><span class="op">)</span>,
   payoffs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>Yanai <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,
                  Kamijo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,
-  quietly <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+  direction <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-21-1.png"><!-- --></p>
-<p>And you can show the equilibrium path by setting <code>mark_path = TRUE</code>.</p>
+<p>And you can find the solution of the game by <code><a href="reference/solve_efg.html">solve_efg()</a></code>.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">game6</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/extensive_form.html">extensive_form</a></span><span class="op">(</span>
- players <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"Yanai"</span>, 
-                 <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Kamijo"</span>, <span class="fl">2</span><span class="op">)</span>,
-                 <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>,
-  actions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stat"</span>, <span class="st">"game"</span><span class="op">)</span>,
-                  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stat"</span>, <span class="st">"game"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"stat"</span>, <span class="st">"game"</span><span class="op">)</span><span class="op">)</span>,
-  payoffs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>Yanai <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,
-                 Kamijo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,
-  mark_path <span class="op">=</span> <span class="cn">TRUE</span>,
-  direction <span class="op">=</span> <span class="st">"right"</span>,
-  color_palette <span class="op">=</span> <span class="st">"Accent"</span>
-<span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-22-1.png"><!-- --></p>
+<code class="sourceCode R"><span class="va">s_game6</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_efg.html">solve_efg</a></span><span class="op">(</span><span class="va">game6</span><span class="op">)</span>
+<span class="co">#&gt; backward induction: [(stat), (stat, game)]</span></code></pre></div>
+<p>Then, you can see the path played under a solution by <code><a href="reference/show_path.html">show_path()</a></code>.</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/show_path.html">show_path</a></span><span class="op">(</span><span class="va">s_game6</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-23-1.png"><!-- --></p>
 </div>
 </div>
   </div>
@@ -361,8 +351,8 @@ install.packages("rgamer")
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 <li><a href="https://CRAN.R-project.org/package=rgamer"><img src="https://www.r-pkg.org/badges/version/rgamer" alt="CRAN status"></a></li>
 <li><a href="https://travis-ci.org/yukiyanai/rgamer"><img src="https://travis-ci.org/yukiyanai/rgamer.svg?branch=master" alt="Travis build status"></a></li>
-<li><a href="https://github.com/yukiyanai/rgamer/actions"><img src="https://github.com/yukiyanai/rgamer/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://codecov.io/gh/yukiyanai/rgamer?branch=master"><img src="https://codecov.io/gh/yukiyanai/rgamer/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://github.com/yukiyanai/rgamer/actions"><img src="https://github.com/yukiyanai/rgamer/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 </div>
@@ -385,8 +375,8 @@ install.packages("rgamer")
   docsearch({
     
     
-    apiKey: 'API_KEY',
-    indexName: 'INDEX_NAME',
+    apiKey: '5ac428bc699b36dda4d35fa97f145ac1',
+    indexName: 'rgamer',
     inputSelector: 'input#search-input.form-control',
     transformData: function(hits) {
       return hits.map(function (hit) {

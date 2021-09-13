@@ -1,22 +1,22 @@
 {
-  "index_name": "INDEX_NAME",
+  "index_name": "rgamer",
   "start_urls": [
     {
-      "url": "https://yukiyanai.github.io/rgamer//index.html",
+      "url": "https://yukiyanai.github.io/rgamer/index.html",
       "selectors_key": "homepage",
       "tags": [
         "homepage"
       ]
     },
     {
-      "url": "https://yukiyanai.github.io/rgamer//reference",
+      "url": "https://yukiyanai.github.io/rgamer/reference",
       "selectors_key": "reference",
       "tags": [
         "reference"
       ]
     },
     {
-      "url": "https://yukiyanai.github.io/rgamer//articles",
+      "url": "https://yukiyanai.github.io/rgamer/articles",
       "selectors_key": "articles",
       "tags": [
         "articles"
@@ -30,7 +30,7 @@
     "/articles/index.html"
   ],
   "sitemap_urls": [
-    "https://yukiyanai.github.io/rgamer//sitemap.xml"
+    "https://yukiyanai.github.io/rgamer/sitemap.xml"
   ],
   "selectors": {
     "homepage": {

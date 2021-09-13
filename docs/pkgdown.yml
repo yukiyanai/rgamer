@@ -2,8 +2,8 @@ pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2021-09-09T12:31Z
+last_built: 2021-09-13T13:41Z
 urls:
-  reference: https://yukiyanai.github.io/rgamer//reference
-  article: https://yukiyanai.github.io/rgamer//articles
+  reference: https://yukiyanai.github.io/rgamer/reference
+  article: https://yukiyanai.github.io/rgamer/articles
 

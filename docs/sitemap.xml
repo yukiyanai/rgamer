@@ -1,54 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://yukiyanai.github.io/rgamer//index.html</loc>
+    <loc>https://yukiyanai.github.io/rgamer/index.html</loc>
   </url>
   <url>
-    <loc>https://yukiyanai.github.io/rgamer//reference/dom.html</loc>
+    <loc>https://yukiyanai.github.io/rgamer/reference/dom.html</loc>
   </url>
   <url>
-    <loc>https://yukiyanai.github.io/rgamer//reference/eliminate_strategy.html</loc>
+    <loc>https://yukiyanai.github.io/rgamer/reference/eliminate_strategy.html</loc>
   </url>
   <url>
-    <loc>https://yukiyanai.github.io/rgamer//reference/extensive_form.html</loc>
+    <loc>https://yukiyanai.github.io/rgamer/reference/extensive_form.html</loc>
   </url>
   <url>
-    <loc>https://yukiyanai.github.io/rgamer//reference/normal_form.html</loc>
+    <loc>https://yukiyanai.github.io/rgamer/reference/get_payoff.html</loc>
   </url>
   <url>
-    <loc>https://yukiyanai.github.io/rgamer//reference/rgamer.html</loc>
+    <loc>https://yukiyanai.github.io/rgamer/reference/normal_form.html</loc>
   </url>
   <url>
-    <loc>https://yukiyanai.github.io/rgamer//reference/seq_form.html</loc>
+    <loc>https://yukiyanai.github.io/rgamer/reference/rgamer.html</loc>
   </url>
   <url>
-    <loc>https://yukiyanai.github.io/rgamer//reference/simu_game.html</loc>
+    <loc>https://yukiyanai.github.io/rgamer/reference/seq_extensive.html</loc>
   </url>
   <url>
-    <loc>https://yukiyanai.github.io/rgamer//reference/simu_game_br.html</loc>
+    <loc>https://yukiyanai.github.io/rgamer/reference/seq_form.html</loc>
   </url>
   <url>
-    <loc>https://yukiyanai.github.io/rgamer//reference/solve_nfg.html</loc>
+    <loc>https://yukiyanai.github.io/rgamer/reference/show_path.html</loc>
   </url>
   <url>
-    <loc>https://yukiyanai.github.io/rgamer//reference/solve_nfg_char.html</loc>
+    <loc>https://yukiyanai.github.io/rgamer/reference/simu_game.html</loc>
   </url>
   <url>
-    <loc>https://yukiyanai.github.io/rgamer//reference/solve_nfg_fcn.html</loc>
+    <loc>https://yukiyanai.github.io/rgamer/reference/simu_game_br.html</loc>
   </url>
   <url>
-    <loc>https://yukiyanai.github.io/rgamer//reference/solve_nfg_matrix.html</loc>
+    <loc>https://yukiyanai.github.io/rgamer/reference/solve_efg.html</loc>
   </url>
   <url>
-    <loc>https://yukiyanai.github.io/rgamer//reference/solve_seq.html</loc>
+    <loc>https://yukiyanai.github.io/rgamer/reference/solve_nfg.html</loc>
   </url>
   <url>
-    <loc>https://yukiyanai.github.io/rgamer//reference/solve_seq_char.html</loc>
+    <loc>https://yukiyanai.github.io/rgamer/reference/solve_nfg_char.html</loc>
   </url>
   <url>
-    <loc>https://yukiyanai.github.io/rgamer//reference/solve_seq_fcn.html</loc>
+    <loc>https://yukiyanai.github.io/rgamer/reference/solve_nfg_fcn.html</loc>
   </url>
   <url>
-    <loc>https://yukiyanai.github.io/rgamer//reference/solve_seq_matrix.html</loc>
+    <loc>https://yukiyanai.github.io/rgamer/reference/solve_nfg_matrix.html</loc>
+  </url>
+  <url>
+    <loc>https://yukiyanai.github.io/rgamer/reference/solve_seq.html</loc>
+  </url>
+  <url>
+    <loc>https://yukiyanai.github.io/rgamer/reference/solve_seq_char.html</loc>
+  </url>
+  <url>
+    <loc>https://yukiyanai.github.io/rgamer/reference/solve_seq_fcn.html</loc>
+  </url>
+  <url>
+    <loc>https://yukiyanai.github.io/rgamer/reference/solve_seq_matrix.html</loc>
   </url>
 </urlset>

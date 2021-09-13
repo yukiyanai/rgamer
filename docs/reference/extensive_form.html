@@ -79,7 +79,7 @@ a game tree." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.7</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.8</span>
       </span>
     </div>
 
@@ -144,13 +144,17 @@ a game tree.</p>
   players <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>actions</span>,
   <span class='va'>payoffs</span>,
-  quietly <span class='op'>=</span> <span class='cn'>FALSE</span>,
   show_tree <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  mark_path <span class='op'>=</span> <span class='cn'>FALSE</span>,
   show_node_id <span class='op'>=</span> <span class='cn'>TRUE</span>,
   direction <span class='op'>=</span> <span class='st'>"down"</span>,
   color_palette <span class='op'>=</span> <span class='st'>"Set1"</span>,
-  family <span class='op'>=</span> <span class='cn'>NULL</span>
+  family <span class='op'>=</span> <span class='cn'>NULL</span>,
+  size_player <span class='op'>=</span> <span class='fl'>4</span>,
+  size_payoff <span class='op'>=</span> <span class='fl'>4</span>,
+  size_action <span class='op'>=</span> <span class='fl'>4</span>,
+  size_node_id <span class='op'>=</span> <span class='fl'>4</span>,
+  size_terminal <span class='op'>=</span> <span class='fl'>2</span>,
+  scale <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -175,20 +179,9 @@ numeric vector of payoffs for a player. The names of the elements must
 match the names of the players specified  by <code>players</code>.</p></td>
     </tr>
     <tr>
-      <th>quietly</th>
-      <td><p>A logical value. If <code>TRUE</code>, the subgame perfect
-equilibrium will not be displayed on screen. Default is <code>FALSE</code>.</p></td>
-    </tr>
-    <tr>
       <th>show_tree</th>
       <td><p>A logical value. If <code>TRUE</code>, the game tree will be
 displayed. Default is <code>TRUE</code>.</p></td>
-    </tr>
-    <tr>
-      <th>mark_path</th>
-      <td><p>A logical value. If <code>TRUE</code>, The paths played in the
-equilibrium will be marked (with color and bold lines). Default is
-<code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>show_node_id</th>
@@ -215,6 +208,33 @@ Default is <code>"down"</code>.</p></td>
       <th>family</th>
       <td><p>A font family to be used in the tree.</p></td>
     </tr>
+    <tr>
+      <th>size_player</th>
+      <td><p>Font size for the players' names. Default is 4.</p></td>
+    </tr>
+    <tr>
+      <th>size_payoff</th>
+      <td><p>Font size for the payoffs. Default is 4.</p></td>
+    </tr>
+    <tr>
+      <th>size_action</th>
+      <td><p>Font size for the action displayed by each edge. Default
+is 4.</p></td>
+    </tr>
+    <tr>
+      <th>size_node_id</th>
+      <td><p>Size of the node id. Default is 4.</p></td>
+    </tr>
+    <tr>
+      <th>size_terminal</th>
+      <td><p>Size of the terminal node. Default is 2.</p></td>
+    </tr>
+    <tr>
+      <th>scale</th>
+      <td><p>Scale <code>player_size</code>, <code>payoff_size</code>,
+<code>action_size</code>, <code>noden_size</code>, <code>terminal_size</code>. It must be a
+positive number.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -238,7 +258,7 @@ tree.</p>
                   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"U'"</span>, <span class='st'>"D'"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"U''"</span>, <span class='st'>"D''"</span><span class='op'>)</span><span class='op'>)</span>,
   payoffs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>Kamijo <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span>,
                  Yanai  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Subgame perfect equilibrium: [(U), (D', U'')]</span></div><div class='img'><img src='extensive_form-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div><div class='img'><img src='extensive_form-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='va'>g2</span> <span class='op'>&lt;-</span> <span class='fu'>extensive_form</span><span class='op'>(</span>
   players <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"f"</span>,
                  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"m"</span>, <span class='st'>"m"</span><span class='op'>)</span>,
@@ -247,8 +267,6 @@ tree.</p>
                  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ballet"</span>, <span class='st'>"baseball"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ballet"</span>, <span class='st'>"baseball"</span><span class='op'>)</span><span class='op'>)</span>,
   payoffs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>f <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>,
                  m <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>,
-  mark_path <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  quietly <span class='op'>=</span> <span class='cn'>TRUE</span>,
   show_node_id <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 </div><div class='img'><img src='extensive_form-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='va'>g3</span> <span class='op'>&lt;-</span> <span class='fu'>extensive_form</span><span class='op'>(</span>
@@ -259,10 +277,9 @@ tree.</p>
                  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"F"</span>, <span class='st'>"G"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"H"</span>, <span class='st'>"I"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"J"</span>, <span class='st'>"K"</span><span class='op'>)</span><span class='op'>)</span>,
   payoffs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>p1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>1</span><span class='op'>)</span>,
                  p2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>,
-  mark_path <span class='op'>=</span> <span class='cn'>TRUE</span>,
   direction <span class='op'>=</span> <span class='st'>"down"</span>,
   show_node_id <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Subgame perfect equilibria: [(C), (F, H, K)], [(C), (G, H, K)], [(C), (F, I, K)], [(C), (G, I, K)]</span></div><div class='img'><img src='extensive_form-3.png' alt='' width='700' height='433' /></div><div class='input'>
+</div><div class='img'><img src='extensive_form-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='va'>g4</span> <span class='op'>&lt;-</span> <span class='fu'>extensive_form</span><span class='op'>(</span>
   players <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"child"</span>,
                  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='st'>"parent"</span><span class='op'>)</span>,
@@ -270,9 +287,8 @@ tree.</p>
    actions <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"give up"</span>, <span class='st'>"keep asking"</span><span class='op'>)</span>,
                   <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"leave"</span>,   <span class='st'>"buy"</span><span class='op'>)</span><span class='op'>)</span>,
    payoffs   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>child  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='op'>-</span><span class='fl'>10</span>, <span class='fl'>10</span><span class='op'>)</span>,
-                    parent <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='op'>-</span><span class='fl'>10</span>,  <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>,
-   mark_path <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Subgame perfect equilibrium: [(keep asking), (buy)]</span></div><div class='img'><img src='extensive_form-4.png' alt='' width='700' height='433' /></div><div class='input'>
+                    parent <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='op'>-</span><span class='fl'>10</span>,  <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='extensive_form-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='va'>g5</span> <span class='op'>&lt;-</span> <span class='fu'>extensive_form</span><span class='op'>(</span>
   players <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"Kamijo"</span>,
                  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Yanai"</span>, <span class='cn'>NA</span><span class='op'>)</span>,
@@ -284,7 +300,7 @@ tree.</p>
   payoffs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>Kamijo <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>3</span><span class='op'>)</span>,
                  Yanai <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>2</span>, <span class='fl'>4</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>,
   direction <span class='op'>=</span> <span class='st'>"horizontal"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Subgame perfect equilibrium: [(P, P''), (P')]</span></div><div class='img'><img src='extensive_form-5.png' alt='' width='700' height='433' /></div></pre>
+</div><div class='img'><img src='extensive_form-5.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -312,8 +328,8 @@ tree.</p>
   docsearch({
     
     
-    apiKey: 'API_KEY',
-    indexName: 'INDEX_NAME',
+    apiKey: '5ac428bc699b36dda4d35fa97f145ac1',
+    indexName: 'rgamer',
     inputSelector: 'input#search-input.form-control',
     transformData: function(hits) {
       return hits.map(function (hit) {

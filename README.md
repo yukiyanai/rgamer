@@ -159,7 +159,7 @@ correspondences by default.
 
 ``` r
 s_game3 <- solve_nfg(game3)
-#> NE: (28/3, 28/3)
+#> approximated NE: (9.3, 9.3)
 #> The obtained NE might be only a part of the solutions.
 #> Please examine br_plot (best response plot) carefully.
 ```
@@ -205,8 +205,7 @@ s_game4 <- solve_nfg(
   game = game4,
   cons1 = list(a = 2, b = 28),
   cons2 = list(s = 2, t = 28),
-  plot = FALSE
-)
+  plot = FALSE)
 #> approximated NE: (9.3, 9.3)
 #> The obtained NE might be only a part of the solutions.
 #> Please examine br_plot (best response plot) carefully.
@@ -220,8 +219,7 @@ s_game4b <- solve_nfg(
   game = game4,
   cons1 = list(a = 2, b = 28),
   cons2 = list(s = 2, t = 28),
-  precision = 3
-)
+  precision = 3)
 #> approximated NE: (9.333, 9.333)
 #> The obtained NE might be only a part of the solutions.
 #> Please examine br_plot (best response plot) carefully.
@@ -298,27 +296,22 @@ game6 <- extensive_form(
                   c("stat", "game"), c("stat", "game")),
   payoffs = list(Yanai = c(2, 0, 0, 1),
                  Kamijo = c(1, 0, 0, 2)),
-  quietly = TRUE
-)
+  direction = "right")
 ```
 
 ![](man/figures/README-unnamed-chunk-21-1.png)<!-- -->
 
-And you can show the equilibrium path by setting `mark_path = TRUE`.
+And you can find the solution of the game by `solve_efg()`.
 
 ``` r
-game6 <- extensive_form(
- players = list("Yanai", 
-                 rep("Kamijo", 2),
-                 rep(NA, 4)),
-  actions = list(c("stat", "game"),
-                  c("stat", "game"), c("stat", "game")),
-  payoffs = list(Yanai = c(2, 0, 0, 1),
-                 Kamijo = c(1, 0, 0, 2)),
-  mark_path = TRUE,
-  direction = "right",
-  color_palette = "Accent"
-)
+s_game6 <- solve_efg(game6)
+#> backward induction: [(stat), (stat, game)]
 ```
 
-![](man/figures/README-unnamed-chunk-22-1.png)<!-- -->
+Then, you can see the path played under a solution by `show_path()`.
+
+``` r
+show_path(s_game6)
+```
+
+![](man/figures/README-unnamed-chunk-23-1.png)<!-- -->

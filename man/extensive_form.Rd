@@ -8,13 +8,17 @@ extensive_form(
   players = NULL,
   actions,
   payoffs,
-  quietly = FALSE,
   show_tree = TRUE,
-  mark_path = FALSE,
   show_node_id = TRUE,
   direction = "down",
   color_palette = "Set1",
-  family = NULL
+  family = NULL,
+  size_player = 4,
+  size_payoff = 4,
+  size_action = 4,
+  size_node_id = 4,
+  size_terminal = 2,
+  scale = NULL
 )
 }
 \arguments{
@@ -30,15 +34,8 @@ of character strings that corresponds to a specific player node.}
 numeric vector of payoffs for a player. The names of the elements must
 match the names of the players specified  by \code{players}.}
 
-\item{quietly}{A logical value. If \code{TRUE}, the subgame perfect
-equilibrium will not be displayed on screen. Default is \code{FALSE}.}
-
 \item{show_tree}{A logical value. If \code{TRUE}, the game tree will be
 displayed. Default is \code{TRUE}.}
-
-\item{mark_path}{A logical value. If \code{TRUE}, The paths played in the
-equilibrium will be marked (with color and bold lines). Default is
-\code{FALSE}.}
 
 \item{show_node_id}{A logical value. If \code{TRUE}, the node numbers are
 displayed in the figure. Default is \code{TRUE}.}
@@ -56,6 +53,21 @@ Default is \code{"down"}.}
 \item{color_palette}{A color palette to be used. Default is "Set1".}
 
 \item{family}{A font family to be used in the tree.}
+
+\item{size_player}{Font size for the players' names. Default is 4.}
+
+\item{size_payoff}{Font size for the payoffs. Default is 4.}
+
+\item{size_action}{Font size for the action displayed by each edge. Default
+is 4.}
+
+\item{size_node_id}{Size of the node id. Default is 4.}
+
+\item{size_terminal}{Size of the terminal node. Default is 2.}
+
+\item{scale}{Scale \code{player_size}, \code{payoff_size},
+\code{action_size}, \code{noden_size}, \code{terminal_size}. It must be a
+positive number.}
 }
 \value{
 An object of "extensive_form" class, which defines an extensive-form
@@ -87,8 +99,6 @@ g2 <- extensive_form(
                  c("ballet", "baseball"), c("ballet", "baseball")),
   payoffs = list(f = c(2, 0, 0, 1),
                  m = c(1, 0, 0, 2)),
-  mark_path = TRUE,
-  quietly = TRUE,
   show_node_id = FALSE)
 
 g3 <- extensive_form(
@@ -99,7 +109,6 @@ g3 <- extensive_form(
                  c("F", "G"), c("H", "I"), c("J", "K")),
   payoffs = list(p1 = c(3, 1, 1, 2, 2, 1),
                  p2 = c(0, 0, 1, 1, 2, 3)),
-  mark_path = TRUE,
   direction = "down",
   show_node_id = TRUE)
 
@@ -110,8 +119,7 @@ g4 <- extensive_form(
    actions = list(c("give up", "keep asking"),
                   c("leave",   "buy")),
    payoffs   = list(child  = c(0, -10, 10),
-                    parent = c(5, -10,  2)),
-   mark_path = TRUE)
+                    parent = c(5, -10,  2)))
 
 g5 <- extensive_form(
   players = list("Kamijo",

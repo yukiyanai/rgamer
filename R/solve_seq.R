@@ -33,7 +33,6 @@ solve_seq <- function(game,
 
   } else if (game$type == "char_function") {
     solve_seq_char(game = game,
-#                   delta = delta,
                    precision = precision,
                    quietly = quietly)
 

@@ -79,7 +79,7 @@ payoff functions are provided as R functions." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.7</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.8</span>
       </span>
     </div>
 
@@ -142,6 +142,7 @@ payoff functions are provided as R functions.</p>
 
     <pre class="usage"><span class='fu'>solve_nfg_fcn</span><span class='op'>(</span>
   <span class='va'>game</span>,
+  par_label <span class='op'>=</span> <span class='cn'>NULL</span>,
   cons1 <span class='op'>=</span> <span class='cn'>NULL</span>,
   cons2 <span class='op'>=</span> <span class='cn'>NULL</span>,
   cons_common <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -158,6 +159,11 @@ payoff functions are provided as R functions.</p>
     <tr>
       <th>game</th>
       <td><p>A "normal_form" class object created by <code><a href='normal_form.html'>normal_form()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>par_label</th>
+      <td><p>A vector of parameter labels if the user define the game
+with functions as characters.</p></td>
     </tr>
     <tr>
       <th>cons1</th>
@@ -244,8 +250,8 @@ and the plot of best response correspondences.</p>
   docsearch({
     
     
-    apiKey: 'API_KEY',
-    indexName: 'INDEX_NAME',
+    apiKey: '5ac428bc699b36dda4d35fa97f145ac1',
+    indexName: 'rgamer',
     inputSelector: 'input#search-input.form-control',
     transformData: function(hits) {
       return hits.map(function (hit) {

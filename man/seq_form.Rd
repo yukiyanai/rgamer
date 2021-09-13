@@ -91,6 +91,14 @@ object of "sequential_form" class.
 Create an object of 'sequential_form' class, which can be passed to
 functions in order to find solutions of the game.
 }
+\examples{
+g1 <- seq_form(
+  players = c("Leader", "Follower"),
+  s1 = c("R", "S", "P"),
+  s2 = c("R", "S", "P"),
+  p1 = c(0, -1, 1, 1, 0, -1, -1, 1, 0),
+  p2 = c(0, 1, -1, -1, 0, 1, 1, -1, 0))
+}
 \author{
 Yoshio Kamijo and Yuki Yanai \href{mailto:yanai.yuki@kochi-tech.ac.jp}{yanai.yuki@kochi-tech.ac.jp}
 }

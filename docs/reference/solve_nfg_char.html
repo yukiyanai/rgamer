@@ -80,7 +80,7 @@ strings by normal_form()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.7</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.8</span>
       </span>
     </div>
 
@@ -144,7 +144,6 @@ strings by <code><a href='normal_form.html'>normal_form()</a></code>.</p>
 
     <pre class="usage"><span class='fu'>solve_nfg_char</span><span class='op'>(</span>
   <span class='va'>game</span>,
-  delta <span class='op'>=</span> <span class='fl'>0.1</span>,
   plot <span class='op'>=</span> <span class='cn'>TRUE</span>,
   mark_NE <span class='op'>=</span> <span class='cn'>FALSE</span>,
   quietly <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -157,12 +156,6 @@ strings by <code><a href='normal_form.html'>normal_form()</a></code>.</p>
     <tr>
       <th>game</th>
       <td><p>A "normal_form" class object created by <code><a href='normal_form.html'>normal_form()</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>delta</th>
-      <td><p>A numerical value specifying the grid size to draw the figure of
-best response correspondences. The default value is <code>0.1</code>. The
-smaller the value is, the smoother the correspondence curves are.</p></td>
     </tr>
     <tr>
       <th>plot</th>
@@ -225,8 +218,8 @@ and the plot of best response correspondences.</p>
   docsearch({
     
     
-    apiKey: 'API_KEY',
-    indexName: 'INDEX_NAME',
+    apiKey: '5ac428bc699b36dda4d35fa97f145ac1',
+    indexName: 'rgamer',
     inputSelector: 'input#search-input.form-control',
     transformData: function(hits) {
       return hits.map(function (hit) {

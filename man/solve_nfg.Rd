@@ -10,7 +10,6 @@ solve_nfg(
   show_table = TRUE,
   cell_width = NULL,
   mark_br = TRUE,
-  delta = 0.1,
   cons1 = NULL,
   cons2 = NULL,
   cons_common = NULL,
@@ -35,10 +34,6 @@ The unit is pixel.}
 
 \item{mark_br}{A logical value. If \code{TRUE}, the best response to each of
 the opponent's strategy is marked. Default is \code{TRUE}.}
-
-\item{delta}{A numerical value specifying the grid size to draw the figure of
-best response correspondences. The default value is \code{0.1}. The
-smaller the value is, the smoother the correspondence curves are.}
 
 \item{cons1}{A named list of parameters contained in \code{game$payoff$p1}
 that should be treated as constants, if any.}

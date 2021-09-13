@@ -27,7 +27,7 @@ br_plot <- function(game,
   mat1 <- game$mat$matrix1
   mat2 <- game$mat$matrix2
 
-  if (is.null(msNE)) msNE <- find_mixed_NE(game)
+  if (is.null(msNE)) msNE <- find_mixed_NE(game)$msNE
 
   if (is.null(msNE)) {
     ## BR of A v B

@@ -70,12 +70,32 @@ RPS <- seq_form(
   p1 = c(0,  1,  1, -1, 0,  1,  1, -1, 0),
   p2 = c(0, -1, -1,  1, 0, -1, -1,  1, 0))
 
+
+g_ult <- extensive_form(
+  players = list("K",
+                 rep("Y", 5),
+                 rep(NA, 10)),
+  actions <- list(c("4:0", "3:1", "2:2", "1:3", "1:4"), # n1: k
+                  c("A", "R"), ## n2: y
+                  c("A", "R"), ## n3: y
+                  c("A", "R"), ## n4: y
+                  c("A", "R"), ## n5: y
+                  c("A", "R")), ## n6: y
+  payoffs = list(K = c(4, 0, 3, 0, 2, 0, 1, 0, 0, 0),
+                 Y = c(0, 0, 1, 0, 2, 0, 3, 0, 4, 0)),
+  direction = "right")
+
 PD <- normal_form(
   players = c("Kamijo", "Yanai"),
   s1 = c("Stays silent", "Betrays"),
   s2 = c("Stays silent", "Betrays"),
   p1 = c(-1,  0, -3, -2),
   p2 = c(-1, -3,  0, -2))
+
+test_that("solve_efg finds solutions of extensive-form games", {
+  expect_length(solve_efg(g_ult), 3)
+  expect_s3_class(solve_efg(g_ult), "extensive_sol")
+})
 
 test_that("solve_seq_matrix finds SPE outcomes of matrix-type games", {
   expect_type(solve_seq_matrix(matrix_game), "list")

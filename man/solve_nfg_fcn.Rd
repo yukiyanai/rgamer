@@ -6,6 +6,7 @@
 \usage{
 solve_nfg_fcn(
   game,
+  par_label = NULL,
   cons1 = NULL,
   cons2 = NULL,
   cons_common = NULL,
@@ -18,6 +19,9 @@ solve_nfg_fcn(
 }
 \arguments{
 \item{game}{A "normal_form" class object created by \code{normal_form()}.}
+
+\item{par_label}{A vector of parameter labels if the user define the game
+with functions as characters.}
 
 \item{cons1}{A named list of parameters contained in \code{game$payoff$p1}
 that should be treated as constants, if any.}

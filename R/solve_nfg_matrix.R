@@ -2,8 +2,9 @@
 #' @description \code{solve_nfg_matrix()} finds Nash equilibria of a normal-form
 #'      (strategic-form) game with discrete-choice strategies.
 #' @return A list containing pure strategy Nash equilibrium (NE), mixed strategy
-#'      NE, the gt table of the game, and the plot of best response
-#'      correspondences. Each element will be \code{NULL} if not available.
+#'      NE, the gt table of the game, the plot of best response
+#'      correspondences, and the list of mixed strategy NE of the subsets of
+#'      strategies. Each element will be \code{NULL} if not available.
 #' @param game A "normal_form" class object created by \code{normal_form()}.
 #' @seealso \code{\link{normal_form}}
 #' @param mixed A logical value. If \code{TRUE}, mixed-strategy NE will be
@@ -38,6 +39,8 @@ solve_nfg_matrix <- function(
 
   if (mixed) {
     msNE <- find_mixed_NE(game)
+    msNE_list <- msNE$msNE_list
+    msNE <- msNE$msNE
     if (is.null(msNE)) message("Mixed-strategy NE does not exist (or infinitely many exist).\n")
     else {
       out1 <- stringi::stri_join(MASS::fractions(msNE[[1]]), collapse = ", ")
@@ -55,6 +58,7 @@ solve_nfg_matrix <- function(
     }
   } else {
     msNE <- NULL
+    msNE_list <- NULL
   }
   mat_tbl <- game_table(game, cell_width = cell_width, mark_br = mark_br)
   if (show_table) print(mat_tbl)
@@ -65,5 +69,9 @@ solve_nfg_matrix <- function(
     p <- NULL
   }
 
-  return(list(psNE = psNE, msNE = msNE, table = mat_tbl, br_plot = p))
+  return(list(psNE = psNE,
+              msNE = msNE,
+              table = mat_tbl,
+              br_plot = p,
+              msNE_list = msNE_list))
 }
