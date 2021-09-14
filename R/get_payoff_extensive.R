@@ -22,6 +22,18 @@ get_payoff_extensive <- function(game, actions) {
     }
   }
 
+  actions_avail <- game$action %>%
+    unlist() %>%
+    unique()
+
+  for (i in 1:length(actions)) {
+    actions_i <- actions[[i]]
+    for (j in 1:length(actions_i)) {
+      if (!(actions_i[j] %in% actions_avail))
+        stop(paste(actions_i[j], "is not an available action of the game"))
+    }
+  }
+
   df_path <- game$data$path
   df_node <- game$data$node
 
