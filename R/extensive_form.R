@@ -16,6 +16,9 @@
 #'     displayed. Default is \code{TRUE}.
 #' @param show_node_id A logical value. If \code{TRUE}, the node numbers are
 #'     displayed in the figure. Default is \code{TRUE}.
+#' @param info_set A list of information sets.
+#' @param info_line Line type to connect nodes in an information set. Either
+#'     \code{"solid"} or \code{"dashed"}. Default to \code{"solid"}.
 #' @param direction The direction to which a game tree grows.
 #'     The value must be one of:
 #'     \code{"right"},
@@ -39,7 +42,7 @@
 #' @return An object of "extensive_form" class, which defines an extensive-form
 #'     (or sequential) game.
 #' @importFrom magrittr %>%
-#' @include set_nodes.R set_paths.R
+#' @include set_nodes.R set_paths.R extensive_strategy.R
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
 #' @examples
@@ -99,6 +102,8 @@ extensive_form <- function(
   payoffs,        # named list, one vector for each player. Names must match the unique names of the players
   show_tree = TRUE,
   show_node_id = TRUE,
+  info_set = NULL,
+  info_line = "solid",
   direction = "down",
   color_palette = "Set1",
   family = NULL,
@@ -114,7 +119,8 @@ extensive_form <- function(
                                      "bidirectional",
                                      "horizontal", "vertical"))
 
-  x_s <- x_m <- x_e <- y_s <- y_m <- y_e <- NULL
+  x_s <- x_m <- x_e <- y_s <- y_m <- y_e <- id <- player<- NULL
+  info_sets <- node_from <- s <- NULL
 
   if (!is.null(scale)) {
     if (!is.numeric(scale) | scale <= 0)
@@ -168,6 +174,8 @@ extensive_form <- function(
                     df_node = df_node,
                     direction = direction,
                     show_node_id = show_node_id,
+                    info_set = info_set,
+                    info_line = info_line,
                     color_palette = color_palette,
                     family = family,
                     size_player = size_player,
@@ -181,13 +189,62 @@ extensive_form <- function(
     plot(tree)
   }
 
+  if (!is.null(info_set)) {
+
+    ## check if actions are compatible with info sets
+    for (i in 1:length(info_set)) {
+      n_nodes <- length(info_set[[i]])
+      action_list <- list()
+      for (j in 1:n_nodes) {
+        action_list[[j]] <- df_path %>%
+          dplyr::filter(node_from == info_set[[i]][j]) %>%
+          dplyr::pull(s)
+      }
+      for (j in 2:n_nodes) {
+        if (!setequal(action_list[[j]], action_list[[j - 1]]))
+          stop("Different sets of actions are given at different nodes within an information set.")
+      }
+    }
+
+    ## find players correspondingto info sets
+    n_info_set <- length(info_set)
+    info_set_player <- rep(NA, n_info_set)
+    for (i in 1:n_info_set) {
+      info_node <- info_set[[i]][1]
+      info_set_player[i] <- df_node %>%
+        dplyr::filter(id == info_node) %>%
+        dplyr::pull(player)
+    }
+  } else {
+    info_set_player <- NULL
+  }
+
+  node_to_play <- list()
+  u_players <- unique(players_vec)
+  for (i in 1:length(u_players)) {
+    node_to_play[[i]] <- df_node %>%
+      dplyr::filter(player == u_players[i]) %>%
+      dplyr::pull(id)
+  }
+  names(node_to_play) <- u_players
+
+  strategies <- extensive_strategy(player = players_vec,
+                                   action_list = actions,
+                                   info_set = info_set,
+                                   info_set_player = info_set_player,
+                                   node_to_play = node_to_play)
+
   value <- list(player = players_vec,
                 action = actions,
+                strategy = strategies$strategy,
+                action_prof = strategies$action_profile,
                 payoff = payoffs,
+                info_set = info_set,
                 tree   = tree,
                 data   = list(node = df_node,
                               path = df_path),
-                tree_params = list(direction = direction,
+                tree_params = list(info_line = info_line,
+                                   direction = direction,
                                    show_node_id = show_node_id,
                                    color_palette = color_palette,
                                    family = family,

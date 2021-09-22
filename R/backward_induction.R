@@ -14,6 +14,8 @@ backward_induction <- function(game) {
   node_from <- node_to <- id <- played <- NULL
   type <- player <- NULL
 
+  if (!is.null(game$info_set)) stop("This is not a perfect-information game.")
+
   df_node <- game$data$node
   df_path <- game$data$path
   df_play <- df_node %>%
@@ -125,6 +127,8 @@ backward_induction <- function(game) {
                      df_node = df_node,
                      direction = game$tree_param$direction,
                      show_node_id = game$tree_param$show_node_id,
+                     info_set = game$info_set,
+                     info_line = game$tree_para$info_line,
                      color_palette = game$tree_param$color_palette,
                      family = game$tree_param$family,
                      size_player = game$tree_param$size_player,

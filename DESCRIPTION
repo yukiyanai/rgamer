@@ -1,7 +1,7 @@
 Package: rgamer
 Type: Package
 Title: Learn Game Theory Using R
-Version: 0.0.8
+Version: 0.0.9
 Authors@R:
     c(person(given = "Yoshio",
              family = "Kamijo",
@@ -29,6 +29,7 @@ Depends:
     ggplot2 (>= 3.3.5)
 Imports:
     dplyr (>= 1.0.0),
+    ggforce,
     gt (>= 0.3.1),
     magrittr,
     MASS,
@@ -52,7 +53,10 @@ Collate:
     'br_plot.R'
     'char2function.R'
     'dom.R'
+    'get_payoff_extensive.R'
+    'draw_path.R'
     'eliminate_strategy.R'
+    'extensive_strategy.R'
     'set_paths.R'
     'set_nodes.R'
     'extensive_form.R'
@@ -62,7 +66,6 @@ Collate:
     'find_mixed_NE.R'
     'find_pure_NE.R'
     'game_table.R'
-    'get_payoff_extensive.R'
     'get_payoff_normal.R'
     'get_payoff.R'
     'gridsearch_backward.R'
@@ -86,4 +89,5 @@ Collate:
     'solve_seq_char.R'
     'solve_seq_fcn.R'
     'solve_seq_matrix.R'
+    'to_matrix.R'
 Roxygen: list(markdown = TRUE)

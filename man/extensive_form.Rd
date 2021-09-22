@@ -10,6 +10,8 @@ extensive_form(
   payoffs,
   show_tree = TRUE,
   show_node_id = TRUE,
+  info_set = NULL,
+  info_line = "solid",
   direction = "down",
   color_palette = "Set1",
   family = NULL,
@@ -39,6 +41,11 @@ displayed. Default is \code{TRUE}.}
 
 \item{show_node_id}{A logical value. If \code{TRUE}, the node numbers are
 displayed in the figure. Default is \code{TRUE}.}
+
+\item{info_set}{A list of information sets.}
+
+\item{info_line}{Line type to connect nodes in an information set. Either
+\code{"solid"} or \code{"dashed"}. Default to \code{"solid"}.}
 
 \item{direction}{The direction to which a game tree grows.
 The value must be one of:

@@ -1,3 +1,17 @@
+# rgamer 0.0.9
+
+## New functions
+
+- `to_matrix()` transforms an extensive form game defined by `extensive_form()` into a normal-form game. 
+- In a game tree, You can specify what actions each player takes and show them with color by `draw_path()`
+
+
+## Changes in extensive-form game
+
+- You can specify information sets by the `info_set` argument.
+- An object of `extensive_form` class now has the list of strategies, `strategy`.
+
+
 # rgamer 0.0.8
 
 ## Changes in extensive-form games

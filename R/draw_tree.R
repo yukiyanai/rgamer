@@ -11,6 +11,9 @@
 #'     be colored.
 #' @param show_node_id A logical value. If \code{TRUE}, the node numbers are
 #'     displayed in the figure. Default is \code{TRUE}.
+#' @param info_set A list of information sets.
+#' @param info_line Line type to connect nodes in an information set. Either
+#'     \code{"solid"} or \code{"dashed"}. Default to \code{"solid"}.
 #' @param direction The direction to which a game tree grows.
 #'     The value must be one of:
 #'     \code{"right"},
@@ -39,6 +42,8 @@ draw_tree <- function(df_path,
                       df_node,
                       df_sol = NULL,
                       show_node_id = TRUE,
+                      info_set = NULL,
+                      info_line = "solid",
                       direction = "down",
                       color_palette = "Set1",
                       family = NULL,
@@ -52,6 +57,7 @@ draw_tree <- function(df_path,
   type <- node_from <- node_to <- id <- match_id <- NULL
   left <- x <- x_s <- x_m <- x_e <- y <- y_s <- y_m <- y_e <- NULL
   player <- payoff <- s <- NULL
+  player_color <- info_group <- NULL
 
   df_play <- df_node %>%
     dplyr::filter(type == "play")
@@ -123,6 +129,7 @@ draw_tree <- function(df_path,
   }
 
   if (!is.null(df_sol)) {
+    df_sol$player_color <- as.integer(factor(df_sol$player))
     tree <- ggplot2::ggplot() +
       ggplot2::geom_segment(data = df_path,
                             ggplot2::aes(x = x_s,
@@ -134,7 +141,7 @@ draw_tree <- function(df_path,
                                          xend = x_e,
                                          y = y_s,
                                          yend = y_e,
-                                         color = player),
+                                         color = as.factor(player_color)),
                             size = 2)
   } else {
     tree <- ggplot2::ggplot() +
@@ -144,7 +151,6 @@ draw_tree <- function(df_path,
                                          y = y_s,
                                          yend = y_e))
   }
-
 
   if (direction == "up") {
     tree <- tree +
@@ -216,12 +222,72 @@ draw_tree <- function(df_path,
       ggplot2::scale_y_continuous(NULL, breaks = NULL)
   }
 
+
+  df_play$player_color <- as.integer(factor(df_play$player))
+  p_length <- length(unique(df_play$player))
+
+  if (!is.null(info_set)) {
+
+    x_dif <- 100 / (length(unique(df_node$x)) - 1)
+    y_dif <- 100 / (length(unique(df_node$y)) - 1)
+
+
+    n_info_sets <- length(info_set)
+    for (i in 1:n_info_sets) {
+      info_set_i <- info_set[[i]]
+      n_pairs <- length(info_set_i) - 1
+      for (j in 1:n_pairs) {
+        info_pair <- info_set_i[j:(j + 1)]
+        df_info <- df_node[info_pair, ]
+
+        info_x <- df_info$x
+        if (info_x[1] == info_x[2]) {
+          info_x <- c(info_x[1], info_x[1] - x_dif / 5, info_x[2])
+        } else {
+          info_x <- c(info_x[1], sum(info_x) / 2, info_x[2])
+        }
+
+        info_y <- df_info$y
+        if (info_y[1] == info_y[2]) {
+          info_y <- c(info_y[1], info_y[1] - y_dif / 5, info_y[2])
+        } else {
+          info_y <- c(info_y[1], sum(info_y) / 2, info_y[2])
+        }
+
+        bezier_df <- data.frame(x = info_x,
+                                y = info_y,
+                                info_group = as.character(i + p_length))
+
+        if (info_line == "solid") {
+          tree <- tree +
+            ggforce::geom_bezier(data = bezier_df,
+                                 ggplot2::aes(x = x,
+                                              y = y,
+                                              color = info_group,
+                                              group = "cubic"),
+                                 linetype = "solid",
+                                 alpha = 0.5,
+                                 size = 2)
+        } else {
+          tree <- tree +
+            ggforce::geom_bezier(data = bezier_df,
+                                 ggplot2::aes(x = x,
+                                              y = y,
+                                              color = info_group,
+                                              group = "cubic"),
+                                 linetype = "dotdash",
+                                 size = 1.2)
+        }
+      }
+    }
+  }
+
   if (is.null(family)) {
     tree <- tree +
       ggplot2::geom_label(data = df_play,
                           ggplot2::aes(x = x, y = y,
                                        label = player,
-                                       color = player),
+                                       color = as.factor(player_color)),
 
                           size = size_payoff) +
       ggplot2::geom_text(data = df_path,
@@ -238,12 +304,13 @@ draw_tree <- function(df_path,
       ggplot2::geom_label(data = df_play,
                           ggplot2::aes(x = x, y = y,
                                        label = player,
-                                       color = player),
+                                       color = as.factor(player_color)),
 
                           size = size_player,
                           family = family) +
       ggplot2::geom_text(data = df_path,
                          ggplot2::aes(x = x_m,
+
                                       y = y_m,
                                       label = s),
                          size = size_action,

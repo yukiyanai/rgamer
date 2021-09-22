@@ -5,11 +5,13 @@
 #'     \code{extensive_form()}.
 #' @param actions A named list of actions to which the payoffs correspond. It
 #'     must be a complete list of actions for each player node.
+#' @param get_node A logical value. If \code{TRUE} the terminal node the game
+#'    reached will be displayed instead of the payoffs.
 #' @return A vector of payoffs.
 #' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
-get_payoff_extensive <- function(game, actions) {
+get_payoff_extensive <- function(game, actions, get_node = FALSE) {
 
   id <- node_from <- node_to<- type <- s <- NULL
 
@@ -56,9 +58,10 @@ get_payoff_extensive <- function(game, actions) {
 
   ## play the game forward from the first node
   i <- 1
-  while (i <= n_nodes) {
-    next_node <- df_list[[i]] %>%
-      dplyr::filter(s == action_vec[i]) %>%
+  max_id <- max(df_node$id)
+  while (i <= max_id) {
+    next_node <- df_list[[which(play_nodes == i)]] %>%
+      dplyr::filter(s == action_vec[which(play_nodes == i)]) %>%
       dplyr::pull(node_to)
     if (next_node %in% terminal_nodes) break
     else i <- next_node
@@ -69,5 +72,10 @@ get_payoff_extensive <- function(game, actions) {
   targets <- names(actions)
   payoffs <- df[1, targets] %>% unlist()
 
-  return(payoffs)
+  if (get_node) {
+    reached <- paste0("n", df$id[1])
+    return(list(payoffs = payoffs, reached = reached))
+  } else {
+    return(payoffs)
+  }
 }

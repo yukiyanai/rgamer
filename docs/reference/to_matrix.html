@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Find Nash equilibria of a normal-form game. — solve_nfg_fcn • rgamer</title>
+<title>Transform an extensive-form game into a normal-form game. — to_matrix • rgamer</title>
 
 
 <!-- jquery -->
@@ -45,9 +45,10 @@
 
 
 
-<meta property="og:title" content="Find Nash equilibria of a normal-form game. — solve_nfg_fcn" />
-<meta property="og:description" content="solve_nfg_fcn() finds the pair of best responses when
-payoff functions are provided as R functions." />
+<meta property="og:title" content="Transform an extensive-form game into a normal-form game. — to_matrix" />
+<meta property="og:description" content="to_matrix transoforms a two-person extensive-form game
+into a normal-form game
+a specified pair of strategies or a set of action profiles." />
 
 
 
@@ -130,95 +131,32 @@ payoff functions are provided as R functions." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Find Nash equilibria of a normal-form game.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/yukiyanai/rgamer/blob/master/R/solve_nfg_fcn.R'><code>R/solve_nfg_fcn.R</code></a></small>
-    <div class="hidden name"><code>solve_nfg_fcn.Rd</code></div>
+    <h1>Transform an extensive-form game into a normal-form game.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/yukiyanai/rgamer/blob/master/R/to_matrix.R'><code>R/to_matrix.R</code></a></small>
+    <div class="hidden name"><code>to_matrix.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>solve_nfg_fcn()</code> finds the pair of best responses when
-payoff functions are provided as R functions.</p>
+    <p><code>to_matrix</code> transoforms a two-person extensive-form game
+into a normal-form game
+a specified pair of strategies or a set of action profiles.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>solve_nfg_fcn</span><span class='op'>(</span>
-  <span class='va'>game</span>,
-  par_label <span class='op'>=</span> <span class='cn'>NULL</span>,
-  cons1 <span class='op'>=</span> <span class='cn'>NULL</span>,
-  cons2 <span class='op'>=</span> <span class='cn'>NULL</span>,
-  cons_common <span class='op'>=</span> <span class='cn'>NULL</span>,
-  precision <span class='op'>=</span> <span class='fl'>1L</span>,
-  plot <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  mark_NE <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  quietly <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  color_palette <span class='op'>=</span> <span class='st'>"Set1"</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>to_matrix</span><span class='op'>(</span><span class='va'>game</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>game</th>
-      <td><p>A "normal_form" class object created by <code><a href='normal_form.html'>normal_form()</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>par_label</th>
-      <td><p>A vector of parameter labels if the user define the game
-with functions as characters.</p></td>
-    </tr>
-    <tr>
-      <th>cons1</th>
-      <td><p>A named list of parameters contained in <code>game$payoff$p1</code>
-that should be treated as constants, if any.</p></td>
-    </tr>
-    <tr>
-      <th>cons2</th>
-      <td><p>A named list of parameters contained in <code>game$payoff$p2</code>
-that should be treated as constants, if any.</p></td>
-    </tr>
-    <tr>
-      <th>cons_common</th>
-      <td><p>A named list of parameters contained in
-<code>game$payoff$p1</code> and <code>game$payoff$p2</code> that should be treated as
-constants, if any. If <code>cons1</code> and <code>cons2</code> are exactly same, you
-can specify <code>cons_common</code> instead of specifying both <code>cons1</code>
-and <code>cons2</code>.</p></td>
-    </tr>
-    <tr>
-      <th>precision</th>
-      <td><p>A natural number specifying the precision of numerical
-approximation. The value n approximately means that the approximation is
-correct up to the Nth decimal place. The default value is 1.</p></td>
-    </tr>
-    <tr>
-      <th>plot</th>
-      <td><p>A logical value to determine whether the figure of the best
-response correspondences will be displayed. Default is <code>TRUE</code>.</p></td>
-    </tr>
-    <tr>
-      <th>mark_NE</th>
-      <td><p>A logical value to control if the NE (if any) will be marked
-in the best response plot, which will be displayed (only displayed when
-<code>plot = TRUE</code>). Default is <code>FALSE</code>.</p></td>
-    </tr>
-    <tr>
-      <th>quietly</th>
-      <td><p>A logical value to determine if the equilibrium will be kept
-in the returned list  without being printed on screen. Default is
-<code>FALSE</code>.</p></td>
-    </tr>
-    <tr>
-      <th>color_palette</th>
-      <td><p>A color palette to be used. Default is <code>"Set1"</code>.</p></td>
+      <td><p>A two-person extensive-form game defined by
+<code><a href='extensive_form.html'>extensive_form()</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list containing the pair of the best response correspondence (NE)
-and the plot of best response correspondences.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='normal_form.html'>normal_form()</a></code></p></div>
+    <p>A normal_form class object.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Yoshio Kamijo and Yuki Yanai <a href='mailto:yanai.yuki@kochi-tech.ac.jp'>yanai.yuki@kochi-tech.ac.jp</a></p>
