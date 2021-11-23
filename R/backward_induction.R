@@ -14,7 +14,10 @@ backward_induction <- function(game) {
   node_from <- node_to <- id <- played <- NULL
   type <- player <- NULL
 
-  if (!is.null(game$info_set)) stop("This is not a perfect-information game.")
+  if (!is.null(game$info_set)) {
+    if (max(sapply(game$info_set, length)) > 1)
+      stop("This is not a perfect-information game.")
+  }
 
   df_node <- game$data$node
   df_path <- game$data$path

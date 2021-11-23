@@ -18,7 +18,7 @@ to_matrix <- function(game) {
   u_player <- unique(p_vec)
 
   if (length(u_player) != 2)
-    stop("This function is compatible only with two-player games")
+    stop("This function only works with a two-person game")
 
   ## get payoffs
   actions1 <- game$action_prof[[1]]
@@ -28,7 +28,7 @@ to_matrix <- function(game) {
     for (j in 1:length(actions2)) {
       action_to_pass <- list(actions1[[i]], actions2[[j]])
       names(action_to_pass) <- u_player
-      payoffs <- get_payoff(game, actions = action_to_pass)
+      payoffs <- get_payoff(game, actions = action_to_pass)$payoffs
       payoff1 <- c(payoff1, payoffs[1])
       payoff2 <- c(payoff2, payoffs[2])
     }

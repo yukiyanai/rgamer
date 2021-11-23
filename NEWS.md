@@ -1,3 +1,16 @@
+# rgamer 0.0.10
+
+## Changes in normal-form and extensive-form games
+
+- Now payoffs of `normal_form()` can be specified by each cell with `cells` argument rather than by each player with `p1` and `p2`. You need to add `byrow = TRUE` to fill the matrix by row. The matrix is filled by column by default.
+- Similarly, payoffs of `extensive_form()` can be specified by each terminal node with `payoffs2` argument rather than by each player with `payoff` argument.
+- Display order of strategies has been changed when an extensive-form game is transformed into a matrix game by `to_matrix()`.
+- Users can explicitly specify a single-element information set.
+- `extensive_form()` throws an error if a node belongs to more than one information set.
+
+## Changes in
+
+
 # rgamer 0.0.9
 
 ## New functions
@@ -6,7 +19,7 @@
 - In a game tree, You can specify what actions each player takes and show them with color by `draw_path()`
 
 
-## Changes in extensive-form game
+## Changes in extensive-form games
 
 - You can specify information sets by the `info_set` argument.
 - An object of `extensive_form` class now has the list of strategies, `strategy`.

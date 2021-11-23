@@ -8,8 +8,9 @@ normal_form(
   players = NULL,
   s1 = NULL,
   s2 = NULL,
-  p1,
-  p2,
+  p1 = NULL,
+  p2 = NULL,
+  cells = NULL,
   discretize = FALSE,
   discrete_points = c(6, 6),
   symmetric = FALSE,
@@ -38,6 +39,9 @@ Third, it can be an R function of payoff.}
 
 \item{p2}{The payoff of Player 2. See the explanation of \code{p1}
 for detail.}
+
+\item{cells}{A list of vectors to specify the payoff for each cell. Each
+element of the list should be a numeric vector of two players' payoffs.}
 
 \item{discretize}{A logical value. Set this \code{TRUE} to evaluate payoff
 functions at some discrete values of strategies \code{s1} and \code{s2}.
@@ -97,6 +101,15 @@ game1 <- normal_form(
   s2 = c("L", "R"),
   p1 = c(4, 2, 3, 1),
   p2 = c(4, 3, 2, 1),
+  players = c("Row Player", "Column Player"))
+
+game1b <- normal_form(
+  s1 = c("T", "B"),
+  s2 = c("L", "R"),
+  cells = list(c(4, 4),
+               c(2, 3),
+               c(3, 2),
+               c(1, 1)),
   players = c("Row Player", "Column Player"))
 
 game2 <- normal_form(

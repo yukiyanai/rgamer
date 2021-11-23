@@ -14,7 +14,7 @@
 #'     constants, if any. If \code{cons1} and \code{cons2} are exactly same, you
 #'     can specify \code{cons_common} instead of specifying both \code{cons1}
 #'     and \code{cons2}.
-#' @return A vector of payoffs.
+#' @return A list containing payoffs.
 #' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
@@ -101,5 +101,5 @@ get_payoff_normal <- function(game,
 
   payoffs <- c(p1, p2)
   names(payoffs) <- game$player
-  return(payoffs)
+  return(list(payoffs = payoffs))
 }

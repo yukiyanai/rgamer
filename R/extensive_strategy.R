@@ -34,8 +34,20 @@ extensive_strategy <- function(player,
    for (s in action_num_p) {
      actions <- c(actions, list(action_list[[s]]))
    }
-   action_p <- expand.grid(actions) %>%
-     dplyr::mutate(dplyr::across(tidyselect::everything(), as.character))
+
+   actions_l <- sapply(actions, length)
+   tot_rows <- prod(actions_l)
+   action_p <- matrix(NA,
+                      nrow = tot_rows,
+                      ncol = length(actions))
+   colnames(action_p) <- paste0("var", 1:length(actions))
+   denom <- 1
+   for (l in 1:length(actions)) {
+     action_p[, l] <- rep(actions[[l]], each = tot_rows / actions_l[[l]])
+     tot_rows <- tot_rows / actions_l[[l]]
+   }
+   action_p <- tibble::as_tibble(action_p)
+
    a_list <- b_list <- list()
    for (i in 1:nrow(action_p)) {
      a_vec <- unlist(action_p[i, ])
@@ -56,32 +68,35 @@ extensive_strategy <- function(player,
       s_num <- which(u_player == target_p)
       action_p <- action_profiles[[target_p]] %>%
         unlist() %>%
-        matrix(ncol = length(node_to_play[[target_p]])) %>%
+        matrix(ncol = length(node_to_play[[target_p]]),
+               byrow = TRUE) %>%
         as.data.frame()
       names(action_p) <- paste0("n", node_to_play[[target_p]])
 
       s_set <- which(info_set_player == target_p)
 
-      keep <- NULL
+      keep_out <- NULL
       for (s in s_set) {
         info <- paste0("n", info_set[[s]])
-        for (j in 2:length(info)) {
-          action_p[, info[j]] <- action_p[, info[1]]
+        if (length(info) > 1) {
+          for (j in 2:length(info)) {
+            action_p[, info[j]] <- action_p[, info[1]]
+            keep_out <- c(keep_out, info[j])
+          }
         }
-        keep <- c(keep, info[1])
       }
+      keep <- !(names(action_p) %in% keep_out)
 
       action_p <- dplyr::distinct(action_p)
-      strategy_p <- action_p[keep]
+      strategy_p <- action_p[, keep]
       strategy_tmp <- list()
-            for (r in 1:nrow(strategy_p)) {
+      for (r in 1:nrow(strategy_p)) {
         strategy_tmp[[r]] <- paste0("(", paste(strategy_p[r, ], collapse = ", "), ")")
       }
       action_p <- as.list(as.data.frame((t(as.matrix(action_p)))))
       names(action_p) <- NULL
       action_profiles[[target_p]] <- action_p
       strategy_list[[s_num]] <- strategy_tmp
-
     }
   }
 

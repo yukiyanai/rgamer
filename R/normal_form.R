@@ -14,6 +14,8 @@
 #'     Third, it can be an R function of payoff.
 #' @param p2 The payoff of Player 2. See the explanation of \code{p1}
 #'     for detail.
+#' @param cells A list of vectors to specify the payoff for each cell. Each
+#'     element of the list should be a numeric vector of two players' payoffs.
 #' @param discretize A logical value. Set this \code{TRUE} to evaluate payoff
 #'     functions at some discrete values of strategies \code{s1} and \code{s2}.
 #'     Default is \code{FALSE}.
@@ -56,6 +58,15 @@
 #'   p2 = c(4, 3, 2, 1),
 #'   players = c("Row Player", "Column Player"))
 #'
+#' game1b <- normal_form(
+#'   s1 = c("T", "B"),
+#'   s2 = c("L", "R"),
+#'   cells = list(c(4, 4),
+#'                c(2, 3),
+#'                c(3, 2),
+#'                c(1, 1)),
+#'   players = c("Row Player", "Column Player"))
+#'
 #' game2 <- normal_form(
 #'    players = c("A", "B"),
 #'    p1 = "-x1^2 + (28 - x2) * x1",
@@ -87,8 +98,9 @@ normal_form <- function(
   players = NULL,
   s1 = NULL,
   s2 = NULL,
-  p1,
-  p2,
+  p1 = NULL,
+  p2 = NULL,
+  cells = NULL,
   discretize = FALSE,
   discrete_points = c(6, 6),
   symmetric = FALSE,
@@ -103,6 +115,15 @@ normal_form <- function(
   stop_message <- "For a game with discrete strategies, please specify both s1 and s2.\nFor a game with continuous strategies, please specify all of p1, p2, pars, par1_lim, and par2_lim. When dicretize = TRUE, par1_lim and par2_lim are not necessary."
 
   if (is.null(players)) players <- c("Player 1", "Player 2")
+
+  if (!is.null(cells)) {
+    n_cells <- length(cells)
+    p1 <- p2 <- rep(NA, n_cells)
+    for (i in 1:n_cells) {
+      p1[i] <- cells[[i]][1]
+      p2[i] <- cells[[i]][2]
+    }
+  }
 
   if (is.null(pars)) {
     ## game with discrete-choice strategies

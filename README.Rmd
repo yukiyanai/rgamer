@@ -81,6 +81,19 @@ game1 <- normal_form(
   p2 = c(-1, -3,  0, -2))
 ```
 
+You can specify payoffs for each cell of the game matrix as follows.
+```{r}
+game1b <- normal_form(
+  players = c("Kamijo", "Yanai"),
+  s1 = c("Stays silent", "Betrays"), 
+  s2 = c("Stays silent", "Betrays"), 
+  cells = list(c(-1, -1), c(-3,  0),
+               c( 0, -3), c(-2, -2)),
+  byrow = TRUE)
+```
+
+
+
 Then, you can pass it to `solve_nfg()` function to get the table of the game and the Nash equilibrium.
 ```{r, eval = FALSE}
 s_game1 <- solve_nfg(game1)

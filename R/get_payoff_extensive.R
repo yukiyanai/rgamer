@@ -1,17 +1,15 @@
-#' @title Find payoff for a specific set of actions.
+#' @title Find the payoff for a specific set of actions.
 #' @description \code{get_payoff_extensive} finds payoffs for a specified set of
 #'     actions.
 #' @param game An "extensive_form" class object created by
 #'     \code{extensive_form()}.
 #' @param actions A named list of actions to which the payoffs correspond. It
 #'     must be a complete list of actions for each player node.
-#' @param get_node A logical value. If \code{TRUE} the terminal node the game
-#'    reached will be displayed instead of the payoffs.
-#' @return A vector of payoffs.
+#' @return A list of payoffs and the nodes played to reach the payoffs.
 #' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
-get_payoff_extensive <- function(game, actions, get_node = FALSE) {
+get_payoff_extensive <- function(game, actions) {
 
   id <- node_from <- node_to<- type <- s <- NULL
 
@@ -72,10 +70,7 @@ get_payoff_extensive <- function(game, actions, get_node = FALSE) {
   targets <- names(actions)
   payoffs <- df[1, targets] %>% unlist()
 
-  if (get_node) {
-    reached <- paste0("n", df$id[1])
-    return(list(payoffs = payoffs, reached = reached))
-  } else {
-    return(payoffs)
-  }
+  reached <- paste0("n", df$id[1])
+
+  return(list(payoffs = payoffs, reached = reached))
 }

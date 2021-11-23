@@ -40,7 +40,7 @@ draw_path <- function(game, actions) {
   }
   df_selected$played <- TRUE
 
-  payoffs <- get_payoff_extensive(game, actions = actions, get_node = TRUE)
+  payoffs <- get_payoff(game, actions = actions)
   reached <- payoffs$reached
   payoffs <- payoffs$payoffs
   message(paste0("The game reaches at ", reached, ". \nPayoffs:"))

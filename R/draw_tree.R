@@ -236,6 +236,7 @@ draw_tree <- function(df_path,
     for (i in 1:n_info_sets) {
       info_set_i <- info_set[[i]]
       n_pairs <- length(info_set_i) - 1
+      if (n_pairs == 0) next
       for (j in 1:n_pairs) {
         info_pair <- info_set_i[j:(j + 1)]
         df_info <- df_node[info_pair, ]

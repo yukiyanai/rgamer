@@ -81,6 +81,18 @@ game1 <- normal_form(
   p2 = c(-1, -3,  0, -2))
 ```
 
+You can specify payoffs for each cell of the game matrix as follows.
+
+``` r
+game1b <- normal_form(
+  players = c("Kamijo", "Yanai"),
+  s1 = c("Stays silent", "Betrays"), 
+  s2 = c("Stays silent", "Betrays"), 
+  cells = list(c(-1, -1), c(-3,  0),
+               c( 0, -3), c(-2, -2)),
+  byrow = TRUE)
+```
+
 Then, you can pass it to `solve_nfg()` function to get the table of the
 game and the Nash equilibrium.
 
@@ -129,7 +141,7 @@ well.
 s_game2$br_plot
 ```
 
-![](man/figures/README-unnamed-chunk-11-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-12-1.png)<!-- -->
 
 ### Example 3
 
@@ -164,7 +176,7 @@ s_game3 <- solve_nfg(game3)
 #> Please examine br_plot (best response plot) carefully.
 ```
 
-![](man/figures/README-unnamed-chunk-13-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-14-1.png)<!-- -->
 
 ### Example 4
 
@@ -225,7 +237,7 @@ s_game4b <- solve_nfg(
 #> Please examine br_plot (best response plot) carefully.
 ```
 
-![](man/figures/README-unnamed-chunk-16-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-17-1.png)<!-- -->
 
 You can extract the best response plot with NE marked as follows.
 
@@ -233,7 +245,7 @@ You can extract the best response plot with NE marked as follows.
 s_game4b$br_plot_NE
 ```
 
-![](man/figures/README-unnamed-chunk-17-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-18-1.png)<!-- -->
 
 ## Example 5
 
@@ -299,7 +311,7 @@ game6 <- extensive_form(
   direction = "right")
 ```
 
-![](man/figures/README-unnamed-chunk-21-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-22-1.png)<!-- -->
 
 And you can find the solution of the game by `solve_efg()`.
 
@@ -314,4 +326,4 @@ Then, you can see the path played under a solution by `show_path()`.
 show_path(s_game6)
 ```
 
-![](man/figures/README-unnamed-chunk-23-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-24-1.png)<!-- -->

@@ -1,4 +1,4 @@
-#' @title Define and solve a extensive-form (or strategic-form) game
+#' @title Define an extensive-form (or strategic-form) game
 #' @description \code{extensive_form} defines an extensive-form game and draws
 #'     a game tree.
 #' @details This function defines an extensive-form game and draws the game
@@ -12,6 +12,8 @@
 #' @param payoffs A named list of payoffs. Each element of the list must be a
 #'     numeric vector of payoffs for a player. The names of the elements must
 #'     match the names of the players specified  by \code{players}.
+#' @param payoffs2 A list of payoffs. Each element of the list must be a numeric
+#'     vector of payoffs for a terminal node.
 #' @param show_tree A logical value. If \code{TRUE}, the game tree will be
 #'     displayed. Default is \code{TRUE}.
 #' @param show_node_id A logical value. If \code{TRUE}, the node numbers are
@@ -97,9 +99,10 @@
 #'                  Yanai = c(0, 2, 4, 1)),
 #'   direction = "horizontal")
 extensive_form <- function(
-  players = NULL, # list, one vector for each sequence
-  actions,        # list, one vector for each node.
-  payoffs,        # named list, one vector for each player. Names must match the unique names of the players
+  players,        # list, one vector for each sequence
+  actions,        # list, one vector for each node
+  payoffs = NULL, # named list, one vector for each player. Names must match the unique names of the players
+  payoffs2 = NULL,# list, one vector for each terminal node
   show_tree = TRUE,
   show_node_id = TRUE,
   info_set = NULL,
@@ -121,6 +124,26 @@ extensive_form <- function(
 
   x_s <- x_m <- x_e <- y_s <- y_m <- y_e <- id <- player<- NULL
   info_sets <- node_from <- s <- NULL
+
+  if (!is.null(payoffs2)) {
+    u_players <- players %>%
+      unlist() %>%
+      stats::na.omit() %>%
+      unique()
+    n_players <- length(u_players)
+    n_tmnl <- length(payoffs2)
+    p_matrix <- matrix(NA, ncol = n_players, nrow = n_tmnl)
+    for (i in 1:n_tmnl) {
+      for (p in 1:n_players) {
+        p_matrix[i, p] <- payoffs2[[i]][p]
+      }
+    }
+    payoffs <- list()
+    for (p in 1:n_players) {
+      payoffs[[p]] <- p_matrix[, p]
+    }
+    names(payoffs) <- u_players
+  }
 
   if (!is.null(scale)) {
     if (!is.numeric(scale) | scale <= 0)
@@ -191,9 +214,16 @@ extensive_form <- function(
 
   if (!is.null(info_set)) {
 
+    ## check if a node is included in only one information set
+    info_set_elements <- unlist(info_set)
+    info_set_elements_u <- unique(info_set_elements)
+    if (length(info_set_elements) != length(info_set_elements_u))
+      stop("A node can belong to only one information set.")
+
     ## check if actions are compatible with info sets
     for (i in 1:length(info_set)) {
       n_nodes <- length(info_set[[i]])
+      if (n_nodes == 1) next
       action_list <- list()
       for (j in 1:n_nodes) {
         action_list[[j]] <- df_path %>%
@@ -206,7 +236,7 @@ extensive_form <- function(
       }
     }
 
-    ## find players correspondingto info sets
+    ## find players corresponding to info sets
     n_info_set <- length(info_set)
     info_set_player <- rep(NA, n_info_set)
     for (i in 1:n_info_set) {
@@ -240,9 +270,9 @@ extensive_form <- function(
                 action_prof = strategies$action_profile,
                 payoff = payoffs,
                 info_set = info_set,
-                tree   = tree,
-                data   = list(node = df_node,
-                              path = df_path),
+                tree = tree,
+                data = list(node = df_node,
+                            path = df_path),
                 tree_params = list(info_line = info_line,
                                    direction = direction,
                                    show_node_id = show_node_id,

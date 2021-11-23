@@ -2,12 +2,13 @@
 % Please edit documentation in R/extensive_form.R
 \name{extensive_form}
 \alias{extensive_form}
-\title{Define and solve a extensive-form (or strategic-form) game}
+\title{Define an extensive-form (or strategic-form) game}
 \usage{
 extensive_form(
-  players = NULL,
+  players,
   actions,
-  payoffs,
+  payoffs = NULL,
+  payoffs2 = NULL,
   show_tree = TRUE,
   show_node_id = TRUE,
   info_set = NULL,
@@ -35,6 +36,9 @@ of character strings that corresponds to a specific player node.}
 \item{payoffs}{A named list of payoffs. Each element of the list must be a
 numeric vector of payoffs for a player. The names of the elements must
 match the names of the players specified  by \code{players}.}
+
+\item{payoffs2}{A list of payoffs. Each element of the list must be a numeric
+vector of payoffs for a terminal node.}
 
 \item{show_tree}{A logical value. If \code{TRUE}, the game tree will be
 displayed. Default is \code{TRUE}.}
