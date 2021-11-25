@@ -87,7 +87,8 @@ extensive_strategy <- function(player,
       }
       keep <- !(names(action_p) %in% keep_out)
 
-      action_p <- dplyr::distinct(action_p)
+      action_p <- dplyr::distinct(action_p) %>%
+        tibble::as_tibble()
       strategy_p <- action_p[, keep]
       strategy_tmp <- list()
       for (r in 1:nrow(strategy_p)) {
