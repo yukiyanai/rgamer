@@ -105,7 +105,65 @@ s_game1 <- solve_nfg(game1, show_table = FALSE)
 s_game1$table
 ```
 
-<img src="/tmp/RtmpBfhR3q/file3552b41e2c389.png" width="240" />
+<table class=" lightable-classic table" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="empty-cells: hide;" colspan="2">
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; " colspan="2">
+
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+
+Yanai
+
+</div>
+
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+strategy
+</th>
+<th style="text-align:center;">
+Stays silent
+</th>
+<th style="text-align:center;">
+Betrays
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Kamijo
+</td>
+<td style="text-align:center;">
+Stays silent
+</td>
+<td style="text-align:center;">
+-1, -1
+</td>
+<td style="text-align:center;">
+-3, 0^
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:center;">
+Betrays
+</td>
+<td style="text-align:center;">
+0^, -3
+</td>
+<td style="text-align:center;">
+-2^, -2^
+</td>
+</tr>
+</tbody>
+</table>
 
 ### Example 2
 
@@ -294,9 +352,201 @@ Then, you can examine the specified part of the game.
 s_game5 <- solve_nfg(game5, mark_br = FALSE)
 ```
 
-    #> Pure-strategy NE: [0, 0], [2, 2], [4, 4]
+<table class=" lightable-classic table" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="empty-cells: hide;" colspan="2">
+</th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; " colspan="6">
 
-<img src="/tmp/RtmpBfhR3q/file3552b29cba0b0.png" width="384" />
+<div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+
+Player 2
+
+</div>
+
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+strategy
+</th>
+<th style="text-align:center;">
+0
+</th>
+<th style="text-align:center;">
+2
+</th>
+<th style="text-align:center;">
+4
+</th>
+<th style="text-align:center;">
+6
+</th>
+<th style="text-align:center;">
+8
+</th>
+<th style="text-align:center;">
+10
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Player 1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0, 0
+</td>
+<td style="text-align:center;">
+0, 0
+</td>
+<td style="text-align:center;">
+0, 0
+</td>
+<td style="text-align:center;">
+0, 0
+</td>
+<td style="text-align:center;">
+0, 0
+</td>
+<td style="text-align:center;">
+0, 0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+0, 0
+</td>
+<td style="text-align:center;">
+1, 1
+</td>
+<td style="text-align:center;">
+2, 0
+</td>
+<td style="text-align:center;">
+2, 0
+</td>
+<td style="text-align:center;">
+2, 0
+</td>
+<td style="text-align:center;">
+2, 0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+0, 0
+</td>
+<td style="text-align:center;">
+0, 2
+</td>
+<td style="text-align:center;">
+2, 2
+</td>
+<td style="text-align:center;">
+4, 0
+</td>
+<td style="text-align:center;">
+4, 0
+</td>
+<td style="text-align:center;">
+4, 0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+0, 0
+</td>
+<td style="text-align:center;">
+0, 2
+</td>
+<td style="text-align:center;">
+0, 4
+</td>
+<td style="text-align:center;">
+3, 3
+</td>
+<td style="text-align:center;">
+6, 0
+</td>
+<td style="text-align:center;">
+6, 0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+0, 0
+</td>
+<td style="text-align:center;">
+0, 2
+</td>
+<td style="text-align:center;">
+0, 4
+</td>
+<td style="text-align:center;">
+0, 6
+</td>
+<td style="text-align:center;">
+4, 4
+</td>
+<td style="text-align:center;">
+8, 0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+0, 0
+</td>
+<td style="text-align:center;">
+0, 2
+</td>
+<td style="text-align:center;">
+0, 4
+</td>
+<td style="text-align:center;">
+0, 6
+</td>
+<td style="text-align:center;">
+0, 8
+</td>
+<td style="text-align:center;">
+5, 5
+</td>
+</tr>
+</tbody>
+</table>
 
 ## Example 6
 

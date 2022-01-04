@@ -1,5 +1,6 @@
 ---
 output: github_document
+always_allow_html: true
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -99,11 +100,10 @@ Then, you can pass it to `solve_nfg()` function to get the table of the game and
 s_game1 <- solve_nfg(game1, show_table = FALSE)
 ```
 
-
-```{r, eval = FALSE}
+```{r, eval = TRUE, results = "asis"}
 s_game1$table
 ```
-```{r, echo = FALSE, fig.height = 4}
+```{r, eval = FALSE, echo = FALSE, fig.height = 4}
 kableExtra::as_image(s_game1$table, 
                      width = 2.5)
 ```
@@ -249,10 +249,10 @@ game5 <- normal_form(
 ```
 
 Then, you can examine the specified part of the game.
-```{r, eval = FALSE}
+```{r, eval = TRUE, results = "asis"}
 s_game5 <- solve_nfg(game5, mark_br = FALSE)
 ```
-```{r, echo = FALSE, message = TRUE}
+```{r, echo = FALSE, message = TRUE, eval = FALSE}
 s_game5 <- solve_nfg(game5, show_table = FALSE, mark_br = FALSE)
 kableExtra::as_image(s_game5$table,
                      width = 4)
