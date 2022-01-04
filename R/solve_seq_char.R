@@ -2,7 +2,7 @@
 #'     (extensive form game) with  payoffs defined by character strings
 #' @description \code{solve_seq_char()} finds the subgame perfect equilibrium
 #'     outcomes when payoff functions are provided as character strings.
-#' @return A list containing the subgame perfect equilibrium (SPE) outcomes
+#' @return A list containing the Nash equilibrium (NE) outcomes
 #'     and the plot of best response correspondences.
 #' @param game A "sequential_form" class object created by \code{seq_form()}.
 #' @seealso \code{\link{seq_form}}
@@ -78,7 +78,7 @@ solve_seq_char <- function(game,
   x <- round(out$x, precision)
   y <- round(out$y, precision)
 
-  SPE <- paste0("(",
+  NE <- paste0("(",
                 format(x, nsmall = precision), ", ",
                 format(y, nsmall = precision), ")")
 
@@ -86,9 +86,9 @@ solve_seq_char <- function(game,
                   ff1(x, y), ", ",
                   ff2(x, y), ")")
 
-  if (!quietly) message("SPE outcome: ", SPE)
+  if (!quietly) message("NE outcome: ", NE)
 
-  message("The SPE shown here was numerically obtained and can be slightly different from the analytical solution (if any).")
+  message("The NE shown here were numerically obtained and can be slightly different from the analytical solution (if any).")
 
-  return(list(spe = SPE, payoff = payoff))
+  return(list(NE = NE, payoff = payoff))
 }

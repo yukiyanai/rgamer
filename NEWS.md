@@ -1,3 +1,14 @@
+# rgamer 0.0.11
+
+## New Functions
+
+- `subgames()` finds subgames of an extensive-form game.
+- Now `solve_efg()` can find subgame perfect equilibria by setting `concept = "spe"`.
+
+## Changes
+
+- Appearance of payoff matrix has changed. It has shifted from gt to kableExtra. An argument `cell_width` has been removed.
+
 # rgamer 0.0.10
 
 ## Changes in normal-form and extensive-form games
@@ -7,9 +18,6 @@
 - Display order of strategies has been changed when an extensive-form game is transformed into a matrix game by `to_matrix()`.
 - Users can explicitly specify a single-element information set.
 - `extensive_form()` throws an error if a node belongs to more than one information set.
-
-## Changes in
-
 
 # rgamer 0.0.9
 

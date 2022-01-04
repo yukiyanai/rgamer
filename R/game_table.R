@@ -6,22 +6,12 @@
 #' @seealso \code{\link{normal_form}}, \code{\link[gt]{gt}}
 #' @param mark_br A logical value. If \code{TRUE}, the best response to each of
 #'     the opponent's strategy is marked. Default is \code{TRUE}.
-#' @param cell_width A number specifying the cell width of the game matrix.
-#'     The unit is pixel. If not specified, the function tries to find the
-#'     appropriate size.
 #' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
-game_table <- function(game, mark_br = TRUE, cell_width = NULL) {
+game_table <- function(game, mark_br = TRUE) {
 
   pid <- column <- NULL
-
-  # Need to define the cell width for gt()  in .GlobalEnv.
-  # So temporarily put cellw in order not to overwrite the value
-  if (exists("cellw", envir = .GlobalEnv)) {
-    cellw_rgamer_temp <- cellw
-  }
-  cellw <- NULL
 
   players <- game$player
   s1 <- game$strategy[[1]]
@@ -58,48 +48,22 @@ game_table <- function(game, mark_br = TRUE, cell_width = NULL) {
   row.names(mat) <- s1
   colnames(mat) <- s2
 
-  ## determine the width of cells
-  if (is.null(cell_width)) {
-    s1_length <- stringr::str_length(s1)
-    s2_length <- stringr::str_length(s2)
-    pname_length <- stringr::str_length(players)
-    pname_length[2] <- ceiling(pname_length[2] / 2)
-    cell_size <- mat %>% as.vector() %>% stringr::str_length()
-    max_length <- c(s1_length, s2_length, pname_length, cell_size) %>% max()
-    cell_width <- 12 * max_length
-    if (cell_width > 200) cell_width = 200
-  } else if (cell_width > 200) {
-    warning("If the table doesn't fit to the screen, please make cell_width smaller.")
-  }
-
-  assign("cellw", paste0(cell_width, "px"), envir = .GlobalEnv)
-
-  ## Create the game matrix in HTML format with gt::gt()
-  mat_tbl <- mat %>%
+  ## Create the payoff matrix in HTML with kableExtra::kbl()
+  mat0 <- mat %>%
     tibble::as_tibble(rownames = "strategy") %>%
-    gt::gt() %>%
-    gt::tab_spanner(
-      label = players[2],
-      columns = (1:n_cols) + 1
-    ) %>%
-    gt::tab_row_group(
-      label = players[1],
-      rows = 1:n_rows
-    ) %>%
-    gt::cols_align(
-      align = "center",
-      columns = tidyselect::everything()
-    ) %>%
-    gt::cols_width(
-      tidyselect::everything() ~ cellw
-    )
+    as.matrix()
+  row.names(mat0) <- rep("", nrow(mat0))
+  row.names(mat0)[1] <- players[1]
 
-  # Re-assign the existing cellw value in .GlobalEnv if necessary
-  if (exists("cellw_rgamer_temp")) {
-    assign("cellw", cellw_rgamer_temp, envir = .GlobalEnv)
-  } else {
-    rm(cellw, envir = .GlobalEnv)
-  }
+  mat_tbl <- mat0 %>%
+    kableExtra::kbl(booktabs = TRUE,
+                    align = "c") %>%
+    kableExtra::kable_classic(full_width = FALSE) %>%
+    kableExtra::kable_styling(latex_options = "scale_down") %>%
+    kableExtra::add_header_above(data.frame(c("", players[2]),
+                                            c(2, length(s2))),
+                                 bold = TRUE) %>%
+    kableExtra::column_spec(1, bold = TRUE)
 
   return(mat_tbl)
 }

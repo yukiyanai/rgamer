@@ -13,8 +13,6 @@
 #'     game will be displayed. Default is \code{TRUE}.
 #' @param mark_br A logical value. If \code{TRUE}, the best response to each of
 #'     the opponent's strategy is marked. Default is \code{TRUE}.
-#' @param cell_width A number specifying the cell width of the payoff matrix.
-#'     The unit is pixel.
 #' @param quietly A logical value that determines whether the equilibrium will
 #'     be kept in the returned list without being printed on screen. Default is
 #'      \code{FALSE}.
@@ -24,7 +22,6 @@ solve_nfg_matrix <- function(
   game,
   mixed = FALSE,
   show_table = TRUE,
-  cell_width = NULL,
   mark_br = TRUE,
   quietly = FALSE,
   color_palette = "Set1") {
@@ -34,7 +31,8 @@ solve_nfg_matrix <- function(
   if (is.null(psNE)) {
     if (!quietly) message("Pure strategy NE does not exist.\n")
   } else if (!quietly) {
-    if (!quietly) message("Pure-strategy NE: ", psNE)
+    psNE_str <- paste(psNE, collapse = ", ")
+    if (!quietly) message("Pure-strategy NE: ", psNE_str)
   }
 
   if (mixed) {
@@ -60,7 +58,7 @@ solve_nfg_matrix <- function(
     msNE <- NULL
     msNE_list <- NULL
   }
-  mat_tbl <- game_table(game, cell_width = cell_width, mark_br = mark_br)
+  mat_tbl <- game_table(game, mark_br = mark_br)
   if (show_table) print(mat_tbl)
 
   if (length(game$strategy[[1]]) == 2 & length(game$strategy[[2]]) == 2) {

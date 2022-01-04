@@ -7,11 +7,12 @@
 #'     equilibrium).
 #' @param quietly A logical value. If \code{TRUE}, the solution(s) will not be
 #'     displayed on screen. Default is \code{FALSE}.
-#' @return A list containing (1) \code{sols}: a list of solutions, if any, (2)
-#'     \code{n_sols}: the number of solutions found, and (3) \code{trees}: a
+#' @return A list containing (1) user-specified solution concept (either
+#'     backward induction or spe), (2) \code{sols}: a list of solutions, if any,
+#'     (3) \code{n_sols}: the number of solutions found, and (4) \code{trees}: a
 #'     list of game trees each of which shows which paths were played under
 #'     each solution.
-#' @include backward_induction.R
+#' @include backward_induction.R spe.R
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
 #' @examples
@@ -47,22 +48,28 @@ solve_efg <- function(game,
 
   if (concept == "backward") {
     out <- backward_induction(game)
+    if (!quietly) {
+      if (length(out$sol) > 1) {
+        message("backward induction: ",
+                paste(out$sol, collapse = ", "))
+      } else {
+        message("backward induction: ", out$sol)
+      }
+    }
   } else if (concept == "spe") {
-    stop("funciton to find SPE is under construction.")
-  } else {
-    sol <- NULL
-  }
-
-  if (!quietly) {
-    if (length(out$sol) > 1) {
-      message("backward induction: ",
-              paste(out$sol, collapse = ", "))
-    } else {
-      message("backward induction: ", out$sol)
+    out <- spe(game)
+    if (!quietly) {
+      if (length(out$sol) > 1) {
+          message("SPE: ",
+                  paste(out$sol, collapse = ", "))
+      } else {
+          message("SPE: ", out$sol)
+      }
     }
   }
 
-  value <- list(sols = out$sol,
+  value <- list(concept = concept,
+                sols = out$sol,
                 n_sols = length(out$sol),
                 trees = out$sol_tree)
 

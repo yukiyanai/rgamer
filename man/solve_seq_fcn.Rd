@@ -2,7 +2,7 @@
 % Please edit documentation in R/solve_seq_fcn.R
 \name{solve_seq_fcn}
 \alias{solve_seq_fcn}
-\title{Find Nash equilibria of a normal-form game with payoffs defined by R functions}
+\title{Find Nash equilibria of a sequential-form game with payoffs defined by R functions}
 \usage{
 solve_seq_fcn(
   game,

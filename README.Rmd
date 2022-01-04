@@ -95,13 +95,19 @@ game1b <- normal_form(
 
 
 Then, you can pass it to `solve_nfg()` function to get the table of the game and the Nash equilibrium.
-```{r, eval = FALSE}
-s_game1 <- solve_nfg(game1)
-```
-```{r, echo = FALSE, message = TRUE}
+```{r, message = TRUE}
 s_game1 <- solve_nfg(game1, show_table = FALSE)
 ```
-<img src="https://yukiyanai.github.io/resources/images/eg1_table.png" width=400>
+
+
+```{r, eval = FALSE}
+s_game1$table
+```
+```{r, echo = FALSE, fig.height = 4}
+kableExtra::as_image(s_game1$table, 
+                     width = 2.5)
+```
+
 
 ### Example 2
 
@@ -154,7 +160,7 @@ game3 <- normal_form(
 
 Then, you can pass it to `solve_nfg()`, which displays the best response correspondences by default.
 ```{r, message = TRUE}
-s_game3 <- solve_nfg(game3)
+s_game3 <- solve_nfg(game3,)
 ```
 
 
@@ -248,8 +254,9 @@ s_game5 <- solve_nfg(game5, mark_br = FALSE)
 ```
 ```{r, echo = FALSE, message = TRUE}
 s_game5 <- solve_nfg(game5, show_table = FALSE, mark_br = FALSE)
+kableExtra::as_image(s_game5$table,
+                     width = 4)
 ```
-<img src="https://yukiyanai.github.io/resources/images/eg5_table.png" width=700>
 
 
 

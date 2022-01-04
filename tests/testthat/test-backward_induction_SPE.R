@@ -1,4 +1,4 @@
-context("Finds SPE outcomes by backward induction")
+context("Finds solutions of extensive-form games")
 
 matrix_game <- seq_form(
   players = c("Kamijo", "Yanai"),
@@ -92,12 +92,36 @@ PD <- normal_form(
   p1 = c(-1,  0, -3, -2),
   p2 = c(-1, -3,  0, -2))
 
-test_that("solve_efg finds solutions of extensive-form games", {
-  expect_length(solve_efg(g_ult), 3)
-  expect_s3_class(solve_efg(g_ult), "extensive_sol")
+g4 <- extensive_form(
+  players = list("Kamijo",
+                 c(NA, "Kamijo"),
+                 c("Yanai", "Yanai"),
+                 rep(NA, 4)),
+  actions = list(c("N", "Y"),
+                 c("A", "B"),
+                 c("A", "B"), c("A", "B")),
+  payoffs = list(Kamijo = c(3, 4, 1, 2, 0),
+                 Yanai = c(2, 1, 0, 0, 1)),
+  info_set = list(c(4, 5)),
+  direction = "right",
+  show_tree = FALSE)
+
+test_that("subgame finds subgames of an extensive-form game", {
+  expect_length(subgames(g4), 2)
+  expect_s3_class(subgames(g4)[[1]], "extensive_form")
+  expect_s3_class(subgames(g4)[[2]], "subgame")
 })
 
-test_that("solve_seq_matrix finds SPE outcomes of matrix-type games", {
+test_that("solve_efg finds solutions of extensive-form games", {
+  expect_length(solve_efg(g_ult), 4)
+  expect_s3_class(solve_efg(g_ult), "extensive_sol")
+  expect_length(solve_efg(g_ult, concept = "spe"), 4)
+  expect_s3_class(solve_efg(g_ult, concept = "spe"), "extensive_sol")
+  expect_length(solve_efg(g4, concept = "spe"), 4)
+  expect_s3_class(solve_efg(g4, concept = "spe"), "extensive_sol")
+})
+
+test_that("solve_seq_matrix finds NE outcomes of matrix-type games", {
   expect_type(solve_seq_matrix(matrix_game), "list")
   expect_type(solve_seq_matrix(RPS), "list")
   expect_message(solve_seq_matrix(matrix_game))
@@ -108,8 +132,7 @@ test_that("solve_seq_matrix finds SPE outcomes of matrix-type games", {
   expect_error(solve_nfg_matrix(fcn_game))
 })
 
-
-test_that("solve_seq_char finds SPE outcomes of 'char_function'-type games", {
+test_that("solve_seq_char finds NE outcomes of 'char_function'-type games", {
   expect_type(solve_seq_char(char_game), "list")
   expect_length(solve_seq_char(char_game), 2)
   expect_message(solve_seq_char(char_game))
@@ -128,7 +151,7 @@ test_that("solve_seq_fcn finds SPE oucomes of 'function'-type games", {
   expect_error(solve_seq_fcn(char_game))
 })
 
-test_that("solve_seq finds SPE outcomes a sequential-form game", {
+test_that("solve_seq finds NE outcomes a sequential-form game", {
   expect_type(solve_seq(matrix_game), "list")
   expect_type(solve_seq(char_game), "list")
   expect_type(solve_seq(fcn_game), "list")

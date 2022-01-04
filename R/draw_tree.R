@@ -5,7 +5,7 @@
 #'     edges) of the tree.
 #' @param df_node A data frame containing the information about the nodes of
 #'     the tree.
-#' @param df_sol A data frame containg the solution path of the tree. If
+#' @param df_sol A data frame containing the solution path of the tree. If
 #'     \code{df_sol = NULL} (which is default), the game tree is drawn without
 #'     no path colored.  If \code{df_sol} is passed, the solution paths will
 #'     be colored.

@@ -17,8 +17,9 @@ equilibrium).}
 displayed on screen. Default is \code{FALSE}.}
 }
 \value{
-A list containing (1) \code{sols}: a list of solutions, if any, (2)
-\code{n_sols}: the number of solutions found, and (3) \code{trees}: a
+A list containing (1) user-specified solution concept (either
+backward induction or spe), (2) \code{sols}: a list of solutions, if any,
+(3) \code{n_sols}: the number of solutions found, and (4) \code{trees}: a
 list of game trees each of which shows which paths were played under
 each solution.
 }

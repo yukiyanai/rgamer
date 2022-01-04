@@ -97,7 +97,7 @@ g1 <- extensive_form(
   players = list("Kamijo",
                  rep("Yanai", 2),
                  rep(NA, 4)),
-  actions <- list(c("U", "D"),
+  actions = list(c("U", "D"),
                   c("U'", "D'"), c("U''", "D''")),
   payoffs = list(Kamijo = c(0, 2, 1, 3),
                  Yanai  = c(0, 1, 2, 1)))

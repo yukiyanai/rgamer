@@ -82,7 +82,7 @@ find_best_response <- function(game) {
       dplyr::mutate(player = players[2],
                     pid = 2)
 
-    out <-df_2 %>%
+    out <- df_2 %>%
       dplyr::select(player, best_response, against, payoff, row, column, pid)
   }
 

@@ -363,9 +363,8 @@ seq_game <- seq_form(
 )
 
 test_that("game_table makes a payoff matrix of normal-form games", {
-  expect_s3_class(game_table(PD), "gt_tbl")
-  expect_s3_class(game_table(SH), "gt_tbl")
-  expect_warning(game_table(PD, cell_width = 250))
+  expect_s3_class(game_table(PD), "kableExtra")
+  expect_s3_class(game_table(SH), "kableExtra")
   expect_error(game_table(char_game))
-  expect_s3_class(game_table(seq_game), "gt_tbl")
+  expect_s3_class(game_table(seq_game), "kableExtra")
 })

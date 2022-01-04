@@ -18,7 +18,7 @@ The default value is 1.}
 without being printed on screen. Default is \code{FALSE}.}
 }
 \value{
-A list containing the subgame perfect equilibrium (SPE) outcomes
+A list containing the Nash equilibrium (NE) outcomes
 and the plot of best response correspondences.
 }
 \description{

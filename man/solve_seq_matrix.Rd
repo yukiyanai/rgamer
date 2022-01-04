@@ -2,15 +2,9 @@
 % Please edit documentation in R/solve_seq_matrix.R
 \name{solve_seq_matrix}
 \alias{solve_seq_matrix}
-\title{Find subgame perfect equilibria of a sequential-form game.}
+\title{Find Nash equilibria of a sequential-form game.}
 \usage{
-solve_seq_matrix(
-  game,
-  show_table = TRUE,
-  mark_br = FALSE,
-  cell_width = NULL,
-  quietly = FALSE
-)
+solve_seq_matrix(game, show_table = TRUE, mark_br = FALSE, quietly = FALSE)
 }
 \arguments{
 \item{game}{A "sequential_form" class object created by \code{seq_form()}.}
@@ -21,15 +15,12 @@ be displayed. Default is \code{TRUE}.}
 \item{mark_br}{A logical value. If \code{TRUE}, the follower's best response
 to each of the leader's strategy is marked. Default is \code{FALSE}.}
 
-\item{cell_width}{A number specifying the cell width of the game matrix. The
-unit is pixel.}
-
 \item{quietly}{A logical value that determines whether the equilibrium will
 be kept in the returned list without being printed on screen. Default is
 \code{FALSE}.}
 }
 \value{
-A list containing subgame perfect equilibrium (SPE) outcome and
+A list containing Nash equilibrium (NE) outcome and
 the gt table of the game.
 }
 \description{

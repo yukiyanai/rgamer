@@ -8,7 +8,6 @@ solve_nfg(
   game,
   mixed = FALSE,
   show_table = TRUE,
-  cell_width = NULL,
   mark_br = TRUE,
   cons1 = NULL,
   cons2 = NULL,
@@ -28,9 +27,6 @@ searched. Default is \code{FALSE}.}
 
 \item{show_table}{A logical value. If \code{TRUE}, the payoff matrix  of the
 game will be displayed. Default is \code{TRUE}.}
-
-\item{cell_width}{A number specifying the cell width of the payoff matrix.
-The unit is pixel.}
 
 \item{mark_br}{A logical value. If \code{TRUE}, the best response to each of
 the opponent's strategy is marked. Default is \code{TRUE}.}

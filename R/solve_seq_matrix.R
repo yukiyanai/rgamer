@@ -1,7 +1,7 @@
-#' @title Find subgame perfect equilibria of a sequential-form game.
+#' @title Find Nash equilibria of a sequential-form game.
 #' @description \code{solve_seq_matrix()} finds subgame perfect equilibria of
 #'   a sequential-form (an extensive-form) game with discrete-choice strategies.
-#' @return A list containing subgame perfect equilibrium (SPE) outcome and
+#' @return A list containing Nash equilibrium (NE) outcome and
 #'   the gt table of the game.
 #' @param game A "sequential_form" class object created by \code{seq_form()}.
 #' @seealso \code{\link{seq_form}}
@@ -9,8 +9,6 @@
 #'   be displayed. Default is \code{TRUE}.
 #' @param mark_br A logical value. If \code{TRUE}, the follower's best response
 #'   to each of the leader's strategy is marked. Default is \code{FALSE}.
-#' @param cell_width A number specifying the cell width of the game matrix. The
-#'   unit is pixel.
 #' @param quietly A logical value that determines whether the equilibrium will
 #'   be kept in the returned list without being printed on screen. Default is
 #'   \code{FALSE}.
@@ -19,7 +17,6 @@ solve_seq_matrix <- function(
   game,
   show_table = TRUE,
   mark_br = FALSE,
-  cell_width = NULL,
   quietly = FALSE) {
 
   s1 <- s2 <- NULL
@@ -40,21 +37,21 @@ solve_seq_matrix <- function(
   sp1_chosen <- sp1[tuple::matchAll(max(p1_get), p1_get)]
 
   if (length(sp1_chosen > 1)) {
-    SPE <- rep(NA, length(sp1_chosen))
-    for (i in seq_along(SPE)) {
+    NE <- rep(NA, length(sp1_chosen))
+    for (i in seq_along(NE)) {
       sp1_ci <- sp1_chosen[i]
-      SPE[i] <- paste0("(", sp1_ci, ", ",
+      NE[i] <- paste0("(", sp1_ci, ", ",
                          sp2[[match(sp1_ci, sp1_chosen)]], ")")
     }
   } else {
-    SPE <- paste0("(", sp1_chosen, ", ",
+    NE <- paste0("(", sp1_chosen, ", ",
                   sp2[[which.max(p1_get)]], ")")
   }
 
-  if (!quietly) message("SPE outcome: ", SPE)
+  if (!quietly) message("NE outcome: ", NE)
 
-  mat_tbl <- game_table(game, cell_width = cell_width, mark_br = mark_br)
+  mat_tbl <- game_table(game, mark_br = mark_br)
   if (show_table) print(mat_tbl)
 
-  return(list(SPE = SPE, table = mat_tbl))
+  return(list(NE = NE, table = mat_tbl))
 }

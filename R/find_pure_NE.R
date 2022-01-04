@@ -27,7 +27,7 @@ find_pure_NE <- function(game) {
   if (length(pureNE_index) == 0) {
     psNE <- NULL
   } else {
-    psNE <- paste0("(", s1[pureNE_index[,1]], ", ", s2[pureNE_index[, 2]], ")")
+    psNE <- paste0("[", s1[pureNE_index[,1]], ", ", s2[pureNE_index[, 2]], "]")
   }
 
   return(psNE)

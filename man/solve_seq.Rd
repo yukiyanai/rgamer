@@ -2,12 +2,11 @@
 % Please edit documentation in R/solve_seq.R
 \name{solve_seq}
 \alias{solve_seq}
-\title{Find subgame perfect equilibria of a sequential-form game}
+\title{Find Nash equilibria of a sequential-form game}
 \usage{
 solve_seq(
   game,
   show_table = TRUE,
-  cell_width = NULL,
   mark_br = FALSE,
   cons1 = NULL,
   cons2 = NULL,
@@ -21,9 +20,6 @@ solve_seq(
 
 \item{show_table}{A logical value. If \code{TRUE}, the table of the game will
 be displayed. Default is \code{TRUE}.}
-
-\item{cell_width}{A number specifying the cell width of the game matrix. The
-unit is pixel.}
 
 \item{mark_br}{A logical value. If \code{TRUE}, the follower's best response
 to each of the leader's strategy is marked. Default is \code{FALSE}.}
@@ -46,14 +42,13 @@ be kept in the returned list without being printed on screen. Default is
 \code{FALSE}.}
 }
 \value{
-A list containing subgame perfect equilibrium outcomes (if any), and
+A list containing Nash equilibrium outcomes (if any), and
 the game table (if available).
 }
 \description{
-\code{solve_seq()} finds subgame perfect equilibrium outcomes
-of a sequential-form game.
-This is a wrapper
-function of \code{\link{solve_seq_matrix}}, \code{\link{solve_seq_char}}, and
+\code{solve_seq()} finds Nash equilibrium outcomes of a
+sequential-form game. This is a wrapper function of
+\code{\link{solve_seq_matrix}}, \code{\link{solve_seq_char}}, and
 \code{\link{solve_seq_fcn}}.
 }
 \author{

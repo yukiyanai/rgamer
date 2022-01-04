@@ -97,12 +97,15 @@ Then, you can pass it to `solve_nfg()` function to get the table of the
 game and the Nash equilibrium.
 
 ``` r
-s_game1 <- solve_nfg(game1)
+s_game1 <- solve_nfg(game1, show_table = FALSE)
+#> Pure-strategy NE: [Betrays, Betrays]
 ```
 
-    #> Pure-strategy NE: (Betrays, Betrays)
+``` r
+s_game1$table
+```
 
-<img src="https://yukiyanai.github.io/resources/images/eg1_table.png" width=400>
+<img src="/tmp/RtmpBfhR3q/file3552b41e2c389.png" width="240" />
 
 ### Example 2
 
@@ -128,7 +131,7 @@ Then, you can pass it to `solve_nfg()` function to get NEs. Set
 
 ``` r
 s_game2 <- solve_nfg(game2, mixed = TRUE, show_table = FALSE)
-#> Pure-strategy NE: (Stag, Stag)(Hare, Hare)
+#> Pure-strategy NE: [Stag, Stag], [Hare, Hare]
 #> Mixed-strategy NE: [(7/9, 2/9), (7/9, 2/9)]
 #> The obtained mixed-strategy NE might be only a part of the solutions.
 #> Please examine br_plot (best response plot) carefully.
@@ -141,7 +144,7 @@ well.
 s_game2$br_plot
 ```
 
-![](man/figures/README-unnamed-chunk-12-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-13-1.png)<!-- -->
 
 ### Example 3
 
@@ -170,13 +173,13 @@ Then, you can pass it to `solve_nfg()`, which displays the best response
 correspondences by default.
 
 ``` r
-s_game3 <- solve_nfg(game3)
+s_game3 <- solve_nfg(game3,)
 #> approximated NE: (9.3, 9.3)
 #> The obtained NE might be only a part of the solutions.
 #> Please examine br_plot (best response plot) carefully.
 ```
 
-![](man/figures/README-unnamed-chunk-14-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->
 
 ### Example 4
 
@@ -237,7 +240,7 @@ s_game4b <- solve_nfg(
 #> Please examine br_plot (best response plot) carefully.
 ```
 
-![](man/figures/README-unnamed-chunk-17-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-18-1.png)<!-- -->
 
 You can extract the best response plot with NE marked as follows.
 
@@ -245,7 +248,7 @@ You can extract the best response plot with NE marked as follows.
 s_game4b$br_plot_NE
 ```
 
-![](man/figures/README-unnamed-chunk-18-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-19-1.png)<!-- -->
 
 ## Example 5
 
@@ -291,9 +294,9 @@ Then, you can examine the specified part of the game.
 s_game5 <- solve_nfg(game5, mark_br = FALSE)
 ```
 
-    #> Pure-strategy NE: (0, 0)(2, 2)(4, 4)
+    #> Pure-strategy NE: [0, 0], [2, 2], [4, 4]
 
-<img src="https://yukiyanai.github.io/resources/images/eg5_table.png" width=700>
+<img src="/tmp/RtmpBfhR3q/file3552b29cba0b0.png" width="384" />
 
 ## Example 6
 
@@ -311,7 +314,7 @@ game6 <- extensive_form(
   direction = "right")
 ```
 
-![](man/figures/README-unnamed-chunk-22-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-23-1.png)<!-- -->
 
 And you can find the solution of the game by `solve_efg()`.
 
@@ -326,4 +329,4 @@ Then, you can see the path played under a solution by `show_path()`.
 show_path(s_game6)
 ```
 
-![](man/figures/README-unnamed-chunk-24-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-25-1.png)<!-- -->

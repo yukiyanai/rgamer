@@ -1,4 +1,4 @@
-#' @title Find Nash equilibria of a normal-form game with payoffs defined by R functions
+#' @title Find Nash equilibria of a sequential-form game with payoffs defined by R functions
 #' @description \code{solve_nfg_fcn()} finds the pair of best responses when payoff
 #'     functions are provided as R functions.
 #' @return A list containing the pair of the best response correspondence (NE)  and the plot of best
@@ -113,7 +113,7 @@ solve_seq_fcn <- function(game,
     purrr::pmap(.f = ff2) %>%
     unlist()
 
-  SPE <- paste0("(",
+  NE <- paste0("(",
                 format(x, nsmall = precision), ", ",
                 format(y, nsmall = precision), ")")
 
@@ -121,9 +121,9 @@ solve_seq_fcn <- function(game,
                   payoff1, ", ",
                   payoff2, ")")
 
-  if (!quietly) message("SPE outcome: ", SPE)
+  if (!quietly) message("NE outcome: ", NE)
 
-  message("The SPE shown here was numerically obtained and can be slightly different from the analytical solution (if any).")
+  message("The NE shown here were numerically obtained and can be slightly different from the analytical solution (if any).")
 
-  return(list(spe = SPE, payoff = payoff))
+  return(list(NE = NE, payoff = payoff))
 }
