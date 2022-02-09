@@ -18,7 +18,7 @@
 #'     displayed. Default is \code{TRUE}.
 #' @param show_node_id A logical value. If \code{TRUE}, the node numbers are
 #'     displayed in the figure. Default is \code{TRUE}.
-#' @param info_set A list of information sets.
+#' @param info_sets A list of information sets.
 #' @param info_line Line type to connect nodes in an information set. Either
 #'     \code{"solid"} or \code{"dashed"}. Default to \code{"solid"}.
 #' @param direction The direction to which a game tree grows.
@@ -105,7 +105,7 @@ extensive_form <- function(
   payoffs2 = NULL,# list, one vector for each terminal node
   show_tree = TRUE,
   show_node_id = TRUE,
-  info_set = NULL,
+  info_sets = NULL,
   info_line = "solid",
   direction = "down",
   color_palette = "Set1",
@@ -123,7 +123,7 @@ extensive_form <- function(
                                      "horizontal", "vertical"))
 
   x_s <- x_m <- x_e <- y_s <- y_m <- y_e <- id <- player<- NULL
-  info_sets <- node_from <- s <- NULL
+  info_setss <- node_from <- s <- NULL
 
   if (!is.null(payoffs2)) {
     u_players <- players %>%
@@ -197,7 +197,7 @@ extensive_form <- function(
                     df_node = df_node,
                     direction = direction,
                     show_node_id = show_node_id,
-                    info_set = info_set,
+                    info_sets = info_sets,
                     info_line = info_line,
                     color_palette = color_palette,
                     family = family,
@@ -212,22 +212,22 @@ extensive_form <- function(
     plot(tree)
   }
 
-  if (!is.null(info_set)) {
+  if (!is.null(info_sets)) {
 
     ## check if a node is included in only one information set
-    info_set_elements <- unlist(info_set)
-    info_set_elements_u <- unique(info_set_elements)
-    if (length(info_set_elements) != length(info_set_elements_u))
+    info_sets_elements <- unlist(info_sets)
+    info_sets_elements_u <- unique(info_sets_elements)
+    if (length(info_sets_elements) != length(info_sets_elements_u))
       stop("A node can belong to only one information set.")
 
     ## check if actions are compatible with info sets
-    for (i in 1:length(info_set)) {
-      n_nodes <- length(info_set[[i]])
+    for (i in 1:length(info_sets)) {
+      n_nodes <- length(info_sets[[i]])
       if (n_nodes == 1) next
       action_list <- list()
       for (j in 1:n_nodes) {
         action_list[[j]] <- df_path %>%
-          dplyr::filter(node_from == info_set[[i]][j]) %>%
+          dplyr::filter(node_from == info_sets[[i]][j]) %>%
           dplyr::pull(s)
       }
       for (j in 2:n_nodes) {
@@ -237,16 +237,16 @@ extensive_form <- function(
     }
 
     ## find players corresponding to info sets
-    n_info_set <- length(info_set)
-    info_set_player <- rep(NA, n_info_set)
-    for (i in 1:n_info_set) {
-      info_node <- info_set[[i]][1]
-      info_set_player[i] <- df_node %>%
+    n_info_sets <- length(info_sets)
+    info_sets_player <- rep(NA, n_info_sets)
+    for (i in 1:n_info_sets) {
+      info_node <- info_sets[[i]][1]
+      info_sets_player[i] <- df_node %>%
         dplyr::filter(id == info_node) %>%
         dplyr::pull(player)
     }
   } else {
-    info_set_player <- NULL
+    info_sets_player <- NULL
   }
 
   node_to_play <- list()
@@ -260,8 +260,8 @@ extensive_form <- function(
 
   strategies <- extensive_strategy(player = players_vec,
                                    action_list = actions,
-                                   info_set = info_set,
-                                   info_set_player = info_set_player,
+                                   info_sets = info_sets,
+                                   info_sets_player = info_sets_player,
                                    node_to_play = node_to_play)
 
   value <- list(player = players_vec,
@@ -269,7 +269,7 @@ extensive_form <- function(
                 strategy = strategies$strategy,
                 action_prof = strategies$action_profile,
                 payoff = payoffs,
-                info_set = info_set,
+                info_sets = info_sets,
                 tree = tree,
                 data = list(node = df_node,
                             path = df_path),

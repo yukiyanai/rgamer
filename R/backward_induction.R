@@ -3,19 +3,20 @@
 #'      an extensive-form game defined by \code{extensive_form()}.
 #' @param game An "extensive_form" class object created by
 #'     \code{extensive_form()}.
+#' @param restriction TRUE if the game has restricted sets of actions.
 #' @return A list of backward-induction solution(s) and game tree(s) with
 #'     marked paths.
 #' @include draw_tree.R
 #' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
-backward_induction <- function(game) {
+backward_induction <- function(game, restriction = FALSE) {
 
   node_from <- node_to <- id <- played <- NULL
   type <- player <- NULL
 
-  if (!is.null(game$info_set)) {
-    if (max(sapply(game$info_set, length)) > 1)
+  if (!is.null(game$info_sets)) {
+    if (max(sapply(game$info_sets, length)) > 1)
       stop("This is not a perfect-information game.")
   }
 
@@ -130,7 +131,7 @@ backward_induction <- function(game) {
                      df_node = df_node,
                      direction = game$tree_param$direction,
                      show_node_id = game$tree_param$show_node_id,
-                     info_set = game$info_set,
+                     info_sets = game$info_sets,
                      info_line = game$tree_para$info_line,
                      color_palette = game$tree_param$color_palette,
                      family = game$tree_param$family,
@@ -139,7 +140,8 @@ backward_induction <- function(game) {
                      size_action = game$tree_param$size_action,
                      size_node_id = game$tree_param$size_node_id,
                      size_terminal = game$tree_param$size_terminal,
-                     scale = game$tree_param$scale)
+                     scale = game$tree_param$scale,
+                     restriction = restriction)
 
   list(sol = sols_list, sol_tree = bi_trees)
 }

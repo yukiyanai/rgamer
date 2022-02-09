@@ -3,7 +3,7 @@
 #' @return A gt table of the normal form game.
 #' @param game A "normal_form" class object created by \code{normal_form()}.
 #'     The game's type must be "matrix".
-#' @seealso \code{\link{normal_form}}, \code{\link[gt]{gt}}
+#' @seealso \code{\link{normal_form}}
 #' @param mark_br A logical value. If \code{TRUE}, the best response to each of
 #'     the opponent's strategy is marked. Default is \code{TRUE}.
 #' @importFrom magrittr %>%
@@ -58,8 +58,8 @@ game_table <- function(game, mark_br = TRUE) {
   mat_tbl <- mat0 %>%
     kableExtra::kbl(booktabs = TRUE,
                     align = "c") %>%
-    kableExtra::kable_classic(full_width = FALSE) %>%
-    kableExtra::kable_styling(latex_options = "scale_down") %>%
+    kableExtra::kable_classic(html_font = "sans-serif") %>%
+    kableExtra::kable_styling(full_width = FALSE) %>%
     kableExtra::add_header_above(data.frame(c("", players[2]),
                                             c(2, length(s2))),
                                  bold = TRUE) %>%

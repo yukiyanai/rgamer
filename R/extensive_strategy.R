@@ -3,9 +3,9 @@
 #'     in an extensive-form game.
 #' @param player A vector of players corresponding to play nodes in the game.
 #' @param action_list A list of actions corresponding to play nodes in the game.
-#' @param info_set A list of information sets.
-#' @param info_set_player A vector of players corresponding to each element of
-#'     info_set.
+#' @param info_sets A list of information sets.
+#' @param info_sets_player A vector of players corresponding to each element of
+#'     info_sets.
 #' @param node_to_play A list whose element shows which nodes each player plays.
 #' @return A list of strategies and action_prof
 #' @importFrom magrittr %>%
@@ -13,8 +13,8 @@
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 extensive_strategy <- function(player,
                                action_list,
-                               info_set = NULL,
-                               info_set_player = NULL,
+                               info_sets = NULL,
+                               info_sets_player = NULL,
                                node_to_play = NULL) {
 
   u_player <- unique(player)
@@ -61,8 +61,8 @@ extensive_strategy <- function(player,
   }
   names(action_profiles) <- u_player
 
-  if (!is.null(info_set)) {
-    u_info_player <- unique(info_set_player)
+  if (!is.null(info_sets)) {
+    u_info_player <- unique(info_sets_player)
     for (i in 1:length(u_info_player)) {
       target_p <- u_info_player[i]
       s_num <- which(u_player == target_p)
@@ -73,11 +73,11 @@ extensive_strategy <- function(player,
         as.data.frame()
       names(action_p) <- paste0("n", node_to_play[[target_p]])
 
-      s_set <- which(info_set_player == target_p)
+      s_set <- which(info_sets_player == target_p)
 
       keep_out <- NULL
       for (s in s_set) {
-        info <- paste0("n", info_set[[s]])
+        info <- paste0("n", info_sets[[s]])
         if (length(info) > 1) {
           for (j in 2:length(info)) {
             action_p[, info[j]] <- action_p[, info[1]]

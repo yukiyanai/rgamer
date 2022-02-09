@@ -2,6 +2,7 @@
 #' @description \code{solve_efg} finds solutions of an extensive-form game
 #'     defined by \code{extensive_form()}.
 #' @param game An "extensive_form" class object created by
+#'     \code{extensive_form()}.
 #' @param concept Solution concept to be used. It must be one of
 #'     \code{"backward"} (backward induction) or \code{"spe"} (subgame perfect
 #'     equilibrium).
@@ -40,14 +41,22 @@ solve_efg <- function(game,
                       concept = "backward",
                       quietly = FALSE) {
 
-  if (class(game) != "extensive_form")
-    stop("game must be an object of 'extensive_form' class defined by extensive_form() function.")
+  tree_overlay <- FALSE
+
+  if (!(class(game) %in% c("extensive_form", "restricted_game")))
+    stop("game must be an object of 'extensive_form' or 'restricted_game'")
+
+  if (class(game) == "restricted_game") {
+    tree_overlay <- TRUE
+    fgame <- format_restricted(game)
+    game <- fgame$game
+  }
 
   concept <- match.arg(concept,
                        choices = c("backward", "spe"))
 
   if (concept == "backward") {
-    out <- backward_induction(game)
+    out <- backward_induction(game, restriction = tree_overlay)
     if (!quietly) {
       if (length(out$sol) > 1) {
         message("backward induction: ",
@@ -57,7 +66,7 @@ solve_efg <- function(game,
       }
     }
   } else if (concept == "spe") {
-    out <- spe(game)
+    out <- spe(game, restriction = tree_overlay)
     if (!quietly) {
       if (length(out$sol) > 1) {
           message("SPE: ",
@@ -65,6 +74,16 @@ solve_efg <- function(game,
       } else {
           message("SPE: ", out$sol)
       }
+    }
+  }
+
+  if (tree_overlay) {
+    old_tree <- fgame$old_tree
+    for (t in seq_along(out$sol_tree)) {
+      out$sol_tree[[t]] <- old_tree +
+        out$sol_tree[[t]]$layers[[2]] +
+        old_tree$layers[[2]] +
+        old_tree$layers[[4]]
     }
   }
 

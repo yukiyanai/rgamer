@@ -6,12 +6,12 @@
 #' @param df_node A data frame containing the information about the nodes of
 #'     the tree.
 #' @param df_sol A data frame containing the solution path of the tree. If
-#'     \code{df_sol = NULL} (which is default), the game tree is drawn without
+#'     \code{df_sol = NULL} (which is default), the game tree is drawn with
 #'     no path colored.  If \code{df_sol} is passed, the solution paths will
 #'     be colored.
 #' @param show_node_id A logical value. If \code{TRUE}, the node numbers are
 #'     displayed in the figure. Default is \code{TRUE}.
-#' @param info_set A list of information sets.
+#' @param info_sets A list of information sets.
 #' @param info_line Line type to connect nodes in an information set. Either
 #'     \code{"solid"} or \code{"dashed"}. Default to \code{"solid"}.
 #' @param direction The direction to which a game tree grows.
@@ -34,6 +34,8 @@
 #' @param scale Scale \code{player_size}, \code{payoff_size},
 #'     \code{action_size}, \code{noden_size}, \code{terminal_size}. It must be a
 #'      positive number.
+#' @param restriction If TRUE, actions are restricted in a game. Restricted
+#'     actions are shown by dotted lines.
 #' @return A ggplot object of a game tree.
 #' @importFrom magrittr %>%
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
@@ -42,7 +44,7 @@ draw_tree <- function(df_path,
                       df_node,
                       df_sol = NULL,
                       show_node_id = TRUE,
-                      info_set = NULL,
+                      info_sets = NULL,
                       info_line = "solid",
                       direction = "down",
                       color_palette = "Set1",
@@ -52,12 +54,13 @@ draw_tree <- function(df_path,
                       size_action = 4,
                       size_node_id = 4,
                       size_terminal = 2,
-                      scale = NULL) {
+                      scale = NULL,
+                      restriction = FALSE) {
 
   type <- node_from <- node_to <- id <- match_id <- NULL
   left <- x <- x_s <- x_m <- x_e <- y <- y_s <- y_m <- y_e <- NULL
   player <- payoff <- s <- NULL
-  player_color <- info_group <- NULL
+  player_color <- info_group <- linetype <- NULL
 
   df_play <- df_node %>%
     dplyr::filter(type == "play")
@@ -94,8 +97,12 @@ draw_tree <- function(df_path,
     df_path_top2 <- df_path[1:2,] %>%
       dplyr::mutate(y_e = y_s)
     df_path_rem <- df_path[-(1:2),] %>%
-      dplyr::mutate(y_s = ifelse(left == 0, y_s + y_adj_right, y_s + y_adj_left),
-                    y_e = ifelse(left == 0, y_e + y_adj_right, y_e + y_adj_left))
+      dplyr::mutate(y_s = ifelse(left == 0,
+                                 y_s + y_adj_right,
+                                 y_s + y_adj_left),
+                    y_e = ifelse(left == 0,
+                                 y_e + y_adj_right,
+                                 y_e + y_adj_left))
     df_path <- dplyr::bind_rows(df_path_top2, df_path_rem) %>%
       dplyr::mutate(x_m = 3/4 * x_s + 1/4  * x_e,
                     y_m = 1/2 * y_s + 1/2 * y_e,
@@ -130,6 +137,10 @@ draw_tree <- function(df_path,
 
   if (!is.null(df_sol)) {
     df_sol$player_color <- as.integer(factor(df_sol$player))
+    if (restriction) {
+      df_sol <- df_sol %>%
+        dplyr::filter(bold == FALSE)
+    }
     tree <- ggplot2::ggplot() +
       ggplot2::geom_segment(data = df_path,
                             ggplot2::aes(x = x_s,
@@ -144,12 +155,30 @@ draw_tree <- function(df_path,
                                          color = as.factor(player_color)),
                             size = 2)
   } else {
-    tree <- ggplot2::ggplot() +
-      ggplot2::geom_segment(data = df_path,
-                            ggplot2::aes(x = x_s,
-                                         xend = x_e,
-                                         y = y_s,
-                                         yend = y_e))
+    if (restriction) {
+      tree <- ggplot2::ggplot() +
+        ggplot2::geom_segment(data = df_path,
+                              ggplot2::aes(x = x_s,
+                                           xend = x_e,
+                                           y = y_s,
+                                           yend = y_e))
+      df_path_dbl <- df_path %>%
+        dplyr::filter(bold)
+      tree <- tree +
+        ggplot2::geom_segment(data = df_path_dbl,
+                              ggplot2::aes(x = x_s,
+                                           xend = x_e,
+                                           y = y_s,
+                                           yend = y_e),
+                              size = 2)
+    } else {
+      tree <- ggplot2::ggplot() +
+        ggplot2::geom_segment(data = df_path,
+                              ggplot2::aes(x = x_s,
+                                           xend = x_e,
+                                           y = y_s,
+                                           yend = y_e))
+    }
   }
 
   if (direction == "up") {
@@ -226,19 +255,19 @@ draw_tree <- function(df_path,
   df_play$player_color <- as.integer(factor(df_play$player))
   p_length <- length(unique(df_play$player))
 
-  if (!is.null(info_set)) {
+  if (!is.null(info_sets)) {
 
     x_dif <- 100 / (length(unique(df_node$x)) - 1)
     y_dif <- 100 / (length(unique(df_node$y)) - 1)
 
 
-    n_info_sets <- length(info_set)
+    n_info_sets <- length(info_sets)
     for (i in 1:n_info_sets) {
-      info_set_i <- info_set[[i]]
-      n_pairs <- length(info_set_i) - 1
+      info_sets_i <- info_sets[[i]]
+      n_pairs <- length(info_sets_i) - 1
       if (n_pairs == 0) next
       for (j in 1:n_pairs) {
-        info_pair <- info_set_i[j:(j + 1)]
+        info_pair <- info_sets_i[j:(j + 1)]
         df_info <- df_node[info_pair, ]
 
         info_x <- df_info$x

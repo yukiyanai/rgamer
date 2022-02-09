@@ -7,7 +7,8 @@
 solve_efg(game, concept = "backward", quietly = FALSE)
 }
 \arguments{
-\item{game}{An "extensive_form" class object created by}
+\item{game}{An "extensive_form" class object created by
+\code{extensive_form()}.}
 
 \item{concept}{Solution concept to be used. It must be one of
 \code{"backward"} (backward induction) or \code{"spe"} (subgame perfect

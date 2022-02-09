@@ -3,17 +3,18 @@
 #'      an extensive-form game defined by \code{extensive_form()}.
 #' @param game An "extensive_form" class object created by
 #'     \code{extensive_form()}.
+#' @param restriction TRUE if the game has restricted sets of actions.
 #' @return A list of subgame perfect equilibria  and game tree(s) with marked
 #'     paths.
 #' @include backward_induction.R find_pure_NE.R draw_tree.R subgames.R
 #' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
-spe <- function(game) {
+spe <- function(game, restriction = FALSE) {
 
   type <- id <- player <- player_id <- is_id <- is_seq <- psne <- NULL
 
-  if (is.null(game$info_set)) { # perfect information
+  if (is.null(game$info_sets)) { # perfect information
     if (!("NATURE" %in% game$player)) {
       return (backward_induction(game))
     } else {
@@ -36,11 +37,11 @@ spe <- function(game) {
       if (i == 1) {
         df_node <- g$data$node
         df_path <- g$data$path
-        info_set <- g$info_set
+        info_sets <- g$info_sets
       } else{
         df_node <- g$subgame$node
         df_path <- g$subgame$path
-        info_set <- g$subgame$info_set
+        info_sets <- g$subgame$info_sets
       }
 
       if (length(unique(g$player)) == 1) {
@@ -98,8 +99,8 @@ spe <- function(game) {
         nr0 <- nrow(df_player_node)
         df_player_node$is_id <- rep(NA, nr0)
         for (k in 1:nr0) {
-          for (m in seq_along(info_set)) {
-            if (df_player_node$id[k] %in% info_set[[m]])
+          for (m in seq_along(info_sets)) {
+            if (df_player_node$id[k] %in% info_sets[[m]])
               df_player_node$is_id[k] <- m
           }
         }
@@ -111,7 +112,7 @@ spe <- function(game) {
             counter <- counter + 1
             df_player_node$is_seq[k] <- counter
           } else {
-             if (df_player_node$id[k] == info_set[[df_player_node$is_id[k]]][1]) {
+             if (df_player_node$id[k] == info_sets[[df_player_node$is_id[k]]][1]) {
                counter <- counter + 1
                df_player_node$is_seq[k] <- counter
              } else {
@@ -191,7 +192,7 @@ spe <- function(game) {
                           df_node = game$data$node,
                           direction = game$tree_param$direction,
                           show_node_id = game$tree_param$show_node_id,
-                          info_set = game$info_set,
+                          info_sets = game$info_sets,
                           info_line = game$tree_para$info_line,
                           color_palette = game$tree_param$color_palette,
                           family = game$tree_param$family,
@@ -200,7 +201,8 @@ spe <- function(game) {
                           size_action = game$tree_param$size_action,
                           size_node_id = game$tree_param$size_node_id,
                           size_terminal = game$tree_param$size_terminal,
-                          scale = game$tree_param$scale)
+                          scale = game$tree_param$scale,
+                          restriction = restriction)
 
       return(list(sol = SPE, sol_tree = spe_trees))
     }

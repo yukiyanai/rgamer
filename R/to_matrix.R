@@ -11,8 +11,8 @@
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 to_matrix <- function(game) {
 
-  if (!(class(game) %in% c("extensive_form", "subgame")))
-    stop("game must be an 'extensive_form' or a 'subgame'")
+  if (!(class(game) %in% c("extensive_form", "subgame", "restricted_game")))
+    stop("game must be an 'extensive_form', a 'subgame', or a restricted_game")
 
   p_vec <- game$player
   u_player <- unique(p_vec)

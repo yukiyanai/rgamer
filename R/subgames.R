@@ -45,21 +45,21 @@ subgames <- function(game, quietly = FALSE) {
     }
 
     ## Check if all nodes of an given info set is included
-    if (!is.null(game$info_set)) {
-      subg_info_set <- list()
-      for (s in seq_along(game$info_set)) {
-        tgt_info_set <- game$info_set[[s]]
-        n_in <- sum(tgt_info_set %in% subgame_path$node_from)
-        if (n_in == length(tgt_info_set)) {
-          subg_info_set <- c(subg_info_set, list(tgt_info_set))
+    if (!is.null(game$info_sets)) {
+      subg_info_sets <- list()
+      for (s in seq_along(game$info_sets)) {
+        tgt_info_sets <- game$info_sets[[s]]
+        n_in <- sum(tgt_info_sets %in% subgame_path$node_from)
+        if (n_in == length(tgt_info_sets)) {
+          subg_info_sets <- c(subg_info_sets, list(tgt_info_sets))
         } else if (n_in > 0) {
           sg_flag <- FALSE
           break
         }
       }
-      if (length(subg_info_set) == 0) subg_info_set <- NULL
+      if (length(subg_info_sets) == 0) subg_info_sets <- NULL
     } else {
-      subg_info_set <- NULL
+      subg_info_sets <- NULL
     }
 
     if (sg_flag) {
@@ -120,11 +120,11 @@ subgames <- function(game, quietly = FALSE) {
       names(subg_payoff_list) <- subg_players_unique
 
       ## info set adjustment
-      subg_info_set_original <- subg_info_set
-      if (!is.null(subg_info_set)) {
-        for (s in seq_along(subg_info_set)) {
-          old_id <- subg_info_set[[s]]
-          subg_info_set[[s]] <- subgame_node %>%
+      subg_info_sets_original <- subg_info_sets
+      if (!is.null(subg_info_sets)) {
+        for (s in seq_along(subg_info_sets)) {
+          old_id <- subg_info_sets[[s]]
+          subg_info_sets[[s]] <- subgame_node %>%
             dplyr::filter(id %in% old_id) %>%
             dplyr::pull(new_id)
         }
@@ -134,17 +134,17 @@ subgames <- function(game, quietly = FALSE) {
         players = subg_player_list,
         actions = subg_action_list,
         payoffs = subg_payoff_list,
-        info_set = subg_info_set,
+        info_sets = subg_info_sets,
         direction = game$tree_params$direction,
         show_tree = FALSE
       )
       subgame$subgame$path <- subgame_path
       subgame$subgame$node <- subgame_node
-      subgame$subgame$info_set <- subg_info_set_original
+      subgame$subgame$info_sets <- subg_info_sets_original
       subgame$tree <- draw_tree(
         df_path = subgame_path,
         df_node = subgame_node,
-        info_set = subg_info_set,
+        info_sets = subg_info_sets,
         direction = game$tree_params$direction
       )
 

@@ -1,3 +1,11 @@
+# rgamer 0.0.12
+
+## New Functions
+
+- `restrict_action()` restricts actions at specified nodes in an extensive-form game.
+
+
+
 # rgamer 0.0.11
 
 ## New Functions

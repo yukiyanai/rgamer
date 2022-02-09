@@ -27,10 +27,10 @@ get_payoff <- function(game,
 
   if (class(game) %in% c("normal_form", "sequential_form")) {
     out <- get_payoff_normal(game, actions, cons1, cons2, cons_common)
-  } else if (class(game) %in% c("extensive_form", "subgame")) {
+  } else if (class(game) %in% c("extensive_form", "subgame", "restricted_game")) {
     out <- get_payoff_extensive(game, actions)
   } else {
-    stop("A game must be one of 'normal_form', 'sequential_form', 'extensive_form' or 'subgame'.")
+    stop("A game must be one of 'normal_form', 'sequential_form', 'extensive_form', 'subgame', or 'restricted_game'.")
   }
 
   return(out)
