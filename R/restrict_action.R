@@ -17,17 +17,48 @@ restrict_action <- function(game, action) {
   id <- node_from <- node_to <- info_sets <- NULL
   s <- player <- linetype <- NULL
 
-  n_spec <- length(action)
-
   nodes <- names(action) %>%
     stringr::str_replace("n", "") %>%
     as.integer()
+
+  play_nodes <- game$data$node %>%
+    dplyr::filter(type == "play") %>%
+    dplyr::pull(id)
+
+
+  ## check if each node specified above belongs to an info set
+  nodes_extra <- action_extra <- NULL
+  for (i in 1:length(nodes)) {
+    if (nodes[i] %in% unlist(game$info_sets)) {
+      for (j in 1:length(game$info_sets)) {
+        if (nodes[i] %in% game$info_sets[[j]]) {
+          nodes_extra <- c(nodes_extra,
+                           game$info_sets[[j]][nodes[i] != game$info_sets[[j]]])
+          action_extra <- c(action_extra,
+                            rep(action[[i]], sum(nodes[i] != game$info_sets[[j]])))
+
+        }
+      }
+    }
+
+  }
+
+  ## duplicate specified actions for nodes in an info set
+  if (!is.null(nodes_extra)) {
+    for (i in 1:length(nodes_extra)) {
+      new_element <- list(action_extra[i])
+      names(new_element) <- paste0("n", nodes_extra[i])
+      action <- c(action, new_element)
+    }
+  }
+  nodes <- c(nodes, nodes_extra)
+  n_spec <- length(action)
 
   action_vec <- unlist(action)
 
   ## check if specified actions are available
   for (i in 1:n_spec) {
-    if (!(action_vec[i] %in% game$action[[nodes[i]]])) {
+    if (!(action_vec[i] %in% game$action[[which(play_nodes == nodes[i])]])) {
       stop(paste(action_vec[i], "is not an avilable action for", names(action)[i]))
     }
 
@@ -122,13 +153,22 @@ restrict_action <- function(game, action) {
   }
 
   df_path <- df_path %>%
-    dplyr::filter(linetype == "1") %>%
-    dplyr::select(!linetype)
+      dplyr::filter(linetype == "1") %>%
+      dplyr::select(!linetype)
 
-  reaches <- c(1, dplyr::pull(df_path, node_to))
+  cont <- TRUE
+  while (cont) {
+    reaches <- c(1, dplyr::pull(df_path, node_to))
 
-  df_node <- game$data$node %>%
-    dplyr::filter(id %in% reaches)
+    df_node <- game$data$node %>%
+      dplyr::filter(id %in% reaches)
+
+    nrow_check <- nrow(df_path)
+    df_path <- df_path %>%
+      dplyr::filter(node_from %in% reaches)
+
+    if (nrow(df_path) == nrow_check) cont <- FALSE
+  }
 
   payoffs <- game$payoff
   for (p in seq_along(u_players)) {

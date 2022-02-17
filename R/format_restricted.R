@@ -39,6 +39,10 @@ format_restricted <- function(game) {
   new_game$data$node <- df_node
   new_game$data$path <- df_path
 
+  attr(new_game, "class") <- "restricted_game"
+
   list(game = new_game,
-       old_tree = game$tree)
+       old_tree = game$tree,
+       df_pid = df_pid,
+       df_nid = df_nid)
 }

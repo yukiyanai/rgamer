@@ -14,6 +14,13 @@ spe <- function(game, restriction = FALSE) {
 
   type <- id <- player <- player_id <- is_id <- is_seq <- psne <- NULL
 
+  if (restriction) {
+    fgame <- format_restricted(game)
+    game <- fgame$game
+    df_pid <- fgame$df_pid
+    df_nid <- fgame$df_nid
+  }
+
   if (is.null(game$info_sets)) { # perfect information
     if (!("NATURE" %in% game$player)) {
       return (backward_induction(game))
@@ -60,12 +67,6 @@ spe <- function(game, restriction = FALSE) {
       } else {
         g_nf <- to_matrix(g)
         PSNE <- find_pure_NE(g_nf)
-
-        #for (s in seq_along(PSNE)) {
-        #  PSNE[s] <- PSNE[s] %>%
-        #    stringr::str_replace("\\(\\(", "\\[\\(") %>%
-        #    stringr::str_replace("\\)\\)", "\\)\\]")
-        #}
 
         player_nodes <- list()
         for (p in u_players) {
@@ -132,6 +133,15 @@ spe <- function(game, restriction = FALSE) {
     n_sg <- length(sg)
     if (n_sg == 1) {
       SPE <- PSNE_list[[1]] %>% as.list()
+      spe_sol_list <- vector("list", length(SPE))
+      for (i in 1:length(SPE)) {
+        df_path_tmp <- game$data$path %>%
+          dplyr::mutate(s = stringr::str_replace_all(s, " ", ""))
+        spe_sol_list[[i]] <- df_psne_list[[1]][[i]] %>%
+          dplyr::select(player, psne) %>%
+          dplyr::rename(s = psne) %>%
+          dplyr::left_join(df_path_tmp, by = c("player", "s"))
+      }
     } else {
       n_psne <- sapply(df_psne_list, length)
 
@@ -144,7 +154,6 @@ spe <- function(game, restriction = FALSE) {
 
       whole <- df_psne_list[[1]]
       n_cand <- length(whole)
-
 
       spe_id <- NULL
       for (i in 1:n_cand) {
@@ -169,10 +178,12 @@ spe <- function(game, restriction = FALSE) {
       SPE <- spe_sol_list <- vector("list", length(spe_id))
       for (i in 1:length(spe_id)) {
         SPE[[i]] <- PSNE_list[[1]][[spe_id[i]]]
+        df_path_tmp <- game$data$path %>%
+          dplyr::mutate(s = stringr::str_replace_all(s, " ", ""))
         spe_sol_list[[i]] <- df_psne_list[[1]][[spe_id[i]]] %>%
           dplyr::select(player, psne) %>%
           dplyr::rename(s = psne) %>%
-          dplyr::left_join(game$data$path, by = c("player", "s"))
+          dplyr::left_join(df_path_tmp, by = c("player", "s"))
       }
 
     }
@@ -187,12 +198,25 @@ spe <- function(game, restriction = FALSE) {
                   ...)
       }
 
-      spe_trees <- lapply(1:length(SPE),
+      if (!restriction) {
+        new_info_sets <- game$info_sets
+      } else {
+        new_info_sets <- list()
+        kept_nodes <- df_nid$old[df_nid$new %in% game$data$node$id]
+        for (s in 1:length(game$info_sets)) {
+          if (all(game$info_sets[[s]] %in% kept_nodes)) {
+            new_info_sets <- c(new_info_sets, game$info_sets[[s]])
+          }
+        }
+        if (length(new_info_sets) == 0) new_info_sets <- NULL
+      }
+
+      spe_trees <- lapply(1:length(spe_sol_list),
                           list_trees,
                           df_node = game$data$node,
                           direction = game$tree_param$direction,
                           show_node_id = game$tree_param$show_node_id,
-                          info_sets = game$info_sets,
+                          info_sets = new_info_sets,
                           info_line = game$tree_para$info_line,
                           color_palette = game$tree_param$color_palette,
                           family = game$tree_param$family,

@@ -48,8 +48,6 @@ solve_efg <- function(game,
 
   if (class(game) == "restricted_game") {
     tree_overlay <- TRUE
-    fgame <- format_restricted(game)
-    game <- fgame$game
   }
 
   concept <- match.arg(concept,
@@ -78,7 +76,7 @@ solve_efg <- function(game,
   }
 
   if (tree_overlay) {
-    old_tree <- fgame$old_tree
+    old_tree <- game$tree
     for (t in seq_along(out$sol_tree)) {
       out$sol_tree[[t]] <- old_tree +
         out$sol_tree[[t]]$layers[[2]] +

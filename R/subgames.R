@@ -19,6 +19,7 @@ subgames <- function(game, quietly = FALSE) {
   type <- node_from <- id <- x <- n <- player <- n_each <- new_id <- NULL
 
   subgame_list <- list(game)
+  #attr(subgame_list[[1]], "class") <- class(game)
 
   df_path <- game$data$path
   df_node <- game$data$node

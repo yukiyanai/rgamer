@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://yukiyanai.github.io/rgamer/404.html</loc>
+  </url>
+  <url>
+    <loc>https://yukiyanai.github.io/rgamer/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://yukiyanai.github.io/rgamer/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://yukiyanai.github.io/rgamer/authors.html</loc>
+  </url>
+  <url>
     <loc>https://yukiyanai.github.io/rgamer/index.html</loc>
+  </url>
+  <url>
+    <loc>https://yukiyanai.github.io/rgamer/news/index.html</loc>
   </url>
   <url>
     <loc>https://yukiyanai.github.io/rgamer/reference/dom.html</loc>
@@ -19,7 +34,22 @@
     <loc>https://yukiyanai.github.io/rgamer/reference/get_payoff.html</loc>
   </url>
   <url>
+    <loc>https://yukiyanai.github.io/rgamer/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://yukiyanai.github.io/rgamer/reference/matching.html</loc>
+  </url>
+  <url>
+    <loc>https://yukiyanai.github.io/rgamer/reference/matching_df.html</loc>
+  </url>
+  <url>
     <loc>https://yukiyanai.github.io/rgamer/reference/normal_form.html</loc>
+  </url>
+  <url>
+    <loc>https://yukiyanai.github.io/rgamer/reference/print.matching.html</loc>
+  </url>
+  <url>
+    <loc>https://yukiyanai.github.io/rgamer/reference/restrict_action.html</loc>
   </url>
   <url>
     <loc>https://yukiyanai.github.io/rgamer/reference/rgamer.html</loc>
@@ -65,6 +95,9 @@
   </url>
   <url>
     <loc>https://yukiyanai.github.io/rgamer/reference/solve_seq_matrix.html</loc>
+  </url>
+  <url>
+    <loc>https://yukiyanai.github.io/rgamer/reference/subgames.html</loc>
   </url>
   <url>
     <loc>https://yukiyanai.github.io/rgamer/reference/to_matrix.html</loc>
