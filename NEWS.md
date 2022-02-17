@@ -1,3 +1,16 @@
+# rgamer 0.0.13
+
+## New Functions
+
+- The following two functions to implement matching has been added. Currently, only Gale-Shapley (deferred acceptance; DA) algorithm is supported.
+  - `matching()`
+  - `matching_df()`
+  
+## Bug Fix
+
+- `restrict_action()` now works with imperfect-information games. 
+
+
 # rgamer 0.0.12
 
 ## New Functions

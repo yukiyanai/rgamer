@@ -1,7 +1,7 @@
 Package: rgamer
 Type: Package
 Title: Learn Game Theory Using R
-Version: 0.0.12
+Version: 0.0.13
 Authors@R:
     c(person(given = "Yoshio",
              family = "Kamijo",
@@ -47,6 +47,7 @@ Imports:
 ByteCompile: TRUE
 VignetteBuilder: knitr
 Collate: 
+    'DA.R'
     'as_df_br.R'
     'draw_tree.R'
     'backward_induction.R'
@@ -71,7 +72,10 @@ Collate:
     'get_payoff.R'
     'gridsearch_backward.R'
     'gridsearch_br.R'
+    'matching.R'
+    'matching_df.R'
     'normal_form.R'
+    'print.matching.R'
     'restrict_action.R'
     'rgamer.R'
     'seq_extensive.R'

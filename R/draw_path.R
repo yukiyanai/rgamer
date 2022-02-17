@@ -51,7 +51,7 @@ draw_path <- function(game, actions) {
             df_sol = df_selected,
             direction = game$tree_param$direction,
             show_node_id = game$tree_param$show_node_id,
-            info_set = game$info_set,
+            info_sets = game$info_sets,
             info_line = game$tree_para$info_line,
             color_palette = game$tree_param$color_palette,
             family = game$tree_param$family,

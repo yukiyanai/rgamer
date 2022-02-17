@@ -5,7 +5,7 @@
 #'     \code{extensive_form()}.
 #' @param action A named list of actions that can be chosen by players. The
 #'     names must be node names: "n1", "n2", etc. A player can choose any action
-#'     at the nodes not listed.
+#'     at the nodes that are not listed in this argument.
 #' @return A "restricted_game" class object in which players have to choose the
 #'    actions specified by the user.
 #' @importFrom magrittr %>%
@@ -91,7 +91,7 @@ restrict_action <- function(game, action) {
       action_list <- list()
       for (j in 1:n_nodes) {
         action_list[[j]] <- df_path %>%
-          dplyr::filter(node_from == info_sets[[i]][j]) %>%
+          dplyr::filter(node_from == game$info_sets[[i]][j]) %>%
           dplyr::pull(s)
       }
       for (j in 2:n_nodes) {
@@ -101,11 +101,11 @@ restrict_action <- function(game, action) {
     }
 
     ## find players corresponding to info sets
-    n_info_sets <- length(info_sets)
+    n_info_sets <- length(game$info_sets)
     info_sets_player <- rep(NA, n_info_sets)
     for (i in 1:n_info_sets) {
-      info_node <- info_sets[[i]][1]
-      info_sets_player[i] <- df_node %>%
+      info_node <- game$info_sets[[i]][1]
+      info_sets_player[i] <- game$data$node %>%
         dplyr::filter(id == info_node) %>%
         dplyr::pull(player)
     }

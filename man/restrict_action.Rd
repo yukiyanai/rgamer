@@ -12,7 +12,7 @@ restrict_action(game, action)
 
 \item{action}{A named list of actions that can be chosen by players. The
 names must be node names: "n1", "n2", etc. A player can choose any action
-at the nodes not listed.}
+at the nodes that are not listed in this argument.}
 }
 \value{
 A "restricted_game" class object in which players have to choose the

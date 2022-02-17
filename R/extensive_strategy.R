@@ -68,10 +68,10 @@ extensive_strategy <- function(player,
       s_num <- which(u_player == target_p)
       action_p <- action_profiles[[target_p]] %>%
         unlist() %>%
-        matrix(ncol = length(node_to_play[[target_p]]),
+        matrix(ncol = length(node_to_play[[s_num]]),
                byrow = TRUE) %>%
         as.data.frame()
-      names(action_p) <- paste0("n", node_to_play[[target_p]])
+      names(action_p) <- paste0("n", node_to_play[[s_num]])
 
       s_set <- which(info_sets_player == target_p)
 

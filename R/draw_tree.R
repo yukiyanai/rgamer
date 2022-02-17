@@ -60,7 +60,7 @@ draw_tree <- function(df_path,
   type <- node_from <- node_to <- id <- match_id <- NULL
   left <- x <- x_s <- x_m <- x_e <- y <- y_s <- y_m <- y_e <- NULL
   player <- payoff <- s <- NULL
-  player_color <- info_group <- linetype <- NULL
+  player_color <- info_group <- linetype <- bold <- NULL
 
   df_play <- df_node %>%
     dplyr::filter(type == "play")
