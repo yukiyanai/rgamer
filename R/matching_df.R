@@ -79,7 +79,7 @@ matching_df <- function(df1,
   } else {
       df_type <- match.arg(df_type,
                            choices = c("data.frame", "csv", "tsv", "table"))
-      df_type_1 <- df_type2 <- df_type
+      df_type_1 <- df_type_2 <- df_type
   }
 
   ## Read df1
