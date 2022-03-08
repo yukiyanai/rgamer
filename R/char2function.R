@@ -1,6 +1,6 @@
 #' @title Transform a pair of character function into R functions.
 #' @description \code{char2function()} transform a pair of functions given by
-#'    chracter strings into a pair of R functions.
+#'    character strings into a pair of R functions.
 #' @param f1 A character string of the payoff function of Player 1.
 #' @param f2 A character string of the payoff function of Player 2.
 #' @param pars A character vector specifying the parameters of payoff functions.

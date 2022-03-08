@@ -19,12 +19,12 @@ set_paths <- function(players_vec, n_choice, actions) {
   nonzero_choice <- n_choice_vec[n_choice_vec != 0]
   nonzero_index <- which(n_choice_vec != 0)
 
-  df <- data.frame(
-    id        = 1:n_path,
-    player    = rep(players_vec, nonzero_choice),
-    s         = unlist(actions),
+  data.frame(
+    id = 1:n_path,
+    player = rep(players_vec, nonzero_choice),
+    s = unlist(actions),
     node_from = rep(nonzero_index, nonzero_choice),
-    node_to   = 2:(n_path + 1))
+    node_to = 2:(n_path + 1)
+  )
 
-  return(df)
 }

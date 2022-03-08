@@ -19,6 +19,8 @@ br_plot <- function(game,
   s2 <- game$strategy[[2]]
   p1 <- game$payoff[[1]]
   p2 <- game$payoff[[2]]
+
+  # error if game is not 2-by-2
   if (length(s1) != 2 | length(s2) != 2) {
     stop("This function works only for a 2-by-2 game.")
   }
@@ -45,6 +47,7 @@ br_plot <- function(game,
     } else {
       q <- ifelse(p2[2] > p2[4], 1, 0)
     }
+
     if (p == "ANY" | q == "ANY") {
       warning("The best response correspondence is not uniquely determined; no plot has been created.\n")
       return(NULL)
@@ -56,11 +59,15 @@ br_plot <- function(game,
       ye = c(1, q),
       player = players)
     brp <- ggplot2::ggplot(df) +
-      ggplot2::geom_segment(ggplot2::aes(x = xs, y = ys,
-                                         xend = xe, yend = ye,
-                            color = player)) +
+      ggplot2::geom_segment(ggplot2::aes(x = xs,
+                                         y = ys,
+                                         xend = xe,
+                                         yend = ye,
+                                         color = player)) +
       ggplot2::scale_color_brewer(palette = color_palette) +
-      ggplot2::labs(x = "p", y = "q", title = "best response correspondence") +
+      ggplot2::labs(x = "p",
+                    y = "q",
+                    title = "") +
       ggplot2::coord_fixed() +
       ggplot2::theme(axis.title.y = element_text(angle = 0, vjust = 0.5))
   } else {

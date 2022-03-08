@@ -32,8 +32,8 @@ be kept in the returned list without being printed on screen. Default is
 \item{color_palette}{A color palette to be used. Default is \code{"Set1"}.}
 }
 \value{
-A list containing pure strategy Nash equilibrium (NE), mixed strategy
-NE, the gt table of the game, the plot of best response
+A list containing pure strategy Nash equilibria (NE), mixed strategy
+NE, a table of the payoff matrix, the plot of best response
 correspondences, and the list of mixed strategy NE of the subsets of
 strategies. Each element will be \code{NULL} if not available.
 }

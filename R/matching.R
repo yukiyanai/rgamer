@@ -13,8 +13,8 @@
 #'     to \code{g1_prefs} instead of specifying \code{g1_names}.
 #' @param g2_names A vector of names of the proposers. You can pass a named list
 #'     to \code{g2_prefs} instead of specifying \code{g2_names}.
-#' @param algorithm A algorithm for matching. At the present, \code{"DA"} is
-#'     the only available option.
+#' @param algorithm A algorithm for matching. \code{"DA"}
+#'     (\code{"Gale-Shapley"}) or \code{"Boston"}.
 #' @param verbose If \code{TRUE}, matching steps will be printed on screen.
 #'     Default to \code{TRUE}.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
@@ -73,7 +73,7 @@ matching <- function(g1_prefs,
                      verbose = TRUE) {
 
   algorithm <- match.arg(algorithm,
-                         choices = c("DA"))
+                         choices = c("DA", "Gale-Shapley", "Boston"))
 
   n_g1 <- length(g1_prefs)
   n_g2 <- length(g2_prefs)
@@ -178,10 +178,14 @@ matching <- function(g1_prefs,
   }
 
   ## Matching!!
-  if (algorithm == "DA") {
+  if (algorithm %in% c("DA", "Gale-Shapley")) {
     out <- DA(g1_prefs = g1_prefs,
               g2_prefs = g2_prefs,
               verbose = verbose)
+  } else if (algorithm == "Boston") {
+    out <- Boston(g1_prefs = g1_prefs,
+                  g2_prefs = g2_prefs,
+                  verbose = verbose)
   }
 
   structure(out, class = "matching")

@@ -26,8 +26,8 @@ to \code{g1_prefs} instead of specifying \code{g1_names}.}
 \item{g2_names}{A vector of names of the proposers. You can pass a named list
 to \code{g2_prefs} instead of specifying \code{g2_names}.}
 
-\item{algorithm}{A algorithm for matching. At the present, \code{"DA"} is
-the only available option.}
+\item{algorithm}{A algorithm for matching. \code{"DA"}
+(\code{"Gale-Shapley"}) or \code{"Boston"}.}
 
 \item{verbose}{If \code{TRUE}, matching steps will be printed on screen.
 Default to \code{TRUE}.}

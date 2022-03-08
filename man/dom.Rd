@@ -2,20 +2,27 @@
 % Please edit documentation in R/dom.R
 \name{dom}
 \alias{dom}
-\title{Find dominated and dominant strategies in a normal-form game}
+\title{Find dominated or dominant strategies in a normal-form game}
 \usage{
-dom(game, type = "dominated")
+dom(game, type = "dominated", quietly = FALSE)
 }
 \arguments{
-\item{game}{A normal-form game object created by \code{normal_form()}.
+\item{game}{An object of "normal_form" class created by \code{normal_form()}.
 The game's type must be "matrix".}
 
-\item{type}{Specify which to be found, "dominated" or "dominant".
-Default is "dominated."}
+\item{type}{Which to be found, "dominated" or "dominant".
+Default is \code{"dominated"}.}
+
+\item{quietly}{If \code{TRUE}, the message telling dominated (or dominant)
+strategies will not be shown. Default is \code{FALSE}.}
+}
+\value{
+A list of dominated and weakly dominated strategies or a list of
+dominant and weakly dominant strategies.
 }
 \description{
 \code{dom()} finds each player's (weakly) dominated
-or (weakly) dominant strategies
+or (weakly) dominant strategies.
 }
 \author{
 Yoshio Kamijo and Yuki Yanai \href{mailto:yanai.yuki@kochi-tech.ac.jp}{yanai.yuki@kochi-tech.ac.jp}

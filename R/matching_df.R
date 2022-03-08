@@ -20,8 +20,8 @@
 #'     file are separated by this character. If not specified,
 #'     default is \code{","} for "csv", \code{"\t"} for "tsv", and \code{""}
 #'     (white space) for "table".
-#' @param algorithm A algorithm for matching. At the moment, \code{"DA"} is
-#'     the only available option.
+#' @param algorithm A algorithm for matching. \code{"DA"}
+#'     (\code{"Gale-Shapley"}) or \code{"Boston"}.
 #' @param verbose If \code{TRUE}, matching steps will be printed on screen.
 #'     Default to \code{TRUE}.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
@@ -42,7 +42,7 @@ matching_df <- function(df1,
                         verbose = TRUE) {
 
   algorithm <- match.arg(algorithm,
-                         choices = c("DA"))
+                         choices = c("DA", "Gale-Shapley", "Boston"))
 
   if (!is.null(header)) {
     if (!is.logical(header))

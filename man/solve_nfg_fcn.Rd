@@ -61,7 +61,7 @@ and the plot of best response correspondences.
 payoff functions are provided as R functions.
 }
 \seealso{
-\code{\link[=normal_form]{normal_form()}}
+\code{\link{normal_form}}
 }
 \author{
 Yoshio Kamijo and Yuki Yanai \href{mailto:yanai.yuki@kochi-tech.ac.jp}{yanai.yuki@kochi-tech.ac.jp}

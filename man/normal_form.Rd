@@ -92,7 +92,7 @@ strategic-form) game.
 creates an object of "normal_form" class.
 }
 \details{
-Creates an object of 'normal_form' class, which can be passed to
+Creates an object of "normal_form" class, which can be passed to
 functions in order to find solutions of the game.
 }
 \examples{
@@ -130,14 +130,14 @@ game3 <- normal_form(
   par2_lim = c(0, 30))
 
 \dontrun{
-## This causes an error because p1 and p2 are in different forms.
-game4 <- normal_form(
-  p1 = fx,
-  p2 = "-y^2 + (28 - x) * y",
-  pars = c('x', 'y'),
-  par1_lim = c(0, 30),
-  par2_lim = c(0, 30)
-)
+  ## This throws an error because p1 and p2 are in different forms.
+  game4 <- normal_form(
+    p1 = fx,
+    p2 = "-y^2 + (28 - x) * y",
+    pars = c('x', 'y'),
+    par1_lim = c(0, 30),
+    par2_lim = c(0, 30)
+  )
 }
 }
 \author{

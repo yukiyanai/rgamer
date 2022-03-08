@@ -62,7 +62,7 @@ be kept in the returned list without being printed on screen. Default is
 }
 \value{
 A list containing Nash equilibria (if any), the payoff matrix of the
-game  (if available), and the plot of best response correspondence
+game (if available), and the plot of best response correspondence
 (if available).
 }
 \description{
@@ -71,7 +71,7 @@ game  (if available), and the plot of best response correspondence
 \details{
 This function finds Nash equilibria of a normal-form game by
 \code{\link{solve_nfg_matrix}}, \code{\link{solve_nfg_char}}, or
-\code{\link{solve_nfg_fcn}} depending on \code{type} of a normal_form
+\code{\link{solve_nfg_fcn}} depending on \code{type} of a "normal_form"
 object defined by \code{normal_form}.
 }
 \examples{

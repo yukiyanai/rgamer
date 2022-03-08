@@ -1,6 +1,7 @@
 #' @title Create a table of the game
-#' @description \code{game_table()} creates and displays a gt table of the game.
-#' @return A gt table of the normal form game.
+#' @description \code{game_table()} creates and displays the payoff matrix of
+#'     the game.
+#' @return A table of the payoff matrix of a normal-form game.
 #' @param game A "normal_form" class object created by \code{normal_form()}.
 #'     The game's type must be "matrix".
 #' @seealso \code{\link{normal_form}}
@@ -21,7 +22,7 @@ game_table <- function(game, mark_br = TRUE) {
 
   if (mark_br) {
     BR <- find_best_response(game)
-    BR1 <- BR %>%  dplyr::filter(pid == 1)
+    BR1 <- BR %>% dplyr::filter(pid == 1)
     if (nrow(BR1) > 0) {
       rows1 <- BR1 %>% dplyr::pull(row)
       cols1 <- BR1 %>% dplyr::pull(column)
@@ -58,8 +59,9 @@ game_table <- function(game, mark_br = TRUE) {
   mat_tbl <- mat0 %>%
     kableExtra::kbl(booktabs = TRUE,
                     align = "c") %>%
-    kableExtra::kable_classic(html_font = "sans-serif") %>%
-    kableExtra::kable_styling(full_width = FALSE) %>%
+    kableExtra::kable_classic(html_font = "Arial") %>%
+    kableExtra::kable_styling(full_width = FALSE,
+                              latex_options = "scale_down") %>%
     kableExtra::add_header_above(data.frame(c("", players[2]),
                                             c(2, length(s2))),
                                  bold = TRUE) %>%

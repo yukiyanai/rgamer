@@ -34,8 +34,8 @@ file are separated by this character. If not specified,
 default is \code{","} for "csv", \code{"\t"} for "tsv", and \code{""}
 (white space) for "table".}
 
-\item{algorithm}{A algorithm for matching. At the moment, \code{"DA"} is
-the only available option.}
+\item{algorithm}{A algorithm for matching. \code{"DA"}
+(\code{"Gale-Shapley"}) or \code{"Boston"}.}
 
 \item{verbose}{If \code{TRUE}, matching steps will be printed on screen.
 Default to \code{TRUE}.}

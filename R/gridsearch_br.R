@@ -22,7 +22,7 @@
 #'     instead of \code{cons1} and \code{cons2}.
 #' @param precision A natural number specifying the precision of numerical
 #'     approximation. The value n approximately means that the approximation is
-#'     correct up to the Nth decimal place. The default value is 1.
+#'     correct up to the n-th decimal place. The default value is 1L.
 #' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>

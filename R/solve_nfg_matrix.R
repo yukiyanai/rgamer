@@ -1,8 +1,8 @@
 #' @title Find Nash equilibria of a normal-form game.
 #' @description \code{solve_nfg_matrix()} finds Nash equilibria of a normal-form
 #'      (strategic-form) game with discrete-choice strategies.
-#' @return A list containing pure strategy Nash equilibrium (NE), mixed strategy
-#'      NE, the gt table of the game, the plot of best response
+#' @return A list containing pure strategy Nash equilibria (NE), mixed strategy
+#'      NE, a table of the payoff matrix, the plot of best response
 #'      correspondences, and the list of mixed strategy NE of the subsets of
 #'      strategies. Each element will be \code{NULL} if not available.
 #' @param game A "normal_form" class object created by \code{normal_form()}.
@@ -32,7 +32,7 @@ solve_nfg_matrix <- function(
     if (!quietly) message("Pure strategy NE does not exist.\n")
   } else if (!quietly) {
     psNE_str <- paste(psNE, collapse = ", ")
-    if (!quietly) message("Pure-strategy NE: ", psNE_str)
+    message("Pure-strategy NE: ", psNE_str)
   }
 
   if (mixed) {

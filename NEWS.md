@@ -1,3 +1,16 @@
+# rgamer 0.0.14
+
+## New Features
+
+- `matching()` and `matching_df()` now implements "Boston mechanism" matching. Still works only for one-to-one matching, though.
+- `eval_matching()` evaluates how desirable a matching result is for a player.
+
+
+## Bug Fix
+
+- `solve_nfg()`
+- `print.matching()`
+
 # rgamer 0.0.13
 
 ## New Functions

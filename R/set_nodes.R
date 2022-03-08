@@ -36,8 +36,8 @@ set_nodes <- function(players, n_choice, payoffs, direction = "down") {
   keep <- TRUE
   for (i in 1:n_seq) {
     height_sub <- height / (n_node[i] + zero_count)
-    pos <- seq(from       = height_sub / 2,
-               by         = height_sub,
+    pos <- seq(from = height_sub / 2,
+               by = height_sub,
                length.out = n_node[i] + zero_count)
     pos <- pos[keep]
     ypos <- c(ypos, pos)
@@ -94,8 +94,7 @@ set_nodes <- function(players, n_choice, payoffs, direction = "down") {
   df_play <- df %>%
     dplyr::filter(type == "play")
 
-  df <- dplyr::bind_rows(df_play, df_payoff) %>%
+  dplyr::bind_rows(df_play, df_payoff) %>%
     dplyr::arrange(id)
 
-  return(df)
 }

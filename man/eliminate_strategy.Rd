@@ -13,13 +13,17 @@ eliminate_strategy(game, player, eliminated)
 
 \item{eliminated}{A strategy to be eliminated. Case sensitive.}
 }
+\value{
+A normal-form game object with the specified strategies eliminated.
+}
 \description{
-\code{eliminate_strategy()} eliminates a strategy from a normal-form game defined by \code{norma_form()}.
+\code{eliminate_strategy()} eliminates a strategy from a
+normal-form game defined by \code{normal_form()}.
 }
 \details{
 This function eliminates a strategy from a normal-form game defined
-by \code{norma_form()}. For instance, you can remove the dominated strategy
-found by \code{dom()}.
+by \code{norma_form()}. For instance, you can remove a dominated
+strategy found by \code{dom()}.
 }
 \author{
 Yoshio Kamijo and Yuki Yanai \href{mailto:yanai.yuki@kochi-tech.ac.jp}{yanai.yuki@kochi-tech.ac.jp}

@@ -1,7 +1,7 @@
 Package: rgamer
 Type: Package
 Title: Learn Game Theory Using R
-Version: 0.0.13
+Version: 0.0.14
 Authors@R:
     c(person(given = "Yoshio",
              family = "Kamijo",
@@ -47,6 +47,7 @@ Imports:
 ByteCompile: TRUE
 VignetteBuilder: knitr
 Collate: 
+    'Boston.R'
     'DA.R'
     'as_df_br.R'
     'draw_tree.R'
@@ -57,6 +58,7 @@ Collate:
     'get_payoff_extensive.R'
     'draw_path.R'
     'eliminate_strategy.R'
+    'eval_match.R'
     'extensive_strategy.R'
     'set_paths.R'
     'set_nodes.R'

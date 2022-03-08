@@ -4,17 +4,41 @@
 \alias{print.matching}
 \title{Custom print method for "matching" class}
 \usage{
-\method{print}{matching}(x, type = "results")
+\method{print}{matching}(
+  x,
+  digits = getOption("digits"),
+  quote = FALSE,
+  na.print = "",
+  zero.print = "0",
+  right = is.numeric(x) || is.complex(x),
+  justify = "none",
+  ...,
+  type = "results"
+)
 }
 \arguments{
-\item{x}{The output of \code{matching()}.}
+\item{x}{The output of \code{matching()} or \code{matching_df()}.}
+
+\item{digits}{Not used.}
+
+\item{quote}{Not used.}
+
+\item{na.print}{Not used.}
+
+\item{zero.print}{Not used.}
+
+\item{right}{Not used.}
+
+\item{justify}{Not used.}
+
+\item{...}{Not used.}
 
 \item{type}{What to print. The available options are "results", "history",
 and "both" (both results and history). Default to \code{"results"}.}
 }
 \description{
 Custom print method for "matching" class created by
-\code{matching()}.
+\code{matching()} or \code{matching_df()}.
 }
 \author{
 Yoshio Kamijo and Yuki Yanai \href{mailto:yanai.yuki@kochi-tech.ac.jp}{yanai.yuki@kochi-tech.ac.jp}

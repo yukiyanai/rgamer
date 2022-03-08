@@ -1,11 +1,14 @@
 #' @title Find dominant strategies in a normal-form game
 #' @description \code{find_dominant()} finds each player's dominant and
 #'     weakly dominant strategies if they exist.
-#' @param game A normal-form game object created by \code{normal_form()}.
+#' @param game An object of "normal_form" class created by \code{normal_form()}.
+#' @param quietly If \code{TRUE}, the message telling dominated (or dominant)
+#'     strategies will not be shown. Default is \code{FALSE}.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @noRd
-find_dominant <- function(game) {
+find_dominant <- function(game, quietly = FALSE) {
 
+  # error if the game's payoffs are defined by functions
   if (game$type != "matrix") stop("game is not defined by a payoff matrix")
 
   n_s1 <- length(game$strategy$s1)
@@ -72,18 +75,21 @@ find_dominant <- function(game) {
       wdom_2 <- NA
   }
 
-  message(paste0(game$player[1],
-                 "'s dominant strategy: ",
-                 dom_1))
-  message(paste0(game$player[1],
+  # message showing dominant strategies
+  if (!quietly) {
+    message(paste0(game$player[1],
+                   "'s dominant strategy: ",
+                   dom_1))
+    message(paste0(game$player[1],
+                   "'s weakly dominant strategy: ",
+                   wdom_1))
+    message(paste0(game$player[2],
+                   "'s dominant strategy: ",
+                   dom_2))
+    message(paste0(game$player[2],
                  "'s weakly dominant strategy: ",
-                 wdom_1))
-  message(paste0(game$player[2],
-                 "'s dominant strategy: ",
-                 dom_2))
-  message(paste0(game$player[2],
-                 "'s weakly dominant strategy: ",
-                 wdom_2))
+                   wdom_2))
+  }
 
   dom_list <- list(dom_1, dom_2)
   names(dom_list) <- game$player

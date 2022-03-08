@@ -1,8 +1,10 @@
 #' @title Eliminate a strategy from a normal-form game.
-#' @description \code{eliminate_strategy()} eliminates a strategy from a normal-form game defined by \code{norma_form()}.
+#' @description \code{eliminate_strategy()} eliminates a strategy from a
+#'     normal-form game defined by \code{normal_form()}.
 #' @details This function eliminates a strategy from a normal-form game defined
-#'     by \code{norma_form()}. For instance, you can remove the dominated strategy
-#'     found by \code{dom()}.
+#'     by \code{norma_form()}. For instance, you can remove a dominated
+#'     strategy found by \code{dom()}.
+#' @return A normal-form game object with the specified strategies eliminated.
 #' @param game A normal-form game object created by \code{normal_form()}.
 #' @param player A player one of whose strategies will be eliminated.
 #' @param eliminated A strategy to be eliminated. Case sensitive.
@@ -25,12 +27,11 @@ eliminate_strategy <- function(game,
 
   new_df <- game$df %>%
     dplyr::filter(s1 %in% game$strategy$s1,
-           s2 %in% game$strategy$s2)
+                  s2 %in% game$strategy$s2)
 
-  new_game <- normal_form(players = game$player,
-                          s1 = game$strategy$s1,
-                          s2 = game$strategy$s2,
-                          p1 = new_df$p1,
-                          p2 = new_df$p2)
-  return(new_game)
+  normal_form(players = game$player,
+              s1 = game$strategy$s1,
+              s2 = game$strategy$s2,
+              p1 = new_df$p1,
+              p2 = new_df$p2)
 }

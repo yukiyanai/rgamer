@@ -4,7 +4,7 @@
 #' @return A list containing the pair of the best response correspondence (NE)
 #'      and the plot of best response correspondences.
 #' @param game A "normal_form" class object created by \code{normal_form()}.
-#' @seealso [normal_form()]
+#' @seealso \code{\link{normal_form}}
 #' @param par_label A vector of parameter labels if the user define the game
 #'     with functions as characters.
 #' @param cons1 A named list of parameters contained in \code{game$payoff$p1}
@@ -28,7 +28,6 @@
 #'     in the returned list  without being printed on screen. Default is
 #'     \code{FALSE}.
 #' @param color_palette A color palette to be used. Default is \code{"Set1"}.
-#' @import ggplot2
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 solve_nfg_fcn <- function(game,
                           par_label = NULL,
@@ -59,6 +58,7 @@ solve_nfg_fcn <- function(game,
     }
   }
 
+  # find best responses by grid search
   df_sol <- gridsearch_br(players = players,
                           p1 = game$payoff[[1]],
                           p2 = game$payoff[[2]],
@@ -72,6 +72,7 @@ solve_nfg_fcn <- function(game,
 
   NE <- c(df_sol$x, df_sol$y)
 
+  # data frame of NE(s)
   df_sol <- df_sol %>%
     dplyr::mutate(text = paste0("(",
                                 round(NE[1], digits = precision),
@@ -79,6 +80,7 @@ solve_nfg_fcn <- function(game,
                                 round(NE[2], digits = precision),
                                 ")"))
 
+  # data frame of best responses
   df <- as_df_br(players = game$player,
                  p1 = game$payoff[[1]],
                  p2 = game$payoff[[2]],
@@ -93,6 +95,7 @@ solve_nfg_fcn <- function(game,
   df2 <- df$df2 %>%
     dplyr::arrange(x)
 
+  # check if best responses are within the domain
   difference1 <- diff(df1$y[1:2])
   check_range_lb <- NE - difference1
   check_range_ub <- NE + difference1
@@ -101,7 +104,6 @@ solve_nfg_fcn <- function(game,
                   x < check_range_ub[1],
                   y > check_range_lb[2],
                   y < check_range_ub[2])
-
   difference2 <- diff(df2$x[1:2])
   check_range_lb <- NE - difference2
   check_range_ub <- NE + difference2
@@ -115,8 +117,10 @@ solve_nfg_fcn <- function(game,
     NE <- NULL
   }
 
+  # best responses inside the domain
   df <- dplyr::bind_rows(df1, df2)
 
+  # best response correspondence
   p <- ggplot2::ggplot(df) +
     ggplot2::geom_hline(yintercept = par1_lim[1], color = "gray") +
     ggplot2::geom_vline(xintercept = par2_lim[1], color = "gray") +
@@ -142,6 +146,7 @@ solve_nfg_fcn <- function(game,
    if (is.null(NE)) {
      p2 <- p
    } else {
+     # add text showing NE
      p2 <- p +
       ggplot2::geom_point(data = df_sol,
                           ggplot2::aes(x = x, y = y),
@@ -153,11 +158,12 @@ solve_nfg_fcn <- function(game,
                          nudge_y = par2_lim[2] / 10)
    }
 
-
+  # display the plot
   if (plot) {
     if (mark_NE) plot(p2)
     else plot(p)
   }
+
 
   if (!quietly) {
     if (is.null(NE)) {

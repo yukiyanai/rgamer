@@ -1,7 +1,7 @@
 #' @title Define a normal-form (or strategic-form) game
 #' @description \code{normal_form()} defines a normal-form game and
 #'     creates an object of "normal_form" class.
-#' @details Creates an object of 'normal_form' class, which can be passed to
+#' @details Creates an object of "normal_form" class, which can be passed to
 #'     functions in order to find solutions of the game.
 #' @param players A character vector of the name (label) for the players.
 #' @param s1 A character vector of pure strategies for Player 1 (row player).
@@ -21,19 +21,19 @@
 #'     Default is \code{FALSE}.
 #' @param discrete_points A numeric vector of length 2 to set how many discrete
 #'     points should be used to discretize the game defined by payoff functions.
-#'      Default is \code{c(6, 6)}, which shows equally spaced 6 values from the
-#'      range of the strategies \code{par1_lim} and \code{par2_lim}. Instead of
-#'      setting this parameter, you can specify the vectors of arbitrary
-#'      strategies by setting \code{s1} and \code{s2}.
+#'     Default is \code{c(6, 6)}, which shows equally spaced 6 values from the
+#'     range of the strategies \code{par1_lim} and \code{par2_lim}. Instead of
+#'     setting this parameter, you can specify the vectors of arbitrary
+#'     strategies by setting \code{s1} and \code{s2}.
 #' @param symmetric A logical value. Set this \code{TRUE} when the payoffs for
 #'     two players are symmetric as in the prisoners' dilemma. Then, p1 is
 #'     recycled for p2. Default is \code{FALSE}.
 #' @param byrow A logical value. If \code{TRUE}, payoffs will be lined up by
 #'     row. Default is \code{FALSE}. Only used when both \code{s1} and \code{s2}
-#'      are provided.
+#'     are provided.
 #' @param pars A character vector of parameters that are selected by players 1
 #'     and 2, respectively. Only used when \code{p1} and \code{p2} are specified
-#'      by payoff functions (either as character strings or R functions).
+#'     by payoff functions (either as character strings or R functions).
 #' @param par1_lim A numeric vector of length 2, which defines the range of
 #'     parameters from which Player 1 chooses her strategy.
 #' @param par2_lim A numeric vector of length 2, which defines the range of
@@ -85,14 +85,14 @@
 #'   par2_lim = c(0, 30))
 #'
 #' \dontrun{
-#' ## This causes an error because p1 and p2 are in different forms.
-#' game4 <- normal_form(
-#'   p1 = fx,
-#'   p2 = "-y^2 + (28 - x) * y",
-#'   pars = c('x', 'y'),
-#'   par1_lim = c(0, 30),
-#'   par2_lim = c(0, 30)
-#' )
+#'   ## This throws an error because p1 and p2 are in different forms.
+#'   game4 <- normal_form(
+#'     p1 = fx,
+#'     p2 = "-y^2 + (28 - x) * y",
+#'     pars = c('x', 'y'),
+#'     par1_lim = c(0, 30),
+#'     par2_lim = c(0, 30)
+#'   )
 #' }
 normal_form <- function(
   players = NULL,
@@ -112,10 +112,11 @@ normal_form <- function(
   cons2 = NULL,
   cons_common = NULL) {
 
-  stop_message <- "For a game with discrete strategies, please specify both s1 and s2.\nFor a game with continuous strategies, please specify all of p1, p2, pars, par1_lim, and par2_lim. When dicretize = TRUE, par1_lim and par2_lim are not necessary."
 
+  # If players are not named, give them default names.
   if (is.null(players)) players <- c("Player 1", "Player 2")
 
+  # If payoffs are provided by cell, create p1 and p2 from cells
   if (!is.null(cells)) {
     n_cells <- length(cells)
     p1 <- p2 <- rep(NA, n_cells)
@@ -125,9 +126,14 @@ normal_form <- function(
     }
   }
 
+  # error message used for a few times below
+  stop_message <- "For a game with discrete strategies, please specify both s1 and s2.\nFor a game with continuous strategies, please specify all of p1, p2, pars, par1_lim, and par2_lim. When dicretize = TRUE, par1_lim and par2_lim are not necessary."
+
   if (is.null(pars)) {
-    ## game with discrete-choice strategies
+    ## Game with discrete-choice strategies
+
     if (is.null(s1) | is.null(s2)) {
+      # error if strategies are not provided for both players
       stop(stop_message)
     }
 
@@ -137,13 +143,18 @@ normal_form <- function(
 
     if (symmetric) p2 <- p1
 
+    # error if the length of payoffs differs from the number of cells
     if (length(p1) != n_cells) stop("the length of p1 must equal the number of cells.")
     if (length(p2) != n_cells) stop("the length of p2 must equal the number of cells.")
 
+    # Player 1's payoff matrix
     mat1 <- matrix(p1, nrow = n_rows, byrow = byrow)
+
+    # Player 2's payoff matrix
     byrow2 <- ifelse(symmetric, !byrow, byrow)
     mat2 <- matrix(p2, nrow = n_rows, byrow = byrow2)
 
+    # Gather game elements in a data frame
     if (byrow) {
       row <- rep(1:n_rows, each = n_cols)
       s1_vec <- rep(s1, each = n_cols)
@@ -155,21 +166,24 @@ normal_form <- function(
       column <- rep(1:n_cols, each = n_rows)
       s2_vec <- rep(s2, each = n_rows)
     }
-
     df <- data.frame(row, column, s1 = s1_vec, s2 = s2_vec, p1, p2)
 
+    # list for return
     value <- list(player = players,
                   strategy = list(s1 = s1, s2 = s2),
                   payoff = list(p1 = p1, p2 = p2),
                   df = df,
-                  mat = list(matrix1= mat1, matrix2 = mat2),
+                  mat = list(matrix1 = mat1, matrix2 = mat2),
                   type = "matrix")
 
   } else if (is.character(p1) & is.character(p2)) {
-    ## game whose payoffs are defined by character strings of functions
+    ## Game whose payoffs are defined by character strings describing functions
+
     if (is.null(par1_lim) | is.null(par2_lim)) {
+      # error if domains of parameters are not provided
       stop(stop_message)
     } else if (length(par1_lim) != 2 | length(par2_lim) != 2) {
+      # error if parameter domains are not specified correctly
       stop("Each of par1_lim and par2_lim must be the numeric vector of length 2.")
     } else {
       value <- list(player = players,
@@ -179,16 +193,18 @@ normal_form <- function(
                     type = "char_function")
     }
   } else if (is.function(p1) & is.function(p2)) {
-    ## game whose payoffs are defined by function objects
+    ## Game whose payoffs are defined by function objects
+
     if (discretize) {
+      # pick out discrete strategies
       if (is.null(s1)) {
         s1 <- seq(from = par1_lim[1],
-                  to   = par1_lim[2],
+                  to = par1_lim[2],
                   length.out = discrete_points[1])
       }
       if (is.null(s2)) {
         s2 <- seq(from = par2_lim[1],
-                  to   = par2_lim[2],
+                  to = par2_lim[2],
                   length.out = discrete_points[2])
       }
 
@@ -203,17 +219,19 @@ normal_form <- function(
       n_cols <- length(s2)
       n_cells <- n_rows * n_cols
 
+      # payoff matrix for Players 1 and 2
       mat1 <- matrix(payoff1, nrow = n_rows, byrow = FALSE)
       mat2 <- matrix(payoff2, nrow = n_rows, byrow = FALSE)
 
+      # gather game elements in a data frame
       row <- rep(1:n_rows, times = n_cols)
       s1_vec <- rep(s1, times = n_cols)
       column <- rep(1:n_cols, each = n_cols)
       s2_vec <- rep(s2, each = n_rows)
-
       df <- data.frame(row, column, s1, s2,
                        p1 = payoff1, p2 = payoff2)
 
+      # list for return
       value <- list(player = players,
                     strategy = list(s1 = s1, s2 = s2),
                     payoff = list(p1 = payoff1, p2 = payoff2),
@@ -222,8 +240,10 @@ normal_form <- function(
                     type = "matrix")
     } else {
       if (is.null(par1_lim) | is.null(par2_lim)) {
+        # error if domains of parameters are not provided
         stop(stop_message)
       } else if (length(par1_lim) != 2 | length(par2_lim) != 2) {
+        # error if parameter domains are not specified correctly
         stop("Each of par1_lim and par2_lim must be the numeric vector of length 2.")
       } else {
         if (!is.null(cons_common)) {
@@ -231,6 +251,8 @@ normal_form <- function(
         } else {
           constants <- list(cons1 = cons1, cons2 = cons2)
         }
+
+        # list for return
         value <- list(player = players,
                       strategy = list(s1 = par1_lim, s2 = par2_lim),
                       payoff = list(p1 = p1, p2 = p2),
@@ -243,5 +265,6 @@ normal_form <- function(
     stop("Please specify strategies (if payoffs are not functions) and payoffs in a proper way.")
   }
 
+  # return a "normal_form" class object
   structure(value, class = "normal_form")
 }
