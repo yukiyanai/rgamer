@@ -15,6 +15,9 @@
 #'     to \code{g2_prefs} instead of specifying \code{g2_names}.
 #' @param algorithm A algorithm for matching. \code{"DA"}
 #'     (\code{"Gale-Shapley"}) or \code{"Boston"}.
+#' @param switch A logical value. If \code{TRUE}, the roles of g1 and g2 are
+#'     switched. That is, g2 will be the proposer group, and g1 the prposed if
+#'     \code{TRUE}. Default is \code{FALSE}.
 #' @param verbose If \code{TRUE}, matching steps will be printed on screen.
 #'     Default to \code{TRUE}.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
@@ -70,6 +73,7 @@ matching <- function(g1_prefs,
                      g1_names = NULL,
                      g2_names = NULL,
                      algorithm = "DA",
+                     switch = FALSE,
                      verbose = TRUE) {
 
   algorithm <- match.arg(algorithm,
@@ -178,6 +182,11 @@ matching <- function(g1_prefs,
   }
 
   ## Matching!!
+  if (switch) {
+    tmp <- g1_prefs
+    g1_prefs <- g2_prefs
+    g2_prefs <- tmp
+  }
   if (algorithm %in% c("DA", "Gale-Shapley")) {
     out <- DA(g1_prefs = g1_prefs,
               g2_prefs = g2_prefs,

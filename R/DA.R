@@ -129,7 +129,7 @@ DA <- function(g1_prefs,
     res_char <- paste(res_char, g1_names[i], ":", g1_partner[i], "\n")
   }
   for (j in 1:n_g2) {
-    if (!g2_filled[j]) res_char <- paste(res_char, "None :", g2_names[j], "\n")
+    if (!g2_filled[j]) res_char <- paste(res_char, "NA :", g2_names[j], "\n")
   }
 
   df <- data.frame(

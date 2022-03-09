@@ -56,15 +56,20 @@ Boston <- function(g1_prefs,
     }
     df_accept <- data.frame(NULL)
     for (j in g2_notyet) {
-      offers <- df_propose[df_propose$to == j, 1]
-      if (length(offers) < 1) break
-      offers_str <- paste(g1_names[offers], collapse = ", ")
+      offers <- df_propose$from[df_propose$to == j]
+      if (length(offers) < 1) next
       if (step_print) {
         history <- paste(history, "Step", t, "\n")
         step_print <- FALSE
       }
-      history <- paste(history, " ", offers_str,
-                       "propose", g2_names[j], "\n")
+      if (length(offers) == 1) {
+        history <- paste(history, " ", g1_names[offers],
+                         "proposes", g2_names[j], "\n")
+      } else {
+        offers_str <- paste(g1_names[offers], collapse = ", ")
+        history <- paste(history, " ", offers_str,
+                         "propose", g2_names[j], "\n")
+      }
       for (k in 1:length(g2p[[j]])) {
         if (g2p[[j]][k] %in% offers) {
           accept <- g2p[[j]][k]
@@ -104,15 +109,16 @@ Boston <- function(g1_prefs,
   g2_matched <- g2_names[stats::na.omit(df_match$g2)]
   g2_left <- (1:n_g2)[!(g2_names %in% g2_matched)]
   for (j in g2_left) {
-     res_char <- paste(res_char, "None :", g2_names[j], "\n")
+     res_char <- paste(res_char, "NA :", g2_names[j], "\n")
      df_left <- data.frame(g1 = NA_integer_,
                            g2 = j)
-     dplyr::bind_rows(df_match, df_left)
+     df_match <- dplyr::bind_rows(df_match, df_left)
   }
 
   g1_partner <- NULL
+  df_g1partner <- df_match[!is.na(df_match$g1),]
   for (i in 1:n_g1) {
-    g1_partner <- c(g1_partner, df_match$g2[df_match$g1 == i])
+    g1_partner <- c(g1_partner, df_g1partner$g2[df_g1partner$g1 == i])
   }
   g1_partner <- g2_names[g1_partner]
 

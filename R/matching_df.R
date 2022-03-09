@@ -22,6 +22,9 @@
 #'     (white space) for "table".
 #' @param algorithm A algorithm for matching. \code{"DA"}
 #'     (\code{"Gale-Shapley"}) or \code{"Boston"}.
+#' @param switch A logical value. If \code{TRUE}, the roles of g1 and g2 are
+#'     switched. That is, g2 will be the proposer group, and g1 the prposed if
+#'     \code{TRUE}. Default is \code{FALSE}.
 #' @param verbose If \code{TRUE}, matching steps will be printed on screen.
 #'     Default to \code{TRUE}.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
@@ -39,6 +42,7 @@ matching_df <- function(df1,
                         header = NULL,
                         sep = NULL,
                         algorithm = "DA",
+                        switch = FALSE,
                         verbose = TRUE) {
 
   algorithm <- match.arg(algorithm,
@@ -139,5 +143,6 @@ matching_df <- function(df1,
   matching(g1_prefs = g1_prefs,
            g2_prefs = g2_prefs,
            algorithm = algorithm,
+           switch = switch,
            verbose = verbose)
 }
