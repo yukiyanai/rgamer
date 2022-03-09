@@ -21,7 +21,10 @@ eval_match <- function(x,
                        name,
                        group = NULL,
                        preference) {
-  group <- match.arg(group, choices = c(NULL, "proposer", "proposed"))
+  if (!is.null(group)) {
+    group <- match.arg(group,
+                       choices = c("proposer", "proposed"))
+  }
   df <- x$data
   if (!is.null(group)) df <- df[df$group == group, ]
   matched <- df[df$name == name, 2]

@@ -98,8 +98,8 @@ Boston <- function(g1_prefs,
   res_char <- paste(res_char, "Results\n")
   for (i in 1:n_g1) {
     res_char <- paste(res_char,
-                      df_match$g1[i], ":",
-                      df_match$g2[i], "\n")
+                      g1_names[df_match$g1[i]], ":",
+                      g2_names[df_match$g2[i]], "\n")
   }
   g2_matched <- g2_names[stats::na.omit(df_match$g2)]
   g2_left <- (1:n_g2)[!(g2_names %in% g2_matched)]
