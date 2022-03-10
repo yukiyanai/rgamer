@@ -135,8 +135,6 @@ Boston <- function(g1_prefs,
     group = c(rep("proposer", n_g1), rep("proposed", n_g2))
   )
 
-  if (verbose) cat(res_char)
-
   return(list(data = df,
               algorithm = "Boston",
               results = res_char,

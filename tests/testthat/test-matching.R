@@ -65,8 +65,6 @@ test6b <- matching_df(df1 = df1,
                      algorithm = "Boston",
                      verbose = FALSE)
 
-
-
 test_that("matching implements matching", {
   expect_s3_class(test1, "matching")
   expect_s3_class(test1b, "matching")

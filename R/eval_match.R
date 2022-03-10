@@ -21,6 +21,7 @@ eval_match <- function(x,
                        name,
                        group = NULL,
                        preference) {
+
   if (!is.null(group)) {
     group <- match.arg(group,
                        choices = c("proposer", "proposed"))
