@@ -135,7 +135,7 @@ Boston <- function(g1_prefs,
     group = c(rep("proposer", n_g1), rep("proposed", n_g2))
   )
 
-  cat(res_char)
+  if (verbose) cat(res_char)
 
   return(list(data = df,
               results = res_char,
