@@ -4,8 +4,9 @@
 #'    a pair of data files (csv, tsv, or table).
 #' @return A list of "matching" class containing
 #'     (1) a data frame of the matching results,
-#'     (2) a character string of the matching results, and
-#'     (3) a character string of the history of matching steps.
+#'     (2) a character string showing which algorithm was used,
+#'     (3) a character string of the matching results, and
+#'     (4) a character string of the history of matching steps.
 #' @param df1 A data frame or a data file containing preferences of
 #'     the proposers.
 #' @param df2 A data frame or a data file containing preferences of

@@ -1,8 +1,9 @@
 #' @title Implement DA matching algorithm
 #' @description \code{DA()} implements DA matching
-#' @return A list containing (1) a data frame of the matching results
-#'     (2) a character string of the matching results, and
-#'     (3) a character string of the history of matching steps.
+#' @return A list containing (1) a data frame of the matching results,
+#'     (2) a character string showing which algorithm was used,
+#'     (3) a character string of the matching results, and
+#'     (4) a character string of the history of matching steps.
 #' @param g1_prefs A named list of preferences of individuals who make
 #'     proposals.
 #' @param g2_prefs A named list of preferences of individuals who receives
@@ -139,6 +140,7 @@ DA <- function(g1_prefs,
   if (verbose) cat(res_char)
 
   return(list(data = df,
+              algorithm = "DA (Gale-Shapley)",
               results = res_char,
               history = history))
 }

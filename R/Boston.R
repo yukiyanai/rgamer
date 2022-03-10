@@ -1,8 +1,9 @@
 #' @title Implement Boston matching algorithm
 #' @description \code{Boston()} implements Boston mechanism matching
-#' @return A list containing (1) a data frame of the matching results
-#'     (2) a character string of the matching results, and
-#'     (3) a character string of the history of matching steps.
+#' @return A list containing (1) a data frame of the matching results,
+#'     (2) a character string showing which algorithm was used,
+#'     (3) a character string of the matching results, and
+#'     (4) a character string of the history of matching steps.
 #' @param g1_prefs A named list of preferences of individuals who make
 #'     proposals.
 #' @param g2_prefs A named list of preferences of individuals who receives
@@ -33,7 +34,6 @@ Boston <- function(g1_prefs,
 
   ## players not yet matched
   g1_notyet <- 1:n_g1
-  g2_notyet <- 1:n_g2
 
   ## data frame to record matches
   df_match <- data.frame(NULL)
@@ -51,11 +51,11 @@ Boston <- function(g1_prefs,
         break
       }
       df1 <- data.frame(from = i,
-                        to = g1p[[i]][t])
+                        to = g1p[[i]][1])
       df_propose <- dplyr::bind_rows(df_propose, df1)
     }
     df_accept <- data.frame(NULL)
-    for (j in g2_notyet) {
+    for (j in 1:n_g2) {
       offers <- df_propose$from[df_propose$to == j]
       if (length(offers) < 1) next
       if (step_print) {
@@ -138,6 +138,7 @@ Boston <- function(g1_prefs,
   if (verbose) cat(res_char)
 
   return(list(data = df,
+              algorithm = "Boston",
               results = res_char,
               history = history))
 }

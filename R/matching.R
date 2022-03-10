@@ -3,8 +3,9 @@
 #'    individuals.
 #' @return A list of "matching" class containing
 #'     (1) a data frame of the matching results,
-#'     (2) a character string of the matching results, and
-#'     (3) a character string of the history of matching steps.
+#'     (2) a character string showing which algorithm was used,
+#'     (3) a character string of the matching results, and
+#'     (4) a character string of the history of matching steps.
 #' @param g1_prefs A list of preferences of individuals who make
 #'     proposals.
 #' @param g2_prefs A named list of preferences of individuals who receives

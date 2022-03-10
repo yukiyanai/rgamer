@@ -40,8 +40,9 @@ Default to \code{TRUE}.}
 \value{
 A list of "matching" class containing
 (1) a data frame of the matching results,
-(2) a character string of the matching results, and
-(3) a character string of the history of matching steps.
+(2) a character string showing which algorithm was used,
+(3) a character string of the matching results, and
+(4) a character string of the history of matching steps.
 }
 \description{
 \code{matching()} implements matching between two groups of
