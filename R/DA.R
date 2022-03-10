@@ -32,7 +32,6 @@ DA <- function(g1_prefs,
   }
   g2_order <- lapply(g2_prefs, reorder_prefs)
 
-
   ## placeholders for matched partners
   g1_matched <- rep(0, n_g1)
   g2_matched <- rep(0, n_g2)
@@ -49,7 +48,6 @@ DA <- function(g1_prefs,
 
   ## record the matching process
   history <- ""
-
 
   ## steps
   t <- 1
@@ -75,27 +73,27 @@ DA <- function(g1_prefs,
             num_match <- num_match + 1
           }
         } else if (!g2_filled[j]) {
-          g1_matched[i] <- j
-          g2_matched[j] <- i
           history <- paste(history, "  ",
                           g1_names[i], "and", g2_names[j],
                           "temporarily match\n")
-
+          g1_matched[i] <- j
+          g2_matched[j] <- i
           g1_filled[i] <- TRUE
           g2_filled[j] <- TRUE
 
           num_match <- num_match + 1
 
         } else if (g2_order[[j]][i] < g2_order[[j]][k]) {
-          g1_filled[k] <- FALSE
           history <- paste(history, "  ",
                            g2_names[j], "rejects", g1_names[k], "\n")
+          position[k] <- position[k] + 1
           g1_matched[i] <- j
           g2_matched[j] <- i
           history <- paste(history, "  ",
                            g1_names[i], "and", g2_names[j],
                           "temporarily match\n")
           g1_filled[i] <- TRUE
+          g1_filled[k] <- FALSE
           g2_filled[j] <- TRUE
         } else {
           history <- paste(history, "  ",

@@ -10,6 +10,7 @@ matching(
   g1_names = NULL,
   g2_names = NULL,
   algorithm = "DA",
+  switch = FALSE,
   verbose = TRUE
 )
 }
@@ -28,6 +29,10 @@ to \code{g2_prefs} instead of specifying \code{g2_names}.}
 
 \item{algorithm}{A algorithm for matching. \code{"DA"}
 (\code{"Gale-Shapley"}) or \code{"Boston"}.}
+
+\item{switch}{A logical value. If \code{TRUE}, the roles of g1 and g2 are
+switched. That is, g2 will be the proposer group, and g1 the prposed if
+\code{TRUE}. Default is \code{FALSE}.}
 
 \item{verbose}{If \code{TRUE}, matching steps will be printed on screen.
 Default to \code{TRUE}.}

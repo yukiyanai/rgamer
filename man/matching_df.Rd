@@ -11,6 +11,7 @@ matching_df(
   header = NULL,
   sep = NULL,
   algorithm = "DA",
+  switch = FALSE,
   verbose = TRUE
 )
 }
@@ -36,6 +37,10 @@ default is \code{","} for "csv", \code{"\t"} for "tsv", and \code{""}
 
 \item{algorithm}{A algorithm for matching. \code{"DA"}
 (\code{"Gale-Shapley"}) or \code{"Boston"}.}
+
+\item{switch}{A logical value. If \code{TRUE}, the roles of g1 and g2 are
+switched. That is, g2 will be the proposer group, and g1 the prposed if
+\code{TRUE}. Default is \code{FALSE}.}
 
 \item{verbose}{If \code{TRUE}, matching steps will be printed on screen.
 Default to \code{TRUE}.}
