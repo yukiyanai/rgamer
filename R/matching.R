@@ -4,8 +4,9 @@
 #' @return A list of "matching" class containing
 #'     (1) a data frame of the matching results,
 #'     (2) a character string showing which algorithm was used,
-#'     (3) a character string of the matching results, and
-#'     (4) a character string of the history of matching steps.
+#'     (3) a character string of the matching results,
+#'     (4) a character string of the history of matching steps, and
+#'     (5) a list of preferences of each group.
 #' @param g1_prefs A list of preferences of individuals who make
 #'     proposals.
 #' @param g2_prefs A named list of preferences of individuals who receives
@@ -197,6 +198,13 @@ matching <- function(g1_prefs,
                   g2_prefs = g2_prefs,
                   verbose = verbose)
   }
+
+  out$data <- assign_rank(out$data,
+                          g1_prefs = g1_prefs,
+                          g2_prefs = g2_prefs)
+
+  out$preference$proposer <- g1_prefs
+  out$preference$proposed <- g2_prefs
 
   structure(out, class = "matching")
 }

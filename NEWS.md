@@ -1,3 +1,11 @@
+# rgamer 0.0.15
+
+## New Features
+
+- Results of `matching()` and `matching_df()` now contains the information of
+the ranking of matches.
+- Users can examine if a matching is stable by `is_stable()` function.
+
 # rgamer 0.0.14
 
 ## New Features

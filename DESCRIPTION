@@ -1,7 +1,7 @@
 Package: rgamer
 Type: Package
 Title: Learn Game Theory Using R
-Version: 0.0.14
+Version: 0.0.15
 Authors@R:
     c(person(given = "Yoshio",
              family = "Kamijo",
@@ -50,6 +50,7 @@ Collate:
     'Boston.R'
     'DA.R'
     'as_df_br.R'
+    'assign_rank.R'
     'draw_tree.R'
     'backward_induction.R'
     'br_plot.R'
@@ -74,6 +75,7 @@ Collate:
     'get_payoff.R'
     'gridsearch_backward.R'
     'gridsearch_br.R'
+    'is_stable.R'
     'matching.R'
     'matching_df.R'
     'normal_form.R'

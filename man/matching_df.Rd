@@ -49,8 +49,9 @@ Default to \code{TRUE}.}
 A list of "matching" class containing
 (1) a data frame of the matching results,
 (2) a character string showing which algorithm was used,
-(3) a character string of the matching results, and
-(4) a character string of the history of matching steps.
+(3) a character string of the matching results,
+(4) a character string of the history of matching steps, and
+(5) a list of preferences of each group.
 }
 \description{
 \code{matching_df()} implements matching between two groups of
