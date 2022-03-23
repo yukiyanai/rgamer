@@ -33,7 +33,8 @@
 #'     that should be treated as constants, if any.
 #' @param cons2 A named list of parameters contained in \code{game$payoff$p2}
 #'     that should be treated as constants, if any.
-#' @return A list of plays by player.
+#' @return A data frame of simulation results.
+#' @importFrom magrittr %>%
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
 simu_game <- function(game,
@@ -116,5 +117,14 @@ simu_game <- function(game,
 
   }
 
-  return(df)
+  df_longer <- df %>%
+    tidyr::pivot_longer(play1:play2,
+                        names_to = "player",
+                        values_to = "play") %>%
+    dplyr::select(sample, period, player, play) %>%
+    dplyr::mutate(player = ifelse(player == "play1",
+                                  game$player[1],
+                                  game$player[2]))
+
+  return(df_longer)
 }

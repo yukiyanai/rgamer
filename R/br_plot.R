@@ -6,7 +6,6 @@
 #' @param msNE Mixed-strategy NE calculated by \code{find_mixed_NE()}.
 #' @param color_palette A color palette to be used. Default is \code{"Set1"}.
 #' @seealso \code{\link{normal_form}}, \code{\link[ggplot2]{ggplot}}
-#' @import ggplot2
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 br_plot <- function(game,
