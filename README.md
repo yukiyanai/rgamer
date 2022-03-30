@@ -77,8 +77,8 @@ game1 <- normal_form(
   players = c("Kamijo", "Yanai"),
   s1 = c("Stays silent", "Betrays"), 
   s2 = c("Stays silent", "Betrays"), 
-  p1 = c(-1,  0, -3, -2), 
-  p2 = c(-1, -3,  0, -2))
+  payoffs1 = c(-1,  0, -3, -2), 
+  payoffs2 = c(-1, -3,  0, -2))
 ```
 
 You can specify payoffs for each cell of the game matrix as follows.
@@ -105,7 +105,7 @@ s_game1 <- solve_nfg(game1, show_table = FALSE)
 s_game1$table
 ```
 
-<table class=" lightable-classic table" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic table" style="font-family: Arial; margin-left: auto; margin-right: auto; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="empty-cells: hide;" colspan="2">
@@ -180,8 +180,8 @@ game2 <- normal_form(
   players = c("Kamijo", "Yanai"),
   s1 = c("Stag", "Hare"), 
   s2 = c("Stag", "Hare"), 
-  p1 = c(10, 8, 0, 7), 
-  p2 = c(10, 0, 8, 7))
+  payoffs1 = c(10, 8, 0, 7), 
+  payoffs2 = c(10, 0, 8, 7))
 ```
 
 Then, you can pass it to `solve_nfg()` function to get NEs. Set
@@ -209,10 +209,13 @@ s_game2$br_plot
 An example of a normal-form game:
 
 -   Player: { A, B }
--   Strategy: {*x* ∈ \[0, 30\], *y* ∈ \[0, 30\] }
+-   Strategy:
+    {![x \\in \[0, 30\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x%20%5Cin%20%5B0%2C%2030%5D "x \in [0, 30]"),
+    ![y \\in \[0, 30\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;y%20%5Cin%20%5B0%2C%2030%5D "y \in [0, 30]")
+    }
 -   Payoff:
-    {*f*<sub>*x*</sub>(*x*, *y*) =  − *x*<sup>2</sup> + (28 − *y*)*x*,
-    *f*<sub>*y*</sub>(*x*, *y*) =  − *y*<sup>2</sup> + (28 − *x*)*y*}
+    {![f_x(x, y) = -x^2 + (28 - y)x](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f_x%28x%2C%20y%29%20%3D%20-x%5E2%20%2B%20%2828%20-%20y%29x "f_x(x, y) = -x^2 + (28 - y)x"),
+    ![f_y(x, y) = -y^2 + (28 - x) y](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f_y%28x%2C%20y%29%20%3D%20-y%5E2%20%2B%20%2828%20-%20x%29%20y "f_y(x, y) = -y^2 + (28 - x) y")}
 
 You can define a game by specifying payoff functions as character
 vectors using `normal_form()`:
@@ -220,8 +223,8 @@ vectors using `normal_form()`:
 ``` r
 game3 <- normal_form(
   players = c("A", "B"),
-  p1 = "-x^2 + (28 - y) * x",
-  p2 = "-y^2 + (28 - x) * y",
+  payoffs1 = "-x^2 + (28 - y) * x",
+  payoffs2 = "-y^2 + (28 - x) * y",
   par1_lim = c(0, 30),
   par2_lim = c(0, 30),
   pars = c("x", "y"))
@@ -244,10 +247,13 @@ s_game3 <- solve_nfg(game3,)
 An example of a normal-form game:
 
 -   Player: { A, B }
--   Strategy: {*x* ∈ \[0, 30\], *y* ∈ \[0, 30\] }
+-   Strategy:
+    {![x \\in \[0, 30\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x%20%5Cin%20%5B0%2C%2030%5D "x \in [0, 30]"),
+    ![y \\in \[0, 30\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;y%20%5Cin%20%5B0%2C%2030%5D "y \in [0, 30]")
+    }
 -   Payoff:
-    {*f*<sub>*x*</sub>(*x*, *y*) =  − *x*<sup>*a*</sup> + (*b* − *y*)*x*,
-    *f*<sub>*y*</sub>(*x*, *y*) =  − *y*<sup>*s*</sup> + (*t* − *x*)*y*}
+    {![f_x(x, y) = -x^a + (b - y)x](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f_x%28x%2C%20y%29%20%3D%20-x%5Ea%20%2B%20%28b%20-%20y%29x "f_x(x, y) = -x^a + (b - y)x"),
+    ![f_y(x, y) = -y^s + (t - x) y](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;f_y%28x%2C%20y%29%20%3D%20-y%5Es%20%2B%20%28t%20-%20x%29%20y "f_y(x, y) = -y^s + (t - x) y")}
 
 You can define a normal-form game by specifying payoffs by R functions.
 
@@ -260,8 +266,8 @@ f_y <- function(x, y, s, t) {
 }
 game4 <- normal_form(
   players = c("A", "B"),
-  p1 = f_x,
-  p2 = f_y,
+  payoffs1 = f_x,
+  payoffs2 = f_y,
   par1_lim = c(0, 30),
   par2_lim = c(0, 30),
   pars = c("x", "y"))
@@ -338,8 +344,8 @@ func_price2 <- function(p, q){
 }
 
 game5 <- normal_form(
-  p1 = func_price1,
-  p2 = func_price2,
+  payoffs1 = func_price1,
+  payoffs2 = func_price2,
   pars = c("p", "q"),
   par1_lim = c(0, 10),
   par2_lim = c(0, 10),
@@ -352,7 +358,7 @@ Then, you can examine the specified part of the game.
 s_game5 <- solve_nfg(game5, mark_br = FALSE)
 ```
 
-<table class=" lightable-classic table" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic table" style="font-family: Arial; margin-left: auto; margin-right: auto; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="empty-cells: hide;" colspan="2">
