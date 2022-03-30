@@ -1,5 +1,5 @@
-#' @title Implement DA matching algorithm
-#' @description \code{DA()} implements DA matching
+#' @title Implement DA (Gale-Shapley) matching algorithm
+#' @description \code{DA()} implements DA (Gale-Shapley; GA) matching
 #' @return A list containing (1) a data frame of the matching results,
 #'     (2) a character string showing which algorithm was used,
 #'     (3) a character string of the matching results, and

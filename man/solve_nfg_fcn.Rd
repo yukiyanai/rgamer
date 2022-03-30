@@ -23,17 +23,17 @@ solve_nfg_fcn(
 \item{par_label}{A vector of parameter labels if the user define the game
 with functions as characters.}
 
-\item{cons1}{A named list of parameters contained in \code{game$payoff$p1}
-that should be treated as constants, if any.}
+\item{cons1}{A named list of parameters contained in
+\code{game$payoff$payoffs1} that should be treated as constants, if any.}
 
-\item{cons2}{A named list of parameters contained in \code{game$payoff$p2}
-that should be treated as constants, if any.}
+\item{cons2}{A named list of parameters contained in
+\code{game$payoff$payoffs2} that should be treated as constants, if any.}
 
 \item{cons_common}{A named list of parameters contained in
-\code{game$payoff$p1} and \code{game$payoff$p2} that should be treated as
-constants, if any. If \code{cons1} and \code{cons2} are exactly same, you
-can specify \code{cons_common} instead of specifying both \code{cons1}
-and \code{cons2}.}
+\code{game$payoff$payoffs1} and \code{game$payoff$payoffs2} that should
+be treated as constants, if any. If \code{cons1} and \code{cons2} are
+exactly same, you can specify \code{cons_common} instead of specifying
+both \code{cons1} and \code{cons2}.}
 
 \item{precision}{A natural number specifying the precision of numerical
 approximation. The value n approximately means that the approximation is

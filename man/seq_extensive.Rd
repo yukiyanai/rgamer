@@ -24,8 +24,8 @@ g1 <- seq_form(
   players = c("Leader", "Follower"),
   s1 = c("R", "S", "P"),
   s2 = c("R", "S", "P"),
-  p1 = c(0, -1, 1, 1, 0, -1, -1, 1, 0),
-  p2 = c(0, 1, -1, -1, 0, 1, 1, -1, 0))
+  payoffs1 = c(0, -1, 1, 1, 0, -1, -1, 1, 0),
+  payoffs2 = c(0, 1, -1, -1, 0, 1, 1, -1, 0))
 g1e <- seq_extensive(g1)
 g1e2 <- seq_extensive(g1, direction = "right", color_palette = "Accent")
 }

@@ -31,17 +31,17 @@ game will be displayed. Default is \code{TRUE}.}
 \item{mark_br}{A logical value. If \code{TRUE}, the best response to each of
 the opponent's strategy is marked. Default is \code{TRUE}.}
 
-\item{cons1}{A named list of parameters contained in \code{game$payoff$p1}
-that should be treated as constants, if any.}
+\item{cons1}{A named list of parameters contained in
+\code{game$payoff$payoffs1} that should be treated as constants, if any.}
 
-\item{cons2}{A named list of parameters contained in \code{game$payoff$p2}
-that should be treated as constants, if any.}
+\item{cons2}{A named list of parameters contained in
+\code{game$payoff$payoffs2} that should be treated as constants, if any.}
 
 \item{cons_common}{A named list of parameters contained in
-\code{game$payoff$p1} and \code{game$payoff$p2} that should be treated as
-constants, if any. If \code{cons1} and \code{cons2} are exactly same, you
-can specify \code{cons_common} instead of specifying both \code{cons1}
-and \code{cons2}.}
+\code{game$payoff$payoffs1} and \code{game$payoff$payoffs2} that should
+be treated as constants, if any. If \code{cons1} and \code{cons2} are
+exactly same, you can specify \code{cons_common} instead of specifying
+both \code{cons1} and \code{cons2}.}
 
 \item{precision}{A natural number specifying the precision of numerical
 approximation. The value n approximately means that the approximation is
@@ -76,13 +76,15 @@ object defined by \code{normal_form}.
 }
 \examples{
 game1 <- normal_form(
-  s1 = c("T", "B"), s2 = c("L", "R"),
-  p1 = c(4, 2, 3, 1), p2 = c(4, 3, 2, 1))
+  s1 = c("T", "B"),
+  s2 = c("L", "R"),
+  payoffs1 = c(4, 2, 3, 1),
+  payoffs2 = c(4, 3, 2, 1))
 s1 <- solve_nfg(game1, show_table = FALSE)
 
 game2 <- normal_form(
-  p1 = "-x1^2 + (28 - x2) * x1",
-  p2 = "-x2^2 + (28 - x1) * x2",
+  payoffs1 = "-x1^2 + (28 - x2) * x1",
+  payoffs2 = "-x2^2 + (28 - x1) * x2",
   par1_lim = c(0, 30),
   par2_lim = c(0, 30),
   pars = c("x1", "x2"))
@@ -91,8 +93,8 @@ s2 <- solve_nfg(game2)
 fx <- function(x, y) -x^2 + (28 - y) * x
 fy <- function(x, y) -y^2 + (28 - x) * y
 game3 <- normal_form(
-    p1 = fx,
-    p2 = fy,
+    payoffs1 = fx,
+    payoffs2 = fy,
     pars = c("x", "y"),
     par1_lim = c(0, 40),
     par2_lim = c(0, 40))

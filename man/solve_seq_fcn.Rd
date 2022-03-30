@@ -2,7 +2,8 @@
 % Please edit documentation in R/solve_seq_fcn.R
 \name{solve_seq_fcn}
 \alias{solve_seq_fcn}
-\title{Find Nash equilibria of a sequential-form game with payoffs defined by R functions}
+\title{Find Nash equilibria of a sequential-form game with payoffs defined
+by R functions}
 \usage{
 solve_seq_fcn(
   game,
@@ -16,29 +17,33 @@ solve_seq_fcn(
 \arguments{
 \item{game}{A "normal_form" class object created by \code{normal_form()}.}
 
-\item{cons1}{A named list of parameters contained in \code{game$payoff$p1} that should be treated as constants, if any.}
+\item{cons1}{A named list of parameters contained in
+\code{game$payoff$payoffs1} that should be treated as constants, if any.}
 
-\item{cons2}{A named list of parameters contained in \code{game$payoff$p2} that should be treated as constants, if any.}
+\item{cons2}{A named list of parameters contained in
+\code{game$payoff$payoffs2} that should be treated as constants, if any.}
 
-\item{cons_common}{A named list of parameters contained in \code{game$payoff$p1}
-and \code{game$payoff$p2} that should be treated as constants, if any.
-If \code{cons1} and \code{cons2} are exactly same, you can specify
-\code{cons_common} instead of specifying both \code{cons1} and \code{cons2}.}
+\item{cons_common}{A named list of parameters contained in
+\code{game$payoff$payoffs1} and \code{game$payoff$payoffs2} that should
+be treated as constants, if any.  If \code{cons1} and \code{cons2} are
+exactly same, you can specify \code{cons_common} instead of specifying
+both \code{cons1} and \code{cons2}.}
 
-\item{precision}{A natural number specifying the precision of numerical approximation.
-The value n approximately means that the approximation is correct up to the Nth decimal place.
-The default value is 1.}
+\item{precision}{A natural number specifying the precision of numerical
+approximation. The value n approximately means that the approximation is
+correct up to the Nth decimal place. The default value is 1.}
 
-\item{quietly}{A logical value to determine if the equilibrium will be kept in the returned list
-without being printed on screen. Default is \code{FALSE}.}
+\item{quietly}{A logical value to determine if the equilibrium will be kept
+in the returned list without being printed on screen. Default is
+\code{FALSE}.}
 }
 \value{
-A list containing the pair of the best response correspondence (NE)  and the plot of best
-response correspondences.
+A list containing the pair of the best response correspondence (NE)
+and the plot of best response correspondences.
 }
 \description{
-\code{solve_nfg_fcn()} finds the pair of best responses when payoff
-functions are provided as R functions.
+\code{solve_nfg_fcn()} finds the pair of best responses when
+payoff functions are provided as R functions.
 }
 \seealso{
 \code{\link[=normal_form]{normal_form()}}

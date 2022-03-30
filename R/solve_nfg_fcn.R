@@ -7,15 +7,15 @@
 #' @seealso \code{\link{normal_form}}
 #' @param par_label A vector of parameter labels if the user define the game
 #'     with functions as characters.
-#' @param cons1 A named list of parameters contained in \code{game$payoff$p1}
-#'     that should be treated as constants, if any.
-#' @param cons2 A named list of parameters contained in \code{game$payoff$p2}
-#'     that should be treated as constants, if any.
+#' @param cons1 A named list of parameters contained in
+#'     \code{game$payoff$payoffs1} that should be treated as constants, if any.
+#' @param cons2 A named list of parameters contained in
+#'     \code{game$payoff$payoffs2} that should be treated as constants, if any.
 #' @param cons_common A named list of parameters contained in
-#'     \code{game$payoff$p1} and \code{game$payoff$p2} that should be treated as
-#'     constants, if any. If \code{cons1} and \code{cons2} are exactly same, you
-#'     can specify \code{cons_common} instead of specifying both \code{cons1}
-#'     and \code{cons2}.
+#'     \code{game$payoff$payoffs1} and \code{game$payoff$payoffs2} that should
+#'     be treated as constants, if any. If \code{cons1} and \code{cons2} are
+#'     exactly same, you can specify \code{cons_common} instead of specifying
+#'     both \code{cons1} and \code{cons2}.
 #' @param precision A natural number specifying the precision of numerical
 #'     approximation. The value n approximately means that the approximation is
 #'      correct up to the Nth decimal place. The default value is 1.
@@ -60,8 +60,8 @@ solve_nfg_fcn <- function(game,
 
   # find best responses by grid search
   df_sol <- gridsearch_br(players = players,
-                          p1 = game$payoff[[1]],
-                          p2 = game$payoff[[2]],
+                          payoffs1 = game$payoff[[1]],
+                          payoffs2 = game$payoff[[2]],
                           pars = game$pars,
                           par1_lim = par1_lim,
                           par2_lim = par2_lim,
@@ -82,8 +82,8 @@ solve_nfg_fcn <- function(game,
 
   # data frame of best responses
   df <- as_df_br(players = game$player,
-                 p1 = game$payoff[[1]],
-                 p2 = game$payoff[[2]],
+                 payoffs1 = game$payoff[[1]],
+                 payoffs2 = game$payoff[[2]],
                  pars = game$pars,
                  par1_lim = par1_lim,
                  par2_lim = par2_lim,
@@ -144,10 +144,10 @@ solve_nfg_fcn <- function(game,
 
 
    if (is.null(NE)) {
-     p2 <- p
+     payoffs2 <- p
    } else {
      # add text showing NE
-     p2 <- p +
+     payoffs2 <- p +
       ggplot2::geom_point(data = df_sol,
                           ggplot2::aes(x = x, y = y),
                           size = 4,
@@ -160,7 +160,7 @@ solve_nfg_fcn <- function(game,
 
   # display the plot
   if (plot) {
-    if (mark_NE) plot(p2)
+    if (mark_NE) plot(payoffs2)
     else plot(p)
   }
 
@@ -176,5 +176,5 @@ solve_nfg_fcn <- function(game,
   message("The obtained NE might be only a part of the solutions.\n",
           "Please examine br_plot (best response plot) carefully.")
 
-  return(list(NE = NE, br_plot = p, br_plot_NE = p2))
+  return(list(NE = NE, br_plot = p, br_plot_NE = payoffs2))
 }

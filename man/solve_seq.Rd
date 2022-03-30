@@ -24,14 +24,17 @@ be displayed. Default is \code{TRUE}.}
 \item{mark_br}{A logical value. If \code{TRUE}, the follower's best response
 to each of the leader's strategy is marked. Default is \code{FALSE}.}
 
-\item{cons1}{A named list of parameters contained in \code{game$payoff$p1} that should be treated as constants, if any.}
+\item{cons1}{A named list of parameters contained in
+\code{game$payoff$payoffs1} that should be treated as constants, if any.}
 
-\item{cons2}{A named list of parameters contained in \code{game$payoff$p2} that should be treated as constants, if any.}
+\item{cons2}{A named list of parameters contained in
+\code{game$payoff$payoffs2} that should be treated as constants, if any.}
 
-\item{cons_common}{A named list of parameters contained in \code{game$payoff$p1}
-and \code{game$payoff$p2} that should be treated as constants, if any.
-If \code{cons1} and \code{cons2} are exactly same, you can specify
-\code{cons_common} instead of specifying both \code{cons1} and \code{cons2}.}
+\item{cons_common}{A named list of parameters contained in
+\code{game$payoff$payoffs1} and \code{game$payoff$payoffs2} that should
+be treated as constants, if any.  If \code{cons1} and \code{cons2} are
+exactly same, you can specify \code{cons_common} instead of specifying
+both \code{cons1} and \code{cons2}.}
 
 \item{precision}{A natural number specifying the precision of numerical approximation.
 The value n approximately means that the approximation is correct up to the Nth decimal place.

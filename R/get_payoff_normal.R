@@ -5,15 +5,15 @@
 #'     a "sequential_form" class object created by \code{seq_form()}.
 #' @param actions A list of strategies to which the payoffs correspond. Each
 #'     strategy must be defined in the game.
-#' @param cons1 A named list of parameters contained in \code{game$payoff$p1}
-#'     that should be treated as constants, if any.
-#' @param cons2 A named list of parameters contained in \code{game$payoff$p2}
-#'     that should be treated as constants, if any.
+#' @param cons1 A named list of parameters contained in
+#'     \code{game$payoff$payoffs1} that should be treated as constants, if any.
+#' @param cons2 A named list of parameters contained in
+#'     \code{game$payoff$payoffs2} that should be treated as constants, if any.
 #' @param cons_common A named list of parameters contained in
-#'     \code{game$payoff$p1} and \code{game$payoff$p2} that should be treated as
-#'     constants, if any. If \code{cons1} and \code{cons2} are exactly same, you
-#'     can specify \code{cons_common} instead of specifying both \code{cons1}
-#'     and \code{cons2}.
+#'     \code{game$payoff$payoffs1} and \code{game$payoff$payoffs2} that should
+#'     be treated as constants, if any. If \code{cons1} and \code{cons2} are
+#'     exactly same, you can specify \code{cons_common} instead of specifying
+#'     both \code{cons1} and \code{cons2}.
 #' @return A list containing payoffs.
 #' @importFrom magrittr %>%
 #' @noRd
@@ -50,8 +50,8 @@ get_payoff_normal <- function(game,
     df <- df %>%
       dplyr::filter(s1 == actions[[1]],
                     s2 == actions[[2]])
-    p1 <- df$p1
-    p2 <- df$p2
+    payoffs1 <- df$payoffs1
+    payoffs2 <- df$payoffs2
 
   } else {
 
@@ -70,36 +70,36 @@ get_payoff_normal <- function(game,
                                game$pars)
 
       game <- normal_form(players = game$player,
-                          p1 = ff_list[[1]],
-                          p2 = ff_list[[2]],
+                          payoffs1 = ff_list[[1]],
+                          payoffs2 = ff_list[[2]],
                           pars = c("x", "y"),
                           par1_lim = game$strategy[[1]],
                           par2_lim = game$strategy[[2]])
     }
 
-    f1 <- game$payoff$p1
-    f2 <- game$payoff$p2
+    f1 <- game$payoff$payoffs1
+    f2 <- game$payoff$payoffs2
 
     if (!is.null(cons_common)) cons1 <- cons2 <- cons_common
 
     if (!is.null(cons1)) {
       v <- c(actions[[1]], actions[[2]], as.vector(cons1))
       names(v) <- c(game$pars, names(cons1))
-      p1 <- purrr::pmap(v, f1) %>% unlist()
+      payoffs1 <- purrr::pmap(v, f1) %>% unlist()
     } else {
-      p1 <- f1(actions[[1]], actions[[2]])
+      payoffs1 <- f1(actions[[1]], actions[[2]])
     }
 
     if (!is.null(cons2)) {
       v <- c(actions[[1]], actions[[2]], as.vector(cons2))
       names(v) <- c(game$pars, names(cons2))
-      p2 <- purrr::pmap(v, f2) %>% unlist()
+      payoffs2 <- purrr::pmap(v, f2) %>% unlist()
     } else {
-      p2 <- f2(actions[[1]], actions[[2]])
+      payofss2 <- f2(actions[[1]], actions[[2]])
     }
   }
 
-  payoffs <- c(p1, p2)
+  payoffs <- c(payoffs1, payoffs2)
   names(payoffs) <- game$player
   return(list(payoffs = payoffs))
 }

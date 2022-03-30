@@ -13,7 +13,7 @@
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 find_best_response <- function(game) {
 
-  column <- p1 <- p2 <- player <- best_response <- NULL
+  column <- payoff1 <- payoff2 <- player <- best_response <- NULL
   against <- payoff <- pid <-NULL
 
   players <- game$player
@@ -28,14 +28,14 @@ find_best_response <- function(game) {
     for (j in seq_along(s2)) {
       df_1 <- df %>%
         dplyr::filter(column == j) %>%
-        dplyr::filter(p1 == max(p1)) %>%
+        dplyr::filter(payoff1 == max(payoff1)) %>%
         dplyr::bind_rows(df_1)
     }
     df_1 <- df_1 %>%
       dplyr::rename(best_response = s1,
                     against = s2,
-                    payoff = p1) %>%
-      dplyr::select(-p2) %>%
+                    payoff = payoff1) %>%
+      dplyr::select(-payoff2) %>%
       dplyr::arrange(row, column) %>%
       dplyr::mutate(player = players[1],
                     pid = 1)
@@ -45,14 +45,14 @@ find_best_response <- function(game) {
     for (i in seq_along(s1)) {
       df_2 <- df %>%
         dplyr::filter(row == i) %>%
-        dplyr::filter(p2 == max(p2)) %>%
+        dplyr::filter(payoff2 == max(payoff2)) %>%
         dplyr::bind_rows(df_2)
     }
     df_2 <- df_2 %>%
       dplyr::rename(best_response = s2,
                     against = s1,
-                    payoff = p2) %>%
-      dplyr::select(-p1) %>%
+                    payoff = payoff2) %>%
+      dplyr::select(-payoff1) %>%
       dplyr::arrange(row, column) %>%
       dplyr::mutate(player = players[2],
                     pid = 2)
@@ -70,14 +70,14 @@ find_best_response <- function(game) {
     for (i in seq_along(s1)) {
       df_2 <- df %>%
         dplyr::filter(row == i) %>%
-        dplyr::filter(p2 == max(p2)) %>%
+        dplyr::filter(payoff2 == max(payoff2)) %>%
         dplyr::bind_rows(df_2)
     }
     df_2 <- df_2 %>%
       dplyr::rename(best_response = s2,
                     against = s1,
-                    payoff = p2) %>%
-      dplyr::select(-p1) %>%
+                    payoff = payoff2) %>%
+      dplyr::select(-payoff1) %>%
       dplyr::arrange(row, column) %>%
       dplyr::mutate(player = players[2],
                     pid = 2)

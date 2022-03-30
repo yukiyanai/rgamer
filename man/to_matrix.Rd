@@ -14,7 +14,7 @@ to_matrix(game)
 A normal_form class object.
 }
 \description{
-\code{to_matrix} transoforms a two-person extensive-form game
+\code{to_matrix} transforms a two-person extensive-form game
 into a normal-form game
 a specified pair of strategies or a set of action profiles.
 }

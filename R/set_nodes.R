@@ -1,11 +1,12 @@
 #' @title Define the node positions of a game tree
 #' @description \code{set_nodes} determines the position of nodes in a tree of
 #'     an extensive-form game.
-#' @param players A list of players.  Each element of the list must correspond to each game node, except for
-#'   the terminal (payoff) nodes.
-#' @param n_choice A list of the number of choices at each node. An element of the list must
-#'   correspond to each sequence (including the terminal node as the final sequence). Each element must
-#'   be a numeric vector whose length equals the number of nodes at the specific sequence.
+#' @param players A list of players.  Each element of the list must correspond
+#'     to each game node, except for the terminal (payoff) nodes.
+#' @param n_choice A list of the number of choices at each node. An element of
+#'     the list must correspond to each sequence (including the terminal node as
+#'      the final sequence). Each element must be a numeric vector whose length
+#'      equals the number of nodes at the specific sequence.
 #' @param payoffs A named list of payoffs. Each element of the list must be a
 #'     numeric vector of payoffs for a player. The names of the elements must
 #'     match the names of the players specified  by \code{players}.

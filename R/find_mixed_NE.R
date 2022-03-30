@@ -13,8 +13,6 @@ find_mixed_NE <- function(game) {
 
   s1 <- game$strategy[[1]]
   s2 <- game$strategy[[2]]
-  p1 <- game$payoff[[1]]
-  p2 <- game$payoff[[2]]
 
   if (length(s1) < 2 | length(s2) < 2) {
     stop("find_mixed_NE() doesn't work for a game with a single-strategy player.")
@@ -88,8 +86,8 @@ find_mixed_NE <- function(game) {
         msNE <- list(s1 = prob1, s2 = prob2)
 
         msNE_list[[n_msNE]] <- list(s1 = s1_sub,
-                                s2 = s2_sub,
-                                msNE = msNE)
+                                    s2 = s2_sub,
+                                    msNE = msNE)
       }
     }
   }

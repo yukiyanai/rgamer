@@ -2,9 +2,10 @@
 #' @description \code{set_paths} creates the data frame of paths (edges) of a
 #'     tree of an extensive-form game.
 #' @param players_vec A vector of unique players.
-#' @param n_choice A list of the number of choices at each node. An element of the list must
-#'   correspond to each sequence (including the terminal node as the final sequence). Each element must
-#'   be a numeric vector whose length equals the number of nodes at the specific sequence.
+#' @param n_choice A list of the number of choices at each node. An element of
+#'     the list must correspond to each sequence (including the terminal node as
+#'      the final sequence). Each element must be a numeric vector whose length
+#'      equals the number of nodes at the specific sequence.
 #' @param payoffs A named list of payoffs. Each element of the list must be a
 #'     numeric vector of payoffs for a player. The names of the elements must
 #'     match the names of the players specified  by \code{players}.

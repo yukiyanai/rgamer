@@ -10,32 +10,32 @@ f_y <- function(x, y, s, t) {
 
 test_that("gridsearch_br numerically finds NE of normal-form games", {
   expect_s3_class(gridsearch_br(players = 1:2,
-                                p1 = f_x,
-                                p2 = f_y,
+                                payoffs1 = f_x,
+                                payoffs2 = f_y,
                                 pars = c("x", "y"),
                                 par1_lim = c(0, 30),
                                 par2_lim = c(0, 30)),
                   "data.frame")
   expect_equal(ncol(gridsearch_br(players = 1:2,
-                                  p1 = f_x,
-                                  p2 = f_y,
+                                  payoffs1 = f_x,
+                                  payoffs2 = f_y,
                                   pars = c("x", "y"),
                                   par1_lim = c(0, 30),
                                   par2_lim = c(0, 30))), 2)
   expect_equal(ncol(gridsearch_br(players = 1:2,
-                                  p1 = f_x,
-                                  p2 = f_y,
+                                  payoffs1 = f_x,
+                                  payoffs2 = f_y,
                                   pars = c("x", "y"),
                                   par1_lim = c(0, 30),
                                   par2_lim = c(0, 30),
                                   precision = 3)), 2)
   expect_error(gridsearch_br(players = 1:2,
-                             p1 = f_x,
-                             p2 = f_y,
+                             payoffs1 = f_x,
+                             payoffs2 = f_y,
                              pars = c("x", "y")))
   expect_error(gridsearch_br(players = 1:2,
-                             p1 = f_x,
-                             p2 = f_y,
+                             payoffs1 = f_x,
+                             payoffs2 = f_y,
                              par1_lim = c(0, 30),
                              par2_lim = c(0, 30)))
 })

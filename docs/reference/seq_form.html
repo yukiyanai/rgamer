@@ -18,7 +18,7 @@ object of "sequential_form" class.'><!-- mathjax --><script src="https://cdnjs.c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.15</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.16</span>
       </span>
     </div>
 
@@ -70,8 +70,8 @@ object of "sequential_form" class.</p>
   players <span class="op">=</span> <span class="cn">NULL</span>,
   s1 <span class="op">=</span> <span class="cn">NULL</span>,
   s2 <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">p1</span>,
-  <span class="va">p2</span>,
+  <span class="va">payoffs1</span>,
+  <span class="va">payoffs2</span>,
   discretize <span class="op">=</span> <span class="cn">FALSE</span>,
   discrete_points <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6</span><span class="op">)</span>,
   symmetric <span class="op">=</span> <span class="cn">FALSE</span>,
@@ -95,14 +95,14 @@ Required only when the players have discrete-choice strategies.</p></dd>
 <dt>s2</dt>
 <dd><p>A character vector of pure strategies for Player 2 (column player).
 Required only when the players have discrete-choice strategies.</p></dd>
-<dt>p1</dt>
-<dd><p>The payoff of Player1. This argument can be specified in three
-different ways. First, it can be a numeric vector of payoffs. Second, it
-can be a character string of the payoff function (e.g., p1 = "x^2 - y").
-Third, it can be an R function of payoff.</p></dd>
-<dt>p2</dt>
-<dd><p>The payoff of Player 2. See the explanation of <code>p1</code> for
-detail.</p></dd>
+<dt>payoffs1</dt>
+<dd><p>The payoff of Player1. This argument can be specified in
+three different ways. First, it can be a numeric vector of payoffs.
+Second, it can be a character string of the payoff function
+(e.g., payoffs1 = "x^2 - y"). Third, it can be an R function of payoff.</p></dd>
+<dt>payoffs2</dt>
+<dd><p>The payoff of Player 2. See the explanation of
+<code>payoffs1</code> for detail.</p></dd>
 <dt>discretize</dt>
 <dd><p>A logical value. Set this <code>TRUE</code> to evaluate payoff
 functions at some discrete values of strategies <code>s1</code> and <code>s2</code>.
@@ -116,16 +116,17 @@ setting this parameter, you can specify arbitrary points to use by
 setting <code>s1</code> and <code>s2</code>.</p></dd>
 <dt>symmetric</dt>
 <dd><p>A logical value. Set this <code>TRUE</code> when the payoffs for
-two players are symmetric as in the prisoners' dilemma. Then, p1 is
-recycled for p2. Default is <code>FALSE</code>.</p></dd>
+two players are symmetric as in the prisoners' dilemma. Then, payoffs1 is
+recycled for payoffs2. Default is <code>FALSE</code>.</p></dd>
 <dt>byrow</dt>
 <dd><p>A logical value. If <code>TRUE</code>, payoffs will be lined up by
 row. Default is <code>FALSE</code>. Only used when both <code>s1</code> and <code>s2</code>
 are provided.</p></dd>
 <dt>pars</dt>
 <dd><p>A character vector of parameters that are selected by players 1
-and 2, respectively. Only used when <code>p1</code> and <code>p2</code> are specified
-as a function (either as a character string or as an R function).</p></dd>
+and 2, respectively. Only used when <code>payoffs1</code> and <code>payoffs2</code>
+are specified as a function (either as a character string or as an R
+function).</p></dd>
 <dt>par1_lim</dt>
 <dd><p>A numeric vector of length 2, which defines the range of
 parameters from which Player 1 chooses her strategy.</p></dd>
@@ -133,16 +134,16 @@ parameters from which Player 1 chooses her strategy.</p></dd>
 <dd><p>A numeric vector of length 2, which defines the range of
 parameters from which Player 2 chooses his strategy.</p></dd>
 <dt>cons1</dt>
-<dd><p>A named list of parameters contained in <code>p1</code> that should be
-treated as constants, if any.</p></dd>
+<dd><p>A named list of parameters contained in <code>payoffs1</code> that
+should be treated as constants, if any.</p></dd>
 <dt>cons2</dt>
-<dd><p>A named list of parameters contained in <code>p2</code> that should be
-treated as constants, if any.</p></dd>
+<dd><p>A named list of parameters contained in <code>payoffs2</code> that
+should be treated as constants, if any.</p></dd>
 <dt>cons_common</dt>
-<dd><p>A named list of parameters contained in <code>p1</code> and
-<code>p2</code> that should be treated as constants, if any. If <code>cons1</code>
-and <code>cons2</code> are exactly same, you can specify <code>cons_common</code>
-instead of both <code>cons1</code> and <code>cons2</code>.</p></dd>
+<dd><p>A named list of parameters contained in <code>payoffs1</code>
+and <code>payoffs2</code> that should be treated as constants, if any. If
+<code>cons1</code> and <code>cons2</code> are exactly same, you can specify
+<code>cons_common</code> instead of both <code>cons1</code> and <code>cons2</code>.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -165,8 +166,8 @@ functions in order to find solutions of the game.</p>
 <span class="r-in">  players <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Leader"</span>, <span class="st">"Follower"</span><span class="op">)</span>,</span>
 <span class="r-in">  s1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"S"</span>, <span class="st">"P"</span><span class="op">)</span>,</span>
 <span class="r-in">  s2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"S"</span>, <span class="st">"P"</span><span class="op">)</span>,</span>
-<span class="r-in">  p1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,</span>
-<span class="r-in">  p2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in">  payoffs1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span class="r-in">  payoffs2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 </code></pre></div>
     </div>
   </div>
@@ -177,11 +178,14 @@ functions in order to find solutions of the game.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by <a href="https://sites.google.com/site/yoshiokamijo/" class="external-link">Yoshio Kamijo</a>, <a href="https://yukiyanai.github.io" class="external-link">Yuki Yanai</a>.</p>
+  <p></p><p>Developed by
+<a href="https://sites.google.com/site/yoshiokamijo/" class="external-link">Yoshio Kamijo</a>,
+<a href="https://yukiyanai.github.io" class="external-link">Yuki Yanai</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
       </footer></div>

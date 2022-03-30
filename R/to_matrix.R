@@ -1,5 +1,5 @@
 #' @title Transform an extensive-form game into a normal-form game.
-#' @description \code{to_matrix} transoforms a two-person extensive-form game
+#' @description \code{to_matrix} transforms a two-person extensive-form game
 #'     into a normal-form game
 #'     a specified pair of strategies or a set of action profiles.
 #' @param game A two-person extensive-form game defined by
@@ -38,8 +38,8 @@ to_matrix <- function(game) {
     players = u_player,
     s1 = game$strategy[[1]],
     s2 = game$strategy[[2]],
-    p1 = payoff1,
-    p2 = payoff2,
+    payoffs1 = payoff1,
+    payoffs2 = payoff2,
     byrow = TRUE)
 
   return(nfg)

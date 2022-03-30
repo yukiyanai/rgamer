@@ -1,5 +1,5 @@
 #' @title Play a normal-form game by simulation (softly best response)
-#' @description \code{simu_game_sbr()} simulates plays expected in a normal-form
+#' @description \code{sim_game_sbr()} simulates plays expected in a normal-form
 #'     game.
 #' @details Simulate plays expected in a normal-form game defined by
 #'     \code{normal_form()} when each player choose the action that is more
@@ -12,30 +12,30 @@
 #'     randomly selected from the player's strategy set.
 #' @param init2 Player 2's first strategy. If not specified, a strategy is
 #'     randomly selected from the player's strategy set.
-#' @param rho A numeric value in [0, 1] to control the degree of inertia in each
-#'      player's behavior. If \code{rho = 1}, each player does not change their
-#'      choices over time. If \code{rho = 0}, each player does not stick to
-#'      their previous choice at all.
+#' @param omega A numeric value in [0, 1] to control the degree of inertia in
+#'     each player's behavior. If \code{omega = 1}, each player does not change
+#'     their choices over time. If \code{omega = 0}, each player does not stick
+#'     to their previous choice at all.
 #' @param lambda A positive value controlling the weight of the best response to
 #'      the previous move of the opponent.
-#' @param cons1 A named list of parameters contained in \code{game$payoff$p1}
-#'     that should be treated as constants, if any.
-#' @param cons2 A named list of parameters contained in \code{game$payoff$p2}
-#'     that should be treated as constants, if any.
+#' @param cons1 A named list of parameters contained in
+#'     \code{game$payoff$payoffs1} that should be treated as constants, if any.
+#' @param cons2 A named list of parameters contained in
+#'     \code{game$payoff$payoffs2} that should be treated as constants, if any.
 #' @return data.frame containing the history of the game played.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @importFrom magrittr %>%
 #' @noRd
-simu_game_sbr <- function(game,
-                          n_periods,
-                          init1 = NULL,
-                          init2 = NULL,
-                          rho = 0,
-                          lambda = 1,
-                          cons1 = NULL,
-                          cons2 = NULL) {
+sim_game_sbr <- function(game,
+                         n_periods,
+                         init1 = NULL,
+                         init2 = NULL,
+                         omega = 0,
+                         lambda = 1,
+                         cons1 = NULL,
+                         cons2 = NULL) {
 
-  p1 <- p2 <- NULL
+  payoff1 <- payoff2 <- NULL
 
   if (lambda <= 0) stop("lambda must be positive.")
 
@@ -55,25 +55,25 @@ simu_game_sbr <- function(game,
 
     for (i in 2:n_periods) {
       ## Player 1
-      if (stats::runif(1) < rho) {
+      if (stats::runif(1) < omega) {
         play1[i] <- play1[i - 1]
       } else {
         p <- game$df %>%
           dplyr::filter(s2 == play2[i - 1]) %>%
-          dplyr::pull(p1)
+          dplyr::pull(payoff1)
         p <- exp(lambda * p)
         p <- p / sum(p)
         play1[i] <- sample(s1, size = 1, prob = p)
       }
 
       ## Player 2
-      if (stats::runif(1) < rho) {
+      if (stats::runif(1) < omega) {
         play2[i] <- play2[i - 1]
       } else {
         ###
         p <- game$df %>%
           dplyr::filter(s1 == play1[i - 1]) %>%
-          dplyr::pull(p2)
+          dplyr::pull(payoff2)
         p <- exp(lambda * p)
         p <- p / sum(p)
         play2[i] <- sample(s2, size = 1, prob = p)
@@ -92,10 +92,10 @@ simu_game_sbr <- function(game,
 
     for (i in 2:n_periods) {
       ## Player 1
-      if (stats::runif(1) < rho) {
+      if (stats::runif(1) < omega) {
         play1[i] <- play1[i - 1]
       } else {
-        f1 <- game$payoff$p1 %>%
+        f1 <- game$payoff$payoffs1 %>%
           stringr::str_replace(game$pars[2],
                                as.character(play2[i - 1])) %>%
           stringr::str_replace_all(game$pars[1], "XXX") %>%
@@ -129,10 +129,10 @@ simu_game_sbr <- function(game,
       }
 
       ## Player 2
-      if (stats::runif(1) < rho) {
+      if (stats::runif(1) < omega) {
         play2[i] <- play2[i - 1]
       } else {
-        f2 <- game$payoff$p2 %>%
+        f2 <- game$payoff$payoffs2 %>%
           stringr::str_replace(game$pars[1],
                                as.character(play1[i - 1])) %>%
           stringr::str_replace_all(game$pars[2], "YYY") %>%
@@ -179,7 +179,7 @@ simu_game_sbr <- function(game,
     for (i in 2:n_periods) {
 
       ## Player 1
-      if (stats::runif(1) < rho) {
+      if (stats::runif(1) < omega) {
         play1[i] <- play1[i - 1]
       } else {
         f1 <- function(XXX) {
@@ -191,7 +191,7 @@ simu_game_sbr <- function(game,
             names(arg_list) <- c(names(cons1), game$pars)
           }
           purrr::pmap(.l = arg_list,
-                      .f = game$payoff$p1)
+                      .f = game$payoff$payoffs1)
         }
         br <- try(
           stats::optim(par = stats::median(s1),
@@ -223,7 +223,7 @@ simu_game_sbr <- function(game,
       }
 
       ## Player 2
-      if (stats::runif(1) < rho) {
+      if (stats::runif(1) < omega) {
         play2[i] <- play2[i - 1]
       } else {
         f2 <- function(YYY) {
@@ -235,7 +235,7 @@ simu_game_sbr <- function(game,
             names(arg_list) <- c(names(cons2), game$pars)
           }
           purrr::pmap(.l = arg_list,
-                      .f = game$payoff$p2)
+                      .f = game$payoff$payoffs2)
         }
         br <- try(
           stats::optim(par = stats::median(s2),

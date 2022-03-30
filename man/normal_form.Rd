@@ -8,8 +8,8 @@ normal_form(
   players = NULL,
   s1 = NULL,
   s2 = NULL,
-  p1 = NULL,
-  p2 = NULL,
+  payoffs1 = NULL,
+  payoffs2 = NULL,
   cells = NULL,
   discretize = FALSE,
   discrete_points = c(6, 6),
@@ -32,13 +32,13 @@ Required only when the player has discrete-choice strategies.}
 \item{s2}{A character vector of pure strategies for Player 2 (column player).
 Required only when the player has discrete-choice strategies.}
 
-\item{p1}{The payoff of Player1. This argument can be specified in three
-different ways. First, it can be a numeric vector of payoffs. Second, it
-can be a character string of the payoff function (e.g., p1 = "x^2 - y").
-Third, it can be an R function of payoff.}
+\item{payoffs1}{The payoff of Player1. This argument can be specified in
+three different ways. First, it can be a numeric vector of payoffs.
+Second, it can be a character string of the payoff function
+(e.g., payoffs1 = "x^2 - y"). Third, it can be an R function of payoff.}
 
-\item{p2}{The payoff of Player 2. See the explanation of \code{p1}
-for detail.}
+\item{payoffs2}{The payoff of Player 2. See the explanation of
+\code{payoffs1} for detail.}
 
 \item{cells}{A list of vectors to specify the payoff for each cell. Each
 element of the list should be a numeric vector of two players' payoffs.}
@@ -55,16 +55,17 @@ setting this parameter, you can specify the vectors of arbitrary
 strategies by setting \code{s1} and \code{s2}.}
 
 \item{symmetric}{A logical value. Set this \code{TRUE} when the payoffs for
-two players are symmetric as in the prisoners' dilemma. Then, p1 is
-recycled for p2. Default is \code{FALSE}.}
+two players are symmetric as in the prisoners' dilemma. Then, payoffs1 is
+recycled for payoffs2. Default is \code{FALSE}.}
 
 \item{byrow}{A logical value. If \code{TRUE}, payoffs will be lined up by
 row. Default is \code{FALSE}. Only used when both \code{s1} and \code{s2}
 are provided.}
 
 \item{pars}{A character vector of parameters that are selected by players 1
-and 2, respectively. Only used when \code{p1} and \code{p2} are specified
-by payoff functions (either as character strings or R functions).}
+and 2, respectively. Only used when \code{payoffs1} and \code{payoffs2}
+are specified by payoff functions (either as character strings or R
+functions).}
 
 \item{par1_lim}{A numeric vector of length 2, which defines the range of
 parameters from which Player 1 chooses her strategy.}
@@ -72,16 +73,16 @@ parameters from which Player 1 chooses her strategy.}
 \item{par2_lim}{A numeric vector of length 2, which defines the range of
 parameters from which Player 2 chooses his strategy.}
 
-\item{cons1}{A named list of parameters contained in \code{p1} that should be
-treated as constants, if any.}
+\item{cons1}{A named list of parameters contained in \code{payoffs1} that
+should be treated as constants, if any.}
 
-\item{cons2}{A named list of parameters contained in \code{p2} that should be
-treated as constants, if any.}
+\item{cons2}{A named list of parameters contained in \code{payoffs2} that
+should be treated as constants, if any.}
 
-\item{cons_common}{A named list of parameters contained in \code{p1} and
-\code{p2} that should be treated as constants, if any. If \code{cons1}
-and \code{cons2} are exactly same, you can specify \code{cons_common}
-instead of both \code{cons1} and \code{cons2}.}
+\item{cons_common}{A named list of parameters contained in \code{payoffs1}
+and \code{payoffs2} that should be treated as constants, if any. If
+\code{cons1} and \code{cons2} are exactly same, you can specify
+\code{cons_common} instead of both \code{cons1} and \code{cons2}.}
 }
 \value{
 An object of "normal_form" class, which defines a normal-form (or
@@ -99,8 +100,8 @@ functions in order to find solutions of the game.
 game1 <- normal_form(
   s1 = c("T", "B"),
   s2 = c("L", "R"),
-  p1 = c(4, 2, 3, 1),
-  p2 = c(4, 3, 2, 1),
+  payoffs1 = c(4, 2, 3, 1),
+  payoffs2 = c(4, 3, 2, 1),
   players = c("Row Player", "Column Player"))
 
 game1b <- normal_form(
@@ -114,8 +115,8 @@ game1b <- normal_form(
 
 game2 <- normal_form(
    players = c("A", "B"),
-   p1 = "-x1^2 + (28 - x2) * x1",
-   p2 = "-x2^2 + (28 - x1) * x2",
+   payoffs1 = "-x1^2 + (28 - x2) * x1",
+   payoffs2 = "-x2^2 + (28 - x1) * x2",
    par1_lim = c(0, 30),
    par2_lim = c(0, 30),
    pars = c("x1", "x2"))
@@ -123,17 +124,17 @@ game2 <- normal_form(
 fx <- function(x, y, a, b) -x^a + (b - y) * x
 fy <- function(x, y, s, t) -y^s + (t - x) * y
 game3 <- normal_form(
-  p1 = fx,
-  p2 = fy,
+  payoffs1 = fx,
+  payoffs2 = fy,
   pars = c('x', 'y'),
   par1_lim = c(0, 30),
   par2_lim = c(0, 30))
 
 \dontrun{
-  ## This throws an error because p1 and p2 are in different forms.
+  ## This throws an error because payoffs1 and payoffs2 are in different forms.
   game4 <- normal_form(
-    p1 = fx,
-    p2 = "-y^2 + (28 - x) * y",
+    payoffs1 = fx,
+    payoffs2 = "-y^2 + (28 - x) * y",
     pars = c('x', 'y'),
     par1_lim = c(0, 30),
     par2_lim = c(0, 30)

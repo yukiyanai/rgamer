@@ -4,13 +4,13 @@ matrix_game <- seq_form(
   players = c("Kamijo", "Yanai"),
   s1 = c("Stays silent", "Betrays"),
   s2 = c("Stays silent", "Betrays"),
-  p1 = c(-1,  0, -3, -2),
-  p2 = c(-1, -3,  0, -2))
+  payoffs1 = c(-1,  0, -3, -2),
+  payoffs2 = c(-1, -3,  0, -2))
 
 char_game <- seq_form(
   players = c("A", "B"),
-  p1 = "-x^2 - x * y + 28 * x",
-  p2 = "-y^2 - x * y + 28 * y",
+  payoffs1 = "-x^2 - x * y + 28 * x",
+  payoffs2 = "-y^2 - x * y + 28 * y",
   par1_lim = c(0, 30),
   par2_lim = c(0, 30),
   pars = c("x", "y"))
@@ -30,16 +30,16 @@ f_y2 <- function(x, y, a, s) {
 
 fcn_game <- seq_form(
   players = c("A", "B"),
-  p1 = f_x,
-  p2 = f_y,
+  payoffs1 = f_x,
+  payoffs2 = f_y,
   par1_lim = c(0, 30),
   par2_lim = c(0, 30),
   pars = c("x", "y"))
 
 fcn_game2 <- seq_form(
   players = c("A", "B"),
-  p1 = f_x2,
-  p2 = f_y2,
+  payoffs1 = f_x2,
+  payoffs2 = f_y2,
   par1_lim = c(0, 30),
   par2_lim = c(0, 30),
   pars = c("x", "y"),
@@ -47,8 +47,8 @@ fcn_game2 <- seq_form(
 
 fcn_game2x <- seq_form(
   players = c("A", "B"),
-  p1 = f_x2,
-  p2 = f_y,
+  payoffs1 = f_x2,
+  payoffs2 = f_y,
   par1_lim = c(0, 30),
   par2_lim = c(0, 30),
   pars = c("x", "y"),
@@ -56,8 +56,8 @@ fcn_game2x <- seq_form(
 
 fcn_game2y <- seq_form(
   players = c("A", "B"),
-  p1 = f_x,
-  p2 = f_y2,
+  payoffs1 = f_x,
+  payoffs2 = f_y2,
   par1_lim = c(0, 30),
   par2_lim = c(0, 30),
   pars = c("x", "y"),
@@ -67,8 +67,8 @@ RPS <- seq_form(
   players = c("Kamijo", "Yanai"),
   s1 = c("R", "P", "S"),
   s2 = c("R", "P", "S"),
-  p1 = c(0,  1,  1, -1, 0,  1,  1, -1, 0),
-  p2 = c(0, -1, -1,  1, 0, -1, -1,  1, 0))
+  payoffs1 = c(0,  1,  1, -1, 0,  1,  1, -1, 0),
+  payoffs2 = c(0, -1, -1,  1, 0, -1, -1,  1, 0))
 
 
 g_ult <- extensive_form(
@@ -89,8 +89,8 @@ PD <- normal_form(
   players = c("Kamijo", "Yanai"),
   s1 = c("Stays silent", "Betrays"),
   s2 = c("Stays silent", "Betrays"),
-  p1 = c(-1,  0, -3, -2),
-  p2 = c(-1, -3,  0, -2))
+  payoffs1 = c(-1,  0, -3, -2),
+  payoffs2 = c(-1, -3,  0, -2))
 
 g4 <- extensive_form(
   players = list("Kamijo",

@@ -14,13 +14,15 @@
 #' @export
 #' @examples
 #' game1 <- normal_form(
-#'   s1 = c("T", "B"), s2 = c("L", "R"),
-#'   p1 = c(4, 2, 3, 1), p2 = c(4, 3, 2, 1))
+#'   s1 = c("T", "B"),
+#'   s2 = c("L", "R"),
+#'   payoffs1 = c(4, 2, 3, 1),
+#'   payoffs2 = c(4, 3, 2, 1))
 #' s1 <- solve_nfg(game1, show_table = FALSE)
 #'
 #' game2 <- normal_form(
-#'   p1 = "-x1^2 + (28 - x2) * x1",
-#'   p2 = "-x2^2 + (28 - x1) * x2",
+#'   payoffs1 = "-x1^2 + (28 - x2) * x1",
+#'   payoffs2 = "-x2^2 + (28 - x1) * x2",
 #'   par1_lim = c(0, 30),
 #'   par2_lim = c(0, 30),
 #'   pars = c("x1", "x2"))
@@ -29,8 +31,8 @@
 #' fx <- function(x, y) -x^2 + (28 - y) * x
 #' fy <- function(x, y) -y^2 + (28 - x) * y
 #' game3 <- normal_form(
-#'     p1 = fx,
-#'     p2 = fy,
+#'     payoffs1 = fx,
+#'     payoffs2 = fy,
 #'     pars = c("x", "y"),
 #'     par1_lim = c(0, 40),
 #'     par2_lim = c(0, 40))

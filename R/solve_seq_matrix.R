@@ -28,10 +28,10 @@ solve_seq_matrix <- function(
   for (i in seq_along(sp1)) {
     dd <- game$df %>%
       dplyr::filter(s1 == sp1[i])
-    s2_chosen <- dd$s2[which.max(dd$p2)]
+    s2_chosen <- dd$s2[which.max(dd$payoff2)]
     dd <- dd %>%
       dplyr::filter(s2 %in% s2_chosen)
-    p1_get[i] <- mean(dd$p1)
+    p1_get[i] <- mean(dd$payoff1)
     sp2[[i]] <- s2_chosen
   }
   sp1_chosen <- sp1[tuple::matchAll(max(p1_get), p1_get)]

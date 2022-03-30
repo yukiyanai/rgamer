@@ -29,8 +29,8 @@ solve_nfg_char <- function(game,
                            game$pars)
 
   g <- normal_form(players = game$player,
-                   p1 = ff_list[[1]],
-                   p2 = ff_list[[2]],
+                   payoffs1 = ff_list[[1]],
+                   payoffs2 = ff_list[[2]],
                    pars = c("x", "y"),
                    par1_lim = game$strategy[[1]],
                    par2_lim = game$strategy[[2]])

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.15</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.16</span>
       </span>
     </div>
 
@@ -59,11 +59,32 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="0.0.16" id="rgamer-0016">rgamer 0.0.16<a class="anchor" aria-label="anchor" href="#rgamer-0016"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-0-16">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-0-16"></a></h3>
+<ul><li>
+<code><a href="../reference/sim_game.html">sim_game()</a></code> (which was previously
+<code>simu_game()</code>) now automatically produce the ggplot graphs of
+simulation results.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="changes-0-0-16">Changes<a class="anchor" aria-label="anchor" href="#changes-0-0-16"></a></h3>
+<ul><li>For <code><a href="../reference/normal_form.html">normal_form()</a></code> and <code><a href="../reference/seq_form.html">seq_form()</a></code>, the
+parameters <code>p1</code> and <code>p2</code> are renamed to
+<code>payoffs1</code> and <code>payoffs2</code>, respectively.</li>
+<li>
+<code>simu_game()</code> is now <code><a href="../reference/sim_game.html">sim_game()</a></code>, that is,
+“u” has been removed from the function name.</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="0.0.15" id="rgamer-0015">rgamer 0.0.15<a class="anchor" aria-label="anchor" href="#rgamer-0015"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-0-15">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-0-15"></a></h3>
-<ul><li>Results of <code><a href="../reference/matching.html">matching()</a></code> and <code><a href="../reference/matching_df.html">matching_df()</a></code> now contains the information of the ranking of matches.</li>
-<li>Users can examine if a matching is stable by <code>is_stable()</code> function.</li>
+<ul><li>Results of <code><a href="../reference/matching.html">matching()</a></code> and <code><a href="../reference/matching_df.html">matching_df()</a></code>
+now contains the information of the ranking of matches.</li>
+<li>Users can examine if a matching is stable by
+<code><a href="../reference/is_stable.html">is_stable()</a></code> function.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -71,9 +92,12 @@
 <div class="section level3">
 <h3 id="new-features-0-0-14">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-0-14"></a></h3>
 <ul><li>
-<code><a href="../reference/matching.html">matching()</a></code> and <code><a href="../reference/matching_df.html">matching_df()</a></code> now implements “Boston mechanism” matching. Still works only for one-to-one matching, though.</li>
+<code><a href="../reference/matching.html">matching()</a></code> and <code><a href="../reference/matching_df.html">matching_df()</a></code> now
+implements “Boston mechanism” matching. Still works only for one-to-one
+matching, though.</li>
 <li>
-<code>eval_matching()</code> evaluates how desirable a matching result is for a player.</li>
+<code>eval_matching()</code> evaluates how desirable a matching
+result is for a player.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fix-0-0-14">Bug Fix<a class="anchor" aria-label="anchor" href="#bug-fix-0-0-14"></a></h3>
@@ -85,7 +109,9 @@
 <h2 class="page-header" data-toc-text="0.0.13" id="rgamer-0013">rgamer 0.0.13<a class="anchor" aria-label="anchor" href="#rgamer-0013"></a></h2>
 <div class="section level3">
 <h3 id="new-functions-0-0-13">New Functions<a class="anchor" aria-label="anchor" href="#new-functions-0-0-13"></a></h3>
-<ul><li>The following two functions to implement matching has been added. Currently, only Gale-Shapley (deferred acceptance; DA) algorithm is supported.
+<ul><li>The following two functions to implement matching has been added.
+Currently, only Gale-Shapley (deferred acceptance; DA) algorithm is
+supported.
 <ul><li><code><a href="../reference/matching.html">matching()</a></code></li>
 <li><code><a href="../reference/matching_df.html">matching_df()</a></code></li>
 </ul></li>
@@ -93,7 +119,8 @@
 <div class="section level3">
 <h3 id="bug-fix-0-0-13">Bug Fix<a class="anchor" aria-label="anchor" href="#bug-fix-0-0-13"></a></h3>
 <ul><li>
-<code><a href="../reference/restrict_action.html">restrict_action()</a></code> now works with imperfect-information games.</li>
+<code><a href="../reference/restrict_action.html">restrict_action()</a></code> now works with imperfect-information
+games.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -101,7 +128,8 @@
 <div class="section level3">
 <h3 id="new-functions-0-0-12">New Functions<a class="anchor" aria-label="anchor" href="#new-functions-0-0-12"></a></h3>
 <ul><li>
-<code><a href="../reference/restrict_action.html">restrict_action()</a></code> restricts actions at specified nodes in an extensive-form game.</li>
+<code><a href="../reference/restrict_action.html">restrict_action()</a></code> restricts actions at specified nodes
+in an extensive-form game.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -109,24 +137,35 @@
 <div class="section level3">
 <h3 id="new-functions-0-0-11">New Functions<a class="anchor" aria-label="anchor" href="#new-functions-0-0-11"></a></h3>
 <ul><li>
-<code><a href="../reference/subgames.html">subgames()</a></code> finds subgames of an extensive-form game.</li>
-<li>Now <code><a href="../reference/solve_efg.html">solve_efg()</a></code> can find subgame perfect equilibria by setting <code>concept = "spe"</code>.</li>
+<code><a href="../reference/subgames.html">subgames()</a></code> finds subgames of an extensive-form
+game.</li>
+<li>Now <code><a href="../reference/solve_efg.html">solve_efg()</a></code> can find subgame perfect equilibria by
+setting <code>concept = "spe"</code>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="changes-0-0-11">Changes<a class="anchor" aria-label="anchor" href="#changes-0-0-11"></a></h3>
-<ul><li>Appearance of payoff matrix has changed. It has shifted from gt to kableExtra. An argument <code>cell_width</code> has been removed.</li>
+<ul><li>Appearance of payoff matrix has changed. It has shifted from gt to
+kableExtra. An argument <code>cell_width</code> has been removed.</li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.0.10" id="rgamer-0010">rgamer 0.0.10<a class="anchor" aria-label="anchor" href="#rgamer-0010"></a></h2>
 <div class="section level3">
 <h3 id="changes-in-normal-form-and-extensive-form-games-0-0-10">Changes in normal-form and extensive-form games<a class="anchor" aria-label="anchor" href="#changes-in-normal-form-and-extensive-form-games-0-0-10"></a></h3>
-<ul><li>Now payoffs of <code><a href="../reference/normal_form.html">normal_form()</a></code> can be specified by each cell with <code>cells</code> argument rather than by each player with <code>p1</code> and <code>p2</code>. You need to add <code>byrow = TRUE</code> to fill the matrix by row. The matrix is filled by column by default.</li>
-<li>Similarly, payoffs of <code><a href="../reference/extensive_form.html">extensive_form()</a></code> can be specified by each terminal node with <code>payoffs2</code> argument rather than by each player with <code>payoff</code> argument.</li>
-<li>Display order of strategies has been changed when an extensive-form game is transformed into a matrix game by <code><a href="../reference/to_matrix.html">to_matrix()</a></code>.</li>
+<ul><li>Now payoffs of <code><a href="../reference/normal_form.html">normal_form()</a></code> can be specified by each
+cell with <code>cells</code> argument rather than by each player with
+<code>p1</code> and <code>p2</code>. You need to add
+<code>byrow = TRUE</code> to fill the matrix by row. The matrix is
+filled by column by default.</li>
+<li>Similarly, payoffs of <code><a href="../reference/extensive_form.html">extensive_form()</a></code> can be specified
+by each terminal node with <code>payoffs2</code> argument rather than by
+each player with <code>payoff</code> argument.</li>
+<li>Display order of strategies has been changed when an extensive-form
+game is transformed into a matrix game by <code><a href="../reference/to_matrix.html">to_matrix()</a></code>.</li>
 <li>Users can explicitly specify a single-element information set.</li>
 <li>
-<code><a href="../reference/extensive_form.html">extensive_form()</a></code> throws an error if a node belongs to more than one information set.</li>
+<code><a href="../reference/extensive_form.html">extensive_form()</a></code> throws an error if a node belongs to
+more than one information set.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -134,14 +173,18 @@
 <div class="section level3">
 <h3 id="new-functions-0-0-9">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-0-9"></a></h3>
 <ul><li>
-<code><a href="../reference/to_matrix.html">to_matrix()</a></code> transforms an extensive form game defined by <code><a href="../reference/extensive_form.html">extensive_form()</a></code> into a normal-form game.</li>
-<li>In a game tree, You can specify what actions each player takes and show them with color by <code><a href="../reference/draw_path.html">draw_path()</a></code>
+<code><a href="../reference/to_matrix.html">to_matrix()</a></code> transforms an extensive form game defined
+by <code><a href="../reference/extensive_form.html">extensive_form()</a></code> into a normal-form game.</li>
+<li>In a game tree, You can specify what actions each player takes and
+show them with color by <code><a href="../reference/draw_path.html">draw_path()</a></code>
 </li>
 </ul></div>
 <div class="section level3">
 <h3 id="changes-in-extensive-form-games-0-0-9">Changes in extensive-form games<a class="anchor" aria-label="anchor" href="#changes-in-extensive-form-games-0-0-9"></a></h3>
-<ul><li>You can specify information sets by the <code>info_set</code> argument.</li>
-<li>An object of <code>extensive_form</code> class now has the list of strategies, <code>strategy</code>.</li>
+<ul><li>You can specify information sets by the <code>info_set</code>
+argument.</li>
+<li>An object of <code>extensive_form</code> class now has the list of
+strategies, <code>strategy</code>.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -149,58 +192,99 @@
 <div class="section level3">
 <h3 id="changes-in-extensive-form-games-0-0-8">Changes in extensive-form games<a class="anchor" aria-label="anchor" href="#changes-in-extensive-form-games-0-0-8"></a></h3>
 <ul><li>
-<code><a href="../reference/extensive_form.html">extensive_form()</a></code> function has been drastically modified. Now the function only defines a game. It no longer finds solution of an extensive-form game.</li>
-<li>To find a solution of the game, please use <code><a href="../reference/solve_efg.html">solve_efg()</a></code> function. Currently, it finds backward-induction solutions of the game.</li>
-<li>To display game treese with the solution paths colored, please use <code><a href="../reference/show_path.html">show_path()</a></code>.</li>
+<code><a href="../reference/extensive_form.html">extensive_form()</a></code> function has been drastically
+modified. Now the function only defines a game. It no longer finds
+solution of an extensive-form game.</li>
+<li>To find a solution of the game, please use <code><a href="../reference/solve_efg.html">solve_efg()</a></code>
+function. Currently, it finds backward-induction solutions of the
+game.</li>
+<li>To display game treese with the solution paths colored, please use
+<code><a href="../reference/show_path.html">show_path()</a></code>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="new-functions-0-0-8">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-0-8"></a></h3>
 <ul><li>
-<code><a href="../reference/seq_extensive.html">seq_extensive()</a></code> transforms a “seq_form” class game into an “extensive_form” class.</li>
+<code><a href="../reference/seq_extensive.html">seq_extensive()</a></code> transforms a “seq_form” class game into
+an “extensive_form” class.</li>
 <li>
-<code><a href="../reference/get_payoff.html">get_payoff()</a></code> returns the payoff corresponding to a specified pair of strategies or a specified set of actions profiles.</li>
+<code><a href="../reference/get_payoff.html">get_payoff()</a></code> returns the payoff corresponding to a
+specified pair of strategies or a specified set of actions
+profiles.</li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.0.7" id="rgamer-007">rgamer 0.0.7<a class="anchor" aria-label="anchor" href="#rgamer-007"></a></h2>
 <div class="section level3">
 <h3 id="making-a-game-tree-0-0-7">Making a game tree<a class="anchor" aria-label="anchor" href="#making-a-game-tree-0-0-7"></a></h3>
-<ul><li>The way to draw a game tree by <code><a href="../reference/extensive_form.html">extensive_form()</a></code> has been simplified.
-<ul><li>Users do not have to specify <code>n_node</code> or <code>n_choices</code>.</li>
+<ul><li>The way to draw a game tree by <code><a href="../reference/extensive_form.html">extensive_form()</a></code> has
+been simplified.
+<ul><li>Users do not have to specify <code>n_node</code> or
+<code>n_choices</code>.</li>
 </ul></li>
 <li>The positions of payoffs has been adjusted.<br></li>
-<li>Two new options for <code>direction</code>, “horizontal” and “vertical” are available.</li>
+<li>Two new options for <code>direction</code>, “horizontal” and
+“vertical” are available.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="functions-for-a-simple-leader-follower-game-0-0-7">Functions for a simple leader-follower game<a class="anchor" aria-label="anchor" href="#functions-for-a-simple-leader-follower-game-0-0-7"></a></h3>
-<p>Functions to define and solve a simple leader-follower sequential game (e.g., Stackelberg competition) have been added.</p>
-<ul><li>Users can define such a game by <code><a href="../reference/seq_form.html">seq_form()</a></code> function.</li>
-<li>Users can obtain the subgame perfect equilibrium outcome by <code><a href="../reference/solve_seq.html">solve_seq()</a></code> function.</li>
+<p>Functions to define and solve a simple leader-follower sequential
+game (e.g., Stackelberg competition) have been added.</p>
+<ul><li>Users can define such a game by <code><a href="../reference/seq_form.html">seq_form()</a></code>
+function.</li>
+<li>Users can obtain the subgame perfect equilibrium outcome by
+<code><a href="../reference/solve_seq.html">solve_seq()</a></code> function.</li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.0.6" id="rgamer-006">rgamer 0.0.6<a class="anchor" aria-label="anchor" href="#rgamer-006"></a></h2>
-<p>This version contains three new functions: <code>find_dominant()</code> and <code>find_dominated()</code> finds (weakly) dominant and (weakly) dominated strategies, respectively, and <code><a href="../reference/eliminate_strategy.html">eliminate_strategy()</a></code> eliminates the specific player’s specific strategy from a normal-form game. In addition, Some bugs have been fixed.</p>
+<p>This version contains three new functions:
+<code>find_dominant()</code> and <code>find_dominated()</code> finds
+(weakly) dominant and (weakly) dominated strategies, respectively, and
+<code><a href="../reference/eliminate_strategy.html">eliminate_strategy()</a></code> eliminates the specific player’s
+specific strategy from a normal-form game. In addition, Some bugs have
+been fixed.</p>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.0.5" id="rgamer-005">rgamer 0.0.5<a class="anchor" aria-label="anchor" href="#rgamer-005"></a></h2>
-<p>A function to simulate plays expected in a normal-form game is added.</p>
+<p>A function to simulate plays expected in a normal-form game is
+added.</p>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.0.4" id="rgamer-004">rgamer 0.0.4<a class="anchor" aria-label="anchor" href="#rgamer-004"></a></h2>
-<p>This version adds options to (1) discretized strategies with continuous payoff functions (see Example 5 in README) and (2) draw a bidirectional game tree for an extensive-form game Some minor bugs have been fixed. Now users can choose a color palette for ggplot2 figures.</p>
+<p>This version adds options to (1) discretized strategies with
+continuous payoff functions (see Example 5 in README) and (2) draw a
+bidirectional game tree for an extensive-form game Some minor bugs have
+been fixed. Now users can choose a color palette for ggplot2
+figures.</p>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.0.3" id="rgamer-003">rgamer 0.0.3<a class="anchor" aria-label="anchor" href="#rgamer-003"></a></h2>
-<p>Two bugs have been fixed. First, the bug that incorrectly finds a NE, which should not exist, has been fixed. Second, a discrete best response correspondence was displayed as a continuous path in the previous version, but the current versions shows it as discrete.</p>
-<p>Now, when you specify payoffs as functions, you can choose if NE should be displayed in the best response plot by <code>mark_NE</code>. After saving the solution to an object, you can retract the best response plot with and without the NE by <code>br_plot_NE</code> and <code>br_plot</code>, respectively,</p>
+<p>Two bugs have been fixed. First, the bug that incorrectly finds a NE,
+which should not exist, has been fixed. Second, a discrete best response
+correspondence was displayed as a continuous path in the previous
+version, but the current versions shows it as discrete.</p>
+<p>Now, when you specify payoffs as functions, you can choose if NE
+should be displayed in the best response plot by <code>mark_NE</code>.
+After saving the solution to an object, you can retract the best
+response plot with and without the NE by <code>br_plot_NE</code> and
+<code>br_plot</code>, respectively,</p>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.0.2" id="rgamer-002">rgamer 0.0.2<a class="anchor" aria-label="anchor" href="#rgamer-002"></a></h2>
-<p><code><a href="../reference/extensive_form.html">extensive_form()</a></code> has been added to solve a simple extensive form game. The function draws a game tree, finds a subgame perfect equilibrium, and shows the equilibrium path on the tree.</p>
-<p>Now <code>game_table()</code>, which is called by <code><a href="../reference/solve_nfg.html">solve_nfg()</a></code> to display game tables, automatically adjusts the cell size of the table displayed unless <code>cell_width</code> is specified by the user.</p>
-<p>In br_plot (the plot of best response correspondences), two players’ best responses are drawn by the lines with different width (ggplot’s size) so that we can distinguish the two even when they overlap. And a minor bug has been fixed.</p>
-<p>The message that warns users that the NE obtained by <code><a href="../reference/solve_nfg.html">solve_nfg()</a></code> might be a part of the solutions and asks them to examine the br_plot.</p>
+<p><code><a href="../reference/extensive_form.html">extensive_form()</a></code> has been added to solve a simple
+extensive form game. The function draws a game tree, finds a subgame
+perfect equilibrium, and shows the equilibrium path on the tree.</p>
+<p>Now <code>game_table()</code>, which is called by
+<code><a href="../reference/solve_nfg.html">solve_nfg()</a></code> to display game tables, automatically adjusts
+the cell size of the table displayed unless <code>cell_width</code> is
+specified by the user.</p>
+<p>In br_plot (the plot of best response correspondences), two players’
+best responses are drawn by the lines with different width (ggplot’s
+size) so that we can distinguish the two even when they overlap. And a
+minor bug has been fixed.</p>
+<p>The message that warns users that the NE obtained by
+<code><a href="../reference/solve_nfg.html">solve_nfg()</a></code> might be a part of the solutions and asks them
+to examine the br_plot.</p>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.0.1" id="rgamer-001">rgamer 0.0.1<a class="anchor" aria-label="anchor" href="#rgamer-001"></a></h2>
@@ -216,11 +300,14 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by <a href="https://sites.google.com/site/yoshiokamijo/" class="external-link">Yoshio Kamijo</a>, <a href="https://yukiyanai.github.io" class="external-link">Yuki Yanai</a>.</p>
+  <p></p><p>Developed by
+<a href="https://sites.google.com/site/yoshiokamijo/" class="external-link">Yoshio Kamijo</a>,
+<a href="https://yukiyanai.github.io" class="external-link">Yuki Yanai</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
       </footer></div>

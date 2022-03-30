@@ -40,6 +40,9 @@
     <loc>https://yukiyanai.github.io/rgamer/reference/index.html</loc>
   </url>
   <url>
+    <loc>https://yukiyanai.github.io/rgamer/reference/is_stable.html</loc>
+  </url>
+  <url>
     <loc>https://yukiyanai.github.io/rgamer/reference/matching.html</loc>
   </url>
   <url>
@@ -65,6 +68,12 @@
   </url>
   <url>
     <loc>https://yukiyanai.github.io/rgamer/reference/show_path.html</loc>
+  </url>
+  <url>
+    <loc>https://yukiyanai.github.io/rgamer/reference/sim_game.html</loc>
+  </url>
+  <url>
+    <loc>https://yukiyanai.github.io/rgamer/reference/sim_game_br.html</loc>
   </url>
   <url>
     <loc>https://yukiyanai.github.io/rgamer/reference/simu_game.html</loc>

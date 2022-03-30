@@ -4,22 +4,22 @@
 #' @return A data frame containing the pair of the best responses of the
 #'     players.
 #' @param players A character vector specifying the two players of the game.
-#' @param p1 An R function describing Player 1's payoff.
-#' @param p2 An R function describing Player 2's payoff.
+#' @param payoffs1 An R function describing Player 1's payoff.
+#' @param payoffs2 An R function describing Player 2's payoff.
 #' @param pars A character vector of length 2, which specifies the parameters
 #'     each player chooses.
 #' @param par1_lim A numerical vector of length 2, which specifies the range of
 #'     the first parameter.
 #' @param par2_lim A numerical vector of length 2, which specifies the range of
 #'     the second parameter.
-#' @param cons1 A named list of parameters contained in \code{p1} that should be
-#'      treated as constants, if any.
-#' @param cons2 A named list of parameters contained in \code{p2} that should be
-#'      treated as constants, if any.
-#' @param cons_common A named list of parameters contained in \code{p1} and
-#'     \code{p2} that should be treated as constants, if any. If \code{cons1}
-#'     and \code{cons2} are exactly same, you can specify \code{cons_common}
-#'     instead of \code{cons1} and \code{cons2}.
+#' @param cons1 A named list of parameters contained in \code{payoffs1} that
+#'     should be treated as constants, if any.
+#' @param cons2 A named list of parameters contained in \code{payoffs2} that
+#'     should be treated as constants, if any.
+#' @param cons_common A named list of parameters contained in \code{payoffs1}
+#'     and \code{payoffs2} that should be treated as constants, if any. If
+#'     \code{cons1} and \code{cons2} are exactly same, you can specify
+#'     \code{cons_common} instead of \code{cons1} and \code{cons2}.
 #' @param precision A natural number specifying the precision of numerical
 #'     approximation. The value n approximately means that the approximation is
 #'     correct up to the n-th decimal place. The default value is 1L.
@@ -27,8 +27,8 @@
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 gridsearch_br <- function(players,
-                          p1,
-                          p2,
+                          payoffs1,
+                          payoffs2,
                           pars,
                           par1_lim,
                           par2_lim,
@@ -43,8 +43,8 @@ gridsearch_br <- function(players,
   grid2 <- 10^(ceiling(log10(range2)) - 3)
 
   df_list <- as_df_br(players = players,
-                      p1 = p1,
-                      p2 = p2,
+                      payoffs1 = payoffs1,
+                      payoffs2 = payoffs2,
                       pars = pars,
                       par1_lim = par1_lim,
                       par2_lim = par2_lim,
@@ -84,8 +84,8 @@ gridsearch_br <- function(players,
   if (precision > 1) {
     df_sol <- gridsearch_br(
       players = players,
-      p1 = p1,
-      p2 = p2,
+      payoffs1 = payoffs1,
+      payoffs2 = payoffs2,
       pars = pars,
       par1_lim = c(max(x - 2 * grid1, par1_lim[1]),
                    min(x + 2 * grid1, par1_lim[2])),

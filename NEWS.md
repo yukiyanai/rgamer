@@ -1,3 +1,16 @@
+# rgamer 0.0.16
+
+## New Features
+
+- `sim_game()` (which was previously `simu_game()`) now automatically produce the ggplot graphs of simulation results.
+
+## Changes
+
+- For `normal_form()` and `seq_form()`, the parameters `p1` and `p2` are renamed to `payoffs1` and `payoffs2`, respectively.
+- `simu_game()` is now `sim_game()`, that is, "u" has been removed from the function name.
+
+
+
 # rgamer 0.0.15
 
 ## New Features

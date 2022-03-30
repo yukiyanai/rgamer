@@ -8,8 +8,8 @@ seq_form(
   players = NULL,
   s1 = NULL,
   s2 = NULL,
-  p1,
-  p2,
+  payoffs1,
+  payoffs2,
   discretize = FALSE,
   discrete_points = c(6, 6),
   symmetric = FALSE,
@@ -31,13 +31,13 @@ Required only when the players have discrete-choice strategies.}
 \item{s2}{A character vector of pure strategies for Player 2 (column player).
 Required only when the players have discrete-choice strategies.}
 
-\item{p1}{The payoff of Player1. This argument can be specified in three
-different ways. First, it can be a numeric vector of payoffs. Second, it
-can be a character string of the payoff function (e.g., p1 = "x^2 - y").
-Third, it can be an R function of payoff.}
+\item{payoffs1}{The payoff of Player1. This argument can be specified in
+three different ways. First, it can be a numeric vector of payoffs.
+Second, it can be a character string of the payoff function
+(e.g., payoffs1 = "x^2 - y"). Third, it can be an R function of payoff.}
 
-\item{p2}{The payoff of Player 2. See the explanation of \code{p1} for
-detail.}
+\item{payoffs2}{The payoff of Player 2. See the explanation of
+\code{payoffs1} for detail.}
 
 \item{discretize}{A logical value. Set this \code{TRUE} to evaluate payoff
 functions at some discrete values of strategies \code{s1} and \code{s2}.
@@ -51,16 +51,17 @@ setting this parameter, you can specify arbitrary points to use by
 setting \code{s1} and \code{s2}.}
 
 \item{symmetric}{A logical value. Set this \code{TRUE} when the payoffs for
-two players are symmetric as in the prisoners' dilemma. Then, p1 is
-recycled for p2. Default is \code{FALSE}.}
+two players are symmetric as in the prisoners' dilemma. Then, payoffs1 is
+recycled for payoffs2. Default is \code{FALSE}.}
 
 \item{byrow}{A logical value. If \code{TRUE}, payoffs will be lined up by
 row. Default is \code{FALSE}. Only used when both \code{s1} and \code{s2}
 are provided.}
 
 \item{pars}{A character vector of parameters that are selected by players 1
-and 2, respectively. Only used when \code{p1} and \code{p2} are specified
-as a function (either as a character string or as an R function).}
+and 2, respectively. Only used when \code{payoffs1} and \code{payoffs2}
+are specified as a function (either as a character string or as an R
+function).}
 
 \item{par1_lim}{A numeric vector of length 2, which defines the range of
 parameters from which Player 1 chooses her strategy.}
@@ -68,16 +69,16 @@ parameters from which Player 1 chooses her strategy.}
 \item{par2_lim}{A numeric vector of length 2, which defines the range of
 parameters from which Player 2 chooses his strategy.}
 
-\item{cons1}{A named list of parameters contained in \code{p1} that should be
-treated as constants, if any.}
+\item{cons1}{A named list of parameters contained in \code{payoffs1} that
+should be treated as constants, if any.}
 
-\item{cons2}{A named list of parameters contained in \code{p2} that should be
-treated as constants, if any.}
+\item{cons2}{A named list of parameters contained in \code{payoffs2} that
+should be treated as constants, if any.}
 
-\item{cons_common}{A named list of parameters contained in \code{p1} and
-\code{p2} that should be treated as constants, if any. If \code{cons1}
-and \code{cons2} are exactly same, you can specify \code{cons_common}
-instead of both \code{cons1} and \code{cons2}.}
+\item{cons_common}{A named list of parameters contained in \code{payoffs1}
+and \code{payoffs2} that should be treated as constants, if any. If
+\code{cons1} and \code{cons2} are exactly same, you can specify
+\code{cons_common} instead of both \code{cons1} and \code{cons2}.}
 }
 \value{
 An object of "sequential_form" class, which defines a sequential-form
@@ -96,8 +97,8 @@ g1 <- seq_form(
   players = c("Leader", "Follower"),
   s1 = c("R", "S", "P"),
   s2 = c("R", "S", "P"),
-  p1 = c(0, -1, 1, 1, 0, -1, -1, 1, 0),
-  p2 = c(0, 1, -1, -1, 0, 1, 1, -1, 0))
+  payoffs1 = c(0, -1, 1, 1, 0, -1, -1, 1, 0),
+  payoffs2 = c(0, 1, -1, -1, 0, 1, 1, -1, 0))
 }
 \author{
 Yoshio Kamijo and Yuki Yanai \href{mailto:yanai.yuki@kochi-tech.ac.jp}{yanai.yuki@kochi-tech.ac.jp}

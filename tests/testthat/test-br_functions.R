@@ -18,41 +18,41 @@ PD <- normal_form(
   players = c("Kamijo", "Yanai"),
   s1 = c("Stays silent", "Betrays"),
   s2 = c("Stays silent", "Betrays"),
-  p1 = c(-1,  0, -3, -2),
-  p2 = c(-1, -3,  0, -2))
+  payoffs1 = c(-1,  0, -3, -2),
+  payoffs2 = c(-1, -3,  0, -2))
 
 matrix_game <- normal_form(
   players = c("Kamijo", "Yanai"),
   s1 = c("Stag", "Hare"),
   s2 = c("Stag", "Hare"),
-  p1 = c(10, 8, 0, 7),
-  p2 = c(10, 0, 8, 7))
+  payoffs1 = c(10, 8, 0, 7),
+  payoffs2 = c(10, 0, 8, 7))
 
 matrix_game2 <- normal_form(
   players = c("Kamijo", "Yanai"),
   s1 = c("Hare", "Stag"),
   s2 = c("Hare", "Stag"),
-  p1 = c(7, 0, 8, 10),
-  p2 = c(7, 8, 0, 10))
+  payoffs1 = c(7, 0, 8, 10),
+  payoffs2 = c(7, 8, 0, 10))
 
 nogame <- normal_form(
   s1 = c("A", "B"),
   s2 = c("A", "B"),
-  p1 = rep(1, 4),
-  p2 = rep(2, 4))
+  payoffs1 = rep(1, 4),
+  payoffs2 = rep(2, 4))
 
 char_game <- normal_form(
   players = c("A", "B"),
-  p1 = "-x^2 + (28 - y) * x",
-  p2 = "-y^2 + (28 - x) * y",
+  payoffs1 = "-x^2 + (28 - y) * x",
+  payoffs2 = "-y^2 + (28 - x) * y",
   par1_lim = c(0, 30),
   par2_lim = c(0, 30),
   pars = c("x", "y"))
 
 fcn_game <- normal_form(
   players = c("A", "B"),
-  p1 = f_x,
-  p2 = f_y,
+  payoffs1 = f_x,
+  payoffs2 = f_y,
   par1_lim = c(0, 30),
   par2_lim = c(0, 30),
   pars = c("x", "y"))
@@ -61,50 +61,50 @@ seq_game <- seq_form(
   players = c("Leader", "Follower"),
   s1 = c("R", "S", "P"),
   s2 = c("R", "S", "P"),
-  p1 = c(0, -1, 1, 1, 0, -1, -1, 1, 0),
-  p2 = c(0, 1, -1, -1, 0, 1, 1, -1, 0)
+  payoffs1 = c(0, -1, 1, 1, 0, -1, -1, 1, 0),
+  payoffs2 = c(0, 1, -1, -1, 0, 1, 1, -1, 0)
 )
 
 RPS <- normal_form(
   players = c("Kamijo", "Yanai"),
   s1 = c("R", "P", "S"),
   s2 = c("R", "P", "S"),
-  p1 = c(0, 1, -1, -1, 0, 1, 1, -1, 0),
+  payoffs1 = c(0, 1, -1, -1, 0, 1, 1, -1, 0),
   symmetric = TRUE)
 
 test_that("as_df_br returns a list of two data frames", {
   expect_type(as_df_br(players = c("A", "B"),
-                       p1 = f_x,
-                       p2 = f_y,
+                       payoffs1 = f_x,
+                       payoffs2 = f_y,
                        pars = c("x", "y"),
                        par1_lim = c(0, 30),
                        par2_lim = c(0, 30)),
                   "list")
  expect_length(as_df_br(players = c("A", "B"),
-                        p1 = f_x,
-                        p2 = f_y,
+                        payoffs1 = f_x,
+                        payoffs2 = f_y,
                         pars = c("x", "y"),
                         par1_lim = c(0, 30),
                         par2_lim = c(0, 30)), 2)
  expect_type(as_df_br(players = c("A", "B"),
-                      p1 = f_x2,
-                      p2 = f_y2,
+                      payoffs1 = f_x2,
+                      payoffs2 = f_y2,
                       pars = c("x", "y"),
                       cons_common = list(a = 28, s = 2),
                       par1_lim = c(0, 30),
                       par2_lim = c(0, 30)),
              "list")
  expect_type(as_df_br(players = c("A", "B"),
-                      p1 = f_x2,
-                      p2 = f_y,
+                      payoffs1 = f_x2,
+                      payoffs2 = f_y,
                       pars = c("x", "y"),
                       cons1 = list(a = 28, s = 2),
                       par1_lim = c(0, 30),
                       par2_lim = c(0, 30)),
              "list")
  expect_type(as_df_br(players = c("A", "B"),
-                      p1 = f_x,
-                      p2 = f_y2,
+                      payoffs1 = f_x,
+                      payoffs2 = f_y2,
                       pars = c("x", "y"),
                       cons2 = list(a = 28, s = 2),
                       par1_lim = c(0, 30),

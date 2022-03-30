@@ -4,28 +4,28 @@
 #' @return A list containing two data frames, each of which is a player's best
 #'     response to the other.
 #' @param players A character vector specifying the two players of the game.
-#' @param p1 An R function describing Player 1's payoff.
-#' @param p2 An R function describing Player 2's payoff.
+#' @param payoffs1 An R function describing Player 1's payoff.
+#' @param payoffs2 An R function describing Player 2's payoff.
 #' @param pars A character vector of length 2, which specifies the parameters
 #'     each player chooses.
 #' @param par1_lim A numerical vector of length 2, which specifies the range of
 #'     the first parameter.
 #' @param par2_lim A numerical vector of length 2, which specifies the range of
 #'     the second parameter.
-#' @param cons1 A named list of parameters contained in \code{p1} that should be
-#'      treated as constants, if any.
-#' @param cons2 A named list of parameters contained in \code{p2} that should be
-#'      treated as constants, if any.
-#' @param cons_common A named list of parameters contained in p1 and p2 that
-#'     should be treated as constants, if any. If \code{cons1} and \code{cons2}
-#'     are exactly same, you can specify \code{cons_common} instead of
-#'     \code{cons1} and \code{cons2}.
+#' @param cons1 A named list of parameters contained in \code{payoffs1} that
+#'     should be treated as constants, if any.
+#' @param cons2 A named list of parameters contained in \code{payoffs2} that
+#'     should be treated as constants, if any.
+#' @param cons_common A named list of parameters contained in payoffs1 and
+#'     payoffs2 that should be treated as constants, if any. If \code{cons1} and
+#'      \code{cons2} are exactly same, you can specify \code{cons_common}
+#'      instead of \code{cons1} and \code{cons2}.
 #' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 as_df_br <- function(players,
-                     p1,
-                     p2,
+                     payoffs1,
+                     payoffs2,
                      pars,
                      par1_lim,
                      par2_lim,
@@ -98,10 +98,10 @@ as_df_br <- function(players,
   }
 
   df0$payoff1 <- df0 %>%
-    purrr::pmap(.f = p1) %>%
+    purrr::pmap(.f = payoffs1) %>%
     unlist()
   df0$payoff2 <- df0b %>%
-    purrr::pmap(.f = p2) %>%
+    purrr::pmap(.f = payoffs2) %>%
     unlist()
 
   df0 <- df0 %>%

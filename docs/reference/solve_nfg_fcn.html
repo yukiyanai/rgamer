@@ -18,7 +18,7 @@ payoff functions are provided as R functions."><!-- mathjax --><script src="http
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.15</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.16</span>
       </span>
     </div>
 
@@ -88,17 +88,17 @@ payoff functions are provided as R functions.</p>
 <dd><p>A vector of parameter labels if the user define the game
 with functions as characters.</p></dd>
 <dt>cons1</dt>
-<dd><p>A named list of parameters contained in <code>game$payoff$p1</code>
-that should be treated as constants, if any.</p></dd>
+<dd><p>A named list of parameters contained in
+<code>game$payoff$payoffs1</code> that should be treated as constants, if any.</p></dd>
 <dt>cons2</dt>
-<dd><p>A named list of parameters contained in <code>game$payoff$p2</code>
-that should be treated as constants, if any.</p></dd>
+<dd><p>A named list of parameters contained in
+<code>game$payoff$payoffs2</code> that should be treated as constants, if any.</p></dd>
 <dt>cons_common</dt>
 <dd><p>A named list of parameters contained in
-<code>game$payoff$p1</code> and <code>game$payoff$p2</code> that should be treated as
-constants, if any. If <code>cons1</code> and <code>cons2</code> are exactly same, you
-can specify <code>cons_common</code> instead of specifying both <code>cons1</code>
-and <code>cons2</code>.</p></dd>
+<code>game$payoff$payoffs1</code> and <code>game$payoff$payoffs2</code> that should
+be treated as constants, if any. If <code>cons1</code> and <code>cons2</code> are
+exactly same, you can specify <code>cons_common</code> instead of specifying
+both <code>cons1</code> and <code>cons2</code>.</p></dd>
 <dt>precision</dt>
 <dd><p>A natural number specifying the precision of numerical
 approximation. The value n approximately means that the approximation is
@@ -139,11 +139,14 @@ and the plot of best response correspondences.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by <a href="https://sites.google.com/site/yoshiokamijo/" class="external-link">Yoshio Kamijo</a>, <a href="https://yukiyanai.github.io" class="external-link">Yuki Yanai</a>.</p>
+  <p></p><p>Developed by
+<a href="https://sites.google.com/site/yoshiokamijo/" class="external-link">Yoshio Kamijo</a>,
+<a href="https://yukiyanai.github.io" class="external-link">Yuki Yanai</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
       </footer></div>

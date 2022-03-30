@@ -48,7 +48,8 @@ matching_df <- function(df1,
                         verbose = TRUE) {
 
   algorithm <- match.arg(algorithm,
-                         choices = c("DA", "Gale-Shapley", "Boston"))
+                         choices = c("DA", "Gale-Shapley", "GA",
+                                     "Boston"))
 
   if (!is.null(header)) {
     if (!is.logical(header))

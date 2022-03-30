@@ -32,6 +32,6 @@ eliminate_strategy <- function(game,
   normal_form(players = game$player,
               s1 = game$strategy$s1,
               s2 = game$strategy$s2,
-              p1 = new_df$p1,
-              p2 = new_df$p2)
+              payoffs1 = new_df$payoff1,
+              payoffs2 = new_df$payoff2)
 }

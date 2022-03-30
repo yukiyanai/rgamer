@@ -79,7 +79,8 @@ matching <- function(g1_prefs,
                      verbose = TRUE) {
 
   algorithm <- match.arg(algorithm,
-                         choices = c("DA", "Gale-Shapley", "Boston"))
+                         choices = c("DA", "Gale-Shapley", "GS",
+                                     "Boston"))
 
   n_g1 <- length(g1_prefs)
   n_g2 <- length(g2_prefs)
@@ -189,7 +190,7 @@ matching <- function(g1_prefs,
     g1_prefs <- g2_prefs
     g2_prefs <- tmp
   }
-  if (algorithm %in% c("DA", "Gale-Shapley")) {
+  if (algorithm %in% c("DA", "Gale-Shapley", "GA")) {
     out <- DA(g1_prefs = g1_prefs,
               g2_prefs = g2_prefs,
               verbose = verbose)

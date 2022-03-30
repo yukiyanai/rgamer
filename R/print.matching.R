@@ -1,7 +1,6 @@
 #' @title Custom print method for "matching" class
 #' @description Custom print method for "matching" class created by
 #'     \code{matching()} or \code{matching_df()}.
-#' @inheritParams print
 #' @param x The output of \code{matching()} or \code{matching_df()}.
 #' @param digits Not used.
 #' @param quote Not used.
