@@ -15,11 +15,11 @@
 #'     initial beliefs will be randomly assigned.
 #' @param sigma A non-negative value determining the level of noise adherent to
 #'     evaluation of payoffs.
-#' @return A list containing (1) a list of data frames of strategies chosen by
-#'     each player, (2) a single long data frame of (1), (3) a list of each
-#'     player's attraction values for each strategy (data frames), (4) a list of
-#'      probability of each strategy being chosen (data frames), and (5) a plot
-#'      of the simulation result (ggplot object).
+#' @return A list containing (1) a data frames of strategies chosen by each
+#'     player, (2) a list of each player's belief about the opponent's behavior
+#'     (data frames), (3) a list of probability of each strategy being chosen
+#'     (data frames), and (4) a plot of cumulative ratio of each strategy
+#'     chosen, (5) a plot of beliefs, and (6) a plot of choice probabilities.
 #' @importFrom magrittr %>%
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
@@ -29,13 +29,16 @@ sim_fict <- function(game,
                      init = NULL,
                      sigma = 0) {
 
-  period <- belief <- strategy <- probability <- NULL
+  period <- belief <- strategy <- probability <- ratio <- NULL
 
   pi1 <- game$mat$matrix1
   pi2 <- game$mat$matrix2
 
-  n1 <- length(game$strategy$s1)
-  n2 <- length(game$strategy$s2)
+  s1 <- game$strategy$s1
+  s2 <- game$strategy$s2
+
+  n1 <- length(s1)
+  n2 <- length(s2)
 
   ## B (belief), P (Probability) and choice
   B1 <- matrix(NA, nrow = n_periods + 1, ncol = n2) # Player 1's belief
@@ -103,14 +106,14 @@ sim_fict <- function(game,
   }
 
   # Make tibbles of the result
-  df <- data.frame(player1 = game$strategy$s1[choice1[-1]],
-                   player2 = game$strategy$s2[choice2[-1]],
+  df <- data.frame(player1 = s1[choice1[-1]],
+                   player2 = s2[choice2[-1]],
                    period = 1:n_periods)
 
-  colnames(B1) <- game$strategy$s2
-  colnames(B2) <- game$strategy$s1
-  colnames(P1) <- game$strategy$s1
-  colnames(P2) <- game$strategy$s2
+  colnames(B1) <- s2
+  colnames(B2) <- s1
+  colnames(P1) <- s1
+  colnames(P2) <- s2
 
   B1 <- as.data.frame(B1[-1, ])
   B2 <- as.data.frame(B2[-1, ])
@@ -118,6 +121,48 @@ sim_fict <- function(game,
   P2 <- as.data.frame(P2[-1, ])
 
   B1$period <- B2$period <- P1$period <- P2$period <- 1:n_periods
+
+
+  # Plot cumulative choices
+  df1 <- P1
+  df2 <- P2
+  for (t in 1:n_periods) {
+    for (j in 1:n1) {
+      df1[t, j]  <- sum(df$player1[1:t] == s1[j]) / t
+    }
+    for (k in 1:n2) {
+      df2[t, k]  <- sum(df$player2[1:t] == s2[k]) / t
+    }
+  }
+
+  p_cum1 <- df1 %>%
+    tidyr::pivot_longer(cols = -period,
+                        values_to = "ratio",
+                        names_to = "strategy") %>%
+    ggplot2::ggplot(ggplot2::aes(x = period,
+                                 y = ratio,
+                                 color = strategy,
+                                 linetype = strategy)) +
+    ggplot2::geom_line() +
+    ggplot2::scale_color_brewer(palette = "Dark2") +
+    ggplot2::ylim(0, 1) +
+    ggplot2::labs(subtitle = game$player[1])
+
+  p_cum2 <- df2 %>%
+    tidyr::pivot_longer(cols = -period,
+                        values_to = "ratio",
+                        names_to = "strategy") %>%
+    ggplot2::ggplot(ggplot2::aes(x = period,
+                                 y = ratio,
+                                 color = strategy,
+                                 linetype = strategy)) +
+    ggplot2::geom_line() +
+    ggplot2::scale_color_brewer(palette = "Dark2") +
+    ggplot2::ylim(0, 1) +
+    ggplot2::labs(subtitle = game$player[2])
+
+  p_cum <- patchwork::wrap_plots(p_cum1, p_cum2)
+
 
   # Plot beliefs
   p_B1 <- B1 %>%
@@ -188,6 +233,7 @@ sim_fict <- function(game,
                             B2 = B2,
               choice_prob = list(P1 = P1,
                                  P2 = P2)),
+              plot_cum = p_cum,
               plot_B = plt_B,
               plot_P = plt_P))
 

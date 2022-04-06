@@ -26,11 +26,11 @@ initial beliefs will be randomly assigned.}
 evaluation of payoffs.}
 }
 \value{
-A list containing (1) a list of data frames of strategies chosen by
-each player, (2) a single long data frame of (1), (3) a list of each
-player's attraction values for each strategy (data frames), (4) a list of
-probability of each strategy being chosen (data frames), and (5) a plot
-of the simulation result (ggplot object).
+A list containing (1) a data frames of strategies chosen by each
+player, (2) a list of each player's belief about the opponent's behavior
+(data frames), (3) a list of probability of each strategy being chosen
+(data frames), and (4) a plot of cumulative ratio of each strategy
+chosen, (5) a plot of beliefs, and (6) a plot of choice probabilities.
 }
 \description{
 \code{sim_fict()} simulates a fictitous play of a game
