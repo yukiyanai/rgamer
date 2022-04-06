@@ -72,10 +72,10 @@ players.}
 }
 \value{
 A list containing (1) a list of data frames of strategies chosen by
-each player, (2) a single long data frame of (1), (3) a list of each
-player's attraction values for each strategy (data frames), (4) a list of
-probability of each strategy being chosen (data frames), and (5) a plot
-of the simulation result (ggplot object).
+each player, (2) a single long data frame of (1)'s data frames combined,
+(3) a list of each  player's attraction values for each strategy
+(data frames), (4) a list of probability of each strategy being chosen
+(data frames), and (5) a plot of the simulation result (ggplot object).
 }
 \description{
 \code{sim_learning()} simulates learning dynamics in a

@@ -19,7 +19,7 @@ License: MIT + file LICENSE
 URL: https://yukiyanai.github.io/rgamer/, https://github.com/yukiyanai/rgamer
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Suggests: 
     testthat,
     knitr,
@@ -91,6 +91,7 @@ Collate:
     'show_path.R'
     'sim_EWA.R'
     'sim_fict.R'
+    'sim_fict_one.R'
     'sim_game.R'
     'sim_game_abr.R'
     'sim_game_br.R'

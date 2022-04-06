@@ -4,11 +4,23 @@
 \alias{sim_fict}
 \title{Simulates a fictitious play}
 \usage{
-sim_fict(game, n_periods = 50, lambda = 1, init = NULL, sigma = 0)
+sim_fict(
+  game,
+  n_samples = 1,
+  n_periods = 50,
+  lambda = 1,
+  init = NULL,
+  sigma = 0,
+  plot_range_y = NULL,
+  plot_id = 1
+)
 }
 \arguments{
 \item{game}{An object of \code{normal_form} class defined by
 \code{normal_form()}.}
+
+\item{n_samples}{A positive integer specifying the number of samples to be
+simulated.}
 
 \item{n_periods}{A positive integer specifying how many times the game is
 played.}
@@ -24,16 +36,28 @@ initial beliefs will be randomly assigned.}
 
 \item{sigma}{A non-negative value determining the level of noise adherent to
 evaluation of payoffs.}
+
+\item{plot_range_y}{Choose the range of vertical axis for plots. Available
+choices are \code{"fixed"}, \code{"full"} and \code{"free"}.
+If \code{plot_range_y = "free"}, the range of y-axis depends on
+simulation results.  If \code{plot_range_y = "full"}, The range
+defined in \code{game} is used for each player, which can be different
+between players. With \code{"fixed"}, the same y-axis is used for both
+players.}
+
+\item{plot_id}{An integer between 1 and n_samples to specify for which
+sample, playing history should be displayed. If \code{plot_id = NULL},
+plot_B and plot_P will be NULL.}
 }
 \value{
 A list containing (1) a data frames of strategies chosen by each
-player, (2) a list of each player's belief about the opponent's behavior
-(data frames), (3) a list of probability of each strategy being chosen
-(data frames), and (4) a plot of cumulative ratio of each strategy
-chosen, (5) a plot of beliefs, and (6) a plot of choice probabilities.
+player,  (2) a single long data frame of (1)'s data frames combined,
+(3) a list of each player's belief about the opponent's behavior
+(data frames), (4) a list of probability of each strategy being chosen
+(data frames), and (5) three plots of simulation result.
 }
 \description{
-\code{sim_fict()} simulates a fictitous play of a game
+\code{sim_fict()} simulates a fictitious play of a game
 }
 \details{
 Simulate fictitious plays of a normal-form game defined by

@@ -20,10 +20,10 @@
 #'     between players. With \code{"fixed"}, the same y-axis is used for both
 #'     players.
 #' @return A list containing (1) a list of data frames of strategies chosen by
-#'     each player, (2) a single long data frame of (1), (3) a list of each
-#'     player's attraction values for each strategy (data frames), (4) a list of
-#'      probability of each strategy being chosen (data frames), and (5) a plot
-#'      of the simulation result (ggplot object).
+#'     each player, (2) a single long data frame of (1)'s data frames combined,
+#'     (3) a list of each  player's attraction values for each strategy
+#'      (data frames), (4) a list of probability of each strategy being chosen
+#'       (data frames), and (5) a plot of the simulation result (ggplot object).
 #' @importFrom magrittr %>%
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
@@ -43,6 +43,10 @@ sim_learning <- function(game,
   player1 <- player2 <- period <- player <- strategy <- NULL
 
   ## Checks input values
+  if (game$type != "matrix") {
+    stop("This function works with 'matrix' type games only.")
+  }
+
   type <- match.arg(type,
                     choices = c("EWA", "reinforcement", "belief"))
 
@@ -76,9 +80,7 @@ sim_learning <- function(game,
 
   data_list <- A1_list <- A2_list <- P1_list <- P2_list <- list()
 
-  if (game$type != "matrix") {
-    stop("This function works with 'matrix' type games only.")
-  }
+
 
   if (type == "EWA") {
     for (i in 1:n_samples) {
