@@ -65,7 +65,7 @@ sim_fict_one <- function(game,
     tmp1 <- stats::runif(n2)
     tmp2 <- stats::runif(n1)
     B1[1, ] <- tmp1 / sum(tmp1)
-    B2[1, ] <- tmp1 / sum(tmp2)
+    B2[1, ] <- tmp2 / sum(tmp2)
   } else {
     B1[1, ] <- init[[1]]
     B2[1, ] <- init[[2]]
@@ -100,8 +100,8 @@ sim_fict_one <- function(game,
     P1[t, ] <- w1 / sum(w1)
     P2[t, ] <- w2 / sum(w2)
 
-    c1 <- sample(1:n1, size = 1, prob = as.vector(w1))
-    c2 <- sample(1:n2, size = 1, prob = as.vector(w2))
+    c1 <- sample(1:n1, size = 1, prob = P1[t, ])
+    c2 <- sample(1:n2, size = 1, prob = P2[t, ])
 
     choice1[t] <- c1
     choice2[t] <- c2

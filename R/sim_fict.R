@@ -43,7 +43,9 @@ sim_fict <- function(game,
                         lambda = lambda,
                         init = init,
                         sigma = sigma)
-    data_list[[i]] <- res$data
+    df <- res$data
+    df$sample <- i
+    data_list[[i]] <- df
     B1_list[[i]] <- res$belief$B1
     B2_list[[i]] <- res$belief$B2
     P1_list[[i]] <- res$choice_prob$P1
