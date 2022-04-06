@@ -9,6 +9,8 @@
 #'     \code{normal_form()}.
 #' @param plot_range_y Choose the range of vertical axis for plots. Available
 #'     choices are \code{"fixed"}, \code{"full"} and \code{"free"}.
+#'     Alternatively, you can give a numeric vector of length 2, whose element
+#'     should be the lower and upper limits of the y axis.
 #'     If \code{plot_range_y = "free"}, the range of y-axis depends on
 #'     simulation results.  If \code{plot_range_y = "full"}, The range
 #'     defined in \code{game} is used for each player, which can be different
@@ -22,14 +24,19 @@ plot_sim <- function(x,
                      game,
                      plot_range_y = "free") {
 
-  player <- period <- strategy <- play <- ratio <- m <- NULL
-
-  plot_range_y <- match.arg(plot_range_y,
-                            choices = c("fixed", "free", "full"))
+  player <- period <- strategy <- play <- ratio <- m <- yrange <- NULL
 
   n_samples <- length(unique(x$sample))
 
+
   if (game$type == "matrix") {
+
+    if (is.null(plot_range_y)) {
+      yrange <- ggplot2::ylim(0, 1)
+    } else if (is.numeric(plot_range_y)) {
+      yrange <- ggplot2::ylim(plot_range_y[1],
+                              plot_range_y[2])
+    }
 
     # Player 1: ratio of each strategy
     df1 <- NULL
@@ -53,9 +60,8 @@ plot_sim <- function(x,
       ggplot2::labs(x = "period",
                     y = "ratio",
                     subtitle = game$player[1]) +
-      ggplot2::ylim(0, 1) +
       ggplot2::scale_color_brewer(palette = "Dark2") +
-      ggplot2::ylim(0, 1)
+      yrange
 
     # Player 2: ratio of each strategy
     df2 <- NULL
@@ -79,7 +85,8 @@ plot_sim <- function(x,
                     y = "ratio",
                     subtitle = game$player[2]) +
       ggplot2::scale_color_brewer(palette = "Dark2") +
-      ggplot2::ylim(0, 1)
+      yrange
+
 
 
     # Wrap two plots by patchwork
@@ -138,7 +145,6 @@ plot_sim <- function(x,
                     y = "strategy",
                     subtitle = game$player[2])
 
-
     # Adjust y range
     if (plot_range_y == "fixed") {
 
@@ -164,7 +170,20 @@ plot_sim <- function(x,
         ggplot2::ylim(game$strategy$s2[1],
                       game$strategy$s2[2])
 
-      }
+    } else if (is.numeric(plot_range_y)) {
+      p1_1 <- p1_1 +
+        ggplot2::ylim(plot_range_y[1],
+                      plot_range_y[2])
+      p1_2 <- p1_2 +
+        ggplot2::ylim(plot_range_y[1],
+                      plot_range_y[2])
+      p2_1 <- p2_1 +
+        ggplot2::ylim(plot_range_y[1],
+                      plot_range_y[2])
+      p2_2 <- p2_2 +
+        ggplot2::ylim(plot_range_y[1],
+                      plot_range_y[2])
+    }
 
     # Wrap two plots by patchwork
     p1 <- patchwork::wrap_plots(p1_1, p1_2)

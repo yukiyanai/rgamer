@@ -62,7 +62,7 @@ sim_game <- function(game,
                      cons2 = NULL,
                      plot_range_y = NULL) {
 
-  play1 <- play2 <- period <- player <- strategy <- NULL
+  play1 <- play2 <- period <- player <- strategy <- d1 <- NULL
 
   if (class(game) != "normal_form") stop("Please provide a game defined by normal_form().")
 
@@ -77,58 +77,63 @@ sim_game <- function(game,
   if (type == "br") {
     df_list <- list()
     for (i in 1:n_samples) {
-      df_list[[i]] <-  sim_game_br(game,
-                                   n_periods = n_periods,
-                                   omega = omega,
-                                   cons1 = cons1,
-                                   cons2 = cons2,
-                                   init1 = init1,
-                                   init2 = init2) %>%
-        dplyr::mutate(sample = i)
+      d1 <-  sim_game_br(game,
+                         n_periods = n_periods,
+                         omega = omega,
+                         cons1 = cons1,
+                         cons2 = cons2,
+                         init1 = init1,
+                         init2 = init2)
+      d1$sample <- i
+      df_list[[i]] <- d1
     }
     df <- dplyr::bind_rows(df_list)
 
   } else if (type == "sbr") {
     df_list <- list()
     for (i in 1:n_samples) {
-      df_list[[i]] <- sim_game_sbr(game,
-                                   n_periods = n_periods,
-                                   omega = omega,
-                                   lambda = lambda,
-                                   cons1 = cons1,
-                                   cons2 = cons2,
-                                   init1 = init1,
-                                   init2 = init2) %>%
-        dplyr::mutate(sample = i)
+      d1 <- sim_game_sbr(game,
+                         n_periods = n_periods,
+                         omega = omega,
+                         lambda = lambda,
+                         cons1 = cons1,
+                         cons2 = cons2,
+                         init1 = init1,
+                         init2 = init2)
+      d1$sample <- i
+      df_list[[i]] <- d1
     }
     df <- dplyr::bind_rows(df_list)
 
   } else if (type == "abr") {
     df_list <- list()
     for (i in 1:n_samples) {
-      df_list[[i]] <- sim_game_abr(game,
-                                   n_periods = n_periods,
-                                   omega = omega,
-                                   cons1 = cons1,
-                                   cons2 = cons2,
-                                   init1 = init1,
-                                   init2 = init2) %>%
-        dplyr::mutate(sample = i)
+      d1 <- sim_game_abr(game,
+                         n_periods = n_periods,
+                         omega = omega,
+                         cons1 = cons1,
+                         cons2 = cons2,
+                         init1 = init1,
+                         init2 = init2)
+      d1$sample <- i
+      df_list[[i]] <- d1
     }
     df <- dplyr::bind_rows(df_list)
 
   } else if (type == "imitation") {
     df_list <- list()
     for (i in 1:n_samples) {
-      df_list[[i]] <- sim_game_imitation(game,
-                                         n_periods = n_periods,
-                                         omega = omega,
-                                         eta = eta,
-                                         cons1 = cons1,
-                                         cons2 = cons2,
-                                         init1 = init1,
-                                         init2 = init2) %>%
-        dplyr::mutate(sample = i)
+      d1 <- sim_game_imitation(game,
+                               n_periods = n_periods,
+                               omega = omega,
+                               eta = eta,
+                               cons1 = cons1,
+                               cons2 = cons2,
+                               init1 = init1,
+                               init2 = init2)
+      d1$sample <- i
+      df_list[[i]] <- d1
+
     }
     df <- dplyr::bind_rows(df_list)
 
