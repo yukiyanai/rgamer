@@ -41,41 +41,53 @@ sim_game_br <- function(game,
     s1 <- game$strategy$s1
     s2 <- game$strategy$s2
 
+    n1 <- length(s1)
+    n2 <- length(s2)
+
+    pi1 <- game$mat$matrix1
+    pi2 <- game$mat$matrix2
+
     # for the first round
     if (is.null(init1)) {
-      play1[1] <- sample(s1, size = 1)
+      play1[1] <- sample(1:n1, size = 1)
     } else {
-      play1[1] <- init1
+      play1[1] <- which(s1 == init1)
     }
     if (is.null(init2)) {
-      play2[1] <- sample(s2, size = 1)
+      play2[1] <- sample(1:n2, size = 1)
     } else {
-      play2[1] <- init2
+      play2[1] <- which(s2 == init2)
     }
 
-    for (i in 2:n_periods) {
-      ## Player 1
+    for (t in 2:n_periods) {
+
       if (stats::runif(1) < omega) {
-        play1[i] <- play1[i - 1]
+        play1[t] <- play1[t - 1]
       } else {
-        df1 <- game$df %>%
-          dplyr::filter(s2 == play2[i - 1]) %>%
-          dplyr::filter(payoff1 == max(payoff1))
-        if (nrow(df1) > 1) df1 <- dplyr::slice_sample(df1, n = 1)
-        play1[i] <- df1$s1[1]
+        pi1t <- pi1[, play2[t -1]]
+        pi1t <- pi1t == max(pi1t)
+        if (sum(pi1t) == 1) {
+          play1[t] <- which(pi1t)
+        } else {
+          play1[t] <- sample(which(pi1t), size = 1)
+        }
       }
 
-      ## Player 2
       if (stats::runif(1) < omega) {
-        play2[i] <- play2[i - 1]
+        play2[t] <- play2[t - 1]
       } else {
-        df2 <- game$df %>%
-          dplyr::filter(s1 == play1[i - 1]) %>%
-          dplyr::filter(payoff2 == max(payoff2))
-        if (nrow(df2) > 1) df2 <- dplyr::slice_sample(df2, n = 1)
-        play2[i] <- df2$s2[1]
+        pi2t <- pi2[play1[t -1], ]
+        pi2t <- pi2t == max(pi2t)
+        if (sum(pi2t) == 1) {
+          play2[t] <- which(pi2t)
+        } else {
+          play2[t] <- sample(which(pi2t), size = 1)
+        }
       }
     }
+
+    play1 <- s1[play1]
+    play2 <- s2[play2]
 
   } else if (game$type == "char_function") {
     # for the first round

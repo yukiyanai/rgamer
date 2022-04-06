@@ -13,7 +13,7 @@
 #'     simulation results.  If \code{plot_range_y = "full"}, The range
 #'     defined in \code{game} is used for each player, which can be different
 #'     between players. With \code{"fixed"}, the same y-axis is used for both
-#'     players.
+#'     players. Only used when the payoffs are defined by functions.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @import ggplot2
 #' @importFrom magrittr %>%
@@ -53,7 +53,9 @@ plot_sim <- function(x,
       ggplot2::labs(x = "period",
                     y = "ratio",
                     subtitle = game$player[1]) +
-      ggplot2::scale_color_brewer(palette = "Dark2")
+      ggplot2::ylim(0, 1) +
+      ggplot2::scale_color_brewer(palette = "Dark2") +
+      ggplot2::ylim(0, 1)
 
     # Player 2: ratio of each strategy
     df2 <- NULL
@@ -76,7 +78,9 @@ plot_sim <- function(x,
       ggplot2::labs(x = "period",
                     y = "ratio",
                     subtitle = game$player[2]) +
-      ggplot2::scale_color_brewer(palette = "Dark2")
+      ggplot2::scale_color_brewer(palette = "Dark2") +
+      ggplot2::ylim(0, 1)
+
 
     # Wrap two plots by patchwork
     p1 <- patchwork::wrap_plots(p1_1, p1_2)
@@ -123,7 +127,7 @@ plot_sim <- function(x,
                     y = "strategy",
                     subtitle = game$player[1])
 
-    # Player 2: each smample as a line
+    # Player 2: each sample as a line
     p2_2 <- x %>%
       dplyr::filter(player == game$player[2]) %>%
       ggplot2::ggplot(ggplot2::aes(x = period,
@@ -137,13 +141,16 @@ plot_sim <- function(x,
 
     # Adjust y range
     if (plot_range_y == "fixed") {
+
       yl <- min(game$strategy$s1[1], game$strategy$s2[1])
       yu <- max(game$strategy$s1[2], game$strategy$s2[2])
       p1_1 <- p1_1 + ggplot2::ylim(yl, yu)
       p1_2 <- p1_2 + ggplot2::ylim(yl, yu)
       p2_1 <- p2_1 + ggplot2::ylim(yl, yu)
       p2_2 <- p2_2 + ggplot2::ylim(yl, yu)
+
     } else if (plot_range_y == "full") {
+
       p1_1 <- p1_1 +
         ggplot2::ylim(game$strategy$s1[1],
                       game$strategy$s1[2])
@@ -156,7 +163,8 @@ plot_sim <- function(x,
       p2_2 <- p2_2 +
         ggplot2::ylim(game$strategy$s2[1],
                       game$strategy$s2[2])
-    }
+
+      }
 
     # Wrap two plots by patchwork
     p1 <- patchwork::wrap_plots(p1_1, p1_2)

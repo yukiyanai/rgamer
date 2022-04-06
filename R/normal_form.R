@@ -192,11 +192,68 @@ normal_form <- function(
       # error if parameter domains are not specified correctly
       stop("Each of par1_lim and par2_lim must be the numeric vector of length 2.")
     } else {
-      value <- list(player = players,
-                    strategy = list(s1 = par1_lim, s2 = par2_lim),
-                    payoff = list(payoffs1 = payoffs1, payoffs2 = payoffs2),
-                    pars = pars,
-                    type = "char_function")
+
+      if (discretize) {
+
+        # transform char functions to R functions
+        new_fs <- char2function(f1 = payoffs1,
+                                f2 = payoffs2,
+                                pars = pars)
+
+        # pick out discrete strategies
+        if (is.null(s1)) {
+          s1 <- seq(from = par1_lim[1],
+                    to = par1_lim[2],
+                    length.out = discrete_points[1])
+        }
+        if (is.null(s2)) {
+          s2 <- seq(from = par2_lim[1],
+                    to = par2_lim[2],
+                    length.out = discrete_points[2])
+        }
+
+        s_set <- expand.grid(s1, s2)
+        names(s_set) <- c("x", "y")
+        payoff1 <- purrr::pmap(s_set, new_fs[[1]]) %>% unlist()
+        payoff2 <- purrr::pmap(s_set, new_fs[[2]]) %>% unlist()
+
+        s1 <- as.character(s1)
+        s2 <- as.character(s2)
+        n_rows <- length(s1)
+        n_cols <- length(s2)
+        n_cells <- n_rows * n_cols
+
+        # payoff matrix for Players 1 and 2
+        mat1 <- matrix(payoff1, nrow = n_rows, byrow = FALSE)
+        mat2 <- matrix(payoff2, nrow = n_rows, byrow = FALSE)
+
+        # gather game elements in a data frame
+        row <- rep(1:n_rows, times = n_cols)
+        s1_vec <- rep(s1, times = n_cols)
+        column <- rep(1:n_cols, each = n_cols)
+        s2_vec <- rep(s2, each = n_rows)
+        df <- data.frame(row,
+                         column,
+                         s1,
+                         s2,
+                         payoff1,
+                         payoff2)
+
+        # list for return
+        value <- list(player = players,
+                      strategy = list(s1 = s1, s2 = s2),
+                      payoff = list(payoffs1 = payoff1, payoffs2 = payoff2),
+                      df = df,
+                      mat = list(matrix1 = mat1, matrix2 = mat2),
+                      type = "matrix")
+
+      } else {
+        value <- list(player = players,
+                      strategy = list(s1 = par1_lim, s2 = par2_lim),
+                      payoff = list(payoffs1 = payoffs1, payoffs2 = payoffs2),
+                      pars = pars,
+                      type = "char_function")
+      }
     }
   } else if (is.function(payoffs1) & is.function(payoffs2)) {
     ## Game whose payoffs are defined by function objects

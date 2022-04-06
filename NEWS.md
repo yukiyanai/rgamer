@@ -1,3 +1,16 @@
+# rgamer 0.0.17
+
+## New Features
+
+- `sim_learning()` simulates how players learn to play better in a two-person normal-form game.
+- `sim_fict()` simulates fictitious plays with a two-person normal-form game.
+
+## Changes
+
+- `normal_fomr()` can now handle `discretize = TRUE` for payoff functions defined by character strings.
+- Improves performance of `sim_game()`.
+
+
 # rgamer 0.0.16
 
 ## New Features

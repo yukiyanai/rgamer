@@ -1,7 +1,7 @@
 Package: rgamer
 Type: Package
 Title: Learn Game Theory Using R
-Version: 0.0.16
+Version: 0.0.17
 Authors@R:
     c(person(given = "Yoshio",
              family = "Kamijo",
@@ -89,11 +89,14 @@ Collate:
     'spe.R'
     'solve_efg.R'
     'show_path.R'
+    'sim_EWA.R'
+    'sim_fict.R'
     'sim_game.R'
     'sim_game_abr.R'
     'sim_game_br.R'
     'sim_game_imitation.R'
     'sim_game_sbr.R'
+    'sim_learning.R'
     'solve_nfg.R'
     'solve_nfg_char.R'
     'solve_nfg_fcn.R'
