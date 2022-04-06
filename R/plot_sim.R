@@ -22,7 +22,7 @@
 #' @noRd
 plot_sim <- function(x,
                      game,
-                     plot_range_y = "free") {
+                     plot_range_y = NULL) {
 
   player <- period <- strategy <- play <- ratio <- m <- yrange <- NULL
 
@@ -146,7 +146,9 @@ plot_sim <- function(x,
                     subtitle = game$player[2])
 
     # Adjust y range
-    if (plot_range_y == "fixed") {
+    if (is.null(plot_range_y)) {
+     # do nothing
+    } else if (plot_range_y == "fixed") {
 
       yl <- min(game$strategy$s1[1], game$strategy$s2[1])
       yu <- max(game$strategy$s1[2], game$strategy$s2[2])
