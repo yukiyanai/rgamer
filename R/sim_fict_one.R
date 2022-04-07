@@ -6,7 +6,7 @@
 #'     \code{normal_form()}.
 #' @param n_periods A positive integer specifying how many times the game is
 #'     played.
-#' @param lambda A positive real value representing the sensitivity to
+#' @param lambda A positive real value representing the players' sensitivity to
 #'     expected utilities. As \code{lambda} gets larger, a small difference in
 #'     expected utility makes a big difference in choice probability.
 #' @param init A list of initial levels of beliefs. The length of the list must

@@ -32,21 +32,20 @@ solve_nfg_matrix <- function(
     if (!quietly) message("Pure strategy NE does not exist.\n")
   } else if (!quietly) {
     psNE_str <- paste(psNE, collapse = ", ")
-    message("Pure-strategy NE: ", psNE_str)
+    message("Pure-strategy NE: ", psNE_str, "\n")
   }
 
   if (mixed) {
     msNE <- find_mixed_NE(game)
     msNE_list <- msNE$msNE_list
     msNE <- msNE$msNE
-    if (is.null(msNE)) message("Mixed-strategy NE does not exist (or infinitely many exist).\n")
-    else {
+    if (!is.null(msNE)) {
       out1 <- stringi::stri_join(MASS::fractions(msNE[[1]]), collapse = ", ")
       out2 <- stringi::stri_join(MASS::fractions(msNE[[2]]), collapse = ", ")
       out <- paste0("[(", out1, "), (", out2, ")]")
 
       if (!quietly) {
-        message("Mixed-strategy NE: ", out)
+        message("Mixed-strategy NE: ", out, "\n")
         message("The obtained mixed-strategy NE might be only a part of the solutions.")
 
         if (length(game$strategy$s1) == 2 & length(game$strategy$s2) == 2) {

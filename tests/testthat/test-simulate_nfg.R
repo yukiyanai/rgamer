@@ -15,6 +15,15 @@ char_game <- normal_form(
   par2_lim = c(0, 30),
   pars = c("x", "y"))
 
+disc_game <- normal_form(
+  players = c("A", "B"),
+  payoffs1 = "-x^2 + (28 - y) * x",
+  payoffs2 = "-y^2 + (28 - x) * y",
+  par1_lim = c(0, 30),
+  par2_lim = c(0, 30),
+  pars = c("x", "y"),
+  discretize = TRUE)
+
 f_x <- function(xA, xB, a) {
   (a - xA - xB) * xA - 3 * xA
 }
@@ -199,4 +208,62 @@ test_that("sim_game simulates normal-form games", {
                         n_periods = 5,
                         n_samples = 10,
                         type = "super"))
+})
+
+
+test_that("sim_lerning simulates learning proces", {
+  expect_length(sim_learning(disc_game,
+                             n_samples = 2,
+                             n_periods = 10), 5)
+  expect_length(sim_learning(disc_game,
+                             type = "reinforcement",
+                             n_samples = 2,
+                             n_periods = 10), 5)
+  expect_length(sim_learning(disc_game,
+                             type = "belief",
+                             n_samples = 2,
+                             n_periods = 10), 5)
+  expect_error(sim_learning(disc_game,
+                            type = "super",
+                            n_samples = 2,
+                            n_periods = 10))
+  expect_error(sim_learning(disc_game,
+                            lambda = -1,
+                            n_samples = 2,
+                            n_periods = 10))
+  expect_error(sim_learning(disc_game,
+                            delta = 2,
+                            n_samples = 2,
+                            n_periods = 10))
+  expect_error(sim_learning(disc_game,
+                            rho = 3.2,
+                            n_samples = 2,
+                            n_periods = 10))
+  expect_error(sim_learning(disc_game,
+                            phi = 1.1,
+                            n_samples = 2,
+                            n_periods = 10))
+  expect_error(sim_learning(disc_game,
+                            N_init = -1,
+                            n_samples = 2,
+                            n_periods = 10))
+})
+
+test_that("sim_fict simulates fictitious plays", {
+  expect_length(sim_fict(disc_game,
+                         n_samples = 2,
+                         n_periods = 10), 7)
+  expect_length(sim_fict(disc_game,
+                         init = list(rep(1, 6) / 6,
+                                     rep(1, 6) / 6),
+                         n_samples = 2,
+                         n_periods = 10), 7)
+  expect_error(sim_fict(disc_game,
+                        lambda = -1,
+                        n_samples = 1,
+                        n_periods = 10))
+  expect_error(sim_fict(disc_game,
+                        sigma = -2,
+                        n_samples = 2,
+                        n_periods = 10))
 })

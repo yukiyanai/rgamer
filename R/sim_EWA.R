@@ -7,7 +7,7 @@
 #'     \code{normal_form()}.
 #' @param n_periods A positive integer specifying how many times the game is
 #'     played within each sample.
-#' @param lambda A positive real value representing the sensitivity to
+#' @param lambda A positive real value representing the players' sensitivity to
 #'     attraction values of strategies. As \code{lambda} gets larger, the choice
 #'     will be dependent on attraction values more heavily.  As \code{lambda}
 #'     gets close to 0, a strategy will tend to be chosen randomly.
@@ -15,7 +15,7 @@
 #'     attraction values of strategies that are not chosen are updated.  If
 #'     \code{delta = 0}, attraction is updated only for the strategy that is
 #'     selected at the given period (i.e., reinforcement learning is
-#'     implemented. If \code{delta = 1}, attraction is updated equally for all
+#'     implemented). If \code{delta = 1}, attraction is updated equally for all
 #'     strategies (i.e., belief-based learning model is applied).
 #' @param rho A real value between 0 and 1. This parameter controls the learning
 #'     speed. \code{rho = 0} for "reinforcement" leaning and "belief" based
@@ -23,7 +23,8 @@
 #' @param phi A real value between 0 and 1. This parameter controls how much
 #'     attraction values at the current period are constrained by the past
 #'     attraction values. If \code{phi = 0}, the past attraction values are
-#'     ignored.
+#'     ignored. \code{phi = 1} for "reinforcement" leaning and "belief" based
+#'     learning.
 #' @param A1_init An initial value of Player 1's attraction for each strategy.
 #' @param A2_init An initial value of Player 2's attraction for each strategy.
 #' @param N_init An initial value of N.

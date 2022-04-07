@@ -55,7 +55,8 @@ find_mixed_NE <- function(game) {
     prob1 <- tryCatch({
       solve(a1, b1)
     }, error = function(e) {
-     NULL
+      message("Warning: Mixed-strategy NE cannot be foud because a player's payoff matrix or its submatrix is singluar.")
+      NULL
     })
 
     a2 <- matrix(NA, nrow = n_rows, ncol = n_cols)
@@ -69,7 +70,8 @@ find_mixed_NE <- function(game) {
     prob2 <- tryCatch({
       solve(a2, b2)
     }, error = function(e) {
-    NULL
+      message("Warning: Mixed-strategy NE cannot be foud because a player's payoff matrix or its submatrix is singluar.")
+      NULL
     })
 
     if (is.null(prob1) | is.null(prob2)) {

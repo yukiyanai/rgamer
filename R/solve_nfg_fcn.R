@@ -167,9 +167,9 @@ solve_nfg_fcn <- function(game,
 
   if (!quietly) {
     if (is.null(NE)) {
-      message("NE was not found")
+      message("NE was not found.")
     } else {
-      message("approximated NE: ", df_sol$text)
+      message("approximated NE: ", df_sol$text, "\n")
     }
   }
 
