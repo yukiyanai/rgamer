@@ -1,4 +1,4 @@
-#' @title Simulates a fictitious play
+#' @title Simulates fictitious plays of a game
 #' @description \code{sim_fict()} simulates a fictitious play of a game
 #' @details Simulate fictitious plays of a normal-form game defined by
 #'     \code{normal_form()}.

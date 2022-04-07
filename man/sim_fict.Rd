@@ -2,7 +2,7 @@
 % Please edit documentation in R/sim_fict.R
 \name{sim_fict}
 \alias{sim_fict}
-\title{Simulates a fictitious play}
+\title{Simulates fictitious plays of a game}
 \usage{
 sim_fict(
   game,
@@ -25,7 +25,7 @@ simulated.}
 \item{n_periods}{A positive integer specifying how many times the game is
 played.}
 
-\item{lambda}{A positive real value representing the sensitivity to
+\item{lambda}{A positive real value representing the players' sensitivity to
 expected utilities. As \code{lambda} gets larger, a small difference in
 expected utility makes a big difference in choice probability.}
 

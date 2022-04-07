@@ -13,7 +13,7 @@ sim_fict_one(game, n_periods = 50, lambda = 1, init = NULL, sigma = 0)
 \item{n_periods}{A positive integer specifying how many times the game is
 played.}
 
-\item{lambda}{A positive real value representing the sensitivity to
+\item{lambda}{A positive real value representing the players' sensitivity to
 expected utilities. As \code{lambda} gets larger, a small difference in
 expected utility makes a big difference in choice probability.}
 

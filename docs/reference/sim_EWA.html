@@ -88,7 +88,7 @@ game expected by an experienced weighted attraction (EWA) model.</p>
 <dd><p>A positive integer specifying how many times the game is
 played within each sample.</p></dd>
 <dt>lambda</dt>
-<dd><p>A positive real value representing the sensitivity to
+<dd><p>A positive real value representing the players' sensitivity to
 attraction values of strategies. As <code>lambda</code> gets larger, the choice
 will be dependent on attraction values more heavily.  As <code>lambda</code>
 gets close to 0, a strategy will tend to be chosen randomly.</p></dd>
@@ -97,7 +97,7 @@ gets close to 0, a strategy will tend to be chosen randomly.</p></dd>
 attraction values of strategies that are not chosen are updated.  If
 <code>delta = 0</code>, attraction is updated only for the strategy that is
 selected at the given period (i.e., reinforcement learning is
-implemented. If <code>delta = 1</code>, attraction is updated equally for all
+implemented). If <code>delta = 1</code>, attraction is updated equally for all
 strategies (i.e., belief-based learning model is applied).</p></dd>
 <dt>rho</dt>
 <dd><p>A real value between 0 and 1. This parameter controls the learning
@@ -107,7 +107,8 @@ learning.</p></dd>
 <dd><p>A real value between 0 and 1. This parameter controls how much
 attraction values at the current period are constrained by the past
 attraction values. If <code>phi = 0</code>, the past attraction values are
-ignored.</p></dd>
+ignored. <code>phi = 1</code> for "reinforcement" leaning and "belief" based
+learning.</p></dd>
 <dt>A1_init</dt>
 <dd><p>An initial value of Player 1's attraction for each strategy.</p></dd>
 <dt>A2_init</dt>
