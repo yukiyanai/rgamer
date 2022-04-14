@@ -126,7 +126,7 @@ solve_seq_fcn <- function(game,
                   payoff1, ", ",
                   payoff2, ")")
 
-  if (!quietly) message("NE outcome: ", NE)
+  if (!quietly) message("SPE outcome: ", NE)
 
   message("The NE shown here were numerically obtained and can be slightly different from the analytical solution (if any).")
 

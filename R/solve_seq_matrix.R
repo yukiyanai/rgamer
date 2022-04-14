@@ -48,7 +48,7 @@ solve_seq_matrix <- function(
                   sp2[[which.max(p1_get)]], ")")
   }
 
-  if (!quietly) message("NE outcome: ", NE)
+  if (!quietly) message("SPE outcome: ", NE)
 
   mat_tbl <- game_table(game, mark_br = mark_br)
   if (show_table) print(mat_tbl)

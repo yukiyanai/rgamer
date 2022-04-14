@@ -86,7 +86,7 @@ solve_seq_char <- function(game,
                   ff1(x, y), ", ",
                   ff2(x, y), ")")
 
-  if (!quietly) message("NE outcome: ", NE)
+  if (!quietly) message("SPE outcome: ", NE)
 
   message("The NE shown here were numerically obtained and can be slightly different from the analytical solution (if any).")
 
