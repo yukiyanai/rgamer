@@ -15,7 +15,7 @@ extensive_form(
   info_line = "solid",
   direction = "down",
   color_palette = "Set1",
-  family = NULL,
+  family = "sans",
   size_player = 4,
   size_payoff = 4,
   size_action = 4,

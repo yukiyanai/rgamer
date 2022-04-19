@@ -255,13 +255,14 @@ draw_tree <- function(df_path,
   df_play$player_color <- as.integer(factor(df_play$player))
   p_length <- length(unique(df_play$player))
 
+  n_info_sets <- ifelse(is.null(info_sets), 0, length(info_sets))
+  get_palette <- grDevices::colorRampPalette(RColorBrewer::brewer.pal(8, color_palette))
+
   if (!is.null(info_sets)) {
 
     x_dif <- 100 / (length(unique(df_node$x)) - 1)
     y_dif <- 100 / (length(unique(df_node$y)) - 1)
 
-
-    n_info_sets <- length(info_sets)
     for (i in 1:n_info_sets) {
       info_sets_i <- info_sets[[i]]
       n_pairs <- length(info_sets_i) - 1
@@ -327,7 +328,7 @@ draw_tree <- function(df_path,
                          size = size_action) +
       ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
                      panel.grid.minor = ggplot2::element_blank()) +
-      ggplot2::scale_color_brewer(palette = color_palette,
+      ggplot2::scale_color_manual(values = get_palette(n_info_sets + p_length),
                                   guide = "none")
   } else {
     tree <- tree +
@@ -348,7 +349,7 @@ draw_tree <- function(df_path,
       ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
                      panel.grid.minor = ggplot2::element_blank(),
                      text = ggplot2::element_text(family = family)) +
-      ggplot2::scale_color_brewer(palette = color_palette,
+      ggplot2::scale_color_manual(values = get_palette(n_info_sets + p_length),
                                   guide = "none")
   }
 

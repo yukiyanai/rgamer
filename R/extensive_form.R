@@ -109,7 +109,7 @@ extensive_form <- function(
   info_line = "solid",
   direction = "down",
   color_palette = "Set1",
-  family = NULL,
+  family = "sans",
   size_player = 4,
   size_payoff = 4,
   size_action = 4,
@@ -122,8 +122,8 @@ extensive_form <- function(
                                      "bidirectional",
                                      "horizontal", "vertical"))
 
-  x_s <- x_m <- x_e <- y_s <- y_m <- y_e <- id <- player<- NULL
-  info_setss <- node_from <- s <- NULL
+  x_s <- x_m <- x_e <- y_s <- y_m <- y_e <- id <- player <- NULL
+  node_from <- s <- NULL
 
   if (!is.null(payoffs2)) {
     u_players <- players %>%

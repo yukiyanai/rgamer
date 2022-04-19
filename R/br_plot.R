@@ -28,13 +28,20 @@ br_plot <- function(game,
   mat1 <- game$mat$matrix1
   mat2 <- game$mat$matrix2
 
-  if (is.null(msNE)) msNE <- find_mixed_NE(game)$msNE
+  if (is.null(msNE)) {
+    msNEout <- find_mixed_NE(game)
+    msNE <- msNEout$msNE
+    probs <- msNEout$prob
+  }
 
   if (is.null(msNE)) {
     ## BR of A v B
     if (p1[1] == p1[2] & p1[3] == p1[4]) {
       p <- "ANY"
       warning(paste0("Any p is ", players[1], "'s best response regardless of ", players[2], "'s action.\n"))
+    } else if (!is.null(probs$p)) {
+      p <- probs$p[1]
+      if (p > 1 | p < 0) p <- "ANY"
     } else {
       p <- ifelse(p1[3] > p1[4], 1, 0)
     }
@@ -43,6 +50,9 @@ br_plot <- function(game,
     if (p2[1] == p2[3] & p2[2] == p2[4]) {
       q <- "ANY"
       warning(paste0("Any q is ", players[2], "'s best response regardless of ", players[1], "'s action.\n"))
+    } else if (!is.null(probs$q)) {
+      q <- probs$q[1]
+      if (q > 1 | q < 0) q <- "ANY"
     } else {
       q <- ifelse(p2[2] > p2[4], 1, 0)
     }

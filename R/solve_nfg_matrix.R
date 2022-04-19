@@ -52,6 +52,15 @@ solve_nfg_matrix <- function(
           message("Please examine br_plot (best response plot) carefully.")
         }
       }
+    } else {
+      if (!quietly) {
+        message("The payoff matrix is degenerate; No full support mixed-strategy NE exist (or infinitely many exist).")
+        if (length(game$strategy$s1) == 2 & length(game$strategy$s2) == 2) {
+          message("Please examine br_plot (best response plot).")
+        } else {
+          message("It might be useful to check 'msNE_list'.")
+        }
+      }
     }
   } else {
     msNE <- NULL

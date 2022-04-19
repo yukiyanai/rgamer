@@ -30,6 +30,7 @@ Depends:
 Imports:
     dplyr (>= 1.0.0),
     ggforce,
+    grDevices,
     kableExtra,
     magrittr,
     MASS,
@@ -43,7 +44,8 @@ Imports:
     tidyselect,
     tuple,
     utils,
-    lifecycle
+    lifecycle,
+    RColorBrewer,
 ByteCompile: TRUE
 VignetteBuilder: knitr
 Collate: 

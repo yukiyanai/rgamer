@@ -72,9 +72,9 @@ test_that("find_pure_NE finds pure-st. NE if any", {
 
 test_that("find_mixed_NE finds mixed-st. NE if any", {
   expect_null(find_mixed_NE(PD)$mixed_NE)
-  expect_length(find_mixed_NE(PD), 2)
+  expect_length(find_mixed_NE(PD), 3)
   expect_type(find_mixed_NE(SH), "list")
-  expect_length(find_mixed_NE(SH), 2)
+  expect_length(find_mixed_NE(SH), 3)
   expect_type(find_mixed_NE(SH)[[1]], "list")
   expect_type(find_mixed_NE(SH)[[2]], "list")
   expect_type(find_mixed_NE(SH)[[1]][[1]], "double")
