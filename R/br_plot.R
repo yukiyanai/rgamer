@@ -31,7 +31,7 @@ br_plot <- function(game,
   if (is.null(msNE)) {
     msNEout <- find_mixed_NE(game)
     msNE <- msNEout$msNE
-    probs <- msNEout$prob
+    probs <- msNEout$probs
   }
 
   if (is.null(msNE) & (is.null(probs$p) | is.null(probs$q))) {
