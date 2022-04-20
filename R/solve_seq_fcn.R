@@ -29,8 +29,6 @@ solve_seq_fcn <- function(game,
                           precision = 1L,
                           quietly = FALSE) {
 
-  pars <- NULL
-
   players <- game$player
 
   par1_lim <- game$strategy[[1]]
@@ -86,7 +84,7 @@ solve_seq_fcn <- function(game,
                                f2 = ff2,
                                x_vec = par1_seq,
                                y_vec = par2_seq,
-                               pars = pars)
+                               pars = game$pars)
 
     if (dif < delta) {
       break
@@ -109,7 +107,7 @@ solve_seq_fcn <- function(game,
   y <- round(out$y, precision)
 
   df_out <- data.frame(x, y)
-  names(df_out) <- pars
+  names(df_out) <- game$pars
 
   payoff1 <- df_out %>%
     purrr::pmap(.f = ff1) %>%

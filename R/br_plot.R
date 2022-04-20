@@ -34,14 +34,15 @@ br_plot <- function(game,
     probs <- msNEout$prob
   }
 
-  if (is.null(msNE)) {
+  if (is.null(msNE) & (is.null(probs$p) | is.null(probs$q))) {
     ## BR of A v B
     if (p1[1] == p1[2] & p1[3] == p1[4]) {
       p <- "ANY"
       warning(paste0("Any p is ", players[1], "'s best response regardless of ", players[2], "'s action.\n"))
     } else if (!is.null(probs$p)) {
       p <- probs$p[1]
-      if (p > 1 | p < 0) p <- "ANY"
+      if (p > 1) p <- 1
+      else if (p < 0 ) p <- 0
     } else {
       p <- ifelse(p1[3] > p1[4], 1, 0)
     }
@@ -52,7 +53,8 @@ br_plot <- function(game,
       warning(paste0("Any q is ", players[2], "'s best response regardless of ", players[1], "'s action.\n"))
     } else if (!is.null(probs$q)) {
       q <- probs$q[1]
-      if (q > 1 | q < 0) q <- "ANY"
+      if (q > 1) q <- 1
+      else if (q < 0) q <- 0
     } else {
       q <- ifelse(p2[2] > p2[4], 1, 0)
     }
@@ -87,7 +89,12 @@ br_plot <- function(game,
     ep2_2 <- sapply(p, function(p) sum(mat2[, 2] * c(p, 1 - p)))
 
     ## Player 1's best response
-    q_cut <- msNE$s2[1]  ## msNE
+    q_cut <- probs$q[1]
+    if (q_cut > 1) {
+      q_cut <- 1
+    } else if (q_cut < 0) {
+      q_cut <- 0
+    }
     coord_q1_s <- c(0, rep(q_cut, 2))
     coord_q1_e <- c(rep(q_cut, 2), 1)
     coord_p1_s <- rep(NA, 3)
@@ -108,7 +115,13 @@ br_plot <- function(game,
     }
 
     ## Player 2's best response
-    p_cut <- msNE$s1[1] ## msNE
+    p_cut <- probs$p[1]
+    if (p_cut > 1) {
+      p_cut <- 1
+    } else if (p_cut < 0) {
+      p_cut <- 0
+    }
+
     coord_p2_s <- c(0, rep(p_cut, 2))
     coord_p2_e <- c(rep(p_cut, 2), 1)
     coord_q2_s <- rep(NA, 3)

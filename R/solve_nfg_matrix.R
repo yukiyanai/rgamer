@@ -37,7 +37,7 @@ solve_nfg_matrix <- function(
 
   if (mixed) {
     msNE <- find_mixed_NE(game)
-    msNE_list <- msNE$msNE_list
+    msNE_df <- msNE$msNE_df
     msNE <- msNE$msNE
     if (!is.null(msNE)) {
       out1 <- stringi::stri_join(MASS::fractions(msNE[[1]]), collapse = ", ")
@@ -58,13 +58,13 @@ solve_nfg_matrix <- function(
         if (length(game$strategy$s1) == 2 & length(game$strategy$s2) == 2) {
           message("Please examine br_plot (best response plot).")
         } else {
-          message("It might be useful to check 'msNE_list'.")
+          message("It might be useful to check 'msNE_df'.")
         }
       }
     }
   } else {
     msNE <- NULL
-    msNE_list <- NULL
+    msNE_df <- NULL
   }
   mat_tbl <- game_table(game, mark_br = mark_br)
   if (show_table) print(mat_tbl)
@@ -79,5 +79,5 @@ solve_nfg_matrix <- function(
               msNE = msNE,
               table = mat_tbl,
               br_plot = p,
-              msNE_list = msNE_list))
+              msNE_df = msNE_df))
 }

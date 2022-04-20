@@ -7,6 +7,7 @@
 #' @param game A "normal_form" class object created by \code{normal_form()}.
 #'     The game's type must be "matrix".
 #' @seealso \code{\link{normal_form}}
+#' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 find_mixed_NE <- function(game) {
@@ -29,9 +30,11 @@ find_mixed_NE <- function(game) {
   s2_sets <- find_sets(s2)
 
   pair <- expand.grid(row = 1:length(s1_sets),
-                      col = 1:length(s2_sets))
+                      col = 1:length(s2_sets)) %>%
+    dplyr::arrange(row, col)
 
   msNE_list <- NULL
+  msNE_df <- data.frame(NULL)
   n_msNE <- 0
   for (k in 1:nrow(pair)) {
 
@@ -74,6 +77,8 @@ find_mixed_NE <- function(game) {
 
     if (is.null(prob1) | is.null(prob2)) {
       msNE <- NULL
+      p_msNE <- NA_character_
+      q_msNE <- NA_character_
     } else {
       prob1 <- as.vector(prob1)
       prob2 <- as.vector(prob2)
@@ -81,19 +86,33 @@ find_mixed_NE <- function(game) {
       if (!all(prob1 >= 0) | !all(prob1 <= 1) |
           !all(prob2 >= 0) | !all(prob2 <=1)) {
         msNE <- NULL
+        p_msNE <- NA_character_
+        q_msNE <- NA_character_
       } else {
         n_msNE <- n_msNE + 1
         msNE <- list(s1 = prob1, s2 = prob2)
 
-        msNE_list[[n_msNE]] <- list(s1 = s1_sub,
-                                    s2 = s2_sub,
-                                    msNE = msNE)
+        p_msNE <- paste0("(", paste(prob1, collapse = ", "), ")")
+        q_msNE <- paste0("(", paste(prob2, collapse = ", "), ")")
+
+        #msNE_list[[n_msNE]] <- list(s1 = s1_sub,
+        #                            s2 = s2_sub,
+        #                            msNE = msNE)
       }
     }
+
+    sub_df <- data.frame(
+      player1 = paste0("(", paste(s1_sub, collapse = ", "), ")"),
+      player2 = paste0("(", paste(s2_sub, collapse = ", "), ")"),
+      p_msNE = p_msNE,
+      q_msNE = q_msNE)
+
+    msNE_df <- dplyr::bind_rows(msNE_df, sub_df)
+
   }
 
   return(list(msNE = msNE,
-              msNE_list = msNE_list,
+              msNE_df = msNE_df,
               probs = list(p = prob1,
                            q = prob2)))
 }
