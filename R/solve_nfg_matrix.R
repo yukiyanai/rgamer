@@ -36,9 +36,10 @@ solve_nfg_matrix <- function(
   }
 
   if (mixed) {
-    msNE <- find_mixed_NE(game)
-    msNE_df <- msNE$msNE_df
-    msNE <- msNE$msNE
+    msNEout <- find_mixed_NE(game)
+    msNE_df <- msNEout$msNE_df
+    msNE_prob <- msNEout$probs
+    msNE <- msNEout$msNE
     if (!is.null(msNE)) {
       out1 <- stringi::stri_join(MASS::fractions(msNE[[1]]), collapse = ", ")
       out2 <- stringi::stri_join(MASS::fractions(msNE[[2]]), collapse = ", ")
@@ -63,14 +64,13 @@ solve_nfg_matrix <- function(
       }
     }
   } else {
-    msNE <- NULL
-    msNE_df <- NULL
+    msNE <- msNEout <- msNE_df <- msNE_prob <- NULL
   }
   mat_tbl <- game_table(game, mark_br = mark_br)
   if (show_table) print(mat_tbl)
 
   if (length(game$strategy[[1]]) == 2 & length(game$strategy[[2]]) == 2) {
-    p <- br_plot(game, color_palette = color_palette, msNE = msNE)
+    p <- br_plot(game, color_palette = color_palette, msNE = msNEout)
   } else {
     p <- NULL
   }
@@ -79,5 +79,6 @@ solve_nfg_matrix <- function(
               msNE = msNE,
               table = mat_tbl,
               br_plot = p,
-              msNE_df = msNE_df))
+              msNE_df = msNE_df,
+              msNE_prob = msNE_prob))
 }

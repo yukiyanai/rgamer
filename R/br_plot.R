@@ -29,10 +29,10 @@ br_plot <- function(game,
   mat2 <- game$mat$matrix2
 
   if (is.null(msNE)) {
-    msNEout <- find_mixed_NE(game)
-    msNE <- msNEout$msNE
-    probs <- msNEout$probs
+    msNE <- find_mixed_NE(game)
   }
+  probs <- msNE$probs
+  msNE <- msNE$msNE
 
   if (is.null(msNE) & (is.null(probs$p) | is.null(probs$q))) {
     ## BR of A v B
@@ -99,14 +99,14 @@ br_plot <- function(game,
     coord_q1_e <- c(rep(q_cut, 2), 1)
     coord_p1_s <- rep(NA, 3)
     coord_p1_e <- rep(NA, 3)
-    if (ep1_1[1] > ep1_2[1]) {
+    if (ep1_1[1] >= ep1_2[1]) {
       coord_p1_s[1:2] <- 1
       coord_p1_e[1] <- 1
     } else {
       coord_p1_s[1:2] <- 0
       coord_p1_e[1] <- 0
     }
-    if (ep1_1[2] > ep1_2[2]) {
+    if (ep1_1[2] >= ep1_2[2]) {
       coord_p1_s[3] <- 1
       coord_p1_e[2:3] <- 1
     } else {
@@ -126,14 +126,14 @@ br_plot <- function(game,
     coord_p2_e <- c(rep(p_cut, 2), 1)
     coord_q2_s <- rep(NA, 3)
     coord_q2_e <- rep(NA, 3)
-    if (ep2_1[1] > ep2_2[1]) {
+    if (ep2_1[1] >= ep2_2[1]) {
       coord_q2_s[1:2] <- 1
       coord_q2_e[1] <- 1
     } else {
       coord_q2_s[1:2] <- 0
       coord_q2_e[1] <- 0
     }
-    if (ep2_1[2] > ep2_2[2]) {
+    if (ep2_1[2] >= ep2_2[2]) {
       coord_q2_s[3] <- 1
       coord_q2_e[2:3] <- 1
     } else {
@@ -144,8 +144,8 @@ br_plot <- function(game,
     df <- data.frame(
       player = rep(players, each = 3),
       xs = c(coord_p1_s, coord_p2_s),
-      xe = c(coord_p1_e, coord_p2_e),
       ys = c(coord_q1_s, coord_q2_s),
+      xe = c(coord_p1_e, coord_p2_e),
       ye = c(coord_q1_e, coord_q2_e))
 
     brp <- ggplot2::ggplot(df) +
