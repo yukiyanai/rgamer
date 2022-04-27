@@ -48,11 +48,14 @@ Boston <- function(g1_prefs,
         df0 <- data.frame(g1 = i,
                           g2 = NA_integer_)
         df_match <- dplyr::bind_rows(df_match, df0)
-        break
+#        break
+      } else {
+        df1 <- data.frame(from = i,
+                          to = g1p[[i]][1])
+        df_propose <- dplyr::bind_rows(df_propose, df1)
+
+        g1p[[i]] <- g1p[[i]][-1]
       }
-      df1 <- data.frame(from = i,
-                        to = g1p[[i]][1])
-      df_propose <- dplyr::bind_rows(df_propose, df1)
     }
     df_accept <- data.frame(NULL)
     for (j in 1:n_g2) {
@@ -94,6 +97,7 @@ Boston <- function(g1_prefs,
       prefs_left <- prefs0[!(prefs0 %in% df_match$g2)]
       g1p[[i]] <- prefs_left
     }
+
     t <- t + 1
   }
 

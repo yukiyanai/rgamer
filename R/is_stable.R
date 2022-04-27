@@ -36,6 +36,7 @@ is_stable <- function(x, verbose = FALSE) {
         better_match <- g2names[g1p[[r1$name]][j]]
         opp_rank <- which(g1names[g2p[[better_match]]] == r1$name)
         r2 <- df2[df2$name == better_match, ]
+        if (length(opp_rank) == 0) opp_rank <- NA
         if (is.na(opp_rank)) {
           next
         } else if (is.na(r2$rank) | opp_rank < r2$rank) {
