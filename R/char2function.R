@@ -6,27 +6,26 @@
 #' @param pars A character vector specifying the parameters of payoff functions.
 #' @return A list of two R functions, each of which is a player's  payoff
 #'     function.
-#' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 char2function <- function(f1, f2, pars) {
 
-  f1 <- f1 %>%
+  f1 <- f1 |>
     stringr::str_replace_all(pars[1],
-                             replacement = "FIRST_PARAM") %>%
+                             replacement = "FIRST_PARAM") |>
     stringr::str_replace_all(pars[2],
-                             replacement = "SECOND_PARAM") %>%
+                             replacement = "SECOND_PARAM") |>
     stringr::str_replace_all(c("FIRST_PARAM" = "x",
-                               "SECOND_PARAM" = "y")) %>%
+                               "SECOND_PARAM" = "y")) |>
     str2expression()
 
-  f2 <- f2 %>%
+  f2 <- f2 |>
     stringr::str_replace_all(pars[1],
-                             replacement = "FIRST_PARAM") %>%
+                             replacement = "FIRST_PARAM") |>
     stringr::str_replace_all(pars[2],
-                             replacement = "SECOND_PARAM") %>%
+                             replacement = "SECOND_PARAM") |>
     stringr::str_replace_all(c("FIRST_PARAM" = "x",
-                               "SECOND_PARAM" = "y")) %>%
+                               "SECOND_PARAM" = "y")) |>
     str2expression()
 
   ff1 <- function(x, y) {

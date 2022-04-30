@@ -8,7 +8,6 @@
 #' @param all A logical value to determine if all solutions will be displayed.
 #'     Default is \code{FALSE}.
 #' @return A ggplot object of the specified game tree.
-#' @importFrom magrittr %>%
 #' @include solve_efg.R
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export

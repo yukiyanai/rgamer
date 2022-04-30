@@ -24,12 +24,12 @@ solve_seq_matrix <- function(
   ## Follower's choice given leader's action
   sp1 <- game$strategy$s1
   p1_get <- rep(NA, length(sp1))
-  sp2 <- rep(NA, length(sp1)) %>% as.list()
+  sp2 <- rep(NA, length(sp1)) |> as.list()
   for (i in seq_along(sp1)) {
-    dd <- game$df %>%
+    dd <- game$df |>
       dplyr::filter(s1 == sp1[i])
     s2_chosen <- dd$s2[which.max(dd$payoff2)]
-    dd <- dd %>%
+    dd <- dd |>
       dplyr::filter(s2 %in% s2_chosen)
     p1_get[i] <- mean(dd$payoff1)
     sp2[[i]] <- s2_chosen

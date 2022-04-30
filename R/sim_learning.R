@@ -24,7 +24,6 @@
 #'     (3) a list of each  player's attraction values for each strategy
 #'      (data frames), (4) a list of probability of each strategy being chosen
 #'       (data frames), and (5) a plot of the simulation result (ggplot object).
-#' @importFrom magrittr %>%
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
 sim_learning <- function(game,
@@ -94,7 +93,7 @@ sim_learning <- function(game,
                      rho = rho,
                      lambda = lambda)
 
-      data_list[[i]] <- res$data %>%
+      data_list[[i]] <- res$data |>
         dplyr::mutate(sample = i)
       A1_list[[i]] <- res$attraction$A1
       A2_list[[i]] <- res$attraction$A2
@@ -114,7 +113,7 @@ sim_learning <- function(game,
                      rho = 1,
                      lambda = lambda)
 
-      data_list[[i]] <- res$data %>%
+      data_list[[i]] <- res$data |>
         dplyr::mutate(sample = i)
       A1_list[[i]] <- res$attraction$A1
       A2_list[[i]] <- res$attraction$A2
@@ -134,7 +133,7 @@ sim_learning <- function(game,
                      rho = 1,
                      lambda = lambda)
 
-      data_list[[i]] <- res$data %>%
+      data_list[[i]] <- res$data |>
         dplyr::mutate(sample = i)
       A1_list[[i]] <- res$attraction$A1
       A2_list[[i]] <- res$attraction$A2
@@ -143,11 +142,11 @@ sim_learning <- function(game,
     }
   }
 
-  data_long <- dplyr::bind_rows(data_list) %>%
+  data_long <- dplyr::bind_rows(data_list) |>
     tidyr::pivot_longer(player1:player2,
                         names_to = "player",
-                        values_to = "strategy") %>%
-    dplyr::select(sample, period, player, strategy) %>%
+                        values_to = "strategy") |>
+    dplyr::select(sample, period, player, strategy) |>
     dplyr::mutate(player = ifelse(player == "player1",
                                   game$player[1],
                                   game$player[2]))

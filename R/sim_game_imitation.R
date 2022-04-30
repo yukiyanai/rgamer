@@ -26,7 +26,6 @@
 #'     \code{game$payoff$payoffs2} that should be treated as constants, if any.
 #' @return data.frame containing the history of the game played.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
-#' @importFrom magrittr %>%
 #' @noRd
 sim_game_imitation <- function(game,
                                n_periods,
@@ -56,7 +55,7 @@ sim_game_imitation <- function(game,
       if (stats::runif(1) < omega) {
         play1[i] <- play1[i - 1]
       } else {
-        df1 <- game$df %>%
+        df1 <- game$df |>
           dplyr::filter(s1 == play1[i -1],
                         s2 == play2[i - 1])
 
@@ -73,7 +72,7 @@ sim_game_imitation <- function(game,
       if (stats::runif(1) < omega) {
         play2[i] <- play2[i - 1]
       } else {
-        df2 <- game$df %>%
+        df2 <- game$df |>
           dplyr::filter(s1 == play1[i - 1],
                         s2 == play2[i - 1])
 
@@ -99,15 +98,15 @@ sim_game_imitation <- function(game,
     else play2[1] <- init2
 
     for (i in 2:n_periods) {
-      f1 <- game$payoff$payoffs1 %>%
+      f1 <- game$payoff$payoffs1 |>
         stringr::str_replace(game$pars[2],
-                             as.character(play2[i - 1])) %>%
-        stringr::str_replace_all(game$pars[1], "XXX") %>%
+                             as.character(play2[i - 1])) |>
+        stringr::str_replace_all(game$pars[1], "XXX") |>
         str2expression()
-      f2 <- game$payoff$payoffs2 %>%
+      f2 <- game$payoff$payoffs2 |>
         stringr::str_replace(game$pars[1],
-                             as.character(play1[i - 1])) %>%
-        stringr::str_replace_all(game$pars[2], "YYY") %>%
+                             as.character(play1[i - 1])) |>
+        stringr::str_replace_all(game$pars[2], "YYY") |>
         str2expression()
 
       pp1 <- eval(f1, envir = list(XXX = play1[i - 1]))

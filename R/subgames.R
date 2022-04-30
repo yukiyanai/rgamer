@@ -11,7 +11,6 @@
 #'     not be displaed.
 #' @return A list of subgames.
 #' @include draw_tree.R
-#' @importFrom magrittr %>%
 #' @export
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 subgames <- function(game, quietly = FALSE) {
@@ -22,8 +21,8 @@ subgames <- function(game, quietly = FALSE) {
 
   df_path <- game$data$path
   df_node <- game$data$node
-  df_payoff <- df_node %>%
-    dplyr::filter(type == "payoff") %>%
+  df_payoff <- df_node |>
+    dplyr::filter(type == "payoff") |>
     dplyr::mutate(index = 1:dplyr::n())
 
   player_nodes <- unique(df_path$node_from)
@@ -32,13 +31,13 @@ subgames <- function(game, quietly = FALSE) {
   for (j in seq_along(player_nodes)) {
     sg_flag <- TRUE
     subnodes <- player_nodes[j]
-    subgame_path <- df_path %>%
+    subgame_path <- df_path |>
       dplyr::filter(node_from %in% subnodes)
     while (TRUE) {
-      df_path_sub <- df_path %>%
+      df_path_sub <- df_path |>
         dplyr::filter(node_from %in% subnodes)
       subnodes <- df_path_sub$node_to
-      df_add <- df_path %>%
+      df_add <- df_path |>
         dplyr::filter(node_from %in% subnodes)
       subgame_path <- dplyr::bind_rows(subgame_path, df_add)
       if (nrow(df_add) == 0) break
@@ -64,24 +63,24 @@ subgames <- function(game, quietly = FALSE) {
 
     if (sg_flag) {
 
-      subg_node_play <- df_node %>%
-        dplyr::filter(type == "play") %>%
+      subg_node_play <- df_node |>
+        dplyr::filter(type == "play") |>
         dplyr::filter(id %in% subgame_path$node_from)
 
-      subg_node_payoff <- df_node %>%
-        dplyr::filter(type == "payoff") %>%
+      subg_node_payoff <- df_node |>
+        dplyr::filter(type == "payoff") |>
         dplyr::filter(id %in% subgame_path$node_to)
 
-      subgame_node <- dplyr::bind_rows(subg_node_play, subg_node_payoff) %>%
+      subgame_node <- dplyr::bind_rows(subg_node_play, subg_node_payoff) |>
         dplyr::mutate(new_id = 1:dplyr::n())
 
       ## Extract subgame players
-      subg_p_str <- subgame_node %>%
-        dplyr::select(x, player) %>%
-        dplyr::group_by(x) %>%
-        dplyr::summarize(n_each = dplyr::n()) %>%
+      subg_p_str <- subgame_node |>
+        dplyr::select(x, player) |>
+        dplyr::group_by(x) |>
+        dplyr::summarize(n_each = dplyr::n()) |>
         dplyr::pull(n_each)
-      subg_players <- subgame_node %>%
+      subg_players <- subgame_node |>
         dplyr::pull(player)
       subg_player_list <- list()
       end_index <- 0
@@ -97,24 +96,24 @@ subgames <- function(game, quietly = FALSE) {
       }
 
       ## Extract subgame actions
-      subg_nodes_unique <- subgame_path %>%
-        dplyr::pull(node_from) %>%
+      subg_nodes_unique <- subgame_path |>
+        dplyr::pull(node_from) |>
         unique()
       subg_action_list <- list()
       for (i in seq_along(subg_nodes_unique)) {
-        subg_action_list[[i]] <- subgame_path %>%
-          dplyr::filter(node_from == subg_nodes_unique[i]) %>%
+        subg_action_list[[i]] <- subgame_path |>
+          dplyr::filter(node_from == subg_nodes_unique[i]) |>
           dplyr::pull(s)
       }
 
       ## Extract subgame payoffs
-      subg_players_unique <- subg_player_list %>%
-        unlist() %>%
-        unique() %>%
+      subg_players_unique <- subg_player_list |>
+        unlist() |>
+        unique() |>
         stats::na.omit()
       subg_payoff_list <- list()
       for (i in seq_along(subg_players_unique)) {
-        subg_payoff_list[[i]] <- subg_node_payoff %>%
+        subg_payoff_list[[i]] <- subg_node_payoff |>
           dplyr::pull(subg_players_unique[i])
       }
       names(subg_payoff_list) <- subg_players_unique
@@ -124,8 +123,8 @@ subgames <- function(game, quietly = FALSE) {
       if (!is.null(subg_info_sets)) {
         for (s in seq_along(subg_info_sets)) {
           old_id <- subg_info_sets[[s]]
-          subg_info_sets[[s]] <- subgame_node %>%
-            dplyr::filter(id %in% old_id) %>%
+          subg_info_sets[[s]] <- subgame_node |>
+            dplyr::filter(id %in% old_id) |>
             dplyr::pull(new_id)
         }
       }

@@ -15,7 +15,6 @@
 #'     initial beliefs will be randomly assigned.
 #' @param sigma A non-negative value determining the level of noise adherent to
 #'     evaluation of payoffs.
-#' @importFrom magrittr %>%
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 sim_fict_one <- function(game,
                          n_periods = 50,

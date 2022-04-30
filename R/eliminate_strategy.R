@@ -8,7 +8,6 @@
 #' @param game A normal-form game object created by \code{normal_form()}.
 #' @param player A player one of whose strategies will be eliminated.
 #' @param eliminated A strategy to be eliminated. Case sensitive.
-#' @importFrom magrittr %>%
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
 eliminate_strategy <- function(game,
@@ -25,7 +24,7 @@ eliminate_strategy <- function(game,
     }
   }
 
-  new_df <- game$df %>%
+  new_df <- game$df |>
     dplyr::filter(s1 %in% game$strategy$s1,
                   s2 %in% game$strategy$s2)
 

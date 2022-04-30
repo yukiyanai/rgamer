@@ -73,7 +73,7 @@ solve_nfg_fcn <- function(game,
   NE <- c(df_sol$x, df_sol$y)
 
   # data frame of NE(s)
-  df_sol <- df_sol %>%
+  df_sol <- df_sol |>
     dplyr::mutate(text = paste0("(",
                                 round(NE[1], digits = precision),
                                 ", ",
@@ -90,16 +90,16 @@ solve_nfg_fcn <- function(game,
                  cons1 = cons1,
                  cons2 = cons2,
                  cons_common = cons_common)
-  df1 <- df$df1 %>%
+  df1 <- df$df1 |>
     dplyr::arrange(y)
-  df2 <- df$df2 %>%
+  df2 <- df$df2 |>
     dplyr::arrange(x)
 
   # check if best responses are within the domain
   difference1 <- diff(df1$y[1:2])
   check_range_lb <- NE - difference1
   check_range_ub <- NE + difference1
-  check_df1 <- df1 %>%
+  check_df1 <- df1 |>
     dplyr::filter(x > check_range_lb[1],
                   x < check_range_ub[1],
                   y > check_range_lb[2],
@@ -107,7 +107,7 @@ solve_nfg_fcn <- function(game,
   difference2 <- diff(df2$x[1:2])
   check_range_lb <- NE - difference2
   check_range_ub <- NE + difference2
-  check_df2 <- df2 %>%
+  check_df2 <- df2 |>
     dplyr::filter(x > check_range_lb[1],
                   x < check_range_ub[1],
                   y > check_range_lb[2],

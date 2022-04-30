@@ -15,7 +15,6 @@
 #'     exactly same, you can specify \code{cons_common} instead of specifying
 #'     both \code{cons1} and \code{cons2}.
 #' @return A list containing payoffs.
-#' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 get_payoff_normal <- function(game,
@@ -47,7 +46,7 @@ get_payoff_normal <- function(game,
       stop(paste(actions[[2]], "is not an available strategy for", game$player[2]))
 
     df <- game$df
-    df <- df %>%
+    df <- df |>
       dplyr::filter(s1 == actions[[1]],
                     s2 == actions[[2]])
     payoffs1 <- df$payoffs1
@@ -85,7 +84,7 @@ get_payoff_normal <- function(game,
     if (!is.null(cons1)) {
       v <- c(actions[[1]], actions[[2]], as.vector(cons1))
       names(v) <- c(game$pars, names(cons1))
-      payoffs1 <- purrr::pmap(v, f1) %>% unlist()
+      payoffs1 <- purrr::pmap(v, f1) |> unlist()
     } else {
       payoffs1 <- f1(actions[[1]], actions[[2]])
     }
@@ -93,7 +92,7 @@ get_payoff_normal <- function(game,
     if (!is.null(cons2)) {
       v <- c(actions[[1]], actions[[2]], as.vector(cons2))
       names(v) <- c(game$pars, names(cons2))
-      payoffs2 <- purrr::pmap(v, f2) %>% unlist()
+      payoffs2 <- purrr::pmap(v, f2) |> unlist()
     } else {
       payofss2 <- f2(actions[[1]], actions[[2]])
     }

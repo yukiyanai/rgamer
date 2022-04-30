@@ -8,7 +8,6 @@
 #'     at the nodes that are not listed in this argument.
 #' @return A "restricted_game" class object in which players have to choose the
 #'    actions specified by the user.
-#' @importFrom magrittr %>%
 #' @include extensive_strategy.R
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
@@ -17,12 +16,12 @@ restrict_action <- function(game, action) {
   id <- node_from <- node_to <- info_sets <- NULL
   s <- player <- linetype <- NULL
 
-  nodes <- names(action) %>%
-    stringr::str_replace("n", "") %>%
+  nodes <- names(action) |>
+    stringr::str_replace("n", "") |>
     as.integer()
 
-  play_nodes <- game$data$node %>%
-    dplyr::filter(type == "play") %>%
+  play_nodes <- game$data$node |>
+    dplyr::filter(type == "play") |>
     dplyr::pull(id)
 
 
@@ -62,8 +61,8 @@ restrict_action <- function(game, action) {
       stop(paste(action_vec[i], "is not an avilable action for", names(action)[i]))
     }
 
-    type <- game$data$node %>%
-      dplyr::filter(id == nodes[i]) %>%
+    type <- game$data$node |>
+      dplyr::filter(id == nodes[i]) |>
       dplyr::pull(type)
     if (type != "play") stop(paste(names(action)[i], "is a terminal node"))
   }
@@ -121,8 +120,8 @@ restrict_action <- function(game, action) {
       if (n_nodes == 1) next
       action_list <- list()
       for (j in 1:n_nodes) {
-        action_list[[j]] <- df_path %>%
-          dplyr::filter(node_from == game$info_sets[[i]][j]) %>%
+        action_list[[j]] <- df_path |>
+          dplyr::filter(node_from == game$info_sets[[i]][j]) |>
           dplyr::pull(s)
       }
       for (j in 2:n_nodes) {
@@ -136,8 +135,8 @@ restrict_action <- function(game, action) {
     info_sets_player <- rep(NA, n_info_sets)
     for (i in 1:n_info_sets) {
       info_node <- game$info_sets[[i]][1]
-      info_sets_player[i] <- game$data$node %>%
-        dplyr::filter(id == info_node) %>%
+      info_sets_player[i] <- game$data$node |>
+        dplyr::filter(id == info_node) |>
         dplyr::pull(player)
     }
   } else {
@@ -147,24 +146,24 @@ restrict_action <- function(game, action) {
   node_to_play <- list()
   u_players <- unique(unlist(game$player))
   for (i in 1:length(u_players)) {
-    node_to_play[[i]] <- game$data$node %>%
-      dplyr::filter(player == u_players[i]) %>%
+    node_to_play[[i]] <- game$data$node |>
+      dplyr::filter(player == u_players[i]) |>
       dplyr::pull(id)
   }
 
-  df_path <- df_path %>%
-      dplyr::filter(linetype == "1") %>%
+  df_path <- df_path |>
+      dplyr::filter(linetype == "1") |>
       dplyr::select(!linetype)
 
   cont <- TRUE
   while (cont) {
     reaches <- c(1, dplyr::pull(df_path, node_to))
 
-    df_node <- game$data$node %>%
+    df_node <- game$data$node |>
       dplyr::filter(id %in% reaches)
 
     nrow_check <- nrow(df_path)
-    df_path <- df_path %>%
+    df_path <- df_path |>
       dplyr::filter(node_from %in% reaches)
 
     if (nrow(df_path) == nrow_check) cont <- FALSE
@@ -172,9 +171,9 @@ restrict_action <- function(game, action) {
 
   payoffs <- game$payoff
   for (p in seq_along(u_players)) {
-    payoffs[[p]] <- df_node %>%
-      dplyr::pull(u_players[p]) %>%
-      stats::na.omit() %>%
+    payoffs[[p]] <- df_node |>
+      dplyr::pull(u_players[p]) |>
+      stats::na.omit() |>
       as.vector()
   }
 

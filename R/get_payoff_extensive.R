@@ -6,7 +6,6 @@
 #' @param actions A named list of actions to which the payoffs correspond. It
 #'     must be a complete list of actions for each player node.
 #' @return A list of payoffs and the nodes played to reach the payoffs.
-#' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 get_payoff_extensive <- function(game, actions) {
@@ -22,8 +21,8 @@ get_payoff_extensive <- function(game, actions) {
     }
   }
 
-  actions_avail <- game$action %>%
-    unlist() %>%
+  actions_avail <- game$action |>
+    unlist() |>
     unique()
 
   for (i in 1:length(actions)) {
@@ -37,7 +36,7 @@ get_payoff_extensive <- function(game, actions) {
   df_path <- game$data$path
   df_node <- game$data$node
 
-  play_nodes <- df_path$node_from %>% unique()
+  play_nodes <- df_path$node_from |> unique()
   n_nodes <- length(play_nodes)
 
   df_list <- list()
@@ -46,29 +45,29 @@ get_payoff_extensive <- function(game, actions) {
     action_vec[i] <- actions[[game$player[i]]][1]
     actions[[game$player[i]]][1] <- NA
     actions[[game$player[i]]] <- stats::na.omit(actions[[game$player[i]]])
-    df_list[[i]] <- df_path %>%
+    df_list[[i]] <- df_path |>
       dplyr::filter(node_from == play_nodes[i])
   }
 
-  terminal_nodes <- df_node %>%
-    dplyr::filter(type == "payoff") %>%
+  terminal_nodes <- df_node |>
+    dplyr::filter(type == "payoff") |>
     dplyr::pull(id)
 
   ## play the game forward from the first node
   i <- 1
   max_id <- max(df_node$id)
   while (i <= max_id) {
-    next_node <- df_list[[which(play_nodes == i)]] %>%
-      dplyr::filter(s == action_vec[which(play_nodes == i)]) %>%
+    next_node <- df_list[[which(play_nodes == i)]] |>
+      dplyr::filter(s == action_vec[which(play_nodes == i)]) |>
       dplyr::pull(node_to)
     if (next_node %in% terminal_nodes) break
     else i <- next_node
   }
 
-  df <- df_node %>% dplyr::filter(id == next_node)
+  df <- df_node |> dplyr::filter(id == next_node)
 
   targets <- names(actions)
-  payoffs <- df[1, targets] %>% unlist()
+  payoffs <- df[1, targets] |> unlist()
 
   reached <- paste0("n", df$id[1])
 

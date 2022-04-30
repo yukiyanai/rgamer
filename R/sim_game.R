@@ -46,7 +46,6 @@
 #'     between players. With \code{"fixed"}, the same y-axis is used for both
 #'     players.
 #' @return A data frame of simulation results.
-#' @importFrom magrittr %>%
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
 sim_game <- function(game,
@@ -139,11 +138,11 @@ sim_game <- function(game,
 
   }
 
-  df_longer <- df %>%
+  df_longer <- df |>
     tidyr::pivot_longer(play1:play2,
                         names_to = "player",
-                        values_to = "strategy") %>%
-    dplyr::select(sample, period, player, strategy) %>%
+                        values_to = "strategy") |>
+    dplyr::select(sample, period, player, strategy) |>
     dplyr::mutate(player = ifelse(player == "play1",
                                   game$player[1],
                                   game$player[2]))

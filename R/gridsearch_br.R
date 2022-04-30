@@ -23,7 +23,6 @@
 #' @param precision A natural number specifying the precision of numerical
 #'     approximation. The value n approximately means that the approximation is
 #'     correct up to the n-th decimal place. The default value is 1L.
-#' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 gridsearch_br <- function(players,
@@ -60,10 +59,10 @@ gridsearch_br <- function(players,
   n_df1 <- nrow(df1)
   n_df2 <- nrow(df2)
   while (dif1 > 0 & dif2 > 0) {
-    df1 <- df1 %>%
+    df1 <- df1 |>
       dplyr::filter(x >= min(df2$x), x <= max(df2$x),
                     y >= min(df2$y), y <= max(df2$y))
-    df2 <- df2 %>%
+    df2 <- df2 |>
       dplyr::filter(x >= min(df1$x), x <= max(df1$x),
                     y >= min(df1$y), y <= max(df1$y))
     dif1 <- n_df1 - nrow(df1)
@@ -72,14 +71,14 @@ gridsearch_br <- function(players,
     n_df2 <- nrow(df2)
   }
 
-  df_sol <- dplyr::bind_rows(df1, df2) %>%
+  df_sol <- dplyr::bind_rows(df1, df2) |>
     dplyr::mutate(x = mean(x),
-                  y = mean(y)) %>%
-    dplyr::select(x, y) %>%
+                  y = mean(y)) |>
+    dplyr::select(x, y) |>
     dplyr::distinct()
 
-  x <- df_sol %>% dplyr::pull(x)
-  y <- df_sol %>% dplyr::pull(y)
+  x <- df_sol |> dplyr::pull(x)
+  y <- df_sol |> dplyr::pull(y)
 
   if (precision > 1) {
     df_sol <- gridsearch_br(

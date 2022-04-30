@@ -28,7 +28,6 @@
 #' @param A1_init An initial value of Player 1's attraction for each strategy.
 #' @param A2_init An initial value of Player 2's attraction for each strategy.
 #' @param N_init An initial value of N.
-#' @importFrom magrittr %>%
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 sim_EWA <- function(game,
                     n_periods,

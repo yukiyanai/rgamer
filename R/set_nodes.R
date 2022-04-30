@@ -20,7 +20,6 @@
 #'     \code{"vertical"}.
 #'     Default is \code{"down"}.
 #' @return A data frame containing the position of each node on x-y plane.
-#' @importFrom magrittr %>%
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @noRd
 set_nodes <- function(players, n_choice, payoffs, direction = "down") {
@@ -71,9 +70,9 @@ set_nodes <- function(players, n_choice, payoffs, direction = "down") {
     x_types <- unique(df$x)
     df_tmp <- tibble::tibble(NULL)
     for (z in x_types) {
-      df_sub <- df %>%
+      df_sub <- df |>
         dplyr::filter(x == z)
-      n_y <- df_sub$y %>% length()
+      n_y <- df_sub$y |> length()
       df_sub$y <- seq(from = 0, to = -100, length.out = n_y)
       df_tmp <- dplyr::bind_rows(df_tmp, df_sub)
     }
@@ -87,15 +86,15 @@ set_nodes <- function(players, n_choice, payoffs, direction = "down") {
   }
   payoff_label <- paste0("(", payoff_label, ")")
 
-  df_payoff <- df %>%
-    dplyr::filter(type == "payoff") %>%
-    dplyr::bind_cols(df_payoff) %>%
+  df_payoff <- df |>
+    dplyr::filter(type == "payoff") |>
+    dplyr::bind_cols(df_payoff) |>
     dplyr::mutate(payoff = payoff_label)
 
-  df_play <- df %>%
+  df_play <- df |>
     dplyr::filter(type == "play")
 
-  dplyr::bind_rows(df_play, df_payoff) %>%
+  dplyr::bind_rows(df_play, df_payoff) |>
     dplyr::arrange(id)
 
 }

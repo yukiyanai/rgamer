@@ -7,7 +7,6 @@
 #' @return A list of subgame perfect equilibria  and game tree(s) with marked
 #'     paths.
 #' @include backward_induction.R find_pure_NE.R draw_tree.R subgames.R
-#' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 spe <- function(game, restriction = FALSE) {
@@ -54,15 +53,15 @@ spe <- function(game, restriction = FALSE) {
       if (length(unique(g$player)) == 1) {
         bw <- backward_induction(g)$sol
         PSNE <- unlist(bw)
-        player_nodes <- df_node %>%
-          dplyr::filter(type == "play") %>%
-          dplyr::pull(id) %>%
+        player_nodes <- df_node |>
+          dplyr::filter(type == "play") |>
+          dplyr::pull(id) |>
           list()
         names(player_nodes) <- g$player[1]
 
-        df_player_node <- df_node %>%
-          dplyr::filter(type == "play") %>%
-          dplyr::select(player, id) %>%
+        df_player_node <- df_node |>
+          dplyr::filter(type == "play") |>
+          dplyr::select(player, id) |>
           dplyr::mutate(player_id = ifelse(player == u_players[1], 1, 2))
       } else {
         g_nf <- to_matrix(g)
@@ -70,16 +69,16 @@ spe <- function(game, restriction = FALSE) {
 
         player_nodes <- list()
         for (p in u_players) {
-          player_nodes[[p]] <- df_node %>%
+          player_nodes[[p]] <- df_node |>
             dplyr::filter(type == "play",
-                          player == p) %>%
+                          player == p) |>
             dplyr::pull(id)
         }
 
-        df_player_node <- df_node %>%
-          dplyr::filter(type == "play") %>%
-          dplyr::select(player, id) %>%
-          dplyr::mutate(player_id = ifelse(player == u_players[1], 1, 2)) %>%
+        df_player_node <- df_node |>
+          dplyr::filter(type == "play") |>
+          dplyr::select(player, id) |>
+          dplyr::mutate(player_id = ifelse(player == u_players[1], 1, 2)) |>
           dplyr::arrange(player_id)
       }
 
@@ -88,13 +87,13 @@ spe <- function(game, restriction = FALSE) {
       df_psne <- vector("list", length(PSNE))
       for (j in seq_along(PSNE)) {
         sol <- PSNE[j]
-        sol_v <- sol %>%
-          stringr::str_replace_all("\\(", "") %>%
-          stringr::str_replace_all("\\)", "") %>%
-          stringr::str_replace_all("\\[", "") %>%
-          stringr::str_replace_all("\\]", "") %>%
-          stringr::str_replace_all(" ", "") %>%
-          stringr::str_split(pattern = ",") %>%
+        sol_v <- sol |>
+          stringr::str_replace_all("\\(", "") |>
+          stringr::str_replace_all("\\)", "") |>
+          stringr::str_replace_all("\\[", "") |>
+          stringr::str_replace_all("\\]", "") |>
+          stringr::str_replace_all(" ", "") |>
+          stringr::str_split(pattern = ",") |>
           unlist()
 
         nr0 <- nrow(df_player_node)
@@ -122,8 +121,8 @@ spe <- function(game, restriction = FALSE) {
           }
         }
 
-        df_psne[[j]] <- df_player_node %>%
-          dplyr::mutate(psne = sol_v[df_player_node$is_seq]) %>%
+        df_psne[[j]] <- df_player_node |>
+          dplyr::mutate(psne = sol_v[df_player_node$is_seq]) |>
           dplyr::select(!c(is_id, is_seq))
       }
 
@@ -132,14 +131,14 @@ spe <- function(game, restriction = FALSE) {
 
     n_sg <- length(sg)
     if (n_sg == 1) {
-      SPE <- PSNE_list[[1]] %>% as.list()
+      SPE <- PSNE_list[[1]] |> as.list()
       spe_sol_list <- vector("list", length(SPE))
       for (i in 1:length(SPE)) {
-        df_path_tmp <- game$data$path %>%
+        df_path_tmp <- game$data$path |>
           dplyr::mutate(s = stringr::str_replace_all(s, " ", ""))
-        spe_sol_list[[i]] <- df_psne_list[[1]][[i]] %>%
-          dplyr::select(player, psne) %>%
-          dplyr::rename(s = psne) %>%
+        spe_sol_list[[i]] <- df_psne_list[[1]][[i]] |>
+          dplyr::select(player, psne) |>
+          dplyr::rename(s = psne) |>
           dplyr::left_join(df_path_tmp, by = c("player", "s"))
       }
     } else {
@@ -162,7 +161,7 @@ spe <- function(game, restriction = FALSE) {
         for (j in 1:nrow(df_index)) {
           df_sub <- data.frame()
           for (k in 1:ncol(df_index)) {
-            df_sub <- df_sub %>%
+            df_sub <- df_sub |>
               dplyr::bind_rows(df_psne_list[[k + 1]][df_index[j, k]])
           }
           df_stack <- dplyr::bind_rows(df_whole, df_sub)
@@ -178,11 +177,11 @@ spe <- function(game, restriction = FALSE) {
       SPE <- spe_sol_list <- vector("list", length(spe_id))
       for (i in 1:length(spe_id)) {
         SPE[[i]] <- PSNE_list[[1]][[spe_id[i]]]
-        df_path_tmp <- game$data$path %>%
+        df_path_tmp <- game$data$path |>
           dplyr::mutate(s = stringr::str_replace_all(s, " ", ""))
-        spe_sol_list[[i]] <- df_psne_list[[1]][[spe_id[i]]] %>%
-          dplyr::select(player, psne) %>%
-          dplyr::rename(s = psne) %>%
+        spe_sol_list[[i]] <- df_psne_list[[1]][[spe_id[i]]] |>
+          dplyr::select(player, psne) |>
+          dplyr::rename(s = psne) |>
           dplyr::left_join(df_path_tmp, by = c("player", "s"))
       }
 

@@ -15,7 +15,6 @@
 #'     sample, playing history should be displayed. If \code{plot_id = NULL},
 #'     plot_B and plot_P will be NULL.
 #' @inheritParams sim_fict_one
-#' @importFrom magrittr %>%
 #' @return A list containing (1) a data frames of strategies chosen by each
 #'     player,  (2) a single long data frame of (1)'s data frames combined,
 #'     (3) a list of each player's belief about the opponent's behavior
@@ -52,11 +51,11 @@ sim_fict <- function(game,
     P2_list[[i]] <- res$choice_prob$P1
   }
 
-  data_long <- dplyr::bind_rows(data_list) %>%
+  data_long <- dplyr::bind_rows(data_list) |>
     tidyr::pivot_longer(player1:player2,
                         names_to = "player",
-                        values_to = "strategy") %>%
-    dplyr::select(sample, period, player, strategy) %>%
+                        values_to = "strategy") |>
+    dplyr::select(sample, period, player, strategy) |>
     dplyr::mutate(player = ifelse(player == "player1",
                                   game$player[1],
                                   game$player[2]))
@@ -69,10 +68,10 @@ sim_fict <- function(game,
     plt_B <- plt_P <- NULL
   } else {
     # Plot beliefs
-    p_B1 <- B1_list[[plot_id]] %>%
+    p_B1 <- B1_list[[plot_id]] |>
       tidyr::pivot_longer(cols = -period,
                           values_to = "belief",
-                          names_to = "strategy") %>%
+                          names_to = "strategy") |>
       ggplot2::ggplot(ggplot2::aes(x = period,
                                    y = belief,
                                    color = strategy,
@@ -84,10 +83,10 @@ sim_fict <- function(game,
       ggplot2::ylim(0, 1) +
       ggplot2::labs(subtitle = paste("Belief of", game$player[1]))
 
-    p_B2 <- B2_list[[plot_id]] %>%
+    p_B2 <- B2_list[[plot_id]] |>
       tidyr::pivot_longer(cols = -period,
                           values_to = "belief",
-                          names_to = "strategy") %>%
+                          names_to = "strategy") |>
       ggplot2::ggplot(ggplot2::aes(x = period,
                                    y = belief,
                                    color = strategy,
@@ -102,10 +101,10 @@ sim_fict <- function(game,
     plt_B <- patchwork::wrap_plots(p_B1, p_B2)
 
     # Plot choice probabilities
-    p_P1 <- P1_list[[plot_id]] %>%
+    p_P1 <- P1_list[[plot_id]] |>
       tidyr::pivot_longer(cols = -period,
                           values_to = "probability",
-                          names_to = "strategy") %>%
+                          names_to = "strategy") |>
       ggplot2::ggplot(ggplot2::aes(x = period,
                                    y = probability,
                                    color = strategy,
@@ -115,10 +114,10 @@ sim_fict <- function(game,
       ggplot2::ylim(0, 1) +
       ggplot2::labs(subtitle = game$player[1])
 
-    p_P2 <- P2_list[[plot_id]] %>%
+    p_P2 <- P2_list[[plot_id]] |>
       tidyr::pivot_longer(cols = -period,
                           values_to = "probability",
-                          names_to = "strategy") %>%
+                          names_to = "strategy") |>
       ggplot2::ggplot(ggplot2::aes(x = period,
                                    y = probability,
                                    color = strategy,

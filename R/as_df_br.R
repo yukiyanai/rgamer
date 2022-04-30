@@ -20,7 +20,6 @@
 #'     payoffs2 that should be treated as constants, if any. If \code{cons1} and
 #'      \code{cons2} are exactly same, you can specify \code{cons_common}
 #'      instead of \code{cons1} and \code{cons2}.
-#' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 as_df_br <- function(players,
@@ -97,30 +96,30 @@ as_df_br <- function(players,
 
   }
 
-  df0$payoff1 <- df0 %>%
-    purrr::pmap(.f = payoffs1) %>%
+  df0$payoff1 <- df0 |>
+    purrr::pmap(.f = payoffs1) |>
     unlist()
-  df0$payoff2 <- df0b %>%
-    purrr::pmap(.f = payoffs2) %>%
+  df0$payoff2 <- df0b |>
+    purrr::pmap(.f = payoffs2) |>
     unlist()
 
-  df0 <- df0 %>%
-    dplyr::select(tidyselect::all_of(pars), payoff1, payoff2) %>%
+  df0 <- df0 |>
+    dplyr::select(tidyselect::all_of(pars), payoff1, payoff2) |>
     dplyr::filter(!is.nan(payoff1), !is.nan(payoff2))
   names(df0)[1:2] <- c("x", "y")
 
-  df1 <- df0 %>%
-    dplyr::group_by(y) %>%
+  df1 <- df0 |>
+    dplyr::group_by(y) |>
     dplyr::summarize(x = x[which.max(payoff1)],
                      payoff = max(payoff1),
-                     .groups = "drop") %>%
+                     .groups = "drop") |>
     dplyr::mutate(player = players[1])
 
-  df2 <- df0 %>%
-    dplyr::group_by(x) %>%
+  df2 <- df0 |>
+    dplyr::group_by(x) |>
     dplyr::summarize(y = y[which.max(payoff2)],
                      payoff = max(payoff2),
-                     .groups = "drop") %>%
+                     .groups = "drop") |>
     dplyr::mutate(player = players[2])
 
   return(list(df1 = df1, df2 = df2))

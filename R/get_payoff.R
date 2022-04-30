@@ -15,7 +15,6 @@
 #'     exactly same, you can specify \code{cons_common} instead of specifying
 #'     both \code{cons1} and \code{cons2}.
 #' @return A vector of payoffs.
-#' @importFrom magrittr %>%
 #' @include get_payoff_normal.R get_payoff_extensive.R
 #' @export
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>

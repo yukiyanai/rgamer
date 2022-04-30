@@ -11,7 +11,6 @@
 #'     The default value is 1.
 #' @param quietly A logical value to determine if the equilibrium will be kept in the returned list
 #'     without being printed on screen. Default is \code{FALSE}.
-#' @importFrom magrittr %>%
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 solve_seq_char <- function(game,
                            precision = 1L,
@@ -25,19 +24,19 @@ solve_seq_char <- function(game,
 
   delta <- 10^(-(precision + 2))
 
-  f1 <- p1 %>%
-    stringr::str_replace_all(pattern = pars[1], replacement = "FIRST_PARAM") %>%
-    stringr::str_replace_all( pattern = pars[2], replacement = "SECOND_PARAM") %>%
-    stringr::str_replace_all(c("FIRST_PARAM" = "x", "SECOND_PARAM" = "y")) %>%
+  f1 <- p1 |>
+    stringr::str_replace_all(pattern = pars[1], replacement = "FIRST_PARAM") |>
+    stringr::str_replace_all( pattern = pars[2], replacement = "SECOND_PARAM") |>
+    stringr::str_replace_all(c("FIRST_PARAM" = "x", "SECOND_PARAM" = "y")) |>
     str2expression()
   ff1 <- function(x, y) {
     eval(f1, envir = list(x = x, y = y))
   }
 
-  f2 <- p2 %>%
-    stringr::str_replace_all(pattern = pars[1], replacement = "FIRST_PARAM") %>%
-    stringr::str_replace_all( pattern = pars[2], replacement = "SECOND_PARAM") %>%
-    stringr::str_replace_all(c("FIRST_PARAM" = "x", "SECOND_PARAM" = "y")) %>%
+  f2 <- p2 |>
+    stringr::str_replace_all(pattern = pars[1], replacement = "FIRST_PARAM") |>
+    stringr::str_replace_all( pattern = pars[2], replacement = "SECOND_PARAM") |>
+    stringr::str_replace_all(c("FIRST_PARAM" = "x", "SECOND_PARAM" = "y")) |>
     str2expression()
   ff2 <- function(x, y) {
     eval(f2, envir = list(x = x, y = y))

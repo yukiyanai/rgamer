@@ -7,7 +7,6 @@
 #' @return A list of backward-induction solution(s) and game tree(s) with
 #'     marked paths.
 #' @include draw_tree.R
-#' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 backward_induction <- function(game, restriction = FALSE) {
@@ -22,33 +21,33 @@ backward_induction <- function(game, restriction = FALSE) {
 
   df_node <- game$data$node
   df_path <- game$data$path
-  df_play <- df_node %>%
+  df_play <- df_node |>
     dplyr::filter(type == "play")
 
-  u_players <- df_path %>%
-    dplyr::pull(player) %>%
+  u_players <- df_path |>
+    dplyr::pull(player) |>
     unique()
 
   df_node_list <- list(df_node)
-  df_played_list <- tibble::tibble(NULL) %>% list()
+  df_played_list <- tibble::tibble(NULL) |> list()
 
-  node_id_vec <- df_path %>%
-    dplyr::arrange(dplyr::desc(node_from)) %>%
-    dplyr::pull(node_from) %>%
+  node_id_vec <- df_path |>
+    dplyr::arrange(dplyr::desc(node_from)) |>
+    dplyr::pull(node_from) |>
     unique()
 
   for (i in node_id_vec) {
-    df_sub <- df_path %>%
+    df_sub <- df_path |>
       dplyr::filter(node_from == i)
 
-    check_player <- df_sub %>% dplyr::pull(player) %>% unique()
-    check_payoff <- df_sub %>% dplyr::pull(node_to)
+    check_player <- df_sub |> dplyr::pull(player) |> unique()
+    check_payoff <- df_sub |> dplyr::pull(node_to)
 
     df_node_tmp <- df_played_tmp <- list()
 
     for (j in 1:length(df_node_list)) {
-      df_subgame <- df_node_list[[j]] %>%
-        dplyr::filter(id %in% check_payoff) %>%
+      df_subgame <- df_node_list[[j]] |>
+        dplyr::filter(id %in% check_payoff) |>
         dplyr::select(dplyr::all_of(check_player), id)
       max_v <- max(df_subgame[, 1])
       choice <- df_subgame$id[df_subgame[, 1] == max_v]
@@ -62,8 +61,8 @@ backward_induction <- function(game, restriction = FALSE) {
           for (v in 1:length(df_node_list_0)) {
             df_node_list_0[[v]][i, u_players] <- df_node_list_0[[v]][k, u_players]
             df_node_list_new <- c(df_node_list_new, df_node_list_0)
-            df_played_list_0[[v]] <- df_sub %>%
-              dplyr::mutate(played = ifelse(node_to == k, TRUE, FALSE)) %>%
+            df_played_list_0[[v]] <- df_sub |>
+              dplyr::mutate(played = ifelse(node_to == k, TRUE, FALSE)) |>
               dplyr::bind_rows(df_played_list_0[[v]])
             df_played_list_new <- c(df_played_list_new, df_played_list_0)
           }
@@ -73,8 +72,8 @@ backward_induction <- function(game, restriction = FALSE) {
 
       } else {
         df_node_list[[j]][i, u_players] <- df_node_list[[j]][choice, u_players]
-        df_played_list[[j]] <- df_sub %>%
-          dplyr::mutate(played = ifelse(node_to == choice, TRUE, FALSE)) %>%
+        df_played_list[[j]] <- df_sub |>
+          dplyr::mutate(played = ifelse(node_to == choice, TRUE, FALSE)) |>
           dplyr::bind_rows(df_played_list[[j]])
 
         df_node_tmp <- c(df_node_tmp, list(df_node_list[[j]]))
@@ -89,13 +88,13 @@ backward_induction <- function(game, restriction = FALSE) {
 
   df_path_list <- list()
   for (j in 1:n_sols) {
-    df_path_list[[j]] <- df_path %>%
+    df_path_list[[j]] <- df_path |>
       dplyr::mutate(played = df_played_list[[j]]$played)
   }
 
   make_df_sol <- function(df_played) {
-    df_sol <- df_played %>%
-      dplyr::filter(played) %>%
+    df_sol <- df_played |>
+      dplyr::filter(played) |>
       dplyr::arrange(node_from)
     return(df_sol)
   }
@@ -105,14 +104,14 @@ backward_induction <- function(game, restriction = FALSE) {
     n_players <- length(u_players)
     sol <- rep(NA, n_players)
     for (i in seq_along(u_players)) {
-      df_p <- df_sol %>%
+      df_p <- df_sol |>
         dplyr::filter(player == u_players[i])
-      s <- df_p %>%
+      s <- df_p |>
         dplyr::pull(s)
       s_mid <- paste(s, collapse = ", ")
       sol[i] <- paste0("(", s_mid, ")")
     }
-    sol <- sol %>%
+    sol <- sol |>
       paste(collapse = ", ")
     sol <- paste0("[", sol, "]")
     return(sol)

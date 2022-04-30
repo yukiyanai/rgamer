@@ -1,7 +1,7 @@
 Package: rgamer
 Type: Package
 Title: Learn Game Theory Using R
-Version: 0.0.17
+Version: 0.0.18
 Authors@R:
     c(person(given = "Yoshio",
              family = "Kamijo",
@@ -32,7 +32,6 @@ Imports:
     ggforce,
     grDevices,
     kableExtra,
-    magrittr,
     MASS,
     patchwork,
     purrr,

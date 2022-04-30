@@ -214,8 +214,8 @@ normal_form <- function(
 
         s_set <- expand.grid(s1, s2)
         names(s_set) <- c("x", "y")
-        payoff1 <- purrr::pmap(s_set, new_fs[[1]]) %>% unlist()
-        payoff2 <- purrr::pmap(s_set, new_fs[[2]]) %>% unlist()
+        payoff1 <- purrr::pmap(s_set, new_fs[[1]]) |> unlist()
+        payoff2 <- purrr::pmap(s_set, new_fs[[2]]) |> unlist()
 
         s1 <- as.character(s1)
         s2 <- as.character(s2)
@@ -273,8 +273,8 @@ normal_form <- function(
 
       s_set <- expand.grid(s1, s2)
       names(s_set) <- pars
-      payoff1 <- purrr::pmap(s_set, payoffs1) %>% unlist()
-      payoff2 <- purrr::pmap(s_set, payoffs2) %>% unlist()
+      payoff1 <- purrr::pmap(s_set, payoffs1) |> unlist()
+      payoff2 <- purrr::pmap(s_set, payoffs2) |> unlist()
 
       s1 <- as.character(s1)
       s2 <- as.character(s2)

@@ -43,7 +43,6 @@
 #'      positive number.
 #' @return An object of "extensive_form" class, which defines an extensive-form
 #'     (or sequential) game.
-#' @importFrom magrittr %>%
 #' @include set_nodes.R set_paths.R extensive_strategy.R
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
@@ -126,9 +125,9 @@ extensive_form <- function(
   node_from <- s <- NULL
 
   if (!is.null(payoffs2)) {
-    u_players <- players %>%
-      unlist() %>%
-      stats::na.omit() %>%
+    u_players <- players |>
+      unlist() |>
+      stats::na.omit() |>
       unique()
     n_players <- length(u_players)
     n_tmnl <- length(payoffs2)
@@ -157,7 +156,7 @@ extensive_form <- function(
   }
 
   # count the number of choices at each node
-  n_choice <- rep(NA, length(players)) %>%
+  n_choice <- rep(NA, length(players)) |>
     as.list()
   k <- 1
   for (i in 1:length(n_choice)) {
@@ -183,7 +182,7 @@ extensive_form <- function(
   df_path <- set_paths(players_vec, n_choice, actions)
 
   ## add positions to the branches
-  df_path <- df_path %>%
+  df_path <- df_path |>
     dplyr::mutate(x_s = df_node$x[df_path$node_from],
                   x_e = df_node$x[df_path$node_to],
                   y_s = df_node$y[df_path$node_from],
@@ -226,8 +225,8 @@ extensive_form <- function(
       if (n_nodes == 1) next
       action_list <- list()
       for (j in 1:n_nodes) {
-        action_list[[j]] <- df_path %>%
-          dplyr::filter(node_from == info_sets[[i]][j]) %>%
+        action_list[[j]] <- df_path |>
+          dplyr::filter(node_from == info_sets[[i]][j]) |>
           dplyr::pull(s)
       }
       for (j in 2:n_nodes) {
@@ -241,8 +240,8 @@ extensive_form <- function(
     info_sets_player <- rep(NA, n_info_sets)
     for (i in 1:n_info_sets) {
       info_node <- info_sets[[i]][1]
-      info_sets_player[i] <- df_node %>%
-        dplyr::filter(id == info_node) %>%
+      info_sets_player[i] <- df_node |>
+        dplyr::filter(id == info_node) |>
         dplyr::pull(player)
     }
   } else {
@@ -252,8 +251,8 @@ extensive_form <- function(
   #node_to_play <- list()
   #u_players <- unique(players_vec)
   #for (i in 1:length(u_players)) {
-  #  node_to_play[[i]] <- df_node %>%
-  #    dplyr::filter(player == u_players[i]) %>%
+  #  node_to_play[[i]] <- df_node |>
+  #    dplyr::filter(player == u_players[i]) |>
   #    dplyr::pull(id)
   #}
   #names(node_to_play) <- u_players
@@ -263,8 +262,6 @@ extensive_form <- function(
   #                                 info_sets = info_sets,
   #                                 info_sets_player = info_sets_player,
   #                                 node_to_play = node_to_play)
-
-
 
   value <- list(player = players_vec,
                 action = actions,

@@ -16,9 +16,8 @@
 #'     defined in \code{game} is used for each player, which can be different
 #'     between players. With \code{"fixed"}, the same y-axis is used for both
 #'     players. Only used when the payoffs are defined by functions.
-#' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @import ggplot2
-#' @importFrom magrittr %>%
+#' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @noRd
 plot_sim <- function(x,
                      game,
@@ -41,11 +40,11 @@ plot_sim <- function(x,
     # Player 1: ratio of each strategy
     df1 <- NULL
     for (s in game$strategy$s1) {
-      df_tmp <- x %>%
-        dplyr::filter(player == game$player[1]) %>%
-        dplyr::group_by(period) %>%
+      df_tmp <- x |>
+        dplyr::filter(player == game$player[1]) |>
+        dplyr::group_by(period) |>
         dplyr::summarize(play = s,
-                         ratio = sum(strategy == s) / n_samples) %>%
+                         ratio = sum(strategy == s) / n_samples) |>
         dplyr::rename(strategy = play)
 
       df1 <- dplyr::bind_rows(df1, df_tmp)
@@ -66,11 +65,11 @@ plot_sim <- function(x,
     # Player 2: ratio of each strategy
     df2 <- NULL
     for (s in game$strategy$s2) {
-      df_tmp <- x %>%
-        dplyr::filter(player == game$player[2]) %>%
-        dplyr::group_by(period) %>%
+      df_tmp <- x |>
+        dplyr::filter(player == game$player[2]) |>
+        dplyr::group_by(period) |>
         dplyr::summarize(play = s,
-                         ratio = sum(strategy == s) / n_samples) %>%
+                         ratio = sum(strategy == s) / n_samples) |>
         dplyr::rename(strategy = play)
       df2 <- dplyr::bind_rows(df2, df_tmp)
     }
@@ -98,14 +97,14 @@ plot_sim <- function(x,
   } else {
 
     # Calculate the mean play across all samples
-    df <- x %>%
-      dplyr::group_by(period, player) %>%
+    df <- x |>
+      dplyr::group_by(period, player) |>
       dplyr::summarize(m = mean(strategy),
                        .groups = "drop")
 
     # Player 1: mean play
-    p1_1 <- df %>%
-      dplyr::filter(player == game$player[1]) %>%
+    p1_1 <- df |>
+      dplyr::filter(player == game$player[1]) |>
       ggplot2::ggplot(ggplot2::aes(x = period,
                                    y = m)) +
       ggplot2::geom_path() +
@@ -114,8 +113,8 @@ plot_sim <- function(x,
                     subtitle = game$player[1])
 
     # Player 2: mean play
-    p1_2 <- df %>%
-      dplyr::filter(player == game$player[2]) %>%
+    p1_2 <- df |>
+      dplyr::filter(player == game$player[2]) |>
       ggplot2::ggplot(ggplot2::aes(x = period,
                                    y = m)) +
       ggplot2::geom_path() +
@@ -124,8 +123,8 @@ plot_sim <- function(x,
                     subtitle = game$player[2])
 
     # Player 1: each sample as a line
-    p2_1 <- x %>%
-      dplyr::filter(player == game$player[1]) %>%
+    p2_1 <- x |>
+      dplyr::filter(player == game$player[1]) |>
       ggplot2::ggplot(ggplot2::aes(x = period,
                                    y = strategy,
                                    group = sample)) +
@@ -135,8 +134,8 @@ plot_sim <- function(x,
                     subtitle = game$player[1])
 
     # Player 2: each sample as a line
-    p2_2 <- x %>%
-      dplyr::filter(player == game$player[2]) %>%
+    p2_2 <- x |>
+      dplyr::filter(player == game$player[2]) |>
       ggplot2::ggplot(ggplot2::aes(x = period,
                                    y = strategy,
                                    group = sample)) +

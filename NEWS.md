@@ -1,3 +1,9 @@
+# rgamer 0.0.18
+
+## Changes
+
+- Replace magrittr pipes `%>%` with R's native pipes `|>`.
+
 # rgamer 0.0.17
 
 ## New Features

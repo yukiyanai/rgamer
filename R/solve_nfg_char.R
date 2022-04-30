@@ -15,7 +15,6 @@
 #'     in the returned list without being printed on screen. Default is
 #'     \code{FALSE}.
 #' @param color_palette A color palette to be used. Default is \code{"Set1"}.
-#' @importFrom magrittr %>%
 #' @include char2function.R
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 solve_nfg_char <- function(game,

@@ -52,8 +52,8 @@ solve_seq_fcn <- function(game,
 
   if (!is.null(cons1)) {
     ff1 <- function(...) {
-      cons1 %>%
-        as.data.frame() %>%
+      cons1 |>
+        as.data.frame() |>
         purrr::pmap(.f = game$payoff$payoffs1, ...)
     }
   } else {
@@ -62,8 +62,8 @@ solve_seq_fcn <- function(game,
 
   if (!is.null(cons2)) {
     ff2 <- function(...) {
-      cons2 %>%
-        as.data.frame() %>%
+      cons2 |>
+        as.data.frame() |>
         purrr::pmap(.f = game$payoff$payoffs2, ...)
     }
   } else {
@@ -109,11 +109,11 @@ solve_seq_fcn <- function(game,
   df_out <- data.frame(x, y)
   names(df_out) <- game$pars
 
-  payoff1 <- df_out %>%
-    purrr::pmap(.f = ff1) %>%
+  payoff1 <- df_out |>
+    purrr::pmap(.f = ff1) |>
     unlist()
-  payoff2 <- df_out %>%
-    purrr::pmap(.f = ff2) %>%
+  payoff2 <- df_out |>
+    purrr::pmap(.f = ff2) |>
     unlist()
 
   NE <- paste0("(",

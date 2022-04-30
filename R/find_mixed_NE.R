@@ -7,7 +7,6 @@
 #' @param game A "normal_form" class object created by \code{normal_form()}.
 #'     The game's type must be "matrix".
 #' @seealso \code{\link{normal_form}}
-#' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 find_mixed_NE <- function(game) {
@@ -21,16 +20,16 @@ find_mixed_NE <- function(game) {
 
   find_sets <- function(s) {
     s <- as.list(s)
-    2:length(s) %>%
-      lapply(function(x) apply(utils::combn(s, x), 2, function(y) y)) %>%
-      unlist(recursive = FALSE) %>%
+    2:length(s) |>
+      lapply(function(x) apply(utils::combn(s, x), 2, function(y) y)) |>
+      unlist(recursive = FALSE) |>
       lapply(unlist)
   }
   s1_sets <- find_sets(s1)
   s2_sets <- find_sets(s2)
 
   pair <- expand.grid(row = 1:length(s1_sets),
-                      col = 1:length(s2_sets)) %>%
+                      col = 1:length(s2_sets)) |>
     dplyr::arrange(row, col)
 
   msNE_list <- NULL
@@ -95,9 +94,6 @@ find_mixed_NE <- function(game) {
         p_msNE <- paste0("(", paste(prob1, collapse = ", "), ")")
         q_msNE <- paste0("(", paste(prob2, collapse = ", "), ")")
 
-        #msNE_list[[n_msNE]] <- list(s1 = s1_sub,
-        #                            s2 = s2_sub,
-        #                            msNE = msNE)
       }
     }
 

@@ -4,7 +4,6 @@
 #' @param game A game defined by \code{extensive_form()}.
 #' @param actions A list of actions of players.
 #' @return A ggplot object of the game tree.
-#' @importFrom magrittr %>%
 #' @include draw_tree.R get_payoff_extensive.R
 #' @export
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
@@ -25,14 +24,14 @@ draw_path <- function(game, actions) {
 
   df_selected <- tibble::tibble(NULL)
   for (i in 1:length(actions)) {
-    df_sub <- df_path %>%
+    df_sub <- df_path |>
       dplyr::filter(player == names(actions)[i])
 
     df_sub_sub <- tibble::tibble(NULL)
     sub_nodes <- unique(df_sub$node_from)
     for (j in 1:length(actions[[i]])) {
-      df_sub_j <- df_sub %>%
-        dplyr::filter(node_from == sub_nodes[j]) %>%
+      df_sub_j <- df_sub |>
+        dplyr::filter(node_from == sub_nodes[j]) |>
         dplyr::filter(s == actions[[i]][j])
       df_sub_sub <- dplyr::bind_rows(df_sub_sub, df_sub_j)
     }

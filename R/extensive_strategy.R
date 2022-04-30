@@ -8,7 +8,6 @@
 #'     info_sets.
 #' @param node_to_play A list whose element shows which nodes each player plays.
 #' @return A list of strategies and action_prof
-#' @importFrom magrittr %>%
 #' @noRd
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 extensive_strategy <- function(player,
@@ -66,10 +65,10 @@ extensive_strategy <- function(player,
     for (i in 1:length(u_info_player)) {
       target_p <- u_info_player[i]
       s_num <- which(u_player == target_p)
-      action_p <- action_profiles[[target_p]] %>%
-        unlist() %>%
+      action_p <- action_profiles[[target_p]] |>
+        unlist() |>
         matrix(ncol = length(node_to_play[[s_num]]),
-               byrow = TRUE) %>%
+               byrow = TRUE) |>
         as.data.frame()
       names(action_p) <- paste0("n", node_to_play[[s_num]])
 
@@ -87,7 +86,7 @@ extensive_strategy <- function(player,
       }
       keep <- !(names(action_p) %in% keep_out)
 
-      action_p <- dplyr::distinct(action_p) %>%
+      action_p <- dplyr::distinct(action_p) |>
         tibble::as_tibble()
       strategy_p <- action_p[, keep]
       strategy_tmp <- list()

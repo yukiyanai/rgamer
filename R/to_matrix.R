@@ -5,7 +5,6 @@
 #' @param game A two-person extensive-form game defined by
 #'     \code{extensive_form()}.
 #' @return A normal_form class object.
-#' @importFrom magrittr %>%
 #' @include get_payoff.R
 #' @export
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
@@ -25,8 +24,8 @@ to_matrix <- function(game) {
   node_to_play <- list()
   u_players <- unique(game$player)
   for (i in 1:length(u_players)) {
-    node_to_play[[i]] <- game$data$node %>%
-      dplyr::filter(player == u_players[i]) %>%
+    node_to_play[[i]] <- game$data$node |>
+      dplyr::filter(player == u_players[i]) |>
       dplyr::pull(id)
   }
   names(node_to_play) <- u_players
