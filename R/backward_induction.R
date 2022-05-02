@@ -123,6 +123,7 @@ backward_induction <- function(game, restriction = FALSE) {
   list_trees <- function(x, ...) {
     draw_tree(df_path = df_path_list[[x]],
               df_sol = df_sol_list[[x]],
+              color_palette = game$tree_params$color_palette,
               ...)
   }
   bi_trees <- lapply(1:n_sols,
