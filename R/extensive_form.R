@@ -248,25 +248,8 @@ extensive_form <- function(
     info_sets_player <- NULL
   }
 
-  #node_to_play <- list()
-  #u_players <- unique(players_vec)
-  #for (i in 1:length(u_players)) {
-  #  node_to_play[[i]] <- df_node |>
-  #    dplyr::filter(player == u_players[i]) |>
-  #    dplyr::pull(id)
-  #}
-  #names(node_to_play) <- u_players
-
-  #strategies <- extensive_strategy(player = players_vec,
-  #                                 action_list = actions,
-  #                                 info_sets = info_sets,
-  #                                 info_sets_player = info_sets_player,
-  #                                 node_to_play = node_to_play)
-
   value <- list(player = players_vec,
                 action = actions,
-#                strategy = strategies$strategy,
-#                action_prof = strategies$action_profile,
                 payoff = payoffs,
                 info_sets = info_sets,
                 info_sets_player = info_sets_player,

@@ -255,7 +255,15 @@ draw_tree <- function(df_path,
   p_length <- length(unique(df_play$player))
 
   n_info_sets <- ifelse(is.null(info_sets), 0, length(info_sets))
-  get_palette <- grDevices::colorRampPalette(RColorBrewer::brewer.pal(8, color_palette))
+
+  if (p_length + n_info_sets > 8 ) {
+    get_palette <- grDevices::colorRampPalette(RColorBrewer::brewer.pal(8, color_palette))
+    color_setting <- ggplot2::scale_color_manual(values = get_palette(n_info_sets + p_length),
+                                                 guide = "none")
+  } else {
+    color_setting <- ggplot2::scale_color_brewer(palette = color_palette,
+                                                 guide = "none")
+  }
 
   if (!is.null(info_sets)) {
 
@@ -327,8 +335,7 @@ draw_tree <- function(df_path,
                          size = size_action) +
       ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
                      panel.grid.minor = ggplot2::element_blank()) +
-      ggplot2::scale_color_manual(values = get_palette(n_info_sets + p_length),
-                                  guide = "none")
+      color_setting
   } else {
     tree <- tree +
       ggplot2::geom_label(data = df_play,
@@ -348,8 +355,7 @@ draw_tree <- function(df_path,
       ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
                      panel.grid.minor = ggplot2::element_blank(),
                      text = ggplot2::element_text(family = family)) +
-      ggplot2::scale_color_manual(values = get_palette(n_info_sets + p_length),
-                                  guide = "none")
+      color_setting
   }
 
   if (show_node_id) {
