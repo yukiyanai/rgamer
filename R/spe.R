@@ -194,7 +194,6 @@ spe <- function(game, restriction = FALSE) {
       list_trees <- function(x, ...) {
         draw_tree(df_path = game$data$path,
                   df_sol = spe_sol_list[[x]],
-                  color_palette = game$tree_params$color_palette
                   ...)
       }
 
