@@ -19,7 +19,7 @@
 #'     \code{"right"},
 #'     \code{"up"},
 #'     \code{"down"},
-#'     \code{"bidirectional"},
+#'     \code{"bidirectional"} (temporarily disabled),
 #'     \code{"horizonal"}, and
 #'     \code{"vertical"}.
 #'     Default is \code{"down"}.
@@ -61,78 +61,82 @@ draw_tree <- function(df_path,
   player <- payoff <- s <- NULL
   player_color <- info_group <- linetype <- bold <- NULL
 
+  direction <- match.arg(arg = direction,
+                         choices = c("right", "up", "down",
+                                     "horizontal", "vertical"))
+
   df_play <- df_node |>
     dplyr::filter(type == "play")
 
   df_payoff <- df_node |>
     dplyr::filter(type == "payoff")
 
-  if (direction == "bidirectional") {
+#  if (direction == "bidirectional") {
+#
+#    n_first_choice <- df_path |>
+#      dplyr::filter(node_from == 1) |>
+#      nrow()
 
-    n_first_choice <- df_path |>
-      dplyr::filter(node_from == 1) |>
-      nrow()
-
-    if (n_first_choice != 2) {
-      stop("The first node must have two actions for a 'bidrectional' tree")
-    }
-    df_path0 <- df_path
-    df_path$left <- rep(NA, nrow(df_path))
-    df_path$left[1:2] <- 0:1
-    for (i in 3:nrow(df_path)) {
-      node_origin2 <- df_path$node_from[i]
-      while (node_origin2 > 2) {
-        df_search <- dplyr::filter(df_path, node_to == node_origin2)
-        node_origin2 <- df_search$node_from[1]
-      }
-      df_path$left[i] <- ifelse(node_origin2 == 2, 0, 1)
-    }
-    y_adj_right <- with(df_path, y_s[1] - y_e[1])
-    y_adj_left <-  with(df_path, y_s[2] - y_e[2])
-    df_path <- df_path |>
-      dplyr::mutate(x_s = ifelse(left == 0, x_s, -x_s),
-                    x_e = ifelse(left == 0, x_e, -x_e))
-
-    df_path_top2 <- df_path[1:2,] |>
-      dplyr::mutate(y_e = y_s)
-    df_path_rem <- df_path[-(1:2),] |>
-      dplyr::mutate(y_s = ifelse(left == 0,
-                                 y_s + y_adj_right,
-                                 y_s + y_adj_left),
-                    y_e = ifelse(left == 0,
-                                 y_e + y_adj_right,
-                                 y_e + y_adj_left))
-    df_path <- dplyr::bind_rows(df_path_top2, df_path_rem) |>
-      dplyr::mutate(x_m = 3/4 * x_s + 1/4  * x_e,
-                    y_m = 1/2 * y_s + 1/2 * y_e,
-                    y_m = ifelse(y_m == y_e, y_m + 1.5, y_m))
-
-    ## Adjust payoff positions
-    df_payoff <- df_path0 |>
-      dplyr::rename(match_id = id) |>
-      dplyr::select(match_id, x_e, y_e) |>
-      dplyr::right_join(df_payoff, by = c("x_e" = "x", "y_e" = "y")) |>
-      dplyr::select(-c(x_e, y_e))
-    df_payoff <- df_path |>
-      dplyr::rename(x = x_e, y = y_e, match_id = id) |>
-      dplyr::select(x, y, match_id, left) |>
-      dplyr::right_join(df_payoff, by = "match_id")
-
-    ## Adjust node positions
-    df_play <- df_path0 |>
-      dplyr::rename(match_id = id) |>
-      dplyr::select(match_id, x_s, y_s) |>
-      dplyr::right_join(df_play, by = c("x_s" = "x", "y_s" = "y")) |>
-      dplyr::select(-c(x_s, y_s))
-    df_play <- df_path |>
-      dplyr::rename(x = x_s, y = y_s, match_id = id) |>
-      dplyr::select(x, y, match_id, left) |>
-      dplyr::right_join(df_play, by = "match_id") |>
-      dplyr::select(-match_id) |>
-      dplyr::distinct()
-
-    df_node <- dplyr::bind_rows(df_play, df_payoff)
-  }
+  #   if (n_first_choice != 2) {
+  #     stop("The first node must have two actions for a 'bidrectional' tree")
+  #   }
+  #   df_path0 <- df_path
+  #   df_path$left <- rep(NA, nrow(df_path))
+  #   df_path$left[1:2] <- 0:1
+  #   for (i in 3:nrow(df_path)) {
+  #     node_origin2 <- df_path$node_from[i]
+  #     while (node_origin2 > 2) {
+  #       df_search <- dplyr::filter(df_path, node_to == node_origin2)
+  #       node_origin2 <- df_search$node_from[1]
+  #     }
+  #     df_path$left[i] <- ifelse(node_origin2 == 2, 0, 1)
+  #   }
+  #   y_adj_right <- with(df_path, y_s[1] - y_e[1])
+  #   y_adj_left <-  with(df_path, y_s[2] - y_e[2])
+  #   df_path <- df_path |>
+  #     dplyr::mutate(x_s = ifelse(left == 0, x_s, -x_s),
+  #                   x_e = ifelse(left == 0, x_e, -x_e))
+  #
+  #   df_path_top2 <- df_path[1:2,] |>
+  #     dplyr::mutate(y_e = y_s)
+  #   df_path_rem <- df_path[-(1:2),] |>
+  #     dplyr::mutate(y_s = ifelse(left == 0,
+  #                                y_s + y_adj_right,
+  #                                y_s + y_adj_left),
+  #                   y_e = ifelse(left == 0,
+  #                                y_e + y_adj_right,
+  #                                y_e + y_adj_left))
+  #   df_path <- dplyr::bind_rows(df_path_top2, df_path_rem) |>
+  #     dplyr::mutate(x_m = 3/4 * x_s + 1/4  * x_e,
+  #                   y_m = 1/2 * y_s + 1/2 * y_e,
+  #                   y_m = ifelse(y_m == y_e, y_m + 1.5, y_m))
+  #
+  #   ## Adjust payoff positions
+  #   df_payoff <- df_path0 |>
+  #     dplyr::rename(match_id = id) |>
+  #     dplyr::select(match_id, x_e, y_e) |>
+  #     dplyr::right_join(df_payoff, by = c("x_e" = "x", "y_e" = "y")) |>
+  #     dplyr::select(-c(x_e, y_e))
+  #   df_payoff <- df_path |>
+  #     dplyr::rename(x = x_e, y = y_e, match_id = id) |>
+  #     dplyr::select(x, y, match_id, left) |>
+  #     dplyr::right_join(df_payoff, by = "match_id")
+  #
+  #   ## Adjust node positions
+  #   df_play <- df_path0 |>
+  #     dplyr::rename(match_id = id) |>
+  #     dplyr::select(match_id, x_s, y_s) |>
+  #     dplyr::right_join(df_play, by = c("x_s" = "x", "y_s" = "y")) |>
+  #     dplyr::select(-c(x_s, y_s))
+  #   df_play <- df_path |>
+  #     dplyr::rename(x = x_s, y = y_s, match_id = id) |>
+  #     dplyr::select(x, y, match_id, left) |>
+  #     dplyr::right_join(df_play, by = "match_id") |>
+  #     dplyr::select(-match_id) |>
+  #     dplyr::distinct()
+  #
+  #   df_node <- dplyr::bind_rows(df_play, df_payoff)
+  # }
 
   if (!is.null(df_sol)) {
     df_sol$player_color <- as.integer(factor(df_sol$player))
