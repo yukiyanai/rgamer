@@ -103,7 +103,7 @@ restrict_action <- function(game, action) {
 
   actions <- game$action
   for (i in 1:n_spec) {
-    actions[[nodes[i]]] <- action_vec[i]
+    actions[which(play_nodes == nodes[i])] <- action_vec[i]
   }
 
   if (!is.null(game$info_sets)) {
@@ -189,11 +189,11 @@ restrict_action <- function(game, action) {
                 action_prof = strategies$action_profile,
                 payoff = payoffs,
                 info_sets = game$info_sets,
+                info_sets_player = info_sets_player,
                 data = list(node = df_node,
                             path = df_path),
                 tree = new_tree,
                 tree_params = game$tree_params)
-
 
   structure(value, class = "restricted_game")
 }

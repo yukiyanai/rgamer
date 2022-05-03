@@ -29,13 +29,11 @@ to_matrix <- function(game) {
       dplyr::pull(id)
   }
   names(node_to_play) <- u_players
-
   strategies <- extensive_strategy(player = game$player,
                                    action_list = game$action,
                                    info_sets = game$info_sets,
                                    info_sets_player = game$info_sets_player,
                                    node_to_play = node_to_play)
-
   ## get payoffs
   actions1 <- strategies$action_profile[[1]]
   actions2 <- strategies$action_profile[[2]]
@@ -49,7 +47,6 @@ to_matrix <- function(game) {
       payoff2 <- c(payoff2, payoffs[2])
     }
   }
-
   nfg <- normal_form(
     players = u_player,
     s1 = strategies$strategy$s1,
@@ -57,6 +54,5 @@ to_matrix <- function(game) {
     payoffs1 = payoff1,
     payoffs2 = payoff2,
     byrow = TRUE)
-
   return(nfg)
 }
