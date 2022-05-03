@@ -23,7 +23,7 @@
 #'     default is \code{","} for "csv", \code{"\t"} for "tsv", and \code{""}
 #'     (white space) for "table".
 #' @param algorithm A algorithm for matching. \code{"DA"}
-#'     (\code{"Gale-Shapley"}) or \code{"Boston"}.
+#'     (\code{"Gale-Shapley"},  \code{"GS"}) or \code{"Boston"}.
 #' @param switch A logical value. If \code{TRUE}, the roles of g1 and g2 are
 #'     switched. That is, g2 will be the proposer group, and g1 the prposed if
 #'     \code{TRUE}. Default is \code{FALSE}.
@@ -48,7 +48,7 @@ matching_df <- function(df1,
                         verbose = TRUE) {
 
   algorithm <- match.arg(algorithm,
-                         choices = c("DA", "Gale-Shapley", "GA",
+                         choices = c("DA", "Gale-Shapley", "GS",
                                      "Boston"))
 
   if (!is.null(header)) {
