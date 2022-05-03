@@ -1,6 +1,6 @@
 #' @title Implement matching
 #' @description \code{matching_df()} implements matching between two groups of
-#'    individuals with preferences specified by either a pair ofdata frames or
+#'    individuals with preferences specified by either a pair of data frames or
 #'    a pair of data files (csv, tsv, or table).
 #' @return A list of "matching" class containing
 #'     (1) a data frame of the matching results,
