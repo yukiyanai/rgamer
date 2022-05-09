@@ -156,8 +156,8 @@ sim_learning <- function(game,
                 plot_range_y = plot_range_y)
 
 
-  return(list(data = data_list,
-              data_long = data_long,
+  return(list(data = data_long,
+              data_list = data_list,
               attraction = list(A1 = A1_list,
                                 A2 = A2_list),
               choice_prob = list(P1 = P1_list,

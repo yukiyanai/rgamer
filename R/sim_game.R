@@ -41,7 +41,7 @@
 #' @param plot_range_y Choose the range of vertical axis for plots. Available
 #'     choices are \code{"fixed"}, \code{"full"} and \code{"free"}.
 #'     If \code{plot_range_y = "free"}, the range of y-axis depends on
-#'     simulation results.  If \code{plot_range_y = "full"}, The range
+#'     simulation results.  If \code{plot_range_y = "full"}, the range
 #'     defined in \code{game} is used for each player, which can be different
 #'     between players. With \code{"fixed"}, the same y-axis is used for both
 #'     players.

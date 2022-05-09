@@ -36,7 +36,7 @@ default is \code{","} for "csv", \code{"\t"} for "tsv", and \code{""}
 (white space) for "table".}
 
 \item{algorithm}{A algorithm for matching. \code{"DA"}
-(\code{"Gale-Shapley"}) or \code{"Boston"}.}
+(\code{"Gale-Shapley"},  \code{"GS"}) or \code{"Boston"}.}
 
 \item{switch}{A logical value. If \code{TRUE}, the roles of g1 and g2 are
 switched. That is, g2 will be the proposer group, and g1 the prposed if
@@ -55,7 +55,7 @@ A list of "matching" class containing
 }
 \description{
 \code{matching_df()} implements matching between two groups of
-individuals with preferences specified by either a pair ofdata frames or
+individuals with preferences specified by either a pair of data frames or
 a pair of data files (csv, tsv, or table).
 }
 \examples{
