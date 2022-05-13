@@ -46,7 +46,7 @@ solve_efg <- function(game,
   if (!(class(game) %in% c("extensive_form", "restricted_game")))
     stop("game must be an object of 'extensive_form' or 'restricted_game'")
 
-  if (class(game) == "restricted_game") {
+  if (methods::is(game, "restricted_game")) {
     tree_overlay <- TRUE
   }
 

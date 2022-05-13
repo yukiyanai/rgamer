@@ -20,7 +20,7 @@ find_best_response <- function(game) {
   s2 <- game$strategy[[2]]
   df <- game$df
 
-  if (class(game) == "normal_form") {
+  if (methods::is(game, "normal_form")) {
 
     ## find the best responses of P1 (row player) v. P2 (column player)
     df_1 <- data.frame(NULL)
@@ -59,7 +59,7 @@ find_best_response <- function(game) {
     out <- dplyr::bind_rows(df_1, df_2) |>
       dplyr::select(player, best_response, against, payoff, row, column, pid)
 
-  } else if (class(game) == "sequential_form") {
+  } else if (methods::is(game, "sequential_form")) {
 
     df <- df |>
       dplyr::mutate(rc = paste(row, column, sep = ","))

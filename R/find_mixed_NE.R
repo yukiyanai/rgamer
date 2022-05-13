@@ -82,8 +82,8 @@ find_mixed_NE <- function(game) {
       prob1 <- as.vector(prob1)
       prob2 <- as.vector(prob2)
 
-      if (!all(prob1 >= 0) | !all(prob1 <= 1) |
-          !all(prob2 >= 0) | !all(prob2 <=1)) {
+      if (!all(prob1 > 0) | !all(prob1 < 1) |
+          !all(prob2 > 0) | !all(prob2 < 1)) {
         msNE <- NULL
         p_msNE <- NA_character_
         q_msNE <- NA_character_

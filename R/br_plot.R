@@ -82,71 +82,158 @@ br_plot <- function(game,
       ggplot2::coord_fixed() +
       ggplot2::theme(axis.title.y = element_text(angle = 0, vjust = 0.5))
   } else {
+
     p <- q <- 0:1
     ep1_1 <- sapply(q, function(q) sum(mat1[1, ] * c(q, 1 - q)))
     ep1_2 <- sapply(q, function(q) sum(mat1[2, ] * c(q, 1 - q)))
     ep2_1 <- sapply(p, function(p) sum(mat2[, 1] * c(p, 1 - p)))
     ep2_2 <- sapply(p, function(p) sum(mat2[, 2] * c(p, 1 - p)))
 
-    ## Player 1's best response
-    q_cut <- probs$q[1]
-    if (q_cut > 1) {
-      q_cut <- 1
-    } else if (q_cut < 0) {
-      q_cut <- 0
-    }
-    coord_q1_s <- c(0, rep(q_cut, 2))
-    coord_q1_e <- c(rep(q_cut, 2), 1)
-    coord_p1_s <- rep(NA, 3)
-    coord_p1_e <- rep(NA, 3)
-    if (ep1_1[1] >= ep1_2[1]) {
-      coord_p1_s[1:2] <- 1
-      coord_p1_e[1] <- 1
-    } else {
-      coord_p1_s[1:2] <- 0
-      coord_p1_e[1] <- 0
-    }
-    if (ep1_1[2] >= ep1_2[2]) {
-      coord_p1_s[3] <- 1
-      coord_p1_e[2:3] <- 1
-    } else {
-      coord_p1_s[3] <- 0
-      coord_p1_e[2:3] <- 0
-    }
+    if (is.null(msNE)) {
 
-    ## Player 2's best response
-    p_cut <- probs$p[1]
-    if (p_cut > 1) {
-      p_cut <- 1
-    } else if (p_cut < 0) {
-      p_cut <- 0
-    }
+      ## Player 1's best response
+      q_cut <- probs$q[1]
+      if (q_cut > 1) {
+        q_cut <- 1
+      } else if (q_cut < 0) {
+        q_cut <- 0
+      }
 
-    coord_p2_s <- c(0, rep(p_cut, 2))
-    coord_p2_e <- c(rep(p_cut, 2), 1)
-    coord_q2_s <- rep(NA, 3)
-    coord_q2_e <- rep(NA, 3)
-    if (ep2_1[1] >= ep2_2[1]) {
-      coord_q2_s[1:2] <- 1
-      coord_q2_e[1] <- 1
-    } else {
-      coord_q2_s[1:2] <- 0
-      coord_q2_e[1] <- 0
-    }
-    if (ep2_1[2] >= ep2_2[2]) {
-      coord_q2_s[3] <- 1
-      coord_q2_e[2:3] <- 1
-    } else {
-      coord_q2_s[3] <- 0
-      coord_q2_e[2:3] <- 0
-    }
+      coord_q1_s <- c(0, rep(q_cut, 2))
+      coord_q1_e <- c(rep(q_cut, 2), 1)
+      coord_p1_s <- rep(NA, 3)
+      coord_p1_e <- rep(NA, 3)
+      if (ep1_1[1] > ep1_2[1]) {
+        coord_p1_s[1:2] <- 1
+        coord_p1_e[1] <- 1
+      } else if (ep1_1[1] == ep1_2[1]) {
+        coord_p1_s[1] <- 0
+        coord_p1_s[2] <- 1
+        coord_p1_e[1] <- 1
+        coord_q1_e[1] <- 0
+      } else {
+        coord_p1_s[1:2] <- 0
+        coord_p1_e[1] <- 0
+      }
+      if (ep1_1[2] > ep1_2[2]) {
+        coord_p1_s[3] <- 1
+        coord_p1_e[2:3] <- 1
+      } else if (ep1_1[2] == ep1_2[2]) {
+        coord_p1_s[3] <- 0
+        coord_p1_e[2] <- 0
+        coord_p1_e[3] <- 1
+        coord_q1_s[3] <- 1
+      } else {
+        coord_p1_s[3] <- 0
+        coord_p1_e[2:3] <- 0
+      }
 
-    df <- data.frame(
-      player = rep(players, each = 3),
-      xs = c(coord_p1_s, coord_p2_s),
-      ys = c(coord_q1_s, coord_q2_s),
-      xe = c(coord_p1_e, coord_p2_e),
-      ye = c(coord_q1_e, coord_q2_e))
+      ## Player 2's best response
+      p_cut <- probs$p[1]
+      if (p_cut > 1) {
+        p_cut <- 1
+      } else if (p_cut < 0) {
+        p_cut <- 0
+      }
+
+      coord_p2_s <- c(0, rep(p_cut, 2))
+      coord_p2_e <- c(rep(p_cut, 2), 1)
+      coord_q2_s <- rep(NA, 3)
+      coord_q2_e <- rep(NA, 3)
+      if (ep2_1[1] > ep2_2[1]) {
+        coord_q2_s[1:2] <- 1
+        coord_q2_e[1] <- 1
+      } else if (ep2_1[1] == ep2_2[1]) {
+        coord_q2_s[1] <- 0
+        coord_q2_s[2] <- 1
+        coord_q2_e[1] <- 1
+        coord_p2_e[1] <- 0
+      } else {
+        coord_q2_s[1:2] <- 0
+        coord_q2_e[1] <- 0
+      }
+      if (ep2_1[2] > ep2_2[2]) {
+        coord_q2_s[3] <- 1
+        coord_q2_e[2:3] <- 1
+      } else if (ep2_1[2] == ep2_2[2]) {
+        coord_q2_s[3] <- 0
+        coord_q2_e[2] <- 0
+        coord_q2_e[3] <- 1
+        coord_p2_s[3] <- 1
+      } else {
+        coord_q2_s[3] <- 0
+        coord_q2_e[2:3] <- 0
+      }
+
+      df <- data.frame(
+        player = rep(players, each = 3),
+        xs = c(coord_p1_s, coord_p2_s),
+        ys = c(coord_q1_s, coord_q2_s),
+        xe = c(coord_p1_e, coord_p2_e),
+        ye = c(coord_q1_e, coord_q2_e))
+
+    } else {
+
+      ## Player 1's best response
+      q_cut <- probs$q[1]
+      if (q_cut > 1) {
+        q_cut <- 1
+      } else if (q_cut < 0) {
+        q_cut <- 0
+      }
+      coord_q1_s <- c(0, rep(q_cut, 2))
+      coord_q1_e <- c(rep(q_cut, 2), 1)
+      coord_p1_s <- rep(NA, 3)
+      coord_p1_e <- rep(NA, 3)
+      if (ep1_1[1] >= ep1_2[1]) {
+        coord_p1_s[1:2] <- 1
+        coord_p1_e[1] <- 1
+      } else {
+        coord_p1_s[1:2] <- 0
+        coord_p1_e[1] <- 0
+      }
+      if (ep1_1[2] >= ep1_2[2]) {
+        coord_p1_s[3] <- 1
+        coord_p1_e[2:3] <- 1
+      } else {
+        coord_p1_s[3] <- 0
+        coord_p1_e[2:3] <- 0
+      }
+
+      ## Player 2's best response
+      p_cut <- probs$p[1]
+      if (p_cut > 1) {
+        p_cut <- 1
+      } else if (p_cut < 0) {
+        p_cut <- 0
+      }
+
+      coord_p2_s <- c(0, rep(p_cut, 2))
+      coord_p2_e <- c(rep(p_cut, 2), 1)
+      coord_q2_s <- rep(NA, 3)
+      coord_q2_e <- rep(NA, 3)
+      if (ep2_1[1] >= ep2_2[1]) {
+        coord_q2_s[1:2] <- 1
+        coord_q2_e[1] <- 1
+      } else {
+        coord_q2_s[1:2] <- 0
+        coord_q2_e[1] <- 0
+      }
+      if (ep2_1[2] >= ep2_2[2]) {
+        coord_q2_s[3] <- 1
+        coord_q2_e[2:3] <- 1
+      } else {
+        coord_q2_s[3] <- 0
+        coord_q2_e[2:3] <- 0
+      }
+
+      df <- data.frame(
+        player = rep(players, each = 3),
+        xs = c(coord_p1_s, coord_p2_s),
+        ys = c(coord_q1_s, coord_q2_s),
+        xe = c(coord_p1_e, coord_p2_e),
+        ye = c(coord_q1_e, coord_q2_e))
+    }
 
     brp <- ggplot2::ggplot(df) +
       ggplot2::geom_vline(xintercept = c(0, 1), color = "gray") +

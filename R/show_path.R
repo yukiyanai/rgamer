@@ -17,7 +17,7 @@ show_path <- function(x, id = NULL, all = FALSE) {
     stop("x must be a game defined by extensive_form() or its solution found by solve_efg().")
   }
 
-  if (class(x) == "extensive_form") x <- solve_efg(x, quietly = TRUE)
+  if (methods::is(x, "extensive_form")) x <- solve_efg(x, quietly = TRUE)
 
   n_sols <- x$n_sols
   if (n_sols > 1 & !all)

@@ -124,7 +124,7 @@ sim_game_abr <- function(game,
           }
           play1[i] <- try(stats::uniroot(fd1, interval = s1)$root,
                           silent = TRUE)
-          if (class(play1[i]) == "character") play1[i] <- play1[i - 1]
+          if (methods::is(play1[i], "character")) play1[i] <- play1[i - 1]
           play1 <- as.numeric(play1)
         }
         ## Player 2
@@ -147,7 +147,7 @@ sim_game_abr <- function(game,
           }
           play2[i] <- try(stats::uniroot(fd2, interval = s2)$root,
                           silent = TRUE)
-          if (class(play2[i]) == "character") play2[i] <- play2[i - 1]
+          if (methods::is(play2[i], "character")) play2[i] <- play2[i - 1]
           play2 <- as.numeric(play2)
         }
       }
@@ -188,7 +188,7 @@ sim_game_abr <- function(game,
                          upper = s1[2],
                          control = list(fnscale = -1))$par,
             silent = TRUE)
-          if (class(play1[i]) == "try-error") play1[i] <- play1[i - 1]
+          if (methods::is(play1[i], "try-error")) play1[i] <- play1[i - 1]
         }
         ## Player2
         play2[i] <- play2[i - 1]
@@ -218,7 +218,7 @@ sim_game_abr <- function(game,
                          upper = s2[2],
                          control = list(fnscale = -1))$par,
             silent = TRUE)
-          if (class(play2[i]) == "try-error") play2[i] <- play2[i - 1]
+          if (methods::is(play2[i], "try-error")) play2[i] <- play2[i - 1]
         }
       }
     }

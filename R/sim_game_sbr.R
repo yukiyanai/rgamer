@@ -115,7 +115,7 @@ sim_game_sbr <- function(game,
         }
         br <- try(stats::uniroot(fd1, interval = s1)$root,
                         silent = TRUE)
-        if (class(br) == "try-error") {
+        if (methods::is(br, "try-error")) {
           play1[i] <- play1[i - 1]
         } else {
 
@@ -152,7 +152,7 @@ sim_game_sbr <- function(game,
         }
         br <- try(stats::uniroot(fd2, interval = s2)$root,
                         silent = TRUE)
-        if (class(br) == "try-error") {
+        if (methods::is(br, "try-error")) {
           play2[i] <- play2[i - 1]
         } else {
 
@@ -210,7 +210,7 @@ sim_game_sbr <- function(game,
                        upper = s1[2],
                        control = list(fnscale = -1))$par,
           silent = TRUE)
-        if (class(br) == "try-error") {
+        if (methods::is(br, "try-error")) {
           play1[i] <- play1[i - 1]
         } else {
 
@@ -254,7 +254,7 @@ sim_game_sbr <- function(game,
                        upper = s2[2],
                        control = list(fnscale = -1))$par,
           silent = TRUE)
-        if (class(br) == "try-error") {
+        if (methods::is(br, "try-error")) {
           play2[i] <- play2[i - 1]
         } else {
 

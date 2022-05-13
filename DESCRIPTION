@@ -33,6 +33,7 @@ Imports:
     grDevices,
     kableExtra,
     MASS,
+    methods,
     patchwork,
     purrr,
     stats,
@@ -43,7 +44,6 @@ Imports:
     tidyselect,
     tuple,
     utils,
-    lifecycle,
     RColorBrewer,
 ByteCompile: TRUE
 VignetteBuilder: knitr
