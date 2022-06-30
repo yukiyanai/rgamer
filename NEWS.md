@@ -1,3 +1,13 @@
+# rgamer 0.0.19
+
+## New Features
+
+- `matching_mt1()` implements many-to-one matching.
+
+## Changes
+
+- Fixed bugs in `matching()` with DA (Gale-Shapley) algorithm used.
+
 # rgamer 0.0.18
 
 ## Changes

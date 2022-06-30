@@ -19,7 +19,7 @@ solve_seq <- function(game,
                       precision = 1L,
                       quietly = FALSE) {
 
-  if (class(game) != "sequential_form")
+  if (!methods::is(game, "sequential_form"))
     stop("game must be an object of 'sequential_form' class created by sequential_form() function.")
 
   if (game$type == "matrix") {

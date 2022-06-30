@@ -51,7 +51,7 @@ solve_nfg <- function(game,
                       color_palette = "Set1") {
 
   # error if game is not "normal_form" class
-  if (class(game) != "normal_form")
+  if (!methods::is(game, "normal_form"))
     stop("game must be an object of 'normal_form' class created by normal_form() function.")
 
   if (game$type == "matrix") {

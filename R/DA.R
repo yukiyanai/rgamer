@@ -34,8 +34,8 @@ DA <- function(g1_prefs,
   g2_order <- lapply(g2_prefs, reorder_prefs)
 
   ## placeholders for matched partners
-  g1_matched <- rep(0, n_g1)
-  g2_matched <- rep(0, n_g2)
+  g1_matched <- rep(NA_integer_, n_g1)
+  g2_matched <- rep(NA_integer_, n_g2)
 
   ## number of matches among proposers
   num_match <- 0

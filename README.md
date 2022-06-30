@@ -234,7 +234,7 @@ Then, you can pass it to `solve_nfg()`, which displays the best response
 correspondences by default.
 
 ``` r
-s_game3 <- solve_nfg(game3,)
+s_game3 <- solve_nfg(game3)
 #> approximated NE: (9.3, 9.3)
 #> The obtained NE might be only a part of the solutions.
 #> Please examine br_plot (best response plot) carefully.

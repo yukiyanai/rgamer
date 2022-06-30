@@ -53,6 +53,25 @@ is_stable <- function(x, verbose = FALSE) {
     }
   }
 
+  ## check duplicates for many-to-one matching
+  if (nrow(block) != 0 & !is.null(x$data_cleaned)) {
+    keep <- rep(NA, nrow(block))
+    for (i in 1:nrow(block)) {
+      p_name_i <- block$proposer[i]
+      cur_match <- stringr::str_replace(
+        df1[df1$name == p_name_i, "match"],
+        pattern = "_\\d+",
+        replacement = "")
+      new_match <- stringr::str_replace(
+        block$proposed[i],
+        pattern = "_\\d+",
+        replacement = "")
+      keep[i] <- ifelse(cur_match == new_match, FALSE, TRUE)
+    }
+    block <- block[keep, ]
+  }
+
+
   if (nrow(block) == 0) {
     res <- TRUE
     block <- NULL

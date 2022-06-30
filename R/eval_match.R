@@ -1,5 +1,5 @@
 #' @title Evaluate how desirable a matching result is
-#' @description \code{eval_match()} evaluates how desirable a mathcing result is
+#' @description \code{eval_match()} evaluates how desirable a matching result is
 #'    for a specified player.
 #' @return An integer value indicating the rank of the match given their true
 #'     preference. NA will be returned if there is no match.

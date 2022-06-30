@@ -39,7 +39,7 @@ default is \code{","} for "csv", \code{"\t"} for "tsv", and \code{""}
 (\code{"Gale-Shapley"},  \code{"GS"}) or \code{"Boston"}.}
 
 \item{switch}{A logical value. If \code{TRUE}, the roles of g1 and g2 are
-switched. That is, g2 will be the proposer group, and g1 the prposed if
+switched. That is, g2 will be the proposer group, and g1 the proposed if
 \code{TRUE}. Default is \code{FALSE}.}
 
 \item{verbose}{If \code{TRUE}, matching steps will be printed on screen.

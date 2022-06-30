@@ -162,7 +162,7 @@ game3 <- normal_form(
 
 Then, you can pass it to `solve_nfg()`, which displays the best response correspondences by default.
 ```{r, message = TRUE}
-s_game3 <- solve_nfg(game3,)
+s_game3 <- solve_nfg(game3)
 ```
 
 

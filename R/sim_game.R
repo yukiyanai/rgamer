@@ -63,7 +63,8 @@ sim_game <- function(game,
 
   play1 <- play2 <- period <- player <- strategy <- d1 <- NULL
 
-  if (class(game) != "normal_form") stop("Please provide a game defined by normal_form().")
+  if (!methods::is(game, "normal_form"))
+    stop("Please provide a game defined by normal_form().")
 
   if (omega < 0 | omega > 1) stop(message("The value for omega must be in [0, 1]."))
 

@@ -25,7 +25,7 @@
 #' @param algorithm A algorithm for matching. \code{"DA"}
 #'     (\code{"Gale-Shapley"},  \code{"GS"}) or \code{"Boston"}.
 #' @param switch A logical value. If \code{TRUE}, the roles of g1 and g2 are
-#'     switched. That is, g2 will be the proposer group, and g1 the prposed if
+#'     switched. That is, g2 will be the proposer group, and g1 the proposed if
 #'     \code{TRUE}. Default is \code{FALSE}.
 #' @param verbose If \code{TRUE}, matching steps will be printed on screen.
 #'     Default to \code{TRUE}.
@@ -51,83 +51,21 @@ matching_df <- function(df1,
                          choices = c("DA", "Gale-Shapley", "GS",
                                      "Boston"))
 
-  if (!is.null(header)) {
-    if (!is.logical(header))
-      stop("'header' must be a logical value (TRUE or FALSE)")
-  }
+  f1 <- read_matching_data(data = df1,
+                           df_type = df_type,
+                           header = header,
+                           sep = sep)
 
-  ## Detect df types
-  if (is.null(df_type)) {
-    ## df1
-    if (is.data.frame(df1)) {
-      df_type_1 <- "data.frame"
-    } else if (stringr::str_ends(df1, pattern = ".csv")) {
-      df_type_1 <- "csv"
-    } else if (stringr::str_ends(df1, pattern = ".tsv")) {
-      df_type_1 <- "tsv"
-    } else if (stringr::str_ends(df1, pattern = ".table|.txt|.dat")) {
-      df_type_1 <- "table"
-    } else {
-      stop("df1 should be either a data frame or a csv/tsv/table file")
-    }
-
-    ## df2
-    if (is.data.frame(df2)) {
-      df_type_2 <- "data.frame"
-    } else if (stringr::str_ends(df2, pattern = ".csv")) {
-      df_type_2 <- "csv"
-    } else if (stringr::str_ends(df2, pattern = ".tsv")) {
-      df_type_2 <- "tsv"
-    } else if (stringr::str_ends(df2, pattern = ".table|.txt|.dat")) {
-      df_type_2 <- "table"
-    } else {
-      stop("df2 should be either a data frame or a csv/tsv/table file")
-    }
-  } else {
-      df_type <- match.arg(df_type,
-                           choices = c("data.frame", "csv", "tsv", "table"))
-      df_type_1 <- df_type_2 <- df_type
-  }
-
-  ## Read df1
-  if (df_type_1 == "data.frame") {
-    f1 <- df1
-  } else if (df_type_1 == "csv") {
-    if (is.null(header)) header <- TRUE
-    if (is.null(sep)) sep <- ","
-    f1 <- utils::read.csv(df1, header = header, sep = sep)
-  } else if (df_type_1 == "tsv") {
-    if (is.null(header)) header <- TRUE
-    if (is.null(sep)) sep <- "\t"
-    f1 <- utils::read.delim(df1, header = header, sep = sep)
-  } else {
-    if (is.null(header)) header <- FALSE
-    if (is.null(sep)) sep <- ""
-    f1 <- utils::read.table(df1, header = header, sep = sep)
-  }
-
-  ## Read df2
-  if (df_type_2 == "data.frame") {
-    f2 <- df2
-  } else if (df_type_2 == "csv") {
-    if (is.null(header)) header <- TRUE
-    if (is.null(sep)) sep <- ","
-    f2 <- utils::read.csv(df2, header = header, sep = sep)
-  } else if (df_type_2 == "tsv") {
-    if (is.null(header)) header <- TRUE
-    if (is.null(sep)) sep <- "\t"
-    f2 <- utils::read.delim(df2, header = header, sep = sep)
-  } else {
-    if (is.null(header)) header <- FALSE
-    if (is.null(sep)) sep <- ""
-    f2 <- utils::read.table(df2, header = header, sep = sep)
-  }
+  f2 <- read_matching_data(data = df2,
+                           df_type = df_type,
+                           header = header,
+                           sep = sep)
 
   n_g1 <- nrow(f1)
   n_g2 <- nrow(f2)
 
-  g1_names <- f1[, 1]
-  g2_names <- f2[, 1]
+  g1_names <- unlist(f1[, 1])
+  g2_names <- unlist(f2[, 1])
 
   ## g1: proposers
   g1_prefs <- list()

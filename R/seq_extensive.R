@@ -19,7 +19,7 @@
 #' g1e2 <- seq_extensive(g1, direction = "right", color_palette = "Accent")
 seq_extensive <- function(game, ...) {
 
-  if (class(game) != "sequential_form")
+  if (!methods::is(game, "sequential_form"))
     stop("game must be a 'sequential_form' object created by seq_form().")
 
   if (game$type != "matrix")
