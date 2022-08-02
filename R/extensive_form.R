@@ -208,6 +208,7 @@ extensive_form <- function(
                     size_action = size_action,
                     size_node_id = size_node_id,
                     size_terminal = size_terminal,
+                    linewidth = linewidth,
                     scale = scale)
 
   if (show_tree) {
@@ -269,6 +270,7 @@ extensive_form <- function(
                                    size_action = size_action,
                                    size_node_id = size_node_id,
                                    size_terminal = size_terminal,
+                                   linewidth = linewidth,
                                    scale = scale))
 
   structure(value, class = "extensive_form")
