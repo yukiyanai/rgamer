@@ -26,6 +26,7 @@ Suggests:
     rmarkdown,
     covr
 Depends:
+    R (>= 4.3.0)
     ggplot2 (>= 3.3.5)
 Imports:
     dplyr (>= 1.0.0),
