@@ -21,6 +21,7 @@ extensive_form(
   size_action = 4,
   size_node_id = 4,
   size_terminal = 2,
+  linewidth = 1,
   scale = NULL
 )
 }
@@ -76,9 +77,11 @@ is 4.}
 
 \item{size_terminal}{Size of the terminal node. Default is 2.}
 
+\item{linewidth}{Line width of edges. Default is 1.}
+
 \item{scale}{Scale \code{player_size}, \code{payoff_size},
-\code{action_size}, \code{noden_size}, \code{terminal_size}. It must be a
-positive number.}
+\code{action_size}, \code{noden_size}, \code{terminal_size}, and
+\code{linewidth}. It must be a positive number.}
 }
 \value{
 An object of "extensive_form" class, which defines an extensive-form

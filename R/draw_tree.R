@@ -31,11 +31,12 @@
 #'     is 4.
 #' @param size_node_id Size of the node id. Default is 4.
 #' @param size_terminal Size of the terminal node. Default is 2.
-#' @param scale Scale \code{player_size}, \code{payoff_size},
-#'     \code{action_size}, \code{noden_size}, \code{terminal_size}. It must be a
-#'      positive number.
+#' @param linewidth Line width of edges. Default is 1.
 #' @param restriction If TRUE, actions are restricted in a game. Restricted
 #'     actions are shown by dotted lines.
+#' @param scale Scale \code{player_size}, \code{payoff_size},
+#'     \code{action_size}, \code{noden_size}, \code{terminal_size}, and
+#'     \code{linewidth}. It must be a positive number.
 #' @return A ggplot object of a game tree.
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @noRd
@@ -53,6 +54,7 @@ draw_tree <- function(df_path,
                       size_action = 4,
                       size_node_id = 4,
                       size_terminal = 2,
+                      linewidth = 1,
                       scale = NULL,
                       restriction = FALSE) {
 
@@ -149,14 +151,15 @@ draw_tree <- function(df_path,
                             ggplot2::aes(x = x_s,
                                          xend = x_e,
                                          y = y_s,
-                                         yend = y_e)) +
+                                         yend = y_e),
+                            size = linewidth) +
       ggplot2::geom_segment(data = df_sol,
                             ggplot2::aes(x = x_s,
                                          xend = x_e,
                                          y = y_s,
                                          yend = y_e,
                                          color = as.factor(player_color)),
-                            size = 2)
+                            size = 2 * linewidth)
   } else {
     if (restriction) {
       tree <- ggplot2::ggplot() +
@@ -164,7 +167,8 @@ draw_tree <- function(df_path,
                               ggplot2::aes(x = x_s,
                                            xend = x_e,
                                            y = y_s,
-                                           yend = y_e))
+                                           yend = y_e),
+                              size = linewidth)
       df_path_dbl <- df_path |>
         dplyr::filter(bold)
       tree <- tree +
@@ -173,14 +177,15 @@ draw_tree <- function(df_path,
                                            xend = x_e,
                                            y = y_s,
                                            yend = y_e),
-                              size = 2)
+                              size = 2 * linewidth)
     } else {
       tree <- ggplot2::ggplot() +
         ggplot2::geom_segment(data = df_path,
                               ggplot2::aes(x = x_s,
                                            xend = x_e,
                                            y = y_s,
-                                           yend = y_e))
+                                           yend = y_e),
+                              size = 1 * linewidth)
     }
   }
 

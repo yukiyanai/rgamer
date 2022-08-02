@@ -38,9 +38,10 @@
 #'     is 4.
 #' @param size_node_id Size of the node id. Default is 4.
 #' @param size_terminal Size of the terminal node. Default is 2.
+#' @param linewidth Line width of edges. Default is 1.
 #' @param scale Scale \code{player_size}, \code{payoff_size},
-#'     \code{action_size}, \code{noden_size}, \code{terminal_size}. It must be a
-#'      positive number.
+#'     \code{action_size}, \code{noden_size}, \code{terminal_size}, and
+#'     \code{linewidth}. It must be a positive number.
 #' @return An object of "extensive_form" class, which defines an extensive-form
 #'     (or sequential) game.
 #' @include set_nodes.R set_paths.R extensive_strategy.R
@@ -114,6 +115,7 @@ extensive_form <- function(
   size_action = 4,
   size_node_id = 4,
   size_terminal = 2,
+  linewidth = 1,
   scale = NULL) {
 
   direction <- match.arg(direction,
@@ -153,6 +155,7 @@ extensive_form <- function(
     size_action <- size_action * scale
     size_node_id <- size_node_id * scale
     size_terminal <- size_terminal * scale
+    linewidth <- linewidth * scale
   }
 
   # count the number of choices at each node

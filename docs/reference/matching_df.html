@@ -85,36 +85,53 @@ a pair of data files (csv, tsv, or table).</p>
     <dl><dt>df1</dt>
 <dd><p>A data frame or a data file containing preferences of
 the proposers.</p></dd>
+
+
 <dt>df2</dt>
 <dd><p>A data frame or a data file containing preferences of
 the proposed.</p></dd>
+
+
 <dt>df_type</dt>
 <dd><p>Type of <code>df1</code> and <code>df2</code>, which should be one of
 <code>"data.frame"</code>, <code>"csv"</code>, <code>"tsv"</code>, or <code>"table"</code>.
 If not specified, <code>matching_df()</code> tries to determine the type.</p></dd>
+
+
 <dt>header</dt>
 <dd><p>A logical value showing if the data file has the header
 (variable names) row. If not specified, default is <code>TRUE</code> for
 "csv" and "tsv", and <code>FALSE</code> for "table".</p></dd>
+
+
 <dt>sep</dt>
 <dd><p>The field separator character. Values on each line of the
 file are separated by this character. If not specified,
 default is <code>","</code> for "csv", <code>"\t"</code> for "tsv", and <code>""</code>
 (white space) for "table".</p></dd>
+
+
 <dt>algorithm</dt>
 <dd><p>A algorithm for matching. <code>"DA"</code>
 (<code>"Gale-Shapley"</code>,  <code>"GS"</code>) or <code>"Boston"</code>.</p></dd>
+
+
 <dt>switch</dt>
 <dd><p>A logical value. If <code>TRUE</code>, the roles of g1 and g2 are
 switched. That is, g2 will be the proposer group, and g1 the proposed if
 <code>TRUE</code>. Default is <code>FALSE</code>.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>If <code>TRUE</code>, matching steps will be printed on screen.
 Default to <code>TRUE</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list of "matching" class containing
+    
+
+<p>A list of "matching" class containing
 (1) a data frame of the matching results,
 (2) a character string showing which algorithm was used,
 (3) a character string of the matching results,
@@ -148,7 +165,7 @@ Default to <code>TRUE</code>.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>
