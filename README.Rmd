@@ -1,7 +1,8 @@
 ---
 output: 
   github_document:
-    #pandoc_args: --webtex=https://ibm.codecogs.com/png.latex?
+    pandoc_args: --webtex
+#    pandoc_args: --webtex=https://ibm.codecogs.com/png.latex?
 always_allow_html: true
 ---
 
