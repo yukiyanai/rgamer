@@ -351,8 +351,7 @@ draw_tree <- function(df_path,
                           ggplot2::aes(x = x, y = y,
                                        label = player,
                                        color = as.factor(player_color)),
-
-                          size = size_player,
+                          labels.size = size_player,
                           family = family) +
       ggplot2::geom_text(data = df_path,
                          ggplot2::aes(x = x_m,

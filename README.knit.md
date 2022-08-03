@@ -8,17 +8,7 @@ always_allow_html: true
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  message = FALSE,
-  #out.width = "100%",
-  fig.width = 5,
-  fig.height = 5
-)
-```
+
 
 # rgamer <img src="logo.png" align="right" alt="" width="120" />
 
@@ -41,21 +31,29 @@ In addition, it suggests some numerical solutions for games of which it is diffi
 
 <!--
 #You can install the released version of rgamer from [CRAN](https://CRAN.R-project.org) with:
-``` {r}
+
+```r
 install.packages("rgamer")
+#> Warning: package 'rgamer' is not available for this version of R
+#> 
+#> A version of this package for your version of R might be available elsewhere,
+#> see the ideas at
+#> https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages
 ```
 -->
 
 You can install the development version from [GitHub](https://github.com/) with:
 
-``` {r, eval = FALSE}
+
+```r
 # install.packages("remotes")
 remotes::install_github("yukiyanai/rgamer")
 ```
 
 or
 
-``` {r, eval = FALSE}
+
+```r
 # install.packages("devtools")
 devtools::install_github("yukiyanai/rgamer")
 ```
@@ -63,7 +61,8 @@ devtools::install_github("yukiyanai/rgamer")
 
 ## Examples
 
-```{r}
+
+```r
 library(rgamer)
 ```
 
@@ -76,7 +75,8 @@ An example of a normal-form game (prisoner's dilemma).
 - Payoff: $\{$(-1, 0, -3, -2), (-1, -3, 0, -2)$\}$
 
 First, you define the game by `normal_form()`:
-```{r}
+
+```r
 game1 <- normal_form(
   players = c("Kamijo", "Yanai"),
   s1 = c("Stays silent", "Betrays"), 
@@ -86,7 +86,8 @@ game1 <- normal_form(
 ```
 
 You can specify payoffs for each cell of the game matrix as follows.
-```{r}
+
+```r
 game1b <- normal_form(
   players = c("Kamijo", "Yanai"),
   s1 = c("Stays silent", "Betrays"), 
@@ -99,17 +100,46 @@ game1b <- normal_form(
 
 
 Then, you can pass it to `solve_nfg()` function to get the table of the game and the Nash equilibrium.
-```{r, message = TRUE}
+
+```r
 s_game1 <- solve_nfg(game1, show_table = FALSE)
+#> Pure-strategy NE: [Betrays, Betrays]
 ```
 
-```{r, eval = TRUE, results = "asis"}
+
+```r
 s_game1$table
 ```
-```{r, eval = FALSE, echo = FALSE, fig.height = 4}
-kableExtra::as_image(s_game1$table, 
-                     width = 2.5)
-```
+
+<table class=" lightable-classic table" style="font-family: Arial; margin-left: auto; margin-right: auto; width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+<tr>
+<th style="empty-cells: hide;" colspan="2"></th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; " colspan="2"><div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">Yanai</div></th>
+</tr>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> strategy </th>
+   <th style="text-align:center;"> Stays silent </th>
+   <th style="text-align:center;"> Betrays </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Kamijo </td>
+   <td style="text-align:center;"> Stays silent </td>
+   <td style="text-align:center;"> -1, -1 </td>
+   <td style="text-align:center;"> -3, 0^ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;">  </td>
+   <td style="text-align:center;"> Betrays </td>
+   <td style="text-align:center;"> 0^, -3 </td>
+   <td style="text-align:center;"> -2^, -2^ </td>
+  </tr>
+</tbody>
+</table>
+
 
 
 ### Example 2
@@ -121,7 +151,8 @@ An example of a coordination game.
 - Payoff: $\{$(10, 8, 0, 7), (10, 0, 8, 7)$\}$
 
 Define the game by `normal_form()`:
-```{r}
+
+```r
 game2 <- normal_form(
   players = c("Kamijo", "Yanai"),
   s1 = c("Stag", "Hare"), 
@@ -131,14 +162,22 @@ game2 <- normal_form(
 ```
 
 Then, you can pass it to `solve_nfg()` function to get NEs. Set `mixed = TRUE` to find mixed-strategy NEs well.
-```{r, results = 'asis', message = TRUE}
+
+```r
 s_game2 <- solve_nfg(game2, mixed = TRUE, show_table = FALSE)
+#> Pure-strategy NE: [Stag, Stag], [Hare, Hare]
+#> Mixed-strategy NE: [(7/9, 2/9), (7/9, 2/9)]
+#> The obtained mixed-strategy NE might be only a part of the solutions.
+#> Please examine br_plot (best response plot) carefully.
 ```
 
 For a 2-by-2 game, you can plot the best response correspondences as well.
-```{r}
+
+```r
 s_game2$br_plot
 ```
+
+![](man/figures/README-unnamed-chunk-13-1.png)<!-- -->
 
 
 
@@ -151,7 +190,8 @@ An example of a normal-form game:
 - Payoff: $\{f_x(x, y) = -x^2 + (28 - y)x, f_y(x, y) = -y^2 + (28 - x) y\}$
 
 You can define a game by specifying payoff functions as character vectors using `normal_form()`:
-```{r}
+
+```r
 game3 <- normal_form(
   players = c("A", "B"),
   payoffs1 = "-x^2 + (28 - y) * x",
@@ -162,9 +202,15 @@ game3 <- normal_form(
 ```
 
 Then, you can pass it to `solve_nfg()`, which displays the best response correspondences by default.
-```{r, message = TRUE}
+
+```r
 s_game3 <- solve_nfg(game3)
+#> approximated NE: (9.3, 9.3)
+#> The obtained NE might be only a part of the solutions.
+#> Please examine br_plot (best response plot) carefully.
 ```
+
+![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->
 
 
 ### Example 4
@@ -176,7 +222,8 @@ An example of a normal-form game:
 - Payoff: $\{f_x(x, y) = -x^a + (b - y)x, f_y(x, y) = -y^s + (t - x) y\}$
 
 You can define a normal-form game by specifying payoffs by R functions.
-```{r}
+
+```r
 f_x <- function(x, y, a, b) {
   -x^a + (b - y) * x
 }
@@ -193,33 +240,47 @@ game4 <- normal_form(
 ```
 
 Then, you can approximate a solution numerically by `solve_nfg()`. Note that you need to set the parameter values of the function that should be treated as constants by arguments `cons1` and `cons2`, each of which accepts a named list. In addition, you can suppress the plot of best responses by `plot = FALSE`.
-```{r, message = TRUE}
+
+```r
 s_game4 <- solve_nfg(
   game = game4,
   cons1 = list(a = 2, b = 28),
   cons2 = list(s = 2, t = 28),
   plot = FALSE)
+#> approximated NE: (9.3, 9.3)
+#> The obtained NE might be only a part of the solutions.
+#> Please examine br_plot (best response plot) carefully.
 ```
 
 You can increase the precision of approximation by `precision`, which takes a natural number (default is `precision = 1`).
-```{r, message = TRUE}
+
+```r
 s_game4b <- solve_nfg(
   game = game4,
   cons1 = list(a = 2, b = 28),
   cons2 = list(s = 2, t = 28),
   precision = 3)
+#> approximated NE: (9.333, 9.333)
+#> The obtained NE might be only a part of the solutions.
+#> Please examine br_plot (best response plot) carefully.
 ```
 
+![](man/figures/README-unnamed-chunk-18-1.png)<!-- -->
+
 You can extract the best response plot with NE marked as follows.
-```{r}
+
+```r
 s_game4b$br_plot_NE
 ```
+
+![](man/figures/README-unnamed-chunk-19-1.png)<!-- -->
 
 
 ## Example 5
 
 You can define payoffs by R functions and evaluate them at some discretized values by setting `discretize = TRUE`.  The following is a Bertrand competition example: 
-```{r}
+
+```r
 func_price1 <- function(p, q) {
   if (p < q) {
     profit <- p
@@ -252,14 +313,92 @@ game5 <- normal_form(
 ```
 
 Then, you can examine the specified part of the game.
-```{r, eval = TRUE, results = "asis"}
+
+```r
 s_game5 <- solve_nfg(game5, mark_br = FALSE)
 ```
-```{r, echo = FALSE, message = TRUE, eval = FALSE}
-s_game5 <- solve_nfg(game5, show_table = FALSE, mark_br = FALSE)
-kableExtra::as_image(s_game5$table,
-                     width = 4)
-```
+
+<table class=" lightable-classic table" style="font-family: Arial; margin-left: auto; margin-right: auto; width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+<tr>
+<th style="empty-cells: hide;" colspan="2"></th>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; " colspan="6"><div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">Player 2</div></th>
+</tr>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> strategy </th>
+   <th style="text-align:center;"> 0 </th>
+   <th style="text-align:center;"> 2 </th>
+   <th style="text-align:center;"> 4 </th>
+   <th style="text-align:center;"> 6 </th>
+   <th style="text-align:center;"> 8 </th>
+   <th style="text-align:center;"> 10 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;font-weight: bold;"> Player 1 </td>
+   <td style="text-align:center;"> 0 </td>
+   <td style="text-align:center;"> 0, 0 </td>
+   <td style="text-align:center;"> 0, 0 </td>
+   <td style="text-align:center;"> 0, 0 </td>
+   <td style="text-align:center;"> 0, 0 </td>
+   <td style="text-align:center;"> 0, 0 </td>
+   <td style="text-align:center;"> 0, 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;">  </td>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> 0, 0 </td>
+   <td style="text-align:center;"> 1, 1 </td>
+   <td style="text-align:center;"> 2, 0 </td>
+   <td style="text-align:center;"> 2, 0 </td>
+   <td style="text-align:center;"> 2, 0 </td>
+   <td style="text-align:center;"> 2, 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;">  </td>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> 0, 0 </td>
+   <td style="text-align:center;"> 0, 2 </td>
+   <td style="text-align:center;"> 2, 2 </td>
+   <td style="text-align:center;"> 4, 0 </td>
+   <td style="text-align:center;"> 4, 0 </td>
+   <td style="text-align:center;"> 4, 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;">  </td>
+   <td style="text-align:center;"> 6 </td>
+   <td style="text-align:center;"> 0, 0 </td>
+   <td style="text-align:center;"> 0, 2 </td>
+   <td style="text-align:center;"> 0, 4 </td>
+   <td style="text-align:center;"> 3, 3 </td>
+   <td style="text-align:center;"> 6, 0 </td>
+   <td style="text-align:center;"> 6, 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;">  </td>
+   <td style="text-align:center;"> 8 </td>
+   <td style="text-align:center;"> 0, 0 </td>
+   <td style="text-align:center;"> 0, 2 </td>
+   <td style="text-align:center;"> 0, 4 </td>
+   <td style="text-align:center;"> 0, 6 </td>
+   <td style="text-align:center;"> 4, 4 </td>
+   <td style="text-align:center;"> 8, 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-weight: bold;">  </td>
+   <td style="text-align:center;"> 10 </td>
+   <td style="text-align:center;"> 0, 0 </td>
+   <td style="text-align:center;"> 0, 2 </td>
+   <td style="text-align:center;"> 0, 4 </td>
+   <td style="text-align:center;"> 0, 6 </td>
+   <td style="text-align:center;"> 0, 8 </td>
+   <td style="text-align:center;"> 5, 5 </td>
+  </tr>
+</tbody>
+</table>
+
 
 
 
@@ -267,7 +406,8 @@ kableExtra::as_image(s_game5$table,
 ## Example 6
 
 You can draw a tree of an extensive form game.
-```{r, fig.width = 7}
+
+```r
 game6 <- extensive_form(
   players = list("Yanai", 
                  rep("Kamijo", 2),
@@ -279,12 +419,19 @@ game6 <- extensive_form(
   direction = "right")
 ```
 
+![](man/figures/README-unnamed-chunk-23-1.png)<!-- -->
+
 And you can find the solution of the game by `solve_efg()`.
-```{r, message = TRUE}
+
+```r
 s_game6 <- solve_efg(game6)
+#> backward induction: [(stat), (stat, game)]
 ```
 
 Then, you can see the path played under a solution by `show_path()`.
-```{r, fig.width = 7}
+
+```r
 show_path(s_game6)
 ```
+
+![](man/figures/README-unnamed-chunk-25-1.png)<!-- -->

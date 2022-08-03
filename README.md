@@ -222,8 +222,8 @@ s_game2$br_plot
 
 An example of a normal-form game:
 
--   Player: ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{") A,
-    B ![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
+-   Player:
+    ![\\{A, B\\}](https://latex.codecogs.com/png.latex?%5C%7BA%2C%20B%5C%7D "\{A, B\}")
 -   Strategy:
     ![\\{x \in \[0, 30\], y \in \[0, 30\] \\}](https://latex.codecogs.com/png.latex?%5C%7Bx%20%5Cin%20%5B0%2C%2030%5D%2C%20y%20%5Cin%20%5B0%2C%2030%5D%20%5C%7D "\{x \in [0, 30], y \in [0, 30] \}")
 -   Payoff:
