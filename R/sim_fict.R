@@ -48,7 +48,7 @@ sim_fict <- function(game,
     B1_list[[i]] <- res$belief$B1
     B2_list[[i]] <- res$belief$B2
     P1_list[[i]] <- res$choice_prob$P1
-    P2_list[[i]] <- res$choice_prob$P1
+    P2_list[[i]] <- res$choice_prob$P2
   }
 
   data_long <- dplyr::bind_rows(data_list) |>
