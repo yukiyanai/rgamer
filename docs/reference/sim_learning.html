@@ -89,33 +89,23 @@ model.</p>
     <dl><dt>game</dt>
 <dd><p>An object of <code>normal_form</code> class defined by
 <code><a href="normal_form.html">normal_form()</a></code>.</p></dd>
-
-
 <dt>n_samples</dt>
 <dd><p>A positive integer specifying the number of samples to be
 simulated.</p></dd>
-
-
 <dt>n_periods</dt>
 <dd><p>A positive integer specifying how many times the game is
 played within each sample.</p></dd>
-
-
 <dt>type</dt>
 <dd><p>A character string to tell which learning models should be
 simulated. The available options are <code>"EWA"</code>,
 <code>"reinforcement"</code> (choice reinforcement), and <code>"belief"</code>
 (belief based model).  <code>"reinforcement"</code> and <code>"belief"</code> are
 special cases of <code>"EWA"</code>.</p></dd>
-
-
 <dt>lambda</dt>
 <dd><p>A positive real value representing the players' sensitivity to
 attraction values of strategies. As <code>lambda</code> gets larger, the choice
 will be dependent on attraction values more heavily.  As <code>lambda</code>
 gets close to 0, a strategy will tend to be chosen randomly.</p></dd>
-
-
 <dt>delta</dt>
 <dd><p>A real number between 0 and 1. This parameter controls how fast
 attraction values of strategies that are not chosen are updated.  If
@@ -123,34 +113,22 @@ attraction values of strategies that are not chosen are updated.  If
 selected at the given period (i.e., reinforcement learning is
 implemented). If <code>delta = 1</code>, attraction is updated equally for all
 strategies (i.e., belief-based learning model is applied).</p></dd>
-
-
 <dt>rho</dt>
 <dd><p>A real value between 0 and 1. This parameter controls the learning
 speed. <code>rho = 0</code> for "reinforcement" leaning and "belief" based
 learning.</p></dd>
-
-
 <dt>phi</dt>
 <dd><p>A real value between 0 and 1. This parameter controls how much
 attraction values at the current period are constrained by the past
 attraction values. If <code>phi = 0</code>, the past attraction values are
 ignored. <code>phi = 1</code> for "reinforcement" leaning and "belief" based
 learning.</p></dd>
-
-
 <dt>A1_init</dt>
 <dd><p>An initial value of Player 1's attraction for each strategy.</p></dd>
-
-
 <dt>A2_init</dt>
 <dd><p>An initial value of Player 2's attraction for each strategy.</p></dd>
-
-
 <dt>N_init</dt>
 <dd><p>An initial value of N.</p></dd>
-
-
 <dt>plot_range_y</dt>
 <dd><p>Choose the range of vertical axis for plots. Available
 choices are <code>"fixed"</code>, <code>"full"</code> and <code>"free"</code>.
@@ -159,13 +137,10 @@ simulation results.  If <code>plot_range_y = "full"</code>, The range
 defined in <code>game</code> is used for each player, which can be different
 between players. With <code>"fixed"</code>, the same y-axis is used for both
 players.</p></dd>
-
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>A list containing (1) a list of data frames of strategies chosen by
+    <p>A list containing (1) a list of data frames of strategies chosen by
 each player, (2) a single long data frame of (1)'s data frames combined,
 (3) a list of each  player's attraction values for each strategy
 (data frames), (4) a list of probability of each strategy being chosen
@@ -193,7 +168,7 @@ each player, (2) a single long data frame of (1)'s data frames combined,
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Learn Game Theory Using R • rgamer</title>
+<title>rgamer: Learn Game Theory Using R • rgamer</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -19,7 +19,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><!-- docsearch --><script src="docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.3/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="docsearch.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Learn Game Theory Using R">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="rgamer: Learn Game Theory Using R">
 <meta property="og:description" content="rgamer is an R package that helps students learn (and instructors teach) 
     game theory using R. The rgamer package provides visual displays of basic two-person games 
     and finds Nash equilibria of the games.">
@@ -132,11 +132,11 @@ install.packages("rgamer")
 </h3>
 <p>An example of a normal-form game (prisoner’s dilemma).</p>
 <ul>
-<li>Player: <span class="math inline">{</span>Kamijo, Yanai<span class="math inline">}</span>
+<li>Player: <embed src="https://latex.codecogs.com/png.latex?%5C%7B" title="{"></embed>Kamijo, Yanai<embed src="https://latex.codecogs.com/png.latex?%5C%7D" title="}"></embed>
 </li>
-<li>Strategy: <span class="math inline">{</span>(Stays silent, Betrays), (Stays silent, Betrays)<span class="math inline">}</span>
+<li>Strategy: <embed src="https://latex.codecogs.com/png.latex?%5C%7B" title="{"></embed>(Stays silent, Betrays), (Stays silent, Betrays)<embed src="https://latex.codecogs.com/png.latex?%5C%7D" title="}"></embed>
 </li>
-<li>Payoff: <span class="math inline">{</span>(-1, 0, -3, -2), (-1, -3, 0, -2)<span class="math inline">}</span>
+<li>Payoff: <embed src="https://latex.codecogs.com/png.latex?%5C%7B" title="{"></embed>(-1, 0, -3, -2), (-1, -3, 0, -2)<embed src="https://latex.codecogs.com/png.latex?%5C%7D" title="}"></embed>
 </li>
 </ul>
 <p>First, you define the game by <code><a href="reference/normal_form.html">normal_form()</a></code>:</p>
@@ -223,11 +223,11 @@ Betrays
 </h3>
 <p>An example of a coordination game.</p>
 <ul>
-<li>Player: <span class="math inline">{</span>Kamijo, Yanai <span class="math inline">}</span>
+<li>Player: <embed src="https://latex.codecogs.com/png.latex?%5C%7B" title="{"></embed>Kamijo, Yanai <embed src="https://latex.codecogs.com/png.latex?%5C%7D" title="}"></embed>
 </li>
-<li>Strategy: <span class="math inline">{</span>(Stag, Hare), (Stag, Hare)<span class="math inline">}</span>
+<li>Strategy: <embed src="https://latex.codecogs.com/png.latex?%5C%7B" title="{"></embed>(Stag, Hare), (Stag, Hare)<embed src="https://latex.codecogs.com/png.latex?%5C%7D" title="}"></embed>
 </li>
-<li>Payoff: <span class="math inline">{</span>(10, 8, 0, 7), (10, 0, 8, 7)<span class="math inline">}</span>
+<li>Payoff: <embed src="https://latex.codecogs.com/png.latex?%5C%7B" title="{"></embed>(10, 8, 0, 7), (10, 0, 8, 7)<embed src="https://latex.codecogs.com/png.latex?%5C%7D" title="}"></embed>
 </li>
 </ul>
 <p>Define the game by <code><a href="reference/normal_form.html">normal_form()</a></code>:</p>
@@ -255,11 +255,11 @@ Betrays
 </h3>
 <p>An example of a normal-form game:</p>
 <ul>
-<li>Player: <span class="math inline">{</span> A, B <span class="math inline">}</span>
+<li>Player: <embed src="https://latex.codecogs.com/png.latex?%5C%7BA%2C%20B%5C%7D" title="{A, B}"></embed>
 </li>
-<li>Strategy: <span class="math inline">{<em>x</em> ∈ [0,30], <em>y</em> ∈ [0,30]}</span>
+<li>Strategy: <embed src="https://latex.codecogs.com/png.latex?%5C%7Bx%20%5Cin%20%5B0%2C%2030%5D%2C%20y%20%5Cin%20%5B0%2C%2030%5D%20%5C%7D" title="{x \in [0, 30], y \in [0, 30] }"></embed>
 </li>
-<li>Payoff: <span class="math inline">{<em>f</em><sub><em>x</em></sub>(<em>x</em>,<em>y</em>) =  − <em>x</em><sup>2</sup> + (28−<em>y</em>)<em>x</em>, <em>f</em><sub><em>y</em></sub>(<em>x</em>,<em>y</em>) =  − <em>y</em><sup>2</sup> + (28−<em>x</em>)<em>y</em>}</span>
+<li>Payoff: <embed src="https://latex.codecogs.com/png.latex?%5C%7Bf_x%28x%2C%20y%29%20%3D%20-x%5E2%20%2B%20%2828%20-%20y%29x%2C%20f_y%28x%2C%20y%29%20%3D%20-y%5E2%20%2B%20%2828%20-%20x%29%20y%5C%7D" title="{f_x(x, y) = -x^2 + (28 - y)x, f_y(x, y) = -y^2 + (28 - x) y}"></embed>
 </li>
 </ul>
 <p>You can define a game by specifying payoff functions as character vectors using <code><a href="reference/normal_form.html">normal_form()</a></code>:</p>
@@ -284,11 +284,11 @@ Betrays
 </h3>
 <p>An example of a normal-form game:</p>
 <ul>
-<li>Player: <span class="math inline">{<em>A</em>, <em>B</em>}</span>
+<li>Player: <embed src="https://latex.codecogs.com/png.latex?%5C%7B%20A%2C%20B%20%5C%7D" title="{ A, B }"></embed>
 </li>
-<li>Strategy: <span class="math inline">{<em>x</em> ∈ [0,30], <em>y</em> ∈ [0,30]}</span>
+<li>Strategy: <embed src="https://latex.codecogs.com/png.latex?%5C%7Bx%20%5Cin%20%5B0%2C%2030%5D%2C%20y%20%5Cin%20%5B0%2C%2030%5D%5C%7D" title="{x \in [0, 30], y \in [0, 30]}"></embed>
 </li>
-<li>Payoff: <span class="math inline">{<em>f</em><sub><em>x</em></sub>(<em>x</em>,<em>y</em>) =  − <em>x</em><sup><em>a</em></sup> + (<em>b</em>−<em>y</em>)<em>x</em>, <em>f</em><sub><em>y</em></sub>(<em>x</em>,<em>y</em>) =  − <em>y</em><sup><em>s</em></sup> + (<em>t</em>−<em>x</em>)<em>y</em>}</span>
+<li>Payoff: <embed src="https://latex.codecogs.com/png.latex?%5C%7Bf_x%28x%2C%20y%29%20%3D%20-x%5Ea%20%2B%20%28b%20-%20y%29x%2C%20f_y%28x%2C%20y%29%20%3D%20-y%5Es%20%2B%20%28t%20-%20x%29%20y%5C%7D" title="{f_x(x, y) = -x^a + (b - y)x, f_y(x, y) = -y^s + (t - x) y}"></embed>
 </li>
 </ul>
 <p>You can define a normal-form game by specifying payoffs by R functions.</p>
@@ -645,7 +645,7 @@ Player 1
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
