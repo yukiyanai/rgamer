@@ -12,7 +12,7 @@
 #' @param payoffs A named list of payoffs. Each element of the list must be a
 #'     numeric vector of payoffs for a player. The names of the elements must
 #'     match the names of the players specified  by \code{players}.
-#' @param payoffs2 A list of payoffs. Each element of the list must be a numeric
+#' @param payoffs_node A list of payoffs. Each element of the list must be a numeric
 #'     vector of payoffs for a terminal node.
 #' @param show_tree A logical value. If \code{TRUE}, the game tree will be
 #'     displayed. Default is \code{TRUE}.
@@ -102,7 +102,7 @@ extensive_form <- function(
   players,        # list, one vector for each sequence
   actions,        # list, one vector for each node
   payoffs = NULL, # named list, one vector for each player. Names must match the unique names of the players
-  payoffs2 = NULL,# list, one vector for each terminal node
+  payoffs_node = NULL,# list, one vector for each terminal node
   show_tree = TRUE,
   show_node_id = TRUE,
   info_sets = NULL,
@@ -126,17 +126,28 @@ extensive_form <- function(
   x_s <- x_m <- x_e <- y_s <- y_m <- y_e <- id <- player <- NULL
   node_from <- s <- NULL
 
-  if (!is.null(payoffs2)) {
+  # Replace white spaces in the player names with underscores
+  players <- sapply(players,
+                    stringr::str_replace_all,
+                    pattern = " |\\u3000",
+                    replacement = "_")
+  names(payoffs) <- sapply(names(payoffs),
+                           stringr::str_replace_all,
+                           pattern = " |\\u3000",
+                           replacement = "_")
+
+
+  if (!is.null(payoffs_node)) {
     u_players <- players |>
       unlist() |>
       stats::na.omit() |>
       unique()
     n_players <- length(u_players)
-    n_tmnl <- length(payoffs2)
+    n_tmnl <- length(payoffs_node)
     p_matrix <- matrix(NA, ncol = n_players, nrow = n_tmnl)
     for (i in 1:n_tmnl) {
       for (p in 1:n_players) {
-        p_matrix[i, p] <- payoffs2[[i]][p]
+        p_matrix[i, p] <- payoffs_node[[i]][p]
       }
     }
     payoffs <- list()

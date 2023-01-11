@@ -1,3 +1,7 @@
+# rgamer 0.0.20
+
+- `extensive_form()` now accepts player names containing white spaces, but each white space will be replaced with an underscore.
+
 # rgamer 0.0.19
 
 ## New Features

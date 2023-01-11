@@ -8,7 +8,7 @@ extensive_form(
   players,
   actions,
   payoffs = NULL,
-  payoffs2 = NULL,
+  payoffs_node = NULL,
   show_tree = TRUE,
   show_node_id = TRUE,
   info_sets = NULL,
@@ -38,7 +38,7 @@ of character strings that corresponds to a specific player node.}
 numeric vector of payoffs for a player. The names of the elements must
 match the names of the players specified  by \code{players}.}
 
-\item{payoffs2}{A list of payoffs. Each element of the list must be a numeric
+\item{payoffs_node}{A list of payoffs. Each element of the list must be a numeric
 vector of payoffs for a terminal node.}
 
 \item{show_tree}{A logical value. If \code{TRUE}, the game tree will be
