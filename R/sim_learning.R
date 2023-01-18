@@ -110,7 +110,7 @@ sim_learning <- function(game,
                      N_init = N_init,
                      delta = 0,
                      phi = 1,
-                     rho = 1,
+                     rho = 0,
                      lambda = lambda)
 
       data_list[[i]] <- res$data |>

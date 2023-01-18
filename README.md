@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/rgamer)](https://CRAN.R-project.org/package=rgamer)
 [![Travis build
@@ -66,16 +66,16 @@ library(rgamer)
 
 An example of a normal-form game (prisoner’s dilemma).
 
--   Player:
-    ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")Kamijo,
-    Yanai![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
--   Strategy:
-    ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")(Stays
-    silent, Betrays), (Stays silent,
-    Betrays)![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
--   Payoff: ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")(-1,
-    0, -3, -2), (-1, -3, 0,
-    -2)![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
+- Player:
+  ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")Kamijo,
+  Yanai![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
+- Strategy:
+  ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")(Stays silent,
+  Betrays), (Stays silent,
+  Betrays)![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
+- Payoff: ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")(-1,
+  0, -3, -2), (-1, -3, 0,
+  -2)![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
 
 First, you define the game by `normal_form()`:
 
@@ -176,16 +176,15 @@ Betrays
 
 An example of a coordination game.
 
--   Player:
-    ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")Kamijo,
-    Yanai ![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
--   Strategy:
-    ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")(Stag,
-    Hare), (Stag,
-    Hare)![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
--   Payoff: ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")(10,
-    8, 0, 7), (10, 0, 8,
-    7)![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
+- Player:
+  ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")Kamijo, Yanai
+  ![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
+- Strategy:
+  ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")(Stag, Hare),
+  (Stag, Hare)![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
+- Payoff: ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")(10,
+  8, 0, 7), (10, 0, 8,
+  7)![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
 
 Define the game by `normal_form()`:
 
@@ -222,12 +221,12 @@ s_game2$br_plot
 
 An example of a normal-form game:
 
--   Player:
-    ![\\{A, B\\}](https://latex.codecogs.com/png.latex?%5C%7BA%2C%20B%5C%7D "\{A, B\}")
--   Strategy:
-    ![\\{x \in \[0, 30\], y \in \[0, 30\] \\}](https://latex.codecogs.com/png.latex?%5C%7Bx%20%5Cin%20%5B0%2C%2030%5D%2C%20y%20%5Cin%20%5B0%2C%2030%5D%20%5C%7D "\{x \in [0, 30], y \in [0, 30] \}")
--   Payoff:
-    ![\\{f_x(x, y) = -x^2 + (28 - y)x, f_y(x, y) = -y^2 + (28 - x) y\\}](https://latex.codecogs.com/png.latex?%5C%7Bf_x%28x%2C%20y%29%20%3D%20-x%5E2%20%2B%20%2828%20-%20y%29x%2C%20f_y%28x%2C%20y%29%20%3D%20-y%5E2%20%2B%20%2828%20-%20x%29%20y%5C%7D "\{f_x(x, y) = -x^2 + (28 - y)x, f_y(x, y) = -y^2 + (28 - x) y\}")
+- Player:
+  ![\\{A, B\\}](https://latex.codecogs.com/png.latex?%5C%7BA%2C%20B%5C%7D "\{A, B\}")
+- Strategy:
+  ![\\{x \in \[0, 30\], y \in \[0, 30\] \\}](https://latex.codecogs.com/png.latex?%5C%7Bx%20%5Cin%20%5B0%2C%2030%5D%2C%20y%20%5Cin%20%5B0%2C%2030%5D%20%5C%7D "\{x \in [0, 30], y \in [0, 30] \}")
+- Payoff:
+  ![\\{f_x(x, y) = -x^2 + (28 - y)x, f_y(x, y) = -y^2 + (28 - x) y\\}](https://latex.codecogs.com/png.latex?%5C%7Bf_x%28x%2C%20y%29%20%3D%20-x%5E2%20%2B%20%2828%20-%20y%29x%2C%20f_y%28x%2C%20y%29%20%3D%20-y%5E2%20%2B%20%2828%20-%20x%29%20y%5C%7D "\{f_x(x, y) = -x^2 + (28 - y)x, f_y(x, y) = -y^2 + (28 - x) y\}")
 
 You can define a game by specifying payoff functions as character
 vectors using `normal_form()`:
@@ -258,12 +257,12 @@ s_game3 <- solve_nfg(game3)
 
 An example of a normal-form game:
 
--   Player:
-    ![\\{ A, B \\}](https://latex.codecogs.com/png.latex?%5C%7B%20A%2C%20B%20%5C%7D "\{ A, B \}")
--   Strategy:
-    ![\\{x \in \[0, 30\], y \in \[0, 30\]\\}](https://latex.codecogs.com/png.latex?%5C%7Bx%20%5Cin%20%5B0%2C%2030%5D%2C%20y%20%5Cin%20%5B0%2C%2030%5D%5C%7D "\{x \in [0, 30], y \in [0, 30]\}")
--   Payoff:
-    ![\\{f_x(x, y) = -x^a + (b - y)x, f_y(x, y) = -y^s + (t - x) y\\}](https://latex.codecogs.com/png.latex?%5C%7Bf_x%28x%2C%20y%29%20%3D%20-x%5Ea%20%2B%20%28b%20-%20y%29x%2C%20f_y%28x%2C%20y%29%20%3D%20-y%5Es%20%2B%20%28t%20-%20x%29%20y%5C%7D "\{f_x(x, y) = -x^a + (b - y)x, f_y(x, y) = -y^s + (t - x) y\}")
+- Player:
+  ![\\{ A, B \\}](https://latex.codecogs.com/png.latex?%5C%7B%20A%2C%20B%20%5C%7D "\{ A, B \}")
+- Strategy:
+  ![\\{x \in \[0, 30\], y \in \[0, 30\]\\}](https://latex.codecogs.com/png.latex?%5C%7Bx%20%5Cin%20%5B0%2C%2030%5D%2C%20y%20%5Cin%20%5B0%2C%2030%5D%5C%7D "\{x \in [0, 30], y \in [0, 30]\}")
+- Payoff:
+  ![\\{f_x(x, y) = -x^a + (b - y)x, f_y(x, y) = -y^s + (t - x) y\\}](https://latex.codecogs.com/png.latex?%5C%7Bf_x%28x%2C%20y%29%20%3D%20-x%5Ea%20%2B%20%28b%20-%20y%29x%2C%20f_y%28x%2C%20y%29%20%3D%20-y%5Es%20%2B%20%28t%20-%20x%29%20y%5C%7D "\{f_x(x, y) = -x^a + (b - y)x, f_y(x, y) = -y^s + (t - x) y\}")
 
 You can define a normal-form game by specifying payoffs by R functions.
 

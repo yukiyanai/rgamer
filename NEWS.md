@@ -1,3 +1,8 @@
+# rgamer 0.0.21
+
+- First release of the stable version.
+- Fixed a bug of reinforcement learning in `sim_learning()` function.
+
 # rgamer 0.0.20
 
 - `extensive_form()` now accepts player names containing white spaces, but each white space will be replaced with an underscore.

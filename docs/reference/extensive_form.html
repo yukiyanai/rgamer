@@ -18,7 +18,7 @@ a game tree."><meta property="og:image" content="https://yukiyanai.github.io/rga
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.20</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.21</span>
       </span>
     </div>
 
@@ -70,7 +70,7 @@ a game tree.</p>
   <span class="va">players</span>,
   <span class="va">actions</span>,
   payoffs <span class="op">=</span> <span class="cn">NULL</span>,
-  payoffs2 <span class="op">=</span> <span class="cn">NULL</span>,
+  payoffs_node <span class="op">=</span> <span class="cn">NULL</span>,
   show_tree <span class="op">=</span> <span class="cn">TRUE</span>,
   show_node_id <span class="op">=</span> <span class="cn">TRUE</span>,
   info_sets <span class="op">=</span> <span class="cn">NULL</span>,
@@ -102,7 +102,7 @@ of character strings that corresponds to a specific player node.</p></dd>
 <dd><p>A named list of payoffs. Each element of the list must be a
 numeric vector of payoffs for a player. The names of the elements must
 match the names of the players specified  by <code>players</code>.</p></dd>
-<dt>payoffs2</dt>
+<dt>payoffs_node</dt>
 <dd><p>A list of payoffs. Each element of the list must be a numeric
 vector of payoffs for a terminal node.</p></dd>
 <dt>show_tree</dt>
