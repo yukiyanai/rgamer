@@ -11,7 +11,8 @@ matching(
   g2_names = NULL,
   algorithm = "DA",
   switch = FALSE,
-  verbose = TRUE
+  verbose = TRUE,
+  mt1 = FALSE
 )
 }
 \arguments{
@@ -36,6 +37,9 @@ switched. That is, g2 will be the proposer group, and g1 the prposed if
 
 \item{verbose}{If \code{TRUE}, matching steps will be printed on screen.
 Default to \code{TRUE}.}
+
+\item{mt1}{A logical valu. \code{TRUE} for many-to-one matching.
+Default to \code{FALSE}}
 }
 \value{
 A list of "matching" class containing

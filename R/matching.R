@@ -22,6 +22,8 @@
 #'     \code{TRUE}. Default is \code{FALSE}.
 #' @param verbose If \code{TRUE}, matching steps will be printed on screen.
 #'     Default to \code{TRUE}.
+#' @param mt1 A logical valu. \code{TRUE} for many-to-one matching.
+#'     Default to \code{FALSE}
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
 #' @examples
@@ -76,11 +78,15 @@ matching <- function(g1_prefs,
                      g2_names = NULL,
                      algorithm = "DA",
                      switch = FALSE,
-                     verbose = TRUE) {
+                     verbose = TRUE,
+                     mt1 = FALSE) {
 
   algorithm <- match.arg(algorithm,
                          choices = c("DA", "Gale-Shapley", "GS",
                                      "Boston"))
+
+  g1_prefs0 <- g1_prefs
+  g2_prefs0 <- g2_prefs
 
   n_g1 <- length(g1_prefs)
   n_g2 <- length(g2_prefs)
@@ -200,12 +206,20 @@ matching <- function(g1_prefs,
                   verbose = verbose)
   }
 
-  out$data <- assign_rank(out$data,
-                          g1_prefs = g1_prefs,
-                          g2_prefs = g2_prefs)
+  if (mt1) {
+    out$data <- assign_rank_mt1(out$data,
+                                g1_prefs = g1_prefs0,
+                                g2_prefs = g2_prefs0)
+    out$preference$proposer <- g1_prefs0
+    out$preference$proposed <- g2_prefs0
 
-  out$preference$proposer <- g1_prefs
-  out$preference$proposed <- g2_prefs
+  } else {
+    out$data <- assign_rank(out$data,
+                            g1_prefs = g1_prefs,
+                            g2_prefs = g2_prefs)
+    out$preference$proposer <- g1_prefs
+    out$preference$proposed <- g2_prefs
+  }
 
   structure(out, class = "matching")
 }

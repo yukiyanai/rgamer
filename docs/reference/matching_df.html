@@ -19,7 +19,7 @@ a pair of data files (csv, tsv, or table)."><meta property="og:image" content="h
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.21</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.22</span>
       </span>
     </div>
 
@@ -76,7 +76,8 @@ a pair of data files (csv, tsv, or table).</p>
   sep <span class="op">=</span> <span class="cn">NULL</span>,
   algorithm <span class="op">=</span> <span class="st">"DA"</span>,
   switch <span class="op">=</span> <span class="cn">FALSE</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>
+  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
+  mt1 <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -111,6 +112,9 @@ switched. That is, g2 will be the proposer group, and g1 the proposed if
 <dt>verbose</dt>
 <dd><p>If <code>TRUE</code>, matching steps will be printed on screen.
 Default to <code>TRUE</code>.</p></dd>
+<dt>mt1</dt>
+<dd><p>A logical valu. <code>TRUE</code> for many-to-one matching.
+Default to <code>FALSE</code></p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>

@@ -29,6 +29,8 @@
 #'     \code{TRUE}. Default is \code{FALSE}.
 #' @param verbose If \code{TRUE}, matching steps will be printed on screen.
 #'     Default to \code{TRUE}.
+#' @param mt1 A logical valu. \code{TRUE} for many-to-one matching.
+#'     Default to \code{FALSE}
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #' @export
 #' @examples
@@ -45,7 +47,8 @@ matching_df <- function(df1,
                         sep = NULL,
                         algorithm = "DA",
                         switch = FALSE,
-                        verbose = TRUE) {
+                        verbose = TRUE,
+                        mt1 = FALSE) {
 
   algorithm <- match.arg(algorithm,
                          choices = c("DA", "Gale-Shapley", "GS",
@@ -70,14 +73,14 @@ matching_df <- function(df1,
   ## g1: proposers
   g1_prefs <- list()
   for (i in 1:n_g1) {
-    g1_prefs[[i]] <- unlist(f1[i, -1])
+    g1_prefs[[i]] <- stats::na.omit(unlist(f1[i, -1]))
   }
   names(g1_prefs) <- g1_names
 
   ## g2: proposed
   g2_prefs <- list()
   for (i in 1:n_g2) {
-    g2_prefs[[i]] <- unlist(f2[i, -1])
+    g2_prefs[[i]] <- stats::na.omit(unlist(f2[i, -1]))
   }
   names(g2_prefs) <- g2_names
 
@@ -85,5 +88,6 @@ matching_df <- function(df1,
            g2_prefs = g2_prefs,
            algorithm = algorithm,
            switch = switch,
-           verbose = verbose)
+           verbose = verbose,
+           mt1 = mt1)
 }

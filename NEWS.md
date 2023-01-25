@@ -1,3 +1,7 @@
+# rgamer 0.0.22
+
+- Bug fixes of the functions related to many-to-one matching.
+
 # rgamer 0.0.21
 
 - First release of the stable version.

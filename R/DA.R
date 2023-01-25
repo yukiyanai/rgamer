@@ -60,7 +60,7 @@ DA <- function(g1_prefs,
         ## To whom i proposes (j)
         j <- g1_prefs[[i]][position[i]]
 
-        if (is.na(j)) { # if no cadidate is left
+        if (is.na(j)) { # if no candidate is left
           g1_matched[i] <- NA
           g1_filled[i] <- TRUE
           num_match <- num_match + 1

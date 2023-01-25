@@ -90,11 +90,12 @@ matching_mt1 <- function(df_many,
     x2 <- c()
     for (j in seq_along(x)) {
       x_target <- x[j]
+      if (is.na(x_target)) break
       a <- capacity_df$capacity[capacity_df$r_name == x_target]
       x_tmp <- paste(x_target, 1:a, sep = "_")
       x2 <- c(x2, x_tmp)
     }
-    names(x2) <- paste0("pref_", 1:n_prefs)
+    names(x2) <- paste0("pref_", 1:length(x2))
     p_list[[i]] <- x2
   }
 
@@ -126,7 +127,8 @@ matching_mt1 <- function(df_many,
     df2 = DF2,
     df_type = "data.frame",
     verbose = verbose,
-    algorithm = algorithm)
+    algorithm = algorithm,
+    mt1 = TRUE)
 
   # Fix proposers' ranking
   res_proposer <- m$data |>
