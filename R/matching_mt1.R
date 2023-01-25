@@ -129,40 +129,4 @@ matching_mt1 <- function(df_many,
     verbose = verbose,
     algorithm = algorithm,
     mt1 = TRUE)
-
-  # Fix proposers' ranking
-  #res_proposer <- m$data |>
-  #  dplyr::filter(group == "proposer") |>
-  #  dplyr::mutate(match = stringr::str_replace(match,
-  #                                             pattern = "_\\d+",
-  #                                             replacement = ""),
-  #                rank = NA_integer_)
-
-  #for (i in 1:nrow(res_proposer)) {
-  #  p_name <- res_proposer$name[i]
-  #  x <- f1[f1$name == p_name, -1]
-  #  res_proposer$rank[i] <- which(x == res_proposer$match[i])
-  #}
-
-  # Create the result data for the proposed
-  #res_proposed <- data.frame(
-  #  name = res_proposer$match,
-  #  match = res_proposer$name,
-  #  group = "proposed",
-  #  rank = NA_integer_
-  #) |>
-  #  dplyr::arrange(name)
-
-  #for (i in 1:nrow(res_proposed)) {
-  #   r_name <- res_proposed$name[i]
-  #   x <- f2[f2$name == r_name, -1]
-  #   res_proposed$rank[i] <- which(x == res_proposed$match[i])
-  #}
-
-  #res_proposed <- res_proposed |>
-  #  dplyr::arrange(name, rank)
-
-  #m$data_cleaned <- dplyr::bind_rows(res_proposer,
-  #                                   res_proposed)
-  #return(m)
 }
