@@ -6,9 +6,8 @@
 #'     (1) an extended data frame of the matching results,
 #'     (2) a character string showing which algorithm was used,
 #'     (3) a character string of the matching results,
-#'     (4) a character string of the history of matching steps,
-#'     (5) a list of preferences of each group,
-#'     (6) a data frame of the matching results cleaned.
+#'     (4) a character string of the history of matching steps, and
+#'     (5) a list of preferences of each group.
 #' @param df_many A data frame or a data file containing preferences of
 #'     the proposers.
 #' @param df_one A data frame or a data file containing preferences of
@@ -47,7 +46,7 @@ matching_mt1 <- function(df_many,
                          algorithm = "DA",
                          verbose = TRUE) {
 
-  group <- name <- NULL
+  group <- name <- p_name <- NULL
 
   f1 <- read_matching_data(data = df_many,
                            df_type = df_type,
@@ -102,7 +101,8 @@ matching_mt1 <- function(df_many,
   DF1 <- dplyr::bind_rows(p_list)
   DF1$p_name <- p_names
   DF1 <- dplyr::select(DF1,
-                       p_name, dplyr::starts_with("pref"))
+                       p_name,
+                       dplyr::starts_with("pref"))
 
   ## Extend the data frame of the proposed
   r_list <- list()
@@ -122,7 +122,7 @@ matching_mt1 <- function(df_many,
   DF2 <- dplyr::bind_rows(r_list)
 
   # Implement matching
-  m <- matching_df(
+  matching_df(
     df1 = DF1,
     df2 = DF2,
     df_type = "data.frame",
@@ -131,39 +131,38 @@ matching_mt1 <- function(df_many,
     mt1 = TRUE)
 
   # Fix proposers' ranking
-  res_proposer <- m$data |>
-    dplyr::filter(group == "proposer") |>
-    dplyr::mutate(match = stringr::str_replace(match,
-                                               pattern = "_\\d+",
-                                               replacement = ""),
-                  rank = NA_integer_)
+  #res_proposer <- m$data |>
+  #  dplyr::filter(group == "proposer") |>
+  #  dplyr::mutate(match = stringr::str_replace(match,
+  #                                             pattern = "_\\d+",
+  #                                             replacement = ""),
+  #                rank = NA_integer_)
 
-  for (i in 1:nrow(res_proposer)) {
-    p_name <- res_proposer$name[i]
-    x <- f1[f1$name == p_name, -1]
-    res_proposer$rank[i] <- which(x == res_proposer$match[i])
-  }
+  #for (i in 1:nrow(res_proposer)) {
+  #  p_name <- res_proposer$name[i]
+  #  x <- f1[f1$name == p_name, -1]
+  #  res_proposer$rank[i] <- which(x == res_proposer$match[i])
+  #}
 
   # Create the result data for the proposed
-  res_proposed <- data.frame(
-    name = res_proposer$match,
-    match = res_proposer$name,
-    group = "proposed",
-    rank = NA_integer_
-  ) |>
-    dplyr::arrange(name)
+  #res_proposed <- data.frame(
+  #  name = res_proposer$match,
+  #  match = res_proposer$name,
+  #  group = "proposed",
+  #  rank = NA_integer_
+  #) |>
+  #  dplyr::arrange(name)
 
-  for (i in 1:nrow(res_proposed)) {
-     r_name <- res_proposed$name[i]
-     x <- f2[f2$name == r_name, -1]
-     res_proposed$rank[i] <- which(x == res_proposed$match[i])
-  }
+  #for (i in 1:nrow(res_proposed)) {
+  #   r_name <- res_proposed$name[i]
+  #   x <- f2[f2$name == r_name, -1]
+  #   res_proposed$rank[i] <- which(x == res_proposed$match[i])
+  #}
 
-  res_proposed <- res_proposed |>
-    dplyr::arrange(name, rank)
+  #res_proposed <- res_proposed |>
+  #  dplyr::arrange(name, rank)
 
-  m$data_cleaned <- dplyr::bind_rows(res_proposer,
-                                     res_proposed)
-
-  return(m)
+  #m$data_cleaned <- dplyr::bind_rows(res_proposer,
+  #                                   res_proposed)
+  #return(m)
 }

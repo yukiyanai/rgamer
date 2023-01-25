@@ -57,9 +57,8 @@ A list of "matching" class containing
 (1) an extended data frame of the matching results,
 (2) a character string showing which algorithm was used,
 (3) a character string of the matching results,
-(4) a character string of the history of matching steps,
-(5) a list of preferences of each group,
-(6) a data frame of the matching results cleaned.
+(4) a character string of the history of matching steps, and
+(5) a list of preferences of each group.
 }
 \description{
 \code{matching_mt1()} implements many-to-one matching between
