@@ -155,36 +155,41 @@ spe <- function(game, restriction = FALSE) {
       n_cand <- length(whole)
 
       spe_id <- NULL
-      for (i in 1:n_cand) {
-        df_whole <- whole[[i]]
-        nr_whole <- nrow(df_whole)
-        for (j in 1:nrow(df_index)) {
-          df_sub <- data.frame()
-          for (k in 1:ncol(df_index)) {
-            df_sub <- df_sub |>
-              dplyr::bind_rows(df_psne_list[[k + 1]][df_index[j, k]])
-          }
-          df_stack <- dplyr::bind_rows(df_whole, df_sub)
-          df_check <- dplyr::distinct(df_stack)
-          nr_check <- nrow(df_check)
 
-          if (nr_check == nr_whole) {
-            spe_id <- c(spe_id, i)
+      if (n_cand > 0) {
+        for (i in 1:n_cand) {
+          df_whole <- whole[[i]]
+          nr_whole <- nrow(df_whole)
+          for (j in 1:nrow(df_index)) {
+            df_sub <- data.frame()
+            for (k in 1:ncol(df_index)) {
+              df_sub <- df_sub |>
+                dplyr::bind_rows(df_psne_list[[k + 1]][df_index[j, k]])
+            }
+            df_stack <- dplyr::bind_rows(df_whole, df_sub)
+            df_check <- dplyr::distinct(df_stack)
+            nr_check <- nrow(df_check)
+
+            if (nr_check == nr_whole) {
+              spe_id <- c(spe_id, i)
+            }
           }
         }
       }
 
       SPE <- spe_sol_list <- vector("list", length(spe_id))
-      for (i in 1:length(spe_id)) {
-        SPE[[i]] <- PSNE_list[[1]][[spe_id[i]]]
-        df_path_tmp <- game$data$path |>
-          dplyr::mutate(s = stringr::str_replace_all(s, " ", ""))
-        spe_sol_list[[i]] <- df_psne_list[[1]][[spe_id[i]]] |>
-          dplyr::select(player, psne) |>
-          dplyr::rename(s = psne) |>
-          dplyr::left_join(df_path_tmp, by = c("player", "s"))
-      }
 
+      if (length(spe_id) > 0) {
+        for (i in 1:length(spe_id)) {
+          SPE[[i]] <- PSNE_list[[1]][[spe_id[i]]]
+          df_path_tmp <- game$data$path |>
+            dplyr::mutate(s = stringr::str_replace_all(s, " ", ""))
+          spe_sol_list[[i]] <- df_psne_list[[1]][[spe_id[i]]] |>
+            dplyr::select(player, psne) |>
+            dplyr::rename(s = psne) |>
+            dplyr::left_join(df_path_tmp, by = c("player", "s"))
+        }
+      }
     }
 
     if (length(SPE) == 0) {

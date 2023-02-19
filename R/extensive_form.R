@@ -26,8 +26,8 @@
 #'     \code{"right"},
 #'     \code{"up"},
 #'     \code{"down"},
-#'     \code{"bidirectional"},
-#'     \code{"horizonal"}, and
+#'     \code{"bidirectional"} (temporarily disabled),
+#'     \code{"horizontal"}, and
 #'     \code{"vertical"}.
 #'     Default is \code{"down"}.
 #' @param color_palette A color palette to be used. Default is "Set1".

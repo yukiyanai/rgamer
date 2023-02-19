@@ -1,3 +1,10 @@
+# rgaerm 0.0.23
+
+- Fix bugs in:
+  - `extensive_form()`
+  - `draw_tree()`
+  - `spe()`
+
 # rgamer 0.0.22
 
 - Bug fixes of the functions related to many-to-one matching.

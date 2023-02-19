@@ -20,7 +20,7 @@
 #'     \code{"up"},
 #'     \code{"down"},
 #'     \code{"bidirectional"} (temporarily disabled),
-#'     \code{"horizonal"}, and
+#'     \code{"horizontal"}, and
 #'     \code{"vertical"}.
 #'     Default is \code{"down"}.
 #' @param color_palette A color palette to be used. Default is "Set1".
@@ -351,7 +351,7 @@ draw_tree <- function(df_path,
                           ggplot2::aes(x = x, y = y,
                                        label = player,
                                        color = as.factor(player_color)),
-                          labels.size = size_player,
+                          label.size = size_player / 4,
                           family = family) +
       ggplot2::geom_text(data = df_path,
                          ggplot2::aes(x = x_m,

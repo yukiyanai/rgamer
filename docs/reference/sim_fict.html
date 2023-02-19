@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.22</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.23</span>
       </span>
     </div>
 
@@ -81,24 +81,36 @@
     <dl><dt>game</dt>
 <dd><p>An object of <code>normal_form</code> class defined by
 <code><a href="normal_form.html">normal_form()</a></code>.</p></dd>
+
+
 <dt>n_samples</dt>
 <dd><p>A positive integer specifying the number of samples to be
 simulated.</p></dd>
+
+
 <dt>n_periods</dt>
 <dd><p>A positive integer specifying how many times the game is
 played.</p></dd>
+
+
 <dt>lambda</dt>
 <dd><p>A positive real value representing the players' sensitivity to
 expected utilities. As <code>lambda</code> gets larger, a small difference in
 expected utility makes a big difference in choice probability.</p></dd>
+
+
 <dt>init</dt>
 <dd><p>A list of initial levels of beliefs. The length of the list must
 be two. Each element must be a vector of values between 0 and 1
 representing a player's belief. If <code>init = NULL</code>, which is default,
 initial beliefs will be randomly assigned.</p></dd>
+
+
 <dt>sigma</dt>
 <dd><p>A non-negative value determining the level of noise adherent to
 evaluation of payoffs.</p></dd>
+
+
 <dt>plot_range_y</dt>
 <dd><p>Choose the range of vertical axis for plots. Available
 choices are <code>"fixed"</code>, <code>"full"</code> and <code>"free"</code>.
@@ -107,14 +119,19 @@ simulation results.  If <code>plot_range_y = "full"</code>, The range
 defined in <code>game</code> is used for each player, which can be different
 between players. With <code>"fixed"</code>, the same y-axis is used for both
 players.</p></dd>
+
+
 <dt>plot_id</dt>
 <dd><p>An integer between 1 and n_samples to specify for which
 sample, playing history should be displayed. If <code>plot_id = NULL</code>,
 plot_B and plot_P will be NULL.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list containing (1) a data frames of strategies chosen by each
+    
+
+<p>A list containing (1) a data frames of strategies chosen by each
 player,  (2) a single long data frame of (1)'s data frames combined,
 (3) a list of each player's belief about the opponent's behavior
 (data frames), (4) a list of probability of each strategy being chosen
@@ -142,7 +159,7 @@ player,  (2) a single long data frame of (1)'s data frames combined,
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

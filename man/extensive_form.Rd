@@ -57,8 +57,8 @@ The value must be one of:
 \code{"right"},
 \code{"up"},
 \code{"down"},
-\code{"bidirectional"},
-\code{"horizonal"}, and
+\code{"bidirectional"} (temporarily disabled),
+\code{"horizontal"}, and
 \code{"vertical"}.
 Default is \code{"down"}.}
 

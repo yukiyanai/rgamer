@@ -18,7 +18,7 @@ game."><meta property="og:image" content="https://yukiyanai.github.io/rgamer/log
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.22</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.23</span>
       </span>
     </div>
 
@@ -87,12 +87,18 @@ game.</p>
     <dl><dt>game</dt>
 <dd><p>An object of <code>normal_form</code> class defined by
 <code><a href="normal_form.html">normal_form()</a></code>.</p></dd>
+
+
 <dt>n_samples</dt>
 <dd><p>A positive integer specifying the number of samples to be
 simulated.</p></dd>
+
+
 <dt>n_periods</dt>
 <dd><p>A positive integer specifying how many times the game is
 played within each sample.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>A character string to tell what kind of simulation should be run.
 The available options are <code>"br"</code>, <code>"sbr"</code>, <code>"abr"</code>, and
@@ -104,32 +110,48 @@ player alternately chooses the best response to the other player's
 previous action. With <code>"imitation"</code>, each player imitates the
 opponent's choice in the previous period. Players randomly choose their
 strategies or the first period in each of these options.</p></dd>
+
+
 <dt>init1</dt>
 <dd><p>Player 1's first strategy. If not specified, a strategy is
 randomly selected from the player's strategy set.</p></dd>
+
+
 <dt>init2</dt>
 <dd><p>Player 2's first strategy. If not specified, a strategy is
 randomly selected from the player's strategy set.</p></dd>
+
+
 <dt>omega</dt>
 <dd><p>A numeric value between 0 and 1 to control the degree of inertia
 in each player's behavior. If <code>omega = 1</code>, each player does not
 change their choices over time. If <code>omega = 0</code>, which is the default
 value, each player does not stick to their previous choice at all.</p></dd>
+
+
 <dt>eta</dt>
 <dd><p>A numeric value between 0 and 1 to control the degree of
 randomness in each player's behavior. If <code>eta = 1</code>, each player
 chooses their strategy completely at random. If <code>eta = 0</code>, each
 player chooses the best strategy based on the opponent's behavior in the
 previous period.</p></dd>
+
+
 <dt>lambda</dt>
 <dd><p>A positive value controlling the weight of the best response to
 the previous move of the opponent.</p></dd>
+
+
 <dt>cons1</dt>
 <dd><p>A named list of parameters contained in
 <code>game$payoff$payoffs1</code> that should be treated as constants, if any.</p></dd>
+
+
 <dt>cons2</dt>
 <dd><p>A named list of parameters contained in
 <code>game$payoff$payoffs2</code> that should be treated as constants, if any.</p></dd>
+
+
 <dt>plot_range_y</dt>
 <dd><p>Choose the range of vertical axis for plots. Available
 choices are <code>"fixed"</code>, <code>"full"</code> and <code>"free"</code>.
@@ -138,10 +160,13 @@ simulation results.  If <code>plot_range_y = "full"</code>, the range
 defined in <code>game</code> is used for each player, which can be different
 between players. With <code>"fixed"</code>, the same y-axis is used for both
 players.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame of simulation results.</p>
+    
+
+<p>A data frame of simulation results.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -165,7 +190,7 @@ players.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>
