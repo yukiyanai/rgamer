@@ -59,7 +59,7 @@ solve_efg <- function(game,
       if (length(out$sol) > 1) {
         message("backward induction: ",
                 paste(out$sol, collapse = ", "))
-      } else {
+      } else if (length(out$sol) == 1) {
         message("backward induction: ", out$sol)
       }
     }
@@ -69,7 +69,7 @@ solve_efg <- function(game,
       if (length(out$sol) > 1) {
           message("SPE: ",
                   paste(out$sol, collapse = ", "))
-      } else {
+      } else if (length(out$sol) == 1) {
           message("SPE: ", out$sol)
       }
     }
