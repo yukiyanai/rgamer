@@ -22,13 +22,14 @@ find_dominated <- function(game, quietly = FALSE) {
       for (j in seq_along(not_i)) {
         if (all(game$mat$matrix1[i, ] < game$mat$matrix1[not_i[j], ])) {
           cond[j] <- TRUE
-        } else if (all(game$mat$matrix1[i, ] <= game$mat$matrix1[not_i[j], ])) {
+        } else if (all(game$mat$matrix1[i, ] <= game$mat$matrix1[not_i[j], ]) &
+                   !all(game$mat$matrix1[i, ] == game$mat$matrix1[not_i[j], ])) {
           cond_w[j] <- TRUE
         }
       }
       if (sum(cond) > 0) {
         dom_res_1[i] <- "dominated"
-        break
+        #break
       } else if (sum(cond_w) > 0) dom_res_1[i] <- "weakly"
     }
   }
@@ -42,13 +43,14 @@ find_dominated <- function(game, quietly = FALSE) {
       for (j in seq_along(not_i)) {
         if (all(game$mat$matrix2[, i] < game$mat$matrix2[, not_i[j]])) {
           cond[j] <- TRUE
-        } else if (all(game$mat$matrix2[, i] <= game$mat$matrix2[, not_i[j]])) {
+        } else if (all(game$mat$matrix2[, i] <= game$mat$matrix2[, not_i[j]]) &
+                   !all(game$mat$matrix2[, i] == game$mat$matrix2[, not_i[j]])) {
           cond_w[j] <- TRUE
         }
       }
       if (sum(cond) > 0) {
         dom_res_2[i] <- "dominated"
-        break
+        #break
       } else if (sum(cond_w) > 0) dom_res_2[i] <- "weakly"
     }
   }
@@ -57,22 +59,14 @@ find_dominated <- function(game, quietly = FALSE) {
   dom_1 <- game$strategy$s1[dom_res_1 == "dominated"]
   if (length(dom_1) == 0) dom_1 <- NA
 
-  wdom_1 <- game$strategy$s1[dom_res_1 == "weakly"]
-  if (!is.na(dom_1)) {
-    wdom_1 <- dom_1
-  } else if (length(wdom_1) == 0) {
-    wdom_1 <- NA
-  }
+  wdom_1 <- game$strategy$s1[dom_res_1 %in% c("weakly", "dominated")]
+  if (length(wdom_1) == 0) wdom_1 <- NA
 
   dom_2 <- game$strategy$s2[dom_res_2 == "dominated"]
   if (length(dom_2) == 0) dom_2 <- NA
 
-  wdom_2 <- game$strategy$s2[dom_res_2 == "weakly"]
-  if (!is.na(dom_2)) {
-    wdom_2 <- dom_2
-  } else if (length(wdom_2) == 0) {
-    wdom_2 <- NA
-  }
+  wdom_2 <- game$strategy$s2[dom_res_2 %in% c("weakly", "dominated")]
+  if (length(wdom_2) == 0) wdom_2 <- NA
 
   # message showing dominated strategies
   if (!quietly) {

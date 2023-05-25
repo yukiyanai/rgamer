@@ -23,7 +23,9 @@ find_dominant <- function(game, quietly = FALSE) {
       for (j in seq_along(not_i)) {
         if (all(game$mat$matrix1[i, ] > game$mat$matrix1[not_i[j], ])) {
           cond[j] <- TRUE
-        } else if (all(game$mat$matrix1[i, ] >= game$mat$matrix1[not_i[j], ])) {
+          cond_w[j] <- TRUE
+        } else if (all(game$mat$matrix1[i, ] >= game$mat$matrix1[not_i[j], ]) &
+                   !all(game$mat$matrix1[i, ] == game$mat$matrix1[not_i[j], ])) {
           cond_w[j] <- TRUE
         }
       }
@@ -43,7 +45,9 @@ find_dominant <- function(game, quietly = FALSE) {
       for (j in seq_along(not_i)) {
         if (all(game$mat$matrix2[, i] > game$mat$matrix2[, not_i[j]])) {
           cond[j] <- TRUE
-        } else if (all(game$mat$matrix2[, i] >= game$mat$matrix2[, not_i[j]])) {
+          cond_w[j] <- TRUE
+        } else if (all(game$mat$matrix2[, i] >= game$mat$matrix2[, not_i[j]]) &
+                   !all(game$mat$matrix2[, i] == game$mat$matrix2[, not_i[j]])) {
           cond_w[j] <- TRUE
         }
       }
@@ -58,22 +62,14 @@ find_dominant <- function(game, quietly = FALSE) {
   dom_1 <- game$strategy$s1[dom_res_1 == "dominant"]
   if (length(dom_1) != 1) dom_1 <- NA
 
-  wdom_1 <- game$strategy$s1[dom_res_1 == "weakly"]
-  if (!is.na(dom_1)) {
-    wdom_1 <- dom_1
-  } else if (length(wdom_1) != 1) {
-    wdom_1 <- NA
-  }
+  wdom_1 <- game$strategy$s1[dom_res_1 %in% c("weakly", "dominant")]
+  if (length(wdom_1) != 1) wdom_1 <- NA
 
   dom_2 <- game$strategy$s2[dom_res_2 == "dominant"]
   if (length(dom_2) != 1) dom_2 <- NA
 
-  wdom_2 <- game$strategy$s2[dom_res_2 == "weakly"]
-  if (!is.na(dom_2)) {
-    wdom_2 <- dom_2
-  } else if (length(wdom_2) != 1) {
-      wdom_2 <- NA
-  }
+  wdom_2 <- game$strategy$s2[dom_res_2 %in% c("weakly", "dominant")]
+  if (length(wdom_2) != 1) wdom_2 <- NA
 
   # message showing dominant strategies
   if (!quietly) {

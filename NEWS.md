@@ -1,4 +1,10 @@
-# rgaerm 0.0.23
+# rgamer 0.0.24
+
+- Fix bugs in the functions to find dominant/dominated strategies.
+  - `find_dominated()`
+  - `find_dominant()`
+
+# rgamer 0.0.23
 
 - Fix bugs in:
   - `extensive_form()`
