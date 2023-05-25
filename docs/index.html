@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.23</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.24</span>
       </span>
     </div>
 
@@ -115,18 +115,18 @@ install.packages("rgamer")
 -->
 <p>You can install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"yukiyanai/rgamer"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"yukiyanai/rgamer"</span><span class="op">)</span></span></code></pre></div>
 <p>or</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"yukiyanai/rgamer"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"yukiyanai/rgamer"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yukiyanai.github.io/rgamer/">rgamer</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yukiyanai.github.io/rgamer/">rgamer</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="example-1">Example 1<a class="anchor" aria-label="anchor" href="#example-1"></a>
 </h3>
@@ -141,27 +141,27 @@ install.packages("rgamer")
 </ul>
 <p>First, you define the game by <code><a href="reference/normal_form.html">normal_form()</a></code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">game1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/normal_form.html">normal_form</a></span><span class="op">(</span>
-  players <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Kamijo"</span>, <span class="st">"Yanai"</span><span class="op">)</span>,
-  s1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Stays silent"</span>, <span class="st">"Betrays"</span><span class="op">)</span>, 
-  s2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Stays silent"</span>, <span class="st">"Betrays"</span><span class="op">)</span>, 
-  payoffs1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,  <span class="fl">0</span>, <span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">2</span><span class="op">)</span>, 
-  payoffs2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">3</span>,  <span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">game1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/normal_form.html">normal_form</a></span><span class="op">(</span></span>
+<span>  players <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Kamijo"</span>, <span class="st">"Yanai"</span><span class="op">)</span>,</span>
+<span>  s1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Stays silent"</span>, <span class="st">"Betrays"</span><span class="op">)</span>, </span>
+<span>  s2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Stays silent"</span>, <span class="st">"Betrays"</span><span class="op">)</span>, </span>
+<span>  payoffs1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,  <span class="fl">0</span>, <span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">2</span><span class="op">)</span>, </span>
+<span>  payoffs2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">3</span>,  <span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>You can specify payoffs for each cell of the game matrix as follows.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">game1b</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/normal_form.html">normal_form</a></span><span class="op">(</span>
-  players <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Kamijo"</span>, <span class="st">"Yanai"</span><span class="op">)</span>,
-  s1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Stays silent"</span>, <span class="st">"Betrays"</span><span class="op">)</span>, 
-  s2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Stays silent"</span>, <span class="st">"Betrays"</span><span class="op">)</span>, 
-  cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>,  <span class="fl">0</span><span class="op">)</span>,
-               <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> <span class="fl">0</span>, <span class="op">-</span><span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>,
-  byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">game1b</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/normal_form.html">normal_form</a></span><span class="op">(</span></span>
+<span>  players <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Kamijo"</span>, <span class="st">"Yanai"</span><span class="op">)</span>,</span>
+<span>  s1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Stays silent"</span>, <span class="st">"Betrays"</span><span class="op">)</span>, </span>
+<span>  s2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Stays silent"</span>, <span class="st">"Betrays"</span><span class="op">)</span>, </span>
+<span>  cells <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>,  <span class="fl">0</span><span class="op">)</span>,</span>
+<span>               <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> <span class="fl">0</span>, <span class="op">-</span><span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Then, you can pass it to <code><a href="reference/solve_nfg.html">solve_nfg()</a></code> function to get the table of the game and the Nash equilibrium.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">s_game1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_nfg.html">solve_nfg</a></span><span class="op">(</span><span class="va">game1</span>, show_table <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">#&gt; Pure-strategy NE: [Betrays, Betrays]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">s_game1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_nfg.html">solve_nfg</a></span><span class="op">(</span><span class="va">game1</span>, show_table <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Pure-strategy NE: [Betrays, Betrays]</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">s_game1</span><span class="op">$</span><span class="va">table</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">s_game1</span><span class="op">$</span><span class="va">table</span></span></code></pre></div>
 <table class="table  lightable-classic table" style="font-family: Arial; margin-left: auto; margin-right: auto; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -232,22 +232,22 @@ Betrays
 </ul>
 <p>Define the game by <code><a href="reference/normal_form.html">normal_form()</a></code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">game2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/normal_form.html">normal_form</a></span><span class="op">(</span>
-  players <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Kamijo"</span>, <span class="st">"Yanai"</span><span class="op">)</span>,
-  s1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Stag"</span>, <span class="st">"Hare"</span><span class="op">)</span>, 
-  s2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Stag"</span>, <span class="st">"Hare"</span><span class="op">)</span>, 
-  payoffs1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">0</span>, <span class="fl">7</span><span class="op">)</span>, 
-  payoffs2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">8</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">game2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/normal_form.html">normal_form</a></span><span class="op">(</span></span>
+<span>  players <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Kamijo"</span>, <span class="st">"Yanai"</span><span class="op">)</span>,</span>
+<span>  s1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Stag"</span>, <span class="st">"Hare"</span><span class="op">)</span>, </span>
+<span>  s2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Stag"</span>, <span class="st">"Hare"</span><span class="op">)</span>, </span>
+<span>  payoffs1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">0</span>, <span class="fl">7</span><span class="op">)</span>, </span>
+<span>  payoffs2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">8</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Then, you can pass it to <code><a href="reference/solve_nfg.html">solve_nfg()</a></code> function to get NEs. Set <code>mixed = TRUE</code> to find mixed-strategy NEs well.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">s_game2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_nfg.html">solve_nfg</a></span><span class="op">(</span><span class="va">game2</span>, mixed <span class="op">=</span> <span class="cn">TRUE</span>, show_table <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">#&gt; Pure-strategy NE: [Stag, Stag], [Hare, Hare]</span>
-<span class="co">#&gt; Mixed-strategy NE: [(7/9, 2/9), (7/9, 2/9)]</span>
-<span class="co">#&gt; The obtained mixed-strategy NE might be only a part of the solutions.</span>
-<span class="co">#&gt; Please examine br_plot (best response plot) carefully.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">s_game2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_nfg.html">solve_nfg</a></span><span class="op">(</span><span class="va">game2</span>, mixed <span class="op">=</span> <span class="cn">TRUE</span>, show_table <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Pure-strategy NE: [Stag, Stag], [Hare, Hare]</span></span>
+<span><span class="co">#&gt; Mixed-strategy NE: [(7/9, 2/9), (7/9, 2/9)]</span></span>
+<span><span class="co">#&gt; The obtained mixed-strategy NE might be only a part of the solutions.</span></span>
+<span><span class="co">#&gt; Please examine br_plot (best response plot) carefully.</span></span></code></pre></div>
 <p>For a 2-by-2 game, you can plot the best response correspondences as well.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">s_game2</span><span class="op">$</span><span class="va">br_plot</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">s_game2</span><span class="op">$</span><span class="va">br_plot</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-13-1.png"><!-- --></p>
 </div>
 <div class="section level3">
@@ -264,19 +264,19 @@ Betrays
 </ul>
 <p>You can define a game by specifying payoff functions as character vectors using <code><a href="reference/normal_form.html">normal_form()</a></code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">game3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/normal_form.html">normal_form</a></span><span class="op">(</span>
-  players <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span>,
-  payoffs1 <span class="op">=</span> <span class="st">"-x^2 + (28 - y) * x"</span>,
-  payoffs2 <span class="op">=</span> <span class="st">"-y^2 + (28 - x) * y"</span>,
-  par1_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span><span class="op">)</span>,
-  par2_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span><span class="op">)</span>,
-  pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">game3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/normal_form.html">normal_form</a></span><span class="op">(</span></span>
+<span>  players <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span>,</span>
+<span>  payoffs1 <span class="op">=</span> <span class="st">"-x^2 + (28 - y) * x"</span>,</span>
+<span>  payoffs2 <span class="op">=</span> <span class="st">"-y^2 + (28 - x) * y"</span>,</span>
+<span>  par1_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span><span class="op">)</span>,</span>
+<span>  par2_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span><span class="op">)</span>,</span>
+<span>  pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Then, you can pass it to <code><a href="reference/solve_nfg.html">solve_nfg()</a></code>, which displays the best response correspondences by default.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">s_game3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_nfg.html">solve_nfg</a></span><span class="op">(</span><span class="va">game3</span><span class="op">)</span>
-<span class="co">#&gt; approximated NE: (9.3, 9.3)</span>
-<span class="co">#&gt; The obtained NE might be only a part of the solutions.</span>
-<span class="co">#&gt; Please examine br_plot (best response plot) carefully.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">s_game3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_nfg.html">solve_nfg</a></span><span class="op">(</span><span class="va">game3</span><span class="op">)</span></span>
+<span><span class="co">#&gt; approximated NE: (9.3, 9.3)</span></span>
+<span><span class="co">#&gt; The obtained NE might be only a part of the solutions.</span></span>
+<span><span class="co">#&gt; Please examine br_plot (best response plot) carefully.</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-15-1.png"><!-- --></p>
 </div>
 <div class="section level3">
@@ -293,43 +293,43 @@ Betrays
 </ul>
 <p>You can define a normal-form game by specifying payoffs by R functions.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">f_x</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">a</span>, <span class="va">b</span><span class="op">)</span> <span class="op">{</span>
-  <span class="op">-</span><span class="va">x</span><span class="op">^</span><span class="va">a</span> <span class="op">+</span> <span class="op">(</span><span class="va">b</span> <span class="op">-</span> <span class="va">y</span><span class="op">)</span> <span class="op">*</span> <span class="va">x</span>
-<span class="op">}</span>
-<span class="va">f_y</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">s</span>, <span class="va">t</span><span class="op">)</span> <span class="op">{</span>
-  <span class="op">-</span><span class="va">y</span><span class="op">^</span><span class="va">s</span> <span class="op">+</span> <span class="op">(</span><span class="va">t</span> <span class="op">-</span> <span class="va">x</span><span class="op">)</span> <span class="op">*</span> <span class="va">y</span>
-<span class="op">}</span>
-<span class="va">game4</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/normal_form.html">normal_form</a></span><span class="op">(</span>
-  players <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span>,
-  payoffs1 <span class="op">=</span> <span class="va">f_x</span>,
-  payoffs2 <span class="op">=</span> <span class="va">f_y</span>,
-  par1_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span><span class="op">)</span>,
-  par2_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span><span class="op">)</span>,
-  pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">f_x</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">a</span>, <span class="va">b</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="op">-</span><span class="va">x</span><span class="op">^</span><span class="va">a</span> <span class="op">+</span> <span class="op">(</span><span class="va">b</span> <span class="op">-</span> <span class="va">y</span><span class="op">)</span> <span class="op">*</span> <span class="va">x</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">f_y</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">s</span>, <span class="va">t</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="op">-</span><span class="va">y</span><span class="op">^</span><span class="va">s</span> <span class="op">+</span> <span class="op">(</span><span class="va">t</span> <span class="op">-</span> <span class="va">x</span><span class="op">)</span> <span class="op">*</span> <span class="va">y</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">game4</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/normal_form.html">normal_form</a></span><span class="op">(</span></span>
+<span>  players <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span>,</span>
+<span>  payoffs1 <span class="op">=</span> <span class="va">f_x</span>,</span>
+<span>  payoffs2 <span class="op">=</span> <span class="va">f_y</span>,</span>
+<span>  par1_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span><span class="op">)</span>,</span>
+<span>  par2_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span><span class="op">)</span>,</span>
+<span>  pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Then, you can approximate a solution numerically by <code><a href="reference/solve_nfg.html">solve_nfg()</a></code>. Note that you need to set the parameter values of the function that should be treated as constants by arguments <code>cons1</code> and <code>cons2</code>, each of which accepts a named list. In addition, you can suppress the plot of best responses by <code>plot = FALSE</code>.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">s_game4</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_nfg.html">solve_nfg</a></span><span class="op">(</span>
-  game <span class="op">=</span> <span class="va">game4</span>,
-  cons1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">2</span>, b <span class="op">=</span> <span class="fl">28</span><span class="op">)</span>,
-  cons2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>s <span class="op">=</span> <span class="fl">2</span>, t <span class="op">=</span> <span class="fl">28</span><span class="op">)</span>,
-  plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="co">#&gt; approximated NE: (9.3, 9.3)</span>
-<span class="co">#&gt; The obtained NE might be only a part of the solutions.</span>
-<span class="co">#&gt; Please examine br_plot (best response plot) carefully.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">s_game4</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_nfg.html">solve_nfg</a></span><span class="op">(</span></span>
+<span>  game <span class="op">=</span> <span class="va">game4</span>,</span>
+<span>  cons1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">2</span>, b <span class="op">=</span> <span class="fl">28</span><span class="op">)</span>,</span>
+<span>  cons2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>s <span class="op">=</span> <span class="fl">2</span>, t <span class="op">=</span> <span class="fl">28</span><span class="op">)</span>,</span>
+<span>  plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; approximated NE: (9.3, 9.3)</span></span>
+<span><span class="co">#&gt; The obtained NE might be only a part of the solutions.</span></span>
+<span><span class="co">#&gt; Please examine br_plot (best response plot) carefully.</span></span></code></pre></div>
 <p>You can increase the precision of approximation by <code>precision</code>, which takes a natural number (default is <code>precision = 1</code>).</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">s_game4b</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_nfg.html">solve_nfg</a></span><span class="op">(</span>
-  game <span class="op">=</span> <span class="va">game4</span>,
-  cons1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">2</span>, b <span class="op">=</span> <span class="fl">28</span><span class="op">)</span>,
-  cons2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>s <span class="op">=</span> <span class="fl">2</span>, t <span class="op">=</span> <span class="fl">28</span><span class="op">)</span>,
-  precision <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt; approximated NE: (9.333, 9.333)</span>
-<span class="co">#&gt; The obtained NE might be only a part of the solutions.</span>
-<span class="co">#&gt; Please examine br_plot (best response plot) carefully.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">s_game4b</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_nfg.html">solve_nfg</a></span><span class="op">(</span></span>
+<span>  game <span class="op">=</span> <span class="va">game4</span>,</span>
+<span>  cons1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">2</span>, b <span class="op">=</span> <span class="fl">28</span><span class="op">)</span>,</span>
+<span>  cons2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>s <span class="op">=</span> <span class="fl">2</span>, t <span class="op">=</span> <span class="fl">28</span><span class="op">)</span>,</span>
+<span>  precision <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt; approximated NE: (9.333, 9.333)</span></span>
+<span><span class="co">#&gt; The obtained NE might be only a part of the solutions.</span></span>
+<span><span class="co">#&gt; Please examine br_plot (best response plot) carefully.</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-18-1.png"><!-- --></p>
 <p>You can extract the best response plot with NE marked as follows.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">s_game4b</span><span class="op">$</span><span class="va">br_plot_NE</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">s_game4b</span><span class="op">$</span><span class="va">br_plot_NE</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-19-1.png"><!-- --></p>
 </div>
 </div>
@@ -338,38 +338,38 @@ Betrays
 </h2>
 <p>You can define payoffs by R functions and evaluate them at some discretized values by setting <code>discretize = TRUE</code>. The following is a Bertrand competition example:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">func_price1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">q</span><span class="op">)</span> <span class="op">{</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">p</span> <span class="op">&lt;</span> <span class="va">q</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">profit</span> <span class="op">&lt;-</span> <span class="va">p</span>
-  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">p</span> <span class="op">==</span> <span class="va">q</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">profit</span> <span class="op">&lt;-</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">p</span>
-  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-    <span class="va">profit</span> <span class="op">&lt;-</span> <span class="fl">0</span>
-  <span class="op">}</span>
-  <span class="va">profit</span>
-<span class="op">}</span>
-
-<span class="va">func_price2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">q</span><span class="op">)</span><span class="op">{</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">p</span> <span class="op">&gt;</span> <span class="va">q</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">profit</span> <span class="op">&lt;-</span> <span class="va">q</span>
-  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">p</span> <span class="op">==</span> <span class="va">q</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">profit</span> <span class="op">&lt;-</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">q</span>
-  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-    <span class="va">profit</span> <span class="op">&lt;-</span> <span class="fl">0</span>
-  <span class="op">}</span>
-  <span class="va">profit</span>
-<span class="op">}</span>
-
-<span class="va">game5</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/normal_form.html">normal_form</a></span><span class="op">(</span>
-  payoffs1 <span class="op">=</span> <span class="va">func_price1</span>,
-  payoffs2 <span class="op">=</span> <span class="va">func_price2</span>,
-  pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p"</span>, <span class="st">"q"</span><span class="op">)</span>,
-  par1_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span>,
-  par2_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span>,
-  discretize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">func_price1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">q</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">p</span> <span class="op">&lt;</span> <span class="va">q</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">profit</span> <span class="op">&lt;-</span> <span class="va">p</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">p</span> <span class="op">==</span> <span class="va">q</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">profit</span> <span class="op">&lt;-</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">p</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">profit</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="va">profit</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">func_price2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">p</span>, <span class="va">q</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">p</span> <span class="op">&gt;</span> <span class="va">q</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">profit</span> <span class="op">&lt;-</span> <span class="va">q</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">p</span> <span class="op">==</span> <span class="va">q</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">profit</span> <span class="op">&lt;-</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">q</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">profit</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="va">profit</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">game5</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/normal_form.html">normal_form</a></span><span class="op">(</span></span>
+<span>  payoffs1 <span class="op">=</span> <span class="va">func_price1</span>,</span>
+<span>  payoffs2 <span class="op">=</span> <span class="va">func_price2</span>,</span>
+<span>  pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p"</span>, <span class="st">"q"</span><span class="op">)</span>,</span>
+<span>  par1_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>  par2_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>  discretize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Then, you can examine the specified part of the game.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">s_game5</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_nfg.html">solve_nfg</a></span><span class="op">(</span><span class="va">game5</span>, mark_br <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">s_game5</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_nfg.html">solve_nfg</a></span><span class="op">(</span><span class="va">game5</span>, mark_br <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <table class="table  lightable-classic table" style="font-family: Arial; margin-left: auto; margin-right: auto; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -567,23 +567,23 @@ Player 1
 </h2>
 <p>You can draw a tree of an extensive form game.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">game6</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/extensive_form.html">extensive_form</a></span><span class="op">(</span>
-  players <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Yanai"</span>, 
-                 <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Kamijo"</span>, <span class="fl">2</span><span class="op">)</span>,
-                 <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>,
-  actions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stat"</span>, <span class="st">"game"</span><span class="op">)</span>,
-                  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stat"</span>, <span class="st">"game"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stat"</span>, <span class="st">"game"</span><span class="op">)</span><span class="op">)</span>,
-  payoffs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Yanai <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,
-                 Kamijo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,
-  direction <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">game6</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/extensive_form.html">extensive_form</a></span><span class="op">(</span></span>
+<span>  players <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Yanai"</span>, </span>
+<span>                 <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Kamijo"</span>, <span class="fl">2</span><span class="op">)</span>,</span>
+<span>                 <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  actions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stat"</span>, <span class="st">"game"</span><span class="op">)</span>,</span>
+<span>                  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stat"</span>, <span class="st">"game"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stat"</span>, <span class="st">"game"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  payoffs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Yanai <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>                 Kamijo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  direction <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-23-1.png"><!-- --></p>
 <p>And you can find the solution of the game by <code><a href="reference/solve_efg.html">solve_efg()</a></code>.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">s_game6</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_efg.html">solve_efg</a></span><span class="op">(</span><span class="va">game6</span><span class="op">)</span>
-<span class="co">#&gt; backward induction: [(stat), (stat, game)]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">s_game6</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solve_efg.html">solve_efg</a></span><span class="op">(</span><span class="va">game6</span><span class="op">)</span></span>
+<span><span class="co">#&gt; backward induction: [(stat), (stat, game)]</span></span></code></pre></div>
 <p>Then, you can see the path played under a solution by <code><a href="reference/show_path.html">show_path()</a></code>.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/show_path.html">show_path</a></span><span class="op">(</span><span class="va">s_game6</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/show_path.html">show_path</a></span><span class="op">(</span><span class="va">s_game6</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-25-1.png"><!-- --></p>
 </div>
 </div>
@@ -645,7 +645,7 @@ Player 1
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

@@ -18,7 +18,7 @@ individuals."><meta property="og:image" content="https://yukiyanai.github.io/rga
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.23</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.24</span>
       </span>
     </div>
 
@@ -66,16 +66,16 @@ individuals.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">matching</span><span class="op">(</span>
-  <span class="va">g1_prefs</span>,
-  <span class="va">g2_prefs</span>,
-  g1_names <span class="op">=</span> <span class="cn">NULL</span>,
-  g2_names <span class="op">=</span> <span class="cn">NULL</span>,
-  algorithm <span class="op">=</span> <span class="st">"DA"</span>,
-  switch <span class="op">=</span> <span class="cn">FALSE</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>,
-  mt1 <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">matching</span><span class="op">(</span></span>
+<span>  <span class="va">g1_prefs</span>,</span>
+<span>  <span class="va">g2_prefs</span>,</span>
+<span>  g1_names <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  g2_names <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  algorithm <span class="op">=</span> <span class="st">"DA"</span>,</span>
+<span>  switch <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  mt1 <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -139,12 +139,12 @@ Default to <code>FALSE</code></p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">test1</span> <span class="op">&lt;-</span> <span class="fu">matching</span><span class="op">(</span></span>
-<span class="r-in">  g1_prefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>w1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">                  w2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span class="r-in">                  w3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  g2_prefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>m1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
-<span class="r-in">                  m2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">test1</span> <span class="op">&lt;-</span> <span class="fu">matching</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  g1_prefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>w1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  w2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  w3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  g2_prefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>m1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  m2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Step 1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     w1 proposes m1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     w1 and m1 temporarily match</span>
@@ -159,15 +159,15 @@ Default to <code>FALSE</code></p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     w3 proposes m2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     m2 rejects w3 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">test2</span> <span class="op">&lt;-</span> <span class="fu">matching</span><span class="op">(</span></span>
-<span class="r-in">  g1_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"w1"</span>, <span class="st">"w2"</span>, <span class="st">"w3"</span><span class="op">)</span>,</span>
-<span class="r-in">  g1_prefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">                  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span class="r-in">                  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  g2_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"m1"</span>, <span class="st">"m2"</span><span class="op">)</span>,</span>
-<span class="r-in">  g2_prefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
-<span class="r-in">                  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">test2</span> <span class="op">&lt;-</span> <span class="fu">matching</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  g1_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"w1"</span>, <span class="st">"w2"</span>, <span class="st">"w3"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  g1_prefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  g2_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"m1"</span>, <span class="st">"m2"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  g2_prefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Step 1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     w1 proposes m1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     w1 and m1 temporarily match</span>
@@ -182,15 +182,15 @@ Default to <code>FALSE</code></p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     w3 proposes m2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     m2 rejects w3 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">test3</span> <span class="op">&lt;-</span> <span class="fu">matching</span><span class="op">(</span></span>
-<span class="r-in">  g1_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Amy"</span>, <span class="st">"Beatrice"</span>, <span class="st">"Cindy"</span><span class="op">)</span>,</span>
-<span class="r-in">  g1_prefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Dick"</span>, <span class="st">"Eric"</span><span class="op">)</span>,</span>
-<span class="r-in">                  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Eric"</span>, <span class="st">"Dick"</span><span class="op">)</span>,</span>
-<span class="r-in">                  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Dick"</span>, <span class="st">"Eric"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  g2_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Dick"</span>, <span class="st">"Eric"</span><span class="op">)</span>,</span>
-<span class="r-in">  g2_prefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Amy"</span>, <span class="st">"Beatrice"</span>, <span class="st">"Cindy"</span><span class="op">)</span>,</span>
-<span class="r-in">                  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Beatrice"</span>, <span class="st">"Cindy"</span>, <span class="st">"Amy"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">test3</span> <span class="op">&lt;-</span> <span class="fu">matching</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  g1_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Amy"</span>, <span class="st">"Beatrice"</span>, <span class="st">"Cindy"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  g1_prefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Dick"</span>, <span class="st">"Eric"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Eric"</span>, <span class="st">"Dick"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Dick"</span>, <span class="st">"Eric"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  g2_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Dick"</span>, <span class="st">"Eric"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  g2_prefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Amy"</span>, <span class="st">"Beatrice"</span>, <span class="st">"Cindy"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Beatrice"</span>, <span class="st">"Cindy"</span>, <span class="st">"Amy"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Step 1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Amy proposes Dick </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Amy and Dick temporarily match</span>
@@ -205,13 +205,13 @@ Default to <code>FALSE</code></p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Cindy proposes Eric </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Eric rejects Cindy </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">test4</span> <span class="op">&lt;-</span> <span class="fu">matching</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">g1_prefs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>w1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">                   w2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span class="r-in">                   w3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="va">g2_prefs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>m1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">                   m2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">test4</span> <span class="op">&lt;-</span> <span class="fu">matching</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">g1_prefs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>w1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                   w2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                   w3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="va">g2_prefs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>m1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                   m2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Step 1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     w1 proposes m1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     w1 and m1 temporarily match</span>
@@ -226,20 +226,20 @@ Default to <code>FALSE</code></p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     w3 proposes m2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     m2 rejects w3 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="co">## The following function throws an error because a name (Jack) does not</span></span>
-<span class="r-in">  <span class="co">## exist in the opponent's pool.</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">test5</span> <span class="op">&lt;-</span> <span class="fu">matching</span><span class="op">(</span></span>
-<span class="r-in">    g1_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Amy"</span>, <span class="st">"Beatrice"</span>, <span class="st">"Cindy"</span><span class="op">)</span>,</span>
-<span class="r-in">    g1_prefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Dick"</span>, <span class="st">"Eric"</span><span class="op">)</span>,</span>
-<span class="r-in">                    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Eric"</span>, <span class="st">"Dick"</span><span class="op">)</span>,</span>
-<span class="r-in">                    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Dick"</span>, <span class="st">"Jack"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">    g2_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Dick"</span>, <span class="st">"Eric"</span><span class="op">)</span>,</span>
-<span class="r-in">    g2_prefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Amy"</span>, <span class="st">"Beatrice"</span>, <span class="st">"Cindy"</span><span class="op">)</span>,</span>
-<span class="r-in">                    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Beatrice"</span>, <span class="st">"Cindy"</span>, <span class="st">"Amy"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="co">## The following function throws an error because a name (Jack) does not</span></span></span>
+<span class="r-in"><span>  <span class="co">## exist in the opponent's pool.</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">test5</span> <span class="op">&lt;-</span> <span class="fu">matching</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    g1_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Amy"</span>, <span class="st">"Beatrice"</span>, <span class="st">"Cindy"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    g1_prefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Dick"</span>, <span class="st">"Eric"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Eric"</span>, <span class="st">"Dick"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Dick"</span>, <span class="st">"Jack"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    g2_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Dick"</span>, <span class="st">"Eric"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    g2_prefs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Amy"</span>, <span class="st">"Beatrice"</span>, <span class="st">"Cindy"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Beatrice"</span>, <span class="st">"Cindy"</span>, <span class="st">"Amy"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -254,7 +254,7 @@ Default to <code>FALSE</code></p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
