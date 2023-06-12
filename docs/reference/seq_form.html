@@ -18,7 +18,7 @@ object of "sequential_form" class.'><meta property="og:image" content="https://y
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.24</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.25</span>
       </span>
     </div>
 
@@ -66,23 +66,23 @@ object of "sequential_form" class.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">seq_form</span><span class="op">(</span></span>
-<span>  players <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  s1 <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  s2 <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  <span class="va">payoffs1</span>,</span>
-<span>  <span class="va">payoffs2</span>,</span>
-<span>  discretize <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  discrete_points <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6</span><span class="op">)</span>,</span>
-<span>  symmetric <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  byrow <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  pars <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  par1_lim <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  par2_lim <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  cons1 <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  cons2 <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  cons_common <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">seq_form</span><span class="op">(</span>
+  players <span class="op">=</span> <span class="cn">NULL</span>,
+  s1 <span class="op">=</span> <span class="cn">NULL</span>,
+  s2 <span class="op">=</span> <span class="cn">NULL</span>,
+  <span class="va">payoffs1</span>,
+  <span class="va">payoffs2</span>,
+  discretize <span class="op">=</span> <span class="cn">FALSE</span>,
+  discrete_points <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6</span><span class="op">)</span>,
+  symmetric <span class="op">=</span> <span class="cn">FALSE</span>,
+  byrow <span class="op">=</span> <span class="cn">FALSE</span>,
+  pars <span class="op">=</span> <span class="cn">NULL</span>,
+  par1_lim <span class="op">=</span> <span class="cn">NULL</span>,
+  par2_lim <span class="op">=</span> <span class="cn">NULL</span>,
+  cons1 <span class="op">=</span> <span class="cn">NULL</span>,
+  cons2 <span class="op">=</span> <span class="cn">NULL</span>,
+  cons_common <span class="op">=</span> <span class="cn">NULL</span>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -193,12 +193,12 @@ functions in order to find solutions of the game.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">g1</span> <span class="op">&lt;-</span> <span class="fu">seq_form</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  players <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Leader"</span>, <span class="st">"Follower"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  s1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"S"</span>, <span class="st">"P"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  s2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"S"</span>, <span class="st">"P"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  payoffs1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  payoffs2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">g1</span> <span class="op">&lt;-</span> <span class="fu">seq_form</span><span class="op">(</span></span>
+<span class="r-in">  players <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Leader"</span>, <span class="st">"Follower"</span><span class="op">)</span>,</span>
+<span class="r-in">  s1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"S"</span>, <span class="st">"P"</span><span class="op">)</span>,</span>
+<span class="r-in">  s2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"S"</span>, <span class="st">"P"</span><span class="op">)</span>,</span>
+<span class="r-in">  payoffs1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span class="r-in">  payoffs2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 </code></pre></div>
     </div>
   </div>
@@ -213,7 +213,7 @@ functions in order to find solutions of the game.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>
