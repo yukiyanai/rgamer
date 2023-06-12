@@ -185,9 +185,10 @@ spe <- function(game, restriction = FALSE) {
           df_path_tmp <- game$data$path |>
             dplyr::mutate(s = stringr::str_replace_all(s, " ", ""))
           spe_sol_list[[i]] <- df_psne_list[[1]][[spe_id[i]]] |>
-            dplyr::select(player, psne) |>
-            dplyr::rename(s = psne) |>
-            dplyr::left_join(df_path_tmp, by = c("player", "s"))
+            dplyr::select(id, player, psne) |>
+            dplyr::rename(node_from = id,
+                          s = psne) |>
+            dplyr::left_join(df_path_tmp, by = c("node_from", "player", "s"))
         }
       }
     }

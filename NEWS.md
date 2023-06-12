@@ -1,3 +1,8 @@
+# rgamer 0.0.25
+
+- Fix bugs in the game trees with SPEs.
+  - `spe()`
+
 # rgamer 0.0.24
 
 - Fix bugs in the functions to find dominant/dominated strategies.
