@@ -20,90 +20,92 @@ extensive_strategy <- function(player,
   n_seq <- length(action_list)
 
   action_num <- list()
-  for (i in 1:length(u_player)) {
+  for (i in 1 : length(u_player)) {
     action_seq <- (1:n_seq)[player == u_player[i]]
     action_num[[i]] <- action_seq
   }
   names(action_num) <- u_player
 
- action_profiles <- strategy_list <- list(NA, NA)
- for (p in 1:length(u_player)) {
+ action_profiles <- strategy_list <- vector("list", length(u_player))
+ for (p in 1 : length(u_player)) {
    action_num_p <- action_num[[p]]
    actions <- list()
+
+   target_p <- u_player[p]
+   if (target_p %in% info_sets_player) {
+     node_to_play_kept <- NULL
+     target_node <- node_to_play[[target_p]]
+     target_info_sets <- info_sets[info_sets_player == target_p]
+     for (j in 1 : length(target_info_sets)) {
+       target_set <- target_info_sets[[j]]
+       node_to_play_kept <- c(node_to_play_kept, target_set[1])
+     }
+     index_to_use <- which(
+       target_node %in% node_to_play_kept | !(target_node %in% unlist(target_info_sets))
+     )
+     appear_on_action_prof <- rep(FALSE, length(target_node))
+     appear_on_action_prof[index_to_use] <- TRUE
+     action_num_p <- action_num_p[index_to_use]
+   }
+
    for (s in action_num_p) {
      actions <- c(actions, list(action_list[[s]]))
    }
 
    actions_l <- sapply(actions, length)
    tot_rows <- prod(actions_l)
+
    action_p <- matrix(NA,
                       nrow = tot_rows,
                       ncol = length(actions))
-   colnames(action_p) <- paste0("var", 1:length(actions))
+   colnames(action_p) <- paste0("var", 1 : length(actions))
    denom <- 1
-   for (l in 1:length(actions)) {
+   for (l in 1 : length(actions)) {
      action_p[, l] <- rep(actions[[l]], each = tot_rows / actions_l[[l]])
      tot_rows <- tot_rows / actions_l[[l]]
    }
-   action_p <- tibble::as_tibble(action_p)
 
-   a_list <- b_list <- list()
-   for (i in 1:nrow(action_p)) {
-     a_vec <- unlist(action_p[i, ])
-     names(a_vec) <- NULL
-     a_list <- c(a_list, list(a_vec))
-     b_list <- c(b_list,
-                 paste0("(", paste(action_p[i, ], collapse = ", "), ")"))
-   }
-  action_profiles[[p]] <- a_list
-  strategy_list[[p]] <- b_list
+   a_list <- action_p |>
+     t() |>
+     as.data.frame() |>
+     as.list()
+   names(a_list) <- NULL
+
+   b_list <- apply(action_p,
+                 MARGIN = 1,
+                 FUN = function(x) {
+                   paste0("(", paste(x, collapse = ", "), ")")
+                 }) |>
+     as.list()
+
+   action_profiles[[p]] <- a_list
+   strategy_list[[p]] <- b_list
+
+   if (target_p %in% info_sets_player) {
+     action_p <- action_profiles[[p]]
+     for (i in 1 : length(action_p)) {
+       counter <- 1
+       short_vec <- action_p[[i]]
+       long_vec <- rep(NA, length(target_node))
+       for (j in seq_along(long_vec)) {
+         if (appear_on_action_prof[j]) {
+           long_vec[j] <- short_vec[counter]
+           counter <- counter + 1
+         } else {
+           long_vec[j] <- long_vec[j - 1]
+         }
+       }
+       action_p[[i]] <- long_vec
+      }
+      action_profiles[[p]] <- action_p
+    }
   }
   names(action_profiles) <- u_player
 
-  if (!is.null(info_sets)) {
-    u_info_player <- unique(info_sets_player)
-    for (i in 1:length(u_info_player)) {
-      target_p <- u_info_player[i]
-      s_num <- which(u_player == target_p)
-      action_p <- action_profiles[[target_p]] |>
-        unlist() |>
-        matrix(ncol = length(node_to_play[[s_num]]),
-               byrow = TRUE) |>
-        as.data.frame()
-      names(action_p) <- paste0("n", node_to_play[[s_num]])
-
-      s_set <- which(info_sets_player == target_p)
-
-      keep_out <- NULL
-      for (s in s_set) {
-        info <- paste0("n", info_sets[[s]])
-        if (length(info) > 1) {
-          for (j in 2:length(info)) {
-            action_p[, info[j]] <- action_p[, info[1]]
-            keep_out <- c(keep_out, info[j])
-          }
-        }
-      }
-      keep <- !(names(action_p) %in% keep_out)
-
-      action_p <- dplyr::distinct(action_p) |>
-        tibble::as_tibble()
-      strategy_p <- action_p[, keep]
-      strategy_tmp <- list()
-      for (r in 1:nrow(strategy_p)) {
-        strategy_tmp[[r]] <- paste0("(", paste(strategy_p[r, ], collapse = ", "), ")")
-      }
-      action_p <- as.list(as.data.frame((t(as.matrix(action_p)))))
-      names(action_p) <- NULL
-      action_profiles[[target_p]] <- action_p
-      strategy_list[[s_num]] <- strategy_tmp
-    }
-  }
-
-  for (i in 1:length(u_player)) {
+  for (i in 1 : length(u_player)) {
     strategy_list[[i]] <- unlist(strategy_list[[i]])
   }
-  names(strategy_list) <- paste0("s", 1:length(u_player))
+  names(strategy_list) <- paste0("s", 1 : length(u_player))
 
   return(list(strategy = strategy_list,
               action_profile = action_profiles))

@@ -126,48 +126,10 @@ matching <- function(g1_prefs,
     names(g2_prefs) <- g2_names
   }
 
-
   ## If preferences are specified by names, deal with that
-  if (!all(sapply(g1_prefs, is.numeric)) | !all(sapply(g2_prefs, is.numeric))) {
-    for (i in 1:n_g1) {
-      J <- length(g1_prefs[[i]])
-      for (j in 1:J) {
-        continue <- TRUE
-        k <- 1
-        while (continue & k <= n_g2) {
-          if (g1_prefs[[i]][j] == g2_names[k]) {
-            g1_prefs[[i]][j] <- k
-            continue <- FALSE
-          } else {
-            k <- k + 1
-          }
-        }
-        if (continue)
-          stop(paste(g1_prefs[[i]][j], "does not exist among candidates."))
-      }
-    }
-    g1_prefs <- lapply(g1_prefs, as.integer)
-
-    for (i in 1:n_g2) {
-      J <- length(g2_prefs[[i]])
-      for (j in 1:J) {
-        continue <- TRUE
-        k <- 1
-        while (continue & k <= n_g1) {
-          if (g2_prefs[[i]][j] == g1_names[k]) {
-            g2_prefs[[i]][j] <- k
-            continue <- FALSE
-          } else {
-            k <- k + 1
-          }
-        }
-        if (continue)
-          stop(paste(g2_prefs[[i]][j], "does not exist among candidates."))
-      }
-    }
-    g2_prefs <- lapply(g2_prefs, as.integer)
-  }
-
+  prefs_mod <- pref_name2num(g1_prefs, g2_prefs)
+  g1_prefs <- prefs_mod$g1_prefs
+  g2_prefs <- prefs_mod$g2_prefs
 
   ## Check if all individuals provide complete ordering of preferences.
   ## If not, fix it.

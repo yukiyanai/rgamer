@@ -4,11 +4,37 @@
 \alias{is_stable}
 \title{Check if a matching is stable}
 \usage{
-is_stable(x, verbose = FALSE)
+is_stable(
+  x = NULL,
+  pairs_list = NULL,
+  pairs_df = NULL,
+  proposer_pref = NULL,
+  proposed_pref = NULL,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{x}{An object of the "matching" class obtained by \code{matching} or
-\code{matching_df()}.}
+\code{matching_df()}. Not used if \code{pairs}, \code{proposer_pref},
+and \code{proposed_pref} are provided.}
+
+\item{pairs_list}{An optional list of matched pairs where each element of the list
+is a vector of matched paris. The first element of the vector is a proposer
+.  and the second is the person who accepted the proposal.}
+
+\item{pairs_df}{An optional data frame whose first column contains the
+proposers' names and the second the proposed. Use \code{NA} for "no
+matching." This will be ignored if \code{x} is provided.}
+
+\item{proposer_pref}{A named list of preference of the proposer. The name
+of the list must exactly same as the proposer's name, and the contents of
+list must be the names of the proposed. This will be ignored if \code{x}
+is provided.}
+
+\item{proposed_pref}{A named list of preference of the proposer. The name
+of the list must exactly same as the name of the proposed, and the contents
+of the list must be the proposers' names. This will be ignored if \code{x}
+is provided.}
 
 \item{verbose}{If \code{TRUE}, the result and blocking pairs will be printed
 on screen. Default is \code{FALSE}.}

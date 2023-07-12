@@ -23,7 +23,7 @@ to_matrix <- function(game) {
 
   node_to_play <- list()
   u_players <- unique(game$player)
-  for (i in 1:length(u_players)) {
+  for (i in 1 : length(u_players)) {
     node_to_play[[i]] <- game$data$node |>
       dplyr::filter(player == u_players[i]) |>
       dplyr::pull(id)
@@ -38,8 +38,8 @@ to_matrix <- function(game) {
   actions1 <- strategies$action_profile[[1]]
   actions2 <- strategies$action_profile[[2]]
   payoff1 <- payoff2 <- NULL
-  for (i in 1:length(actions1)) {
-    for (j in 1:length(actions2)) {
+  for (i in 1 : length(actions1)) {
+    for (j in 1 : length(actions2)) {
       action_to_pass <- list(actions1[[i]], actions2[[j]])
       names(action_to_pass) <- u_player
       payoffs <- get_payoff(game, actions = action_to_pass)$payoffs

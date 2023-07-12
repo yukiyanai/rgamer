@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgamer</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.25</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.26</span>
       </span>
     </div>
 
@@ -64,20 +64,20 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">solve_nfg</span><span class="op">(</span>
-  <span class="va">game</span>,
-  mixed <span class="op">=</span> <span class="cn">FALSE</span>,
-  show_table <span class="op">=</span> <span class="cn">TRUE</span>,
-  mark_br <span class="op">=</span> <span class="cn">TRUE</span>,
-  cons1 <span class="op">=</span> <span class="cn">NULL</span>,
-  cons2 <span class="op">=</span> <span class="cn">NULL</span>,
-  cons_common <span class="op">=</span> <span class="cn">NULL</span>,
-  precision <span class="op">=</span> <span class="fl">1</span>,
-  plot <span class="op">=</span> <span class="cn">TRUE</span>,
-  mark_NE <span class="op">=</span> <span class="cn">FALSE</span>,
-  quietly <span class="op">=</span> <span class="cn">FALSE</span>,
-  color_palette <span class="op">=</span> <span class="st">"Set1"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">solve_nfg</span><span class="op">(</span></span>
+<span>  <span class="va">game</span>,</span>
+<span>  mixed <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show_table <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  mark_br <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  cons1 <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cons2 <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cons_common <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  precision <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  mark_NE <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  quietly <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  color_palette <span class="op">=</span> <span class="st">"Set1"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -168,35 +168,35 @@ object defined by <code>normal_form</code>.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">game1</span> <span class="op">&lt;-</span> <span class="fu"><a href="normal_form.html">normal_form</a></span><span class="op">(</span></span>
-<span class="r-in">  s1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"T"</span>, <span class="st">"B"</span><span class="op">)</span>,</span>
-<span class="r-in">  s2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"L"</span>, <span class="st">"R"</span><span class="op">)</span>,</span>
-<span class="r-in">  payoffs1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span class="r-in">  payoffs2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">s1</span> <span class="op">&lt;-</span> <span class="fu">solve_nfg</span><span class="op">(</span><span class="va">game1</span>, show_table <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">game1</span> <span class="op">&lt;-</span> <span class="fu"><a href="normal_form.html">normal_form</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  s1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"T"</span>, <span class="st">"B"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  s2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"L"</span>, <span class="st">"R"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  payoffs1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  payoffs2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">s1</span> <span class="op">&lt;-</span> <span class="fu">solve_nfg</span><span class="op">(</span><span class="va">game1</span>, show_table <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Pure-strategy NE: [T, L]</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">game2</span> <span class="op">&lt;-</span> <span class="fu"><a href="normal_form.html">normal_form</a></span><span class="op">(</span></span>
-<span class="r-in">  payoffs1 <span class="op">=</span> <span class="st">"-x1^2 + (28 - x2) * x1"</span>,</span>
-<span class="r-in">  payoffs2 <span class="op">=</span> <span class="st">"-x2^2 + (28 - x1) * x2"</span>,</span>
-<span class="r-in">  par1_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span><span class="op">)</span>,</span>
-<span class="r-in">  par2_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span><span class="op">)</span>,</span>
-<span class="r-in">  pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"x2"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">s2</span> <span class="op">&lt;-</span> <span class="fu">solve_nfg</span><span class="op">(</span><span class="va">game2</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">game2</span> <span class="op">&lt;-</span> <span class="fu"><a href="normal_form.html">normal_form</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  payoffs1 <span class="op">=</span> <span class="st">"-x1^2 + (28 - x2) * x1"</span>,</span></span>
+<span class="r-in"><span>  payoffs2 <span class="op">=</span> <span class="st">"-x2^2 + (28 - x1) * x2"</span>,</span></span>
+<span class="r-in"><span>  par1_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  par2_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"x2"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">s2</span> <span class="op">&lt;-</span> <span class="fu">solve_nfg</span><span class="op">(</span><span class="va">game2</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> approximated NE: (9.3, 9.3)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The obtained NE might be only a part of the solutions.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Please examine br_plot (best response plot) carefully.</span>
 <span class="r-plt img"><img src="solve_nfg-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">fx</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">-</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="op">(</span><span class="fl">28</span> <span class="op">-</span> <span class="va">y</span><span class="op">)</span> <span class="op">*</span> <span class="va">x</span></span>
-<span class="r-in"><span class="va">fy</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">-</span><span class="va">y</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="op">(</span><span class="fl">28</span> <span class="op">-</span> <span class="va">x</span><span class="op">)</span> <span class="op">*</span> <span class="va">y</span></span>
-<span class="r-in"><span class="va">game3</span> <span class="op">&lt;-</span> <span class="fu"><a href="normal_form.html">normal_form</a></span><span class="op">(</span></span>
-<span class="r-in">    payoffs1 <span class="op">=</span> <span class="va">fx</span>,</span>
-<span class="r-in">    payoffs2 <span class="op">=</span> <span class="va">fy</span>,</span>
-<span class="r-in">    pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>,</span>
-<span class="r-in">    par1_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">40</span><span class="op">)</span>,</span>
-<span class="r-in">    par2_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">40</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">s3</span> <span class="op">&lt;-</span> <span class="fu">solve_nfg</span><span class="op">(</span><span class="va">game3</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">fx</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">-</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="op">(</span><span class="fl">28</span> <span class="op">-</span> <span class="va">y</span><span class="op">)</span> <span class="op">*</span> <span class="va">x</span></span></span>
+<span class="r-in"><span><span class="va">fy</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">-</span><span class="va">y</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="op">(</span><span class="fl">28</span> <span class="op">-</span> <span class="va">x</span><span class="op">)</span> <span class="op">*</span> <span class="va">y</span></span></span>
+<span class="r-in"><span><span class="va">game3</span> <span class="op">&lt;-</span> <span class="fu"><a href="normal_form.html">normal_form</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    payoffs1 <span class="op">=</span> <span class="va">fx</span>,</span></span>
+<span class="r-in"><span>    payoffs2 <span class="op">=</span> <span class="va">fy</span>,</span></span>
+<span class="r-in"><span>    pars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    par1_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">40</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    par2_lim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">40</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">s3</span> <span class="op">&lt;-</span> <span class="fu">solve_nfg</span><span class="op">(</span><span class="va">game3</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> approximated NE: (9.3, 9.3)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The obtained NE might be only a part of the solutions.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Please examine br_plot (best response plot) carefully.</span>
@@ -215,7 +215,7 @@ object defined by <code>normal_form</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

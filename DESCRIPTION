@@ -1,7 +1,7 @@
 Package: rgamer
 Type: Package
 Title: rgamer: Learn Game Theory Using R
-Version: 0.0.25
+Version: 0.0.26
 Authors@R:
     c(person(given = "Yoshio",
              family = "Kamijo",
@@ -19,7 +19,7 @@ License: MIT + file LICENSE
 URL: https://yukiyanai.github.io/rgamer/, https://github.com/yukiyanai/rgamer
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
 Suggests: 
     testthat,
     knitr,
@@ -84,6 +84,7 @@ Collate:
     'matching_mt1.R'
     'normal_form.R'
     'plot_sim.R'
+    'pref_name2num.R'
     'print.matching.R'
     'read_matching_data.R'
     'restrict_action.R'

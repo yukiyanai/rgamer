@@ -1,3 +1,8 @@
+# rgamer 0.0.26
+
+- Now `is_stable()` can check the stability of user specified matching.
+- Make `spe()` a little more efficient by modifying `extensive_strategy()`.
+
 # rgamer 0.0.25
 
 - Fix bugs in the game trees with SPEs.
