@@ -1,3 +1,7 @@
+# rgamer 0.0.27
+
+- Fix bugs in `br_plot`.
+
 # rgamer 0.0.26
 
 - Now `is_stable()` can check the stability of user specified matching.

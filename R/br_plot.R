@@ -25,6 +25,9 @@ br_plot <- function(game,
   }
 
   players <- game$player
+  if (is.numeric(players)) {
+    players <- as.character(players)
+  }
   mat1 <- game$mat$matrix1
   mat2 <- game$mat$matrix2
 
