@@ -1,3 +1,7 @@
+# rgamer 0.0.28
+
+- Fix bugs in `restrict_action`.
+
 # rgamer 0.0.27
 
 - Fix bugs in `br_plot`.

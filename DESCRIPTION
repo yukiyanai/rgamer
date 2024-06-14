@@ -1,7 +1,7 @@
 Package: rgamer
 Type: Package
 Title: rgamer: Learn Game Theory Using R
-Version: 0.0.27
+Version: 0.0.28
 Authors@R:
     c(person(given = "Yoshio",
              family = "Kamijo",

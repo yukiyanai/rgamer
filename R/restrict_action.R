@@ -150,6 +150,7 @@ restrict_action <- function(game, action) {
       dplyr::filter(player == u_players[i]) |>
       dplyr::pull(id)
   }
+  names(node_to_play) <- u_players
 
   df_path <- df_path |>
       dplyr::filter(linetype == "1") |>
