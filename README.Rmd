@@ -23,18 +23,17 @@ knitr::opts_chunk$set(
 # rgamer <img src="logo.png" align="right" alt="" width="120" />
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/yukiyanai/rgamer/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/yukiyanai/rgamer/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![CRAN status](https://www.r-pkg.org/badges/version/rgamer)](https://CRAN.R-project.org/package=rgamer)
-[![Travis build status](https://travis-ci.org/yukiyanai/rgamer.svg?branch=master)](https://travis-ci.org/yukiyanai/rgamer)
+<!--[![CRAN status](https://www.r-pkg.org/badges/version/rgamer)](https://CRAN.R-project.org/package=rgamer)-->
 [![Codecov test coverage](https://codecov.io/gh/yukiyanai/rgamer/branch/master/graph/badge.svg)](https://codecov.io/gh/yukiyanai/rgamer?branch=master)
-[![R-CMD-check](https://github.com/yukiyanai/rgamer/workflows/R-CMD-check/badge.svg)](https://github.com/yukiyanai/rgamer/actions)
 <!-- badges: end -->
 
 ## Overview
 
 The goal of `rgamer` is to help students learn Game Theory using R.
-The functions prepared by the package not only solve basic games such as two-person normal-form games but also provides the users with visual displays that highlight some aspects of the games --- payoff matrix, best response correspondence, etc.
-In addition, it suggests some numerical solutions for games of which it is difficult --- or even seems impossible --- to derive a closed-form analytical solution.
+The functions prepared by the package not only solve basic games such as two-person normal-form games but also provide the users with visual displays that highlight some aspects of the game---payoff matrix, best response correspondence, etc.
+In addition, it suggests some numerical solutions for games of which it is difficult---or even seems impossible --- to derive a closed-form analytical solution.
 
 
 ## Installation

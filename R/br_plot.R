@@ -247,7 +247,7 @@ br_plot <- function(game,
                                          yend = ye,
                                          color = player,
                                          alpha = player,
-                                         size  = player),
+                                         linewidth = player),
                             lineend = "round",
                             linejoin = "mitre") +
       ggplot2::labs(x = "p", y = "q", title = "") +
@@ -259,9 +259,8 @@ br_plot <- function(game,
       ggplot2::scale_alpha_manual(values = c(0.7, 0.8),
                                   breaks = players,
                                   labels = players) +
-      ggplot2::scale_size_manual(values = c(3, 1),
-                                 breaks = players,
-                                 labels = players) +
+      ggplot2::scale_linewidth_manual(values = c(3, 1),
+                                      labels = players) +
       ggplot2::scale_x_continuous(breaks = c(0, p_cut, 1),
                                   labels = c("0", as.character(MASS::fractions(p_cut)), "1")) +
       ggplot2::scale_y_continuous(breaks = c(0, q_cut, 1),

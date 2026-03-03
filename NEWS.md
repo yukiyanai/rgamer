@@ -1,3 +1,7 @@
+# rgamer 0.0.29
+
+- Update arguments for ggplot2: use "linewidth"" instead of "size".
+
 # rgamer 0.0.28
 
 - Fix bugs in `restrict_action`.

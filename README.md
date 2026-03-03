@@ -5,33 +5,29 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/yukiyanai/rgamer/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/yukiyanai/rgamer/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/rgamer)](https://CRAN.R-project.org/package=rgamer)
-[![Travis build
-status](https://travis-ci.org/yukiyanai/rgamer.svg?branch=master)](https://travis-ci.org/yukiyanai/rgamer)
+<!--[![CRAN status](https://www.r-pkg.org/badges/version/rgamer)](https://CRAN.R-project.org/package=rgamer)-->
 [![Codecov test
 coverage](https://codecov.io/gh/yukiyanai/rgamer/branch/master/graph/badge.svg)](https://codecov.io/gh/yukiyanai/rgamer?branch=master)
-[![R-CMD-check](https://github.com/yukiyanai/rgamer/workflows/R-CMD-check/badge.svg)](https://github.com/yukiyanai/rgamer/actions)
 <!-- badges: end -->
 
 ## Overview
 
 The goal of `rgamer` is to help students learn Game Theory using R. The
 functions prepared by the package not only solve basic games such as
-two-person normal-form games but also provides the users with visual
-displays that highlight some aspects of the games — payoff matrix, best
+two-person normal-form games but also provide the users with visual
+displays that highlight some aspects of the game—payoff matrix, best
 response correspondence, etc. In addition, it suggests some numerical
-solutions for games of which it is difficult — or even seems impossible
-— to derive a closed-form analytical solution.
+solutions for games of which it is difficult—or even seems impossible —
+to derive a closed-form analytical solution.
 
 ## Installation
 
 <!--
 #You can install the released version of rgamer from [CRAN](https://CRAN.R-project.org) with:
-
-```r
+&#10;``` r
 install.packages("rgamer")
 #> Warning: package 'rgamer' is not available for this version of R
 #> 
@@ -66,16 +62,15 @@ library(rgamer)
 
 An example of a normal-form game (prisoner’s dilemma).
 
-- Player:
-  ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")Kamijo,
-  Yanai![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
+- Player: ![\\](https://latex.codecogs.com/png.latex?%5C%7B "\{")Kamijo,
+  Yanai![\\](https://latex.codecogs.com/png.latex?%5C%7D "\}")
 - Strategy:
-  ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")(Stays silent,
+  ![\\](https://latex.codecogs.com/png.latex?%5C%7B "\{")(Stays silent,
   Betrays), (Stays silent,
-  Betrays)![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
-- Payoff: ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")(-1,
-  0, -3, -2), (-1, -3, 0,
-  -2)![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
+  Betrays)![\\](https://latex.codecogs.com/png.latex?%5C%7D "\}")
+- Payoff: ![\\](https://latex.codecogs.com/png.latex?%5C%7B "\{")(-1, 0,
+  -3, -2), (-1, -3, 0,
+  -2)![\\](https://latex.codecogs.com/png.latex?%5C%7D "\}")
 
 First, you define the game by `normal_form()`:
 
@@ -112,11 +107,16 @@ s_game1 <- solve_nfg(game1, show_table = FALSE)
 s_game1$table
 ```
 
-<table class=" lightable-classic table" style="font-family: Arial; margin-left: auto; margin-right: auto; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic table" style="color: black; font-family: Arial; margin-left: auto; margin-right: auto; color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+
 <thead>
+
 <tr>
+
 <th style="empty-cells: hide;" colspan="2">
+
 </th>
+
 <th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; " colspan="2">
 
 <div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
@@ -126,65 +126,99 @@ Yanai
 </div>
 
 </th>
+
 </tr>
+
 <tr>
+
 <th style="text-align:left;">
+
 </th>
+
 <th style="text-align:center;">
+
 strategy
 </th>
+
 <th style="text-align:center;">
+
 Stays silent
 </th>
+
 <th style="text-align:center;">
+
 Betrays
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;font-weight: bold;">
+
 Kamijo
 </td>
+
 <td style="text-align:center;">
+
 Stays silent
 </td>
+
 <td style="text-align:center;">
+
 -1, -1
 </td>
+
 <td style="text-align:center;">
+
 -3, 0^
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;font-weight: bold;">
+
 </td>
+
 <td style="text-align:center;">
+
 Betrays
 </td>
+
 <td style="text-align:center;">
+
 0^, -3
 </td>
+
 <td style="text-align:center;">
+
 -2^, -2^
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### Example 2
 
 An example of a coordination game.
 
-- Player:
-  ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")Kamijo, Yanai
-  ![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
+- Player: ![\\](https://latex.codecogs.com/png.latex?%5C%7B "\{")Kamijo,
+  Yanai ![\\](https://latex.codecogs.com/png.latex?%5C%7D "\}")
 - Strategy:
-  ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")(Stag, Hare),
-  (Stag, Hare)![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
-- Payoff: ![\\{](https://latex.codecogs.com/png.latex?%5C%7B "\{")(10,
-  8, 0, 7), (10, 0, 8,
-  7)![\\}](https://latex.codecogs.com/png.latex?%5C%7D "\}")
+  ![\\](https://latex.codecogs.com/png.latex?%5C%7B "\{")(Stag, Hare),
+  (Stag, Hare)![\\](https://latex.codecogs.com/png.latex?%5C%7D "\}")
+- Payoff: ![\\](https://latex.codecogs.com/png.latex?%5C%7B "\{")(10, 8,
+  0, 7), (10, 0, 8,
+  7)![\\](https://latex.codecogs.com/png.latex?%5C%7D "\}")
 
 Define the game by `normal_form()`:
 
@@ -222,11 +256,11 @@ s_game2$br_plot
 An example of a normal-form game:
 
 - Player:
-  ![\\{A, B\\}](https://latex.codecogs.com/png.latex?%5C%7BA%2C%20B%5C%7D "\{A, B\}")
+  ![\\A, B\\](https://latex.codecogs.com/png.latex?%5C%7BA%2C%20B%5C%7D "\{A, B\}")
 - Strategy:
-  ![\\{x \in \[0, 30\], y \in \[0, 30\] \\}](https://latex.codecogs.com/png.latex?%5C%7Bx%20%5Cin%20%5B0%2C%2030%5D%2C%20y%20%5Cin%20%5B0%2C%2030%5D%20%5C%7D "\{x \in [0, 30], y \in [0, 30] \}")
+  ![\\x \in \[0, 30\], y \in \[0, 30\] \\](https://latex.codecogs.com/png.latex?%5C%7Bx%20%5Cin%20%5B0%2C%2030%5D%2C%20y%20%5Cin%20%5B0%2C%2030%5D%20%5C%7D "\{x \in [0, 30], y \in [0, 30] \}")
 - Payoff:
-  ![\\{f_x(x, y) = -x^2 + (28 - y)x, f_y(x, y) = -y^2 + (28 - x) y\\}](https://latex.codecogs.com/png.latex?%5C%7Bf_x%28x%2C%20y%29%20%3D%20-x%5E2%20%2B%20%2828%20-%20y%29x%2C%20f_y%28x%2C%20y%29%20%3D%20-y%5E2%20%2B%20%2828%20-%20x%29%20y%5C%7D "\{f_x(x, y) = -x^2 + (28 - y)x, f_y(x, y) = -y^2 + (28 - x) y\}")
+  ![\\f_x(x, y) = -x^2 + (28 - y)x, f_y(x, y) = -y^2 + (28 - x) y\\](https://latex.codecogs.com/png.latex?%5C%7Bf_x%28x%2C%20y%29%20%3D%20-x%5E2%20%2B%20%2828%20-%20y%29x%2C%20f_y%28x%2C%20y%29%20%3D%20-y%5E2%20%2B%20%2828%20-%20x%29%20y%5C%7D "\{f_x(x, y) = -x^2 + (28 - y)x, f_y(x, y) = -y^2 + (28 - x) y\}")
 
 You can define a game by specifying payoff functions as character
 vectors using `normal_form()`:
@@ -246,23 +280,24 @@ correspondences by default.
 
 ``` r
 s_game3 <- solve_nfg(game3)
-#> approximated NE: (9.3, 9.3)
-#> The obtained NE might be only a part of the solutions.
-#> Please examine br_plot (best response plot) carefully.
 ```
 
 ![](man/figures/README-unnamed-chunk-15-1.png)<!-- -->
+
+    #> approximated NE: (9.3, 9.3)
+    #> The obtained NE might be only a part of the solutions.
+    #> Please examine br_plot (best response plot) carefully.
 
 ### Example 4
 
 An example of a normal-form game:
 
 - Player:
-  ![\\{ A, B \\}](https://latex.codecogs.com/png.latex?%5C%7B%20A%2C%20B%20%5C%7D "\{ A, B \}")
+  ![\\ A, B \\](https://latex.codecogs.com/png.latex?%5C%7B%20A%2C%20B%20%5C%7D "\{ A, B \}")
 - Strategy:
-  ![\\{x \in \[0, 30\], y \in \[0, 30\]\\}](https://latex.codecogs.com/png.latex?%5C%7Bx%20%5Cin%20%5B0%2C%2030%5D%2C%20y%20%5Cin%20%5B0%2C%2030%5D%5C%7D "\{x \in [0, 30], y \in [0, 30]\}")
+  ![\\x \in \[0, 30\], y \in \[0, 30\]\\](https://latex.codecogs.com/png.latex?%5C%7Bx%20%5Cin%20%5B0%2C%2030%5D%2C%20y%20%5Cin%20%5B0%2C%2030%5D%5C%7D "\{x \in [0, 30], y \in [0, 30]\}")
 - Payoff:
-  ![\\{f_x(x, y) = -x^a + (b - y)x, f_y(x, y) = -y^s + (t - x) y\\}](https://latex.codecogs.com/png.latex?%5C%7Bf_x%28x%2C%20y%29%20%3D%20-x%5Ea%20%2B%20%28b%20-%20y%29x%2C%20f_y%28x%2C%20y%29%20%3D%20-y%5Es%20%2B%20%28t%20-%20x%29%20y%5C%7D "\{f_x(x, y) = -x^a + (b - y)x, f_y(x, y) = -y^s + (t - x) y\}")
+  ![\\f_x(x, y) = -x^a + (b - y)x, f_y(x, y) = -y^s + (t - x) y\\](https://latex.codecogs.com/png.latex?%5C%7Bf_x%28x%2C%20y%29%20%3D%20-x%5Ea%20%2B%20%28b%20-%20y%29x%2C%20f_y%28x%2C%20y%29%20%3D%20-y%5Es%20%2B%20%28t%20-%20x%29%20y%5C%7D "\{f_x(x, y) = -x^a + (b - y)x, f_y(x, y) = -y^s + (t - x) y\}")
 
 You can define a normal-form game by specifying payoffs by R functions.
 
@@ -308,12 +343,13 @@ s_game4b <- solve_nfg(
   cons1 = list(a = 2, b = 28),
   cons2 = list(s = 2, t = 28),
   precision = 3)
-#> approximated NE: (9.333, 9.333)
-#> The obtained NE might be only a part of the solutions.
-#> Please examine br_plot (best response plot) carefully.
 ```
 
 ![](man/figures/README-unnamed-chunk-18-1.png)<!-- -->
+
+    #> approximated NE: (9.333, 9.333)
+    #> The obtained NE might be only a part of the solutions.
+    #> Please examine br_plot (best response plot) carefully.
 
 You can extract the best response plot with NE marked as follows.
 
@@ -367,11 +403,16 @@ Then, you can examine the specified part of the game.
 s_game5 <- solve_nfg(game5, mark_br = FALSE)
 ```
 
-<table class=" lightable-classic table" style="font-family: Arial; margin-left: auto; margin-right: auto; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic table" style="color: black; font-family: Arial; margin-left: auto; margin-right: auto; color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+
 <thead>
+
 <tr>
+
 <th style="empty-cells: hide;" colspan="2">
+
 </th>
+
 <th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; " colspan="6">
 
 <div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
@@ -381,186 +422,317 @@ Player 2
 </div>
 
 </th>
+
 </tr>
+
 <tr>
+
 <th style="text-align:left;">
+
 </th>
+
 <th style="text-align:center;">
+
 strategy
 </th>
+
 <th style="text-align:center;">
+
 0
 </th>
+
 <th style="text-align:center;">
+
 2
 </th>
+
 <th style="text-align:center;">
+
 4
 </th>
+
 <th style="text-align:center;">
+
 6
 </th>
+
 <th style="text-align:center;">
+
 8
 </th>
+
 <th style="text-align:center;">
+
 10
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;font-weight: bold;">
+
 Player 1
 </td>
+
 <td style="text-align:center;">
+
 0
 </td>
+
 <td style="text-align:center;">
+
 0, 0
 </td>
+
 <td style="text-align:center;">
+
 0, 0
 </td>
+
 <td style="text-align:center;">
+
 0, 0
 </td>
+
 <td style="text-align:center;">
+
 0, 0
 </td>
+
 <td style="text-align:center;">
+
 0, 0
 </td>
+
 <td style="text-align:center;">
+
 0, 0
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;font-weight: bold;">
+
 </td>
+
 <td style="text-align:center;">
+
 2
 </td>
+
 <td style="text-align:center;">
+
 0, 0
 </td>
+
 <td style="text-align:center;">
+
 1, 1
 </td>
+
 <td style="text-align:center;">
+
 2, 0
 </td>
+
 <td style="text-align:center;">
+
 2, 0
 </td>
+
 <td style="text-align:center;">
+
 2, 0
 </td>
+
 <td style="text-align:center;">
+
 2, 0
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;font-weight: bold;">
+
 </td>
+
 <td style="text-align:center;">
+
 4
 </td>
+
 <td style="text-align:center;">
+
 0, 0
 </td>
+
 <td style="text-align:center;">
+
 0, 2
 </td>
+
 <td style="text-align:center;">
+
 2, 2
 </td>
+
 <td style="text-align:center;">
+
 4, 0
 </td>
+
 <td style="text-align:center;">
+
 4, 0
 </td>
+
 <td style="text-align:center;">
+
 4, 0
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;font-weight: bold;">
+
 </td>
+
 <td style="text-align:center;">
+
 6
 </td>
+
 <td style="text-align:center;">
+
 0, 0
 </td>
+
 <td style="text-align:center;">
+
 0, 2
 </td>
+
 <td style="text-align:center;">
+
 0, 4
 </td>
+
 <td style="text-align:center;">
+
 3, 3
 </td>
+
 <td style="text-align:center;">
+
 6, 0
 </td>
+
 <td style="text-align:center;">
+
 6, 0
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;font-weight: bold;">
+
 </td>
+
 <td style="text-align:center;">
+
 8
 </td>
+
 <td style="text-align:center;">
+
 0, 0
 </td>
+
 <td style="text-align:center;">
+
 0, 2
 </td>
+
 <td style="text-align:center;">
+
 0, 4
 </td>
+
 <td style="text-align:center;">
+
 0, 6
 </td>
+
 <td style="text-align:center;">
+
 4, 4
 </td>
+
 <td style="text-align:center;">
+
 8, 0
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;font-weight: bold;">
+
 </td>
+
 <td style="text-align:center;">
+
 10
 </td>
+
 <td style="text-align:center;">
+
 0, 0
 </td>
+
 <td style="text-align:center;">
+
 0, 2
 </td>
+
 <td style="text-align:center;">
+
 0, 4
 </td>
+
 <td style="text-align:center;">
+
 0, 6
 </td>
+
 <td style="text-align:center;">
+
 0, 8
 </td>
+
 <td style="text-align:center;">
+
 5, 5
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ## Example 6

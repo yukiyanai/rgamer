@@ -6,6 +6,5 @@
 #'
 #' @author Yoshio Kamijo and Yuki Yanai <yanai.yuki@@kochi-tech.ac.jp>
 #'
-#' @docType package
 #' @name rgamer
-NULL
+"_PACKAGE"

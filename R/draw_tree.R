@@ -152,14 +152,14 @@ draw_tree <- function(df_path,
                                          xend = x_e,
                                          y = y_s,
                                          yend = y_e),
-                            size = linewidth) +
+                            linewidth = linewidth) +
       ggplot2::geom_segment(data = df_sol,
                             ggplot2::aes(x = x_s,
                                          xend = x_e,
                                          y = y_s,
                                          yend = y_e,
                                          color = as.factor(player_color)),
-                            size = 2 * linewidth)
+                            linewidth = 2 * linewidth)
   } else {
     if (restriction) {
       tree <- ggplot2::ggplot() +
@@ -168,7 +168,7 @@ draw_tree <- function(df_path,
                                            xend = x_e,
                                            y = y_s,
                                            yend = y_e),
-                              size = linewidth)
+                              linewidth = linewidth)
       df_path_dbl <- df_path |>
         dplyr::filter(bold)
       tree <- tree +
@@ -177,7 +177,7 @@ draw_tree <- function(df_path,
                                            xend = x_e,
                                            y = y_s,
                                            yend = y_e),
-                              size = 2 * linewidth)
+                              linewidth = 2 * linewidth)
     } else {
       tree <- ggplot2::ggplot() +
         ggplot2::geom_segment(data = df_path,
@@ -185,7 +185,7 @@ draw_tree <- function(df_path,
                                            xend = x_e,
                                            y = y_s,
                                            yend = y_e),
-                              size = 1 * linewidth)
+                              linewidth = 1 * linewidth)
     }
   }
 
@@ -314,7 +314,7 @@ draw_tree <- function(df_path,
                                               group = "cubic"),
                                  linetype = "solid",
                                  alpha = 0.5,
-                                 size = 2)
+                                 linewidth = 2)
         } else {
           tree <- tree +
             ggforce::geom_bezier(data = bezier_df,
@@ -323,7 +323,7 @@ draw_tree <- function(df_path,
                                               color = info_group,
                                               group = "cubic"),
                                  linetype = "dotdash",
-                                 size = 1.2)
+                                 linewidth = 1.2)
         }
       }
     }

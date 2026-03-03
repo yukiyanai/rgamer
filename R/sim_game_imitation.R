@@ -12,11 +12,11 @@
 #'     randomly selected from the player's strategy set.
 #' @param init2 Player 2's first strategy. If not specified, a strategy is
 #'     randomly selected from the player's strategy set.
-#' @param omega A numeric value in [0, 1] to control the degree of inertia in
+#' @param omega A numeric value between 0 and 1 to control the degree of inertia in
 #'     each player's behavior. If \code{omega = 1}, each player does not change
 #'     their choices over time. If \code{omega = 0}, each player does not stick
 #'     to their previous choice at all.
-#' @param eta A numeric value in [0, 1] to control the degree of randomness in
+#' @param eta A numeric value between 0 and 1 to control the degree of randomness in
 #'     each player's behavior. If \code{eta = 1}, each player chooses their
 #'     strategy completely at random. If \code{eta = 0}, each player chooses the
 #'     best strategy based on the opponent's behavior in the previous period.

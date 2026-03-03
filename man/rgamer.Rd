@@ -2,12 +2,21 @@
 % Please edit documentation in R/rgamer.R
 \docType{package}
 \name{rgamer}
+\alias{rgamer-package}
 \alias{rgamer}
 \title{rgamer: A package to help students learn Game Theory using R.}
 \description{
 The \href{https://yukiyanai.github.io/rgamer/}{rgamer} package provides useful
 functions to highlight some important aspects of basic games. It visually
 displays the game and finds solutions of the games.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://yukiyanai.github.io/rgamer/}
+  \item \url{https://github.com/yukiyanai/rgamer}
+}
+
 }
 \author{
 Yoshio Kamijo and Yuki Yanai \href{mailto:yanai.yuki@kochi-tech.ac.jp}{yanai.yuki@kochi-tech.ac.jp}
