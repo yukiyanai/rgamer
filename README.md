@@ -48,8 +48,8 @@ remotes::install_github("yukiyanai/rgamer")
 or
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("yukiyanai/rgamer")
+# install.packages("pak")
+pak::pak("yukiyanai/rgamer")
 ```
 
 ## Examples
