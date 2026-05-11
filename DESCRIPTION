@@ -1,7 +1,7 @@
 Package: rgamer
 Type: Package
 Title: rgamer: Learn Game Theory Using R
-Version: 0.0.29
+Version: 0.0.30
 Authors@R:
     c(person(given = "Yoshio",
              family = "Kamijo",
@@ -43,7 +43,6 @@ Imports:
     tibble,
     tidyr,
     tidyselect,
-    tuple,
     utils,
     RColorBrewer,
 ByteCompile: TRUE

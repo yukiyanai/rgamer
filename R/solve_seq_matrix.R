@@ -34,7 +34,7 @@ solve_seq_matrix <- function(
     p1_get[i] <- mean(dd$payoff1)
     sp2[[i]] <- s2_chosen
   }
-  sp1_chosen <- sp1[tuple::matchAll(max(p1_get), p1_get)]
+  sp1_chosen <- sp1[which(p1_get == max(p1_get))]
 
   if (length(sp1_chosen > 1)) {
     NE <- rep(NA, length(sp1_chosen))

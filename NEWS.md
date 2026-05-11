@@ -1,6 +1,10 @@
+# rgamer 0.0.30
+
+- Removed dependency on the archived tuple package.
+
 # rgamer 0.0.29
 
-- Update arguments for ggplot2: use "linewidth"" instead of "size".
+- Update arguments for ggplot2: use "linewidth" instead of "size".
 
 # rgamer 0.0.28
 

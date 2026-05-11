@@ -10,3 +10,5 @@
 ^pkgdown$
 ^\.github$
 logo.png
+^\.positai$
+^\.claude$
