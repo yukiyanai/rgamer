@@ -46,7 +46,7 @@ matching_mt1 <- function(df_many,
                          algorithm = "DA",
                          verbose = TRUE) {
 
-  group <- name <- p_name <- NULL
+  group <- name <- p_name <- r_name <- NULL
 
   f1 <- read_matching_data(data = df_many,
                            df_type = df_type,
@@ -65,6 +65,8 @@ matching_mt1 <- function(df_many,
   names(f2) <- c("name",
                  paste0("pref_", 1:(ncol(f2) - 1)))
 
+  f2 <- dplyr::arrange(f2, name)
+
   p_names <- unlist(f1[, 1])
   r_names <- unlist(f2[, 1])
 
@@ -78,6 +80,7 @@ matching_mt1 <- function(df_many,
                                       header = header,
                                       sep = sep)
     names(capacity_df) <- c("r_name", "capacity")
+    capacity_df <- dplyr::arrange(capacity_df, r_name)
   }
 
   ## Extend the data frame of the proposers

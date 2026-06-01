@@ -1,3 +1,7 @@
+# rgamer 0.0.31
+
+- Fix bugs in `matching_mt1.R`.
+
 # rgamer 0.0.30
 
 - Removed dependency on the archived tuple package.
