@@ -129,6 +129,13 @@ spe <- function(game, restriction = FALSE) {
       df_psne_list[[i]] <- df_psne
     }
 
+    if (length(PSNE_list) == 0) {
+      message("No pure-strategy SPE.")
+      return(NULL)
+    }
+
+
+
     n_sg <- length(sg)
     if (n_sg == 1) {
       SPE <- PSNE_list[[1]] |> as.list()

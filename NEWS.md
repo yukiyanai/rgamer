@@ -1,3 +1,7 @@
+# rgamer 0.0.32
+
+- Fix bugs in `spe.R`.
+
 # rgamer 0.0.31
 
 - Fix bugs in `matching_mt1.R`.
